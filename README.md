@@ -2,7 +2,7 @@
 
 Pattern's modular skill architecture for Claude. Each skill is a folder containing a `SKILL.md` file that instructs Claude on methodology, output format, and quality standards for a specific domain. Skills are loaded on-demand — Claude reads the relevant `SKILL.md` before executing any task in its domain.
 
-**30 skills across 8 groups and 4 functional layers.** Every formal output runs through at least two layers — usually three or four. Layers are not optional — skipping a layer produces a draft, not a deliverable.
+**29 skills across 8 groups and 4 functional layers.** Every formal output runs through at least two layers — usually three or four. Layers are not optional — skipping a layer produces a draft, not a deliverable.
 
 > **Source of truth:** This README reflects the folders in [`ian-lawrence423/Claude-skills`](https://github.com/ian-lawrence423/Claude-skills). Update this file whenever skills are added or removed from the repo.
 
@@ -28,7 +28,7 @@ The skill library has four functional layers. The mandatory sequence for any for
 | **1 — Analytical OS** | `mckinsey-consultant` | Problem structuring, MECE trees, frameworks, claim labeling (F/E/H), Six Screening Questions | Always active for strategy or investment work |
 | **2 — Research** | `market-research`, `ntb-diligence`, `ic-memo`, `competitive-moat-assessment`, `executive-summary-writer`, `driver-tree`, `tam-sam-som-calculator`, `statistics-fundamentals`, `finance-metrics-quickref`, `saas-revenue-growth-metrics`, `saas-economics-efficiency-metrics` | Evidence gathering, research workflow, deliverable architecture, metrics analysis | When research or a specific deliverable type is needed |
 | **3 — Quality** | `writing-style` ⚙️, `claim-scrutinizer`, `red-team`, `pre-mortem`, `boundability` | Prose standards, claim testing, adversarial stress-testing, failure mode enumeration | During drafting (`writing-style`) and after draft (all others) |
-| **4 — Production** | `pattern-docx`, `pattern-investment-pptx`, `pattern-pptx`, `diligence-ddr`, `financial-model-builder`, `executive-briefing`, `written-communication`, `giving-presentations` | Branded file output in correct format with header/footer/logo | Final step — after analytical and quality layers complete |
+| **4 — Production** | `pattern-docx`, `pattern-investment-pptx`, `diligence-ddr`, `financial-model-builder`, `executive-briefing`, `written-communication`, `giving-presentations` | Branded file output in correct format with header/footer/logo | Final step — after analytical and quality layers complete |
 | **4b — QA** | `doc-quality-checker` ⚙️ | Brand compliance, formatting, internal consistency, draft artifact language check | Auto-runs after every Layer 4 file output |
 
 ---
@@ -91,7 +91,7 @@ All 30 skills organized by group. Invoke the most specific skill first; fall bac
 ### Communication & Deliverables
 
 > **Brand rules:**
-> - `pattern-investment-pptx` and `pattern-pptx`: **Wix Madefor Display** font, primary blue `#4285F4`, navy `#002060`
+> - `pattern-investment-pptx`: **Wix Madefor Display** font, primary blue `#4285F4`, navy `#002060`
 > - `pattern-docx`: **Wix Madefor Display** font, section headers `#4280F4`, subheaders `#3A00FD`, table headers `#0F4761`
 > - The `pattern-docx` header contains the Pattern logo and gradient line — injected via Python patch, not docx-js
 
@@ -99,7 +99,6 @@ All 30 skills organized by group. Invoke the most specific skill first; fall bac
 |---|---|---|---|
 | `pattern-docx` | L4 — Production | Pattern-branded Word documents. Two-phase build: docx-js body + Python XML patch for header/footer/logo | Any Pattern memo, report, analysis, IC memo as Word doc |
 | `pattern-investment-pptx` | L4 — Production | Institutional-grade investment decks: IC, PE, acquirer materials. 10×5.625" format | Investment deck, investor presentation, due diligence deck, M&A deck |
-| `pattern-pptx` | L4 — Production | General Pattern-branded presentations for internal, operational, partner content — not investment materials | Internal strategy deck, ops review, partner presentation |
 | `written-communication` | L4 — Production | Emails, memos, strategy documents, and announcements. Covers tone calibration, audience framing, structure, and edit passes | "write an email", "draft a memo", "help me communicate this", "write an announcement" |
 | `giving-presentations` | L4 — Production | Talk track prep, slide deck narrative design, and presentation delivery coaching | "help me prep for this presentation", "talk track", "what's the narrative for this deck" |
 | `writing-style` | L3 — Quality ⚙️ | 5-step prose self-review. Runs on **all** formal outputs before document production. Enforces claim tagging, inductive chain check, data gap flagging, prose standards | Auto-runs — do not invoke manually |
@@ -126,7 +125,7 @@ When multiple skills could apply, use this tie-breaking order:
 | # | Rule | How to Apply |
 |---|---|---|
 | 1 | **Most specific first** | Prefer a narrow skill (e.g., `saas-revenue-growth-metrics`) over a broad one (e.g., `mckinsey-consultant`) when the narrow one directly addresses the task |
-| 2 | **Pattern-branded first** | For any output file, prefer `pattern-investment-pptx` or `pattern-pptx` over generic `pptx`; `pattern-docx` over generic Word |
+| 2 | **Pattern-branded first** | For any output file, prefer `pattern-investment-pptx` over generic `pptx`; `pattern-docx` over generic Word |
 | 3 | **Consulting OS default** | If no skill fits, apply the Default Mode 8-step framework from `agents.md` directly |
 
 ---
