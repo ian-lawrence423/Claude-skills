@@ -2,274 +2,155 @@
 
 Pattern's modular skill architecture for Claude. Each skill is a folder containing a `SKILL.md` file that instructs Claude on methodology, output format, and quality standards for a specific domain. Skills are loaded on-demand — Claude reads the relevant `SKILL.md` before executing any task in its domain.
 
+**30 skills across 8 groups and 4 functional layers.** Every formal output runs through at least two layers — usually three or four. Layers are not optional — skipping a layer produces a draft, not a deliverable.
+
 > **Source of truth:** This README reflects the folders in [`ian-lawrence423/Claude-skills`](https://github.com/ian-lawrence423/Claude-skills). Update this file whenever skills are added or removed from the repo.
 
 ---
 
-## How Skills Work
+## 1. How Skills Fit Together
 
-Skills encode hard-won constraints that Claude's training alone doesn't guarantee: brand specs, analytical methodology, quality gates, and output formatting rules. Claude reads the skill before writing any code, producing any file, or running any analysis.
+The skill library has four functional layers. The mandatory sequence for any formal output:
 
-**Auto-running skills** execute on every relevant output without being explicitly invoked:
+1. **Analytical OS** → frames the problem, governs methodology, structures NTB registry (investment work)
+2. **Research/Analysis** → gathers evidence, builds NTB-ready findings, confirms Gate 2 scorecard
+3. **writing-style** → runs on all prose before any document code is written
+4. **claim-scrutinizer** → redlines every material claim, checks IC memo structure (investment work)
+5. **red-team** → adversarial pass on load-bearing pillars
+6. **pre-mortem** → failure mode inventory with NTB mapping (IC/investment work)
+7. **Document production** → generates the file using canonical template
+8. **doc-quality-checker** → auto-runs after file delivery
 
-| Skill | Auto-runs when... |
+> **Critical:** Never trigger a document production skill without running the quality layer first. A file produced without `writing-style` and `claim-scrutinizer` will fail the `doc-quality-checker` pass and require a full rebuild.
+
+| Layer | Skills | What It Owns | When It Runs |
+|---|---|---|---|
+| **1 — Analytical OS** | `mckinsey-consultant` | Problem structuring, MECE trees, frameworks, claim labeling (F/E/H), Six Screening Questions | Always active for strategy or investment work |
+| **2 — Research** | `market-research`, `ntb-diligence`, `ic-memo`, `competitive-moat-assessment`, `executive-summary-writer`, `driver-tree`, `tam-sam-som-calculator`, `statistics-fundamentals`, `finance-metrics-quickref`, `saas-revenue-growth-metrics`, `saas-economics-efficiency-metrics` | Evidence gathering, research workflow, deliverable architecture, metrics analysis | When research or a specific deliverable type is needed |
+| **3 — Quality** | `writing-style` ⚙️, `claim-scrutinizer`, `red-team`, `pre-mortem`, `boundability` | Prose standards, claim testing, adversarial stress-testing, failure mode enumeration | During drafting (`writing-style`) and after draft (all others) |
+| **4 — Production** | `pattern-docx`, `pattern-investment-pptx`, `pattern-pptx`, `diligence-ddr`, `financial-model-builder`, `executive-briefing`, `written-communication`, `giving-presentations` | Branded file output in correct format with header/footer/logo | Final step — after analytical and quality layers complete |
+| **4b — QA** | `doc-quality-checker` ⚙️ | Brand compliance, formatting, internal consistency, draft artifact language check | Auto-runs after every Layer 4 file output |
+
+---
+
+## 2. Auto-Running Skills
+
+These two skills execute on every relevant output **without being explicitly invoked**:
+
+| Skill | Auto-Runs When... |
 |---|---|
-| `writing-style` | Any final/near-final formal output — memos, reports, investment theses, PPTX narrative text |
+| `writing-style` | Any final or near-final formal output — memos, reports, investment theses, PPTX narrative text |
 | `doc-quality-checker` | After any `pattern-docx` or `pattern-investment-pptx` file is produced |
 
 All other skills are invoked by name when the task matches their trigger criteria.
 
 ---
 
-## Full Skill Index (A–Z)
+## 3. Complete Skill Index
 
-All 28 skills currently in the repo, alphabetically.
+All 30 skills organized by group. Invoke the most specific skill first; fall back to broader skills if needed.
 
----
+### Strategy & Problem Solving
 
-### `boundability`
-Defines and tests the boundaries of a business's competitive advantage — where the moat holds, where it degrades, and what would cause it to collapse. Useful for investment diligence and competitive positioning work.
+| Skill | Layer | What It Does | Triggers |
+|---|---|---|---|
+| `mckinsey-consultant` | L1 — Analytical OS | Problem structuring, MECE trees, 7 strategy dimensions, Pyramid Principle, Six Screening Questions — analytical OS for all strategy/investment work | Issue trees, MECE frameworks, structured diagnosis, storyline design |
+| `market-research` | L2 — Research | Full research workflow: intake → brief → pyramid (L4→L1) → deep dives → draft → iteration loop. Integrates `mckinsey-consultant`, `writing-style`, `claim-scrutinizer`, `competitive-moat-assessment` | "conduct market research", "competitive landscape", "full analysis", "size a market" |
+| `competitive-moat-assessment` | L2 — Research | 5-step moat evidence methodology: classify → existence test → strength rating → durability → verdict. Mandatory at L2b in all market research | "assess the moat", "how defensible is X", "moat depth", "durability of advantage" |
+| `pre-mortem` | L3 — Quality | Assumes deal/project failed and works backward to enumerate every failure pathway. Maps failure modes to NTBs. Distinct from `claim-scrutinizer` — assumes the bull case is wrong | "pre-mortem this", "how does this fail", "war game", "stress test downside" |
+| `red-team` | L3 — Quality | Adversarial review — constructs the strongest opposing case with evidence. 6-gate attack lenses. Produces a structured rebuttal, not a general critique | "red team this", "make the bear case", "argue against this", "steelman the opposition" |
+| `claim-scrutinizer` | L3 — Quality | Seven-part claim test, assumption audit, derivative integrity. For investment docs: Six Screening Questions as lens + IC memo structure check (NTB registry, Gate 2 scorecard) | "scrutinize", "redline", "pressure-test", "poke holes in this", "is this IC-ready" |
+| `boundability` | L3 — Quality | Tests geographic, segment, and product boundaries of a competitive advantage — where it holds vs. degrades. 6-module scoring, 5 disqualification gates | "where does the moat hold", "test the limits of this advantage", "boundary conditions" |
+| `driver-tree` | L2 — Research | Decomposes investment thesis into causal driver tree — revenue, cost, capital, and competitive dynamics. Maps drivers to NTBs and MOIC outcomes | "build a driver tree", "decompose this thesis", "what drives MOIC here" |
+| `tam-sam-som-calculator` | L2 — Research | Market sizing — TAM/SAM/SOM with bottoms-up and tops-down approaches, labeled assumptions (fact/estimate/hypothesis), and sensitivity analysis | "size the market", "TAM/SAM/SOM", "how big is this market", "market sizing" |
+| `statistics-fundamentals` | L2 — Research | Applied statistics for investment and business analysis: regression interpretation, confidence intervals, A/B test validity, correlation vs. causation, common statistical errors | "is this statistically significant", "interpret this regression", "confidence interval" |
 
-**Triggers:** "where does the moat hold", "test the boundaries of this advantage", "how defensible is this"
+### Finance & Investment
 
----
+> ⚠️ **Foundational rule:** Always load `financial-model-builder` first before invoking any other skill in this group. All downstream finance work builds on the canonical 3-tab model structure.
 
-### `claim-scrutinizer`
-Adversarial MECE redline of investment memos, IC decks, and strategy documents. Produces structured **KILL / WOUND / EXPOSE** verdicts with CRAAP scoring, derivative integrity checks, and logic tree analysis. For IC memos, applies the Six Screening Questions as the primary analytical lens. Always produces a redline output — never a general summary.
+| Skill | Layer | What It Does | Triggers |
+|---|---|---|---|
+| `financial-model-builder` | L4 — Production | Builds canonical 3-tab operating model (Input Page, Financial Model Template, Output Tab) from source P&L/BS. 6+6 analysis (actuals + forecast). **Read first — foundational** | "build financial model", "3-tab model", "6+6 analysis", "turn this P&L into a model" |
+| `ic-memo` | L2 — Research | IC memo architecture: 10-section structure, three-gate structure (company quality → sector timing → investment attractiveness), kill criteria, scenario analysis, Pattern-branded DOCX output | "IC memo", "investment committee memo", "write up this deal", "deal memo" |
+| `ntb-diligence` | L2 — Research | Standalone 4-phase NTB diligence, 2 checkpoints, MOIC sum tolerance ±15%. Evaluates whether growth is driven by genuine new customers vs. base recycling | "NTB diligence", "new-to-brand analysis", "customer acquisition quality", "cohort analysis" |
+| `diligence-ddr` | L4 — Production | Generates or customizes Due Diligence Request Lists for PE buyout / M&A sell-side. Tailored by sector and business model | "DDR", "due diligence request list", "data room requests", "diligence checklist" |
+| `finance-metrics-quickref` | L2 — Research | Quick-reference lookup for financial metric definitions, formulas, and benchmarks. Covers SaaS, PE, and general corporate finance | "what's the formula for", "define [metric]", "what's a good benchmark for" |
+| `saas-revenue-growth-metrics` | L2 — Research | Revenue, retention, NRR/GRR, ARR growth, churn, expansion, and logo retention. Metric definitions, calculation methodology, and benchmark ranges by stage and sector | NRR, GRR, ARR, churn, expansion revenue, retention analysis, revenue quality |
+| `saas-economics-efficiency-metrics` | L2 — Research | CAC, LTV, payback period, Rule of 40, burn multiple, and capital efficiency ratios. Benchmarking against SaaS peers | CAC/LTV analysis, payback period, Rule of 40, efficiency metrics, burn analysis |
 
-**Triggers:** "redline", "scrutinize", "pressure-test", "poke holes in this", "is this IC-ready", "check the logic", "fact-check this deck"
+### Executive Leadership
 
----
+| Skill | Layer | What It Does | Triggers |
+|---|---|---|---|
+| `executive-briefing` | L4 — Production | Executive-ready briefing documents: memos, one-pagers, board notes, C-suite briefings. Enforces BLUF structure and decision-oriented formatting | "memo", "board note", "one-pager", "C-suite briefing", "executive summary" |
+| `executive-summary-writer` | L2 — Research | Compresses completed analysis into publication-ready executive summary. Four format variants: one-page memo, deck slide, briefing paragraph, multi-section | "write an executive summary", "summarize for leadership", "condense this" |
+| `managing-up` | Interpersonal | Frameworks for executive relationship management, influencing leadership without authority, and navigating organizational dynamics | "how do I handle this with my boss", "managing up", "influencing leadership" |
+| `having-difficult-conversations` | Interpersonal | Framework for high-stakes conversations: hard feedback, performance discussions, co-ownership framing, escalations. Produces talk tracks, not just advice | "how do I say this to them", "hard conversation", "feedback delivery", "performance conversation" |
 
-### `competitive-moat-assessment`
-Structured assessment of a company's competitive moat: moat type classification (network effects, switching costs, cost advantages, intangibles, efficient scale), depth, durability, and erosion risk. Goes deeper than a generic competitive analysis — focuses specifically on advantage sustainability.
+### Communication & Deliverables
 
-**Triggers:** "assess the moat", "how defensible is X", "competitive advantage analysis", "moat depth", "durability of advantage"
+> **Brand rules:**
+> - `pattern-investment-pptx` and `pattern-pptx`: **Wix Madefor Display** font, primary blue `#4285F4`, navy `#002060`
+> - `pattern-docx`: **Wix Madefor Display** font, section headers `#4280F4`, subheaders `#3A00FD`, table headers `#0F4761`
+> - The `pattern-docx` header contains the Pattern logo and gradient line — injected via Python patch, not docx-js
 
----
+| Skill | Layer | What It Does | Triggers |
+|---|---|---|---|
+| `pattern-docx` | L4 — Production | Pattern-branded Word documents. Two-phase build: docx-js body + Python XML patch for header/footer/logo | Any Pattern memo, report, analysis, IC memo as Word doc |
+| `pattern-investment-pptx` | L4 — Production | Institutional-grade investment decks: IC, PE, acquirer materials. 10×5.625" format | Investment deck, investor presentation, due diligence deck, M&A deck |
+| `pattern-pptx` | L4 — Production | General Pattern-branded presentations for internal, operational, partner content — not investment materials | Internal strategy deck, ops review, partner presentation |
+| `written-communication` | L4 — Production | Emails, memos, strategy documents, and announcements. Covers tone calibration, audience framing, structure, and edit passes | "write an email", "draft a memo", "help me communicate this", "write an announcement" |
+| `giving-presentations` | L4 — Production | Talk track prep, slide deck narrative design, and presentation delivery coaching | "help me prep for this presentation", "talk track", "what's the narrative for this deck" |
+| `writing-style` | L3 — Quality ⚙️ | 5-step prose self-review. Runs on **all** formal outputs before document production. Enforces claim tagging, inductive chain check, data gap flagging, prose standards | Auto-runs — do not invoke manually |
+| `doc-quality-checker` | L4b — QA ⚙️ | Brand compliance QA gate. Auto-runs after every `pattern-docx` or `pattern-investment-pptx` output. Checks formatting, structural logic, table integrity, narrative flow | Auto-runs after Layer 4 production output |
 
-### `diligence-ddr`
-Generates or customizes a Due Diligence Request List (DDR) for PE buyout or M&A sell-side transactions. Full DDR generation from scratch given a company description, and targeted customization to a specific business model, sector, and deal context.
+### AI & Technology
 
-**Triggers:** "DDR", "due diligence request list", "data room requests", "diligence checklist", "I need a DDR for [company]"
+| Skill | Layer | What It Does | Triggers |
+|---|---|---|---|
+| `vibe-coding` | L7 — AI | AI-assisted rapid prototyping — building functional tools, scripts, and apps without deep technical skills. Optimized for speed-to-working-artifact | "build this quickly", "prototype", "just make it work", "vibe code this" |
 
----
+### Meta / Workflow
 
-### `doc-quality-checker`
-⚙️ **Auto-runs after `pattern-docx` or `pattern-investment-pptx` output.**
-
-QA pass on Pattern Word docs and Pattern investment PPTX decks. Checks brand formatting, content quality, structural logic, table integrity, header/footer, page numbers, and narrative flow. Always produces a severity-rated inline issue list with exact locations. Never auto-fixes.
-
-**Manual triggers:** "check this", "QA this", "proof this", "is this ready"
-
----
-
-### `executive-briefing`
-Produces executive-ready briefing documents: memos, one-pagers, board notes, and C-suite briefings. Enforces BLUF structure, three-level hierarchy max, and decision-oriented formatting.
-
-**Triggers:** "memo", "board note", "one-pager", "C-suite briefing", "executive summary", "briefing doc"
-
----
-
-### `executive-summary-writer`
-Writes tight, decision-ready executive summaries from longer documents or analyses. Enforces strict length discipline and inductive structure — conclusion first, evidence second.
-
-**Triggers:** "write an executive summary", "summarize this for leadership", "condense this into an exec summary"
-
----
-
-### `finance-metrics-quickref`
-Quick-reference lookup for financial metric definitions, formulas, and benchmarks. Covers SaaS, PE, and general corporate finance metrics.
-
-**Triggers:** "what's the formula for", "define [metric]", "what's a good benchmark for", "how do I calculate"
-
----
-
-### `financial-model-builder`
-⚠️ **Read first before any other finance skill.**
-
-Builds the canonical 3-tab operating model (Input Page, Financial Model Template, Output Tab) from a source P&L/Balance Sheet. All downstream finance skills assume this structure exists.
-
-**Triggers:** "build financial model", "3-tab model", "6+6 analysis", "go-forward analysis", "turn this P&L into a model", "model this out", "build the pattern template model"
-
----
-
-### `giving-presentations`
-Talk track prep, slide deck narrative design, and presentation delivery coaching. Covers structuring a compelling narrative, anticipating audience questions, and landing key messages under time pressure.
-
-**Triggers:** "help me prep for this presentation", "talk track", "how do I pitch this", "what's the narrative for this deck", "presentation coaching"
+| Skill | Layer | What It Does | Triggers |
+|---|---|---|---|
+| `skill-authoring-workflow` | L8 — Meta | Standards and process for creating or updating a skill without breaking conventions. Covers `SKILL.md` structure, trigger language, integration rules, quality checks | "create a new skill", "update this skill", "how should I structure this skill" |
 
 ---
 
-### `having-difficult-conversations`
-Framework for navigating high-stakes interpersonal conversations: hard feedback, performance discussions, co-ownership framing for sensitive issues, and escalations. Produces talk tracks, not just advice.
+## 4. Skill Invocation Priority
 
-**Triggers:** "how do I say this to them", "help me prepare for a hard conversation", "feedback delivery", "performance conversation", "how do I raise this with [person]"
+When multiple skills could apply, use this tie-breaking order:
 
----
-
-### `ic-memo`
-Produces Pattern-standard IC (Investment Committee) memos. Enforces the three-gate structure (company quality → sector timing → investment attractiveness), kill criteria, scenario analysis, and Pattern-branded DOCX output.
-
-**Triggers:** "IC memo", "investment committee memo", "write up this deal", "IC write-up", "deal memo"
+| # | Rule | How to Apply |
+|---|---|---|
+| 1 | **Most specific first** | Prefer a narrow skill (e.g., `saas-revenue-growth-metrics`) over a broad one (e.g., `mckinsey-consultant`) when the narrow one directly addresses the task |
+| 2 | **Pattern-branded first** | For any output file, prefer `pattern-investment-pptx` or `pattern-pptx` over generic `pptx`; `pattern-docx` over generic Word |
+| 3 | **Consulting OS default** | If no skill fits, apply the Default Mode 8-step framework from `agents.md` directly |
 
 ---
 
-### `managing-up`
-Frameworks for executive relationship management, influencing leadership without authority, and navigating organizational dynamics. Covers how to frame issues, build credibility, and drive decisions upward.
+## 5. Adding a New Skill
 
-**Triggers:** "how do I handle this with my boss", "managing up", "executive relationship", "influencing leadership", "navigating org politics"
-
----
-
-### `market-research`
-Full market research project workflow — from brief through final deliverable. Hypothesis-driven methodology: research brief → pyramid analysis (Market → Customer → Competitive → Company) → source bibliography → report architecture → final DOCX or PPTX.
-
-Integrates `mckinsey-consultant` (analytical method), `writing-style` (prose discipline), `claim-scrutinizer` (logic redline).
-
-**Triggers:** "conduct market research", "build a research brief", "run a market analysis", "size a market", "competitive landscape", "full analysis"
-
----
-
-### `mckinsey-consultant`
-**The analytical OS. Load for any strategy, investment evaluation, or structured diagnosis.**
-
-Governs all analytical methodology: McKinsey 7-step problem solving, MECE issue trees, Six Screening Questions for investments, Pyramid Principle, and all analytical modules (Porter's, SWOT, market sizing, positioning maps, value chain). Does not govern evidence gathering — that is `market-research`'s job. For financial modeling, use `financial-model-builder`. For file output, use `pattern-investment-pptx` or `pattern-docx`.
-
-**Triggers:** issue trees, structured diagnosis, MECE frameworks, storyline design, McKinsey-style PPT, any strategy or PE/finance work mode
-
----
-
-### `ntb-diligence`
-New-to-brand (NTB) diligence framework — evaluates customer acquisition quality, new cohort behavior, and whether stated growth is driven by genuine new customer expansion vs. base recycling. Specific to e-commerce and marketplace businesses.
-
-**Triggers:** "NTB diligence", "new-to-brand analysis", "customer acquisition quality", "cohort analysis", "is this growth real"
-
----
-
-### `pattern-docx`
-**Pattern-branded Word document generator.**
-
-Encodes Pattern's exact typography (Wix Madefor Display), brand colors, header/footer with logo, section structure, table styles, and paragraph formatting. Two-phase build: docx-js body + Python patch for header/footer/logo injection.
-
-**Brand spec:**
-- Font: Wix Madefor Display
-- Section headers: `#4280F4` | Subheaders: `#3A00FD` | Table headers: `#0F4761` | Body: `#000000`
-- Header: Pattern logo + gradient line (Python-injected)
-
-**Triggers:** any Pattern memo, report, analysis, IC memo, market research output as Word doc
-
----
-
-### `pattern-investment-pptx`
-**Pattern-branded investment-grade PowerPoint generator. Ian's primary deck skill.**
-
-Encodes Pattern's full visual system: Wix Madefor Display font, 10×5.625" format, strict no-bold rule, financial tables, market sizing slides, EBITDA bridges, thesis sections.
-
-**Brand spec:**
-- Font: Wix Madefor Display | Slide: 10 × 5.625 inches
-- Primary blue: `#4285F4` | Navy: `#002060` | Highlight row: `#D9E2F3`
-
-**Triggers:** investment deck, investor presentation, due diligence deck, M&A deck, board deck, deal materials
-
----
-
-### `pre-mortem`
-Investment failure analysis. Assumes the deal has already failed and works backward to enumerate every failure pathway, diagnose the information state for each, and surface the data that would change the picture.
-
-Distinct from `claim-scrutinizer`: scrutinizer tests whether the bull case is well-argued; pre-mortem assumes it is wrong.
-
-**Triggers:** "pre-mortem this deal", "how does this fail", "what kills this deal", "war game this investment", "stress test the downside", "failure mode analysis"
-
----
-
-### `red-team`
-Adversarial review of investment theses, strategy documents, and market analyses. Actively constructs the strongest opposing case — not a list of risks, but a coherent counter-narrative with evidence. Produces a structured rebuttal, not a general critique.
-
-**Triggers:** "red team this", "make the bear case", "argue against this", "what's the counter-thesis", "steelman the opposition"
-
----
-
-### `saas-economics-efficiency-metrics`
-CAC, LTV, payback period, Rule of 40, burn multiple, and capital efficiency ratios. Benchmarking against SaaS peers included.
-
-**Triggers:** CAC/LTV analysis, payback period, Rule of 40, efficiency metrics, burn analysis
-
----
-
-### `saas-revenue-growth-metrics`
-Revenue, retention, NRR/GRR, ARR growth, churn, expansion, and logo retention. Covers metric definitions, calculation methodology, and benchmark ranges by stage and sector.
-
-**Triggers:** NRR, GRR, ARR, churn, expansion revenue, retention analysis, revenue quality
-
----
-
-### `skill-authoring-workflow`
-Standards and process for creating or updating a skill without breaking existing conventions. Covers `SKILL.md` structure, trigger language, integration rules with adjacent skills, and quality checks before committing.
-
-**Triggers:** "create a new skill", "update this skill", "I want to add a skill for", "how should I structure this skill"
-
----
-
-### `statistics-fundamentals`
-Applied statistics for investment and business analysis: regression interpretation, confidence intervals, sample size, A/B test validity, correlation vs. causation, and common statistical errors in business contexts.
-
-**Triggers:** "is this statistically significant", "interpret this regression", "how do I size this test", "what's the confidence interval", "is this correlation meaningful"
-
----
-
-### `tam-sam-som-calculator`
-Market sizing — TAM/SAM/SOM with explicit assumptions, bottoms-up and tops-down approaches, and sensitivity analysis. Produces labeled estimates (fact / estimate / hypothesis) with stated methodology.
-
-**Triggers:** "size the market", "TAM/SAM/SOM", "how big is this market", "market sizing"
-
----
-
-### `vibe-coding`
-AI-assisted rapid prototyping — building functional tools, scripts, and apps without deep technical skills. Optimized for speed-to-working-artifact over engineering purity.
-
-**Triggers:** "build this quickly", "prototype", "just make it work", "I don't need it to be perfect", "vibe code this"
-
----
-
-### `writing-style`
-⚙️ **Auto-runs on all formal outputs.**
-
-Governs prose quality, claim standards, and epistemic discipline via an explicit self-review pass after drafting. Enforces five-step review, inductive chain reasoning standard, and absolute/exclusivity term discipline. Runs alongside `mckinsey-consultant`, `market-research`, `diligence-ddr`, `pattern-docx`, and `pattern-investment-pptx`. Does not run on conversational responses or interim work.
-
----
-
-### `written-communication`
-Emails, memos, strategy documents, and announcements. Covers tone calibration, audience framing, structure, and edit passes for clarity and concision.
-
-**Triggers:** "write an email", "draft a memo", "help me communicate this", "write an announcement", "message to leadership"
-
----
-
-## Skill Invocation Priority
-
-When multiple skills could apply:
-
-1. **Most specific first** — prefer a narrow skill (e.g., `saas-revenue-growth-metrics`) over a broad one (e.g., `mckinsey-consultant`) when the narrow one directly addresses the task
-2. **Pattern-branded first** — for any output file, prefer `pattern-investment-pptx` over generic PPTX; `pattern-docx` over generic Word
-3. **Consulting OS default** — if no skill fits, apply the `agents.md` Default Mode 8-step framework directly
-
----
-
-## Adding a New Skill
+Follow this checklist to add a new skill without breaking conventions:
 
 1. Create a folder: `[skill-name]/` (kebab-case)
-2. Write `SKILL.md` — follow `skill-authoring-workflow` for structure and standards
+2. Write `SKILL.md` — invoke `skill-authoring-workflow` for structure and standards
 3. Add the skill to `agents.md` Skill Directory under the appropriate group
-4. Add an entry to this README in alphabetical order using the format above
-5. Commit and push — this README is the source of truth for what's deployed
+4. Add an entry to this README under the correct group table
+5. Commit and push — this README is the source of truth for what is deployed
 
 ---
 
-## Related Files
+## 6. Related Files
 
 | File | Location | Purpose |
 |---|---|---|
-| `agents.md` | repo root / OneDrive | Always-on operating layer — default mode, work-mode templates, skill directory, file output rules |
+| `agents.md` | Repo root / OneDrive sync | Always-on operating layer — default mode, work-mode templates, full skill directory, file output rules |
+| `README.md` | Repo root | Source of truth for deployed skills — skill index, invocation guide, architecture overview |
+| `Claude_Skills_CheatSheet.docx` | `docs/` / OneDrive | Quick-reference card: 23 skills · 4 layers · what each does and its output format |
+| `Claude_Skill_Library_External (Finance).docx` | `docs/` / OneDrive | Deep reference for PE/investment workflow: skill architecture, inventory, IC memo sequential prompts |
+| `Claude_Skills_README.docx` | `docs/` | Pattern-branded Word version of this README |
 | `MBB_METHODOLOGY.md` | `mckinsey-consultant/references/` | Full MBB 7-step methodology reference |
 | `VALIDATION_FRAMEWORKS.md` | `mckinsey-consultant/references/` | Source validation, CRAAP scoring, triangulation standards |
