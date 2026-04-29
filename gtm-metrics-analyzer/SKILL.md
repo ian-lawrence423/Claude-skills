@@ -247,6 +247,26 @@ When the bundled workbook is used:
 
 ---
 
+## Interaction with kpi-tree-builder
+
+`kpi-tree-builder` is the structural companion to this skill.
+
+Use `gtm-metrics-analyzer` to:
+- calculate metrics
+- identify missing inputs
+- separate user inputs from derived calculations
+- populate workbook tabs
+- diagnose metric movement
+
+Use `kpi-tree-builder` to:
+- organize those metrics into a causal operating tree
+- decide which metrics belong under each branch
+- define weekly / monthly / quarterly tracking architecture
+
+This skill can support a KPI tree by supplying the metrics used in its nodes, but it should not replace the structural decomposition performed by `kpi-tree-builder`.
+
+---
+
 ## Success standard
 A good result should let the user answer:
 - what data did i provide?
