@@ -67,6 +67,7 @@ driver-tree         ← YOU ARE HERE — structural decomposition + tier assignm
       ├── pre-mortem           ← parallel: failure mode inventory (out-of-tree risks)
       ├── claim-scrutinizer    ← parallel: bull-case logic redline
       ├── boundability         ← downstream: converts driver work to underwriting
+      ├── kpi-tree-builder     ← downstream (post-close): converts driver tree to trackable operating architecture with owners, cadences, and management actions
       ├── mckinsey-consultant  ← shared analytical OS
       └── pattern-docx         ← downstream: methodology doc output
 ```

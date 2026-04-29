@@ -67,8 +67,9 @@ ic-memo              ← YOU ARE HERE — document architecture, section structu
       ├── pre-mortem                   ← failure mode inventory with NTB mapping
       │                                   Run after red-team; extends stress test coverage
       │
-      └── pattern-docx                 ← file output
-          doc-quality-checker          ← run immediately after file delivery
+      ├── pattern-docx                 ← file output
+      │   doc-quality-checker          ← run immediately after file delivery
+      └── kpi-tree-builder             ← post-close: converts IC thesis + NTB registry into trackable operating architecture
 ```
 
 **Load order:** Read investment-evaluation-framework.md first. Then follow this skill

@@ -248,6 +248,7 @@ Skills are grouped by domain. Invoke the most specific skill first; fall back to
 | `saas-revenue-growth-metrics` | Revenue, retention, NRR/GRR, ARR growth, churn, expansion |
 | `saas-economics-efficiency-metrics` | CAC, LTV, payback period, Rule of 40, burn multiple |
 | `business-health-diagnostic` | Full SaaS health check across growth, retention, efficiency, capital |
+| `kpi-tree-builder` | Decompose a budget, forecast, or operating target into causal drivers with owners, cadences, and management actions. Two modes: diligence (audit management budget credibility) and post-close (define tracking architecture). Triggers: "build a KPI tree", "break down this budget", "what should we track post-close", "audit this plan", "define operating metrics" |
 
 ---
 

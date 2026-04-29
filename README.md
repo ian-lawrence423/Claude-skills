@@ -2,7 +2,7 @@
 
 Pattern's modular skill architecture for Claude. Each skill is a folder containing a `SKILL.md` file that instructs Claude on methodology, output format, and quality standards for a specific domain. Skills are loaded on-demand — Claude reads the relevant `SKILL.md` before executing any task in its domain.
 
-**29 skills across 8 groups and 4 functional layers.** Every formal output runs through at least two layers — usually three or four. Layers are not optional — skipping a layer produces a draft, not a deliverable.
+**30 skills across 8 groups and 4 functional layers.** Every formal output runs through at least two layers — usually three or four. Layers are not optional — skipping a layer produces a draft, not a deliverable.
 
 > **Source of truth:** This README reflects the folders in [`ian-lawrence423/Claude-skills`](https://github.com/ian-lawrence423/Claude-skills). Update this file whenever skills are added or removed from the repo.
 
@@ -109,6 +109,7 @@ All 30 skills organized by group. Invoke the most specific skill first; fall bac
 | Skill | Layer | What It Does | Triggers |
 |---|---|---|---|
 | `vibe-coding` | L7 — AI | AI-assisted rapid prototyping — building functional tools, scripts, and apps without deep technical skills. Optimized for speed-to-working-artifact | "build this quickly", "prototype", "just make it work", "vibe code this" |
+| `kpi-tree-builder` | L2 — Research | Decomposes a budget, forecast, or operating target into causal drivers and atomic inputs. Two modes: diligence (audit management budget credibility) and post-close (define tracking cadence with owners). Produces KPI tree + driver dictionary + tracking pack | "build a KPI tree", "break down this budget", "what should we track post-close", "audit this plan", "define operating metrics" |
 
 ### Meta / Workflow
 

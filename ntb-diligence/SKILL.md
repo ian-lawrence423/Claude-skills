@@ -667,6 +667,9 @@ Every `ntb-diligence` output must pass all of the following before delivery:
 - `claim-scrutinizer`: stress tests can be redlined for logic gaps before final delivery.
 - `ic-memo`: consumes the full package when the IC memo is built. Skip ic-memo's internal
   NTB derivation step — it's already done.
+- `kpi-tree-builder` (post-close): the GAP items from Phase 3 map to specific atomic nodes
+  in the KPI tree — the measurable inputs that confirm or refute each NTB post-close. Run
+  kpi-tree-builder after close to convert the NTB registry into a management tracking system.
 
 **Skill precedence when both are active:**
 - `ntb-diligence` owns the NTB registry as a deliverable
