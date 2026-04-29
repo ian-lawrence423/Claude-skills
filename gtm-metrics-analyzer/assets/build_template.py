@@ -1,21 +1,37 @@
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Border, Side, Alignment
 from openpyxl.utils import get_column_letter
-from openpyxl.worksheet.table import Table, TableStyleInfo
 from pathlib import Path
 
 OUT = Path(__file__).parent / 'gtm_metrics_template.xlsx'
 OUT.parent.mkdir(parents=True, exist_ok=True)
 
-header_fill = PatternFill('solid', fgColor='1F4E78')
-section_fill = PatternFill('solid', fgColor='D9EAF7')
-light_fill = PatternFill('solid', fgColor='F5F9FC')
-white_font = Font(color='FFFFFF', bold=True)
-bold = Font(bold=True)
-thin = Side(style='thin', color='D0D7DE')
-border = Border(left=thin, right=thin, top=thin, bottom=thin)
-center = Alignment(vertical='center')
-wrap = Alignment(wrap_text=True, vertical='top')
+# ── Pattern brand constants ───────────────────────────────────────────────
+NAVY    = '0F4761'
+BLUE    = '4280F4'
+LT_BLUE = 'EBF2FA'
+ALT_ROW = 'F5F8FF'
+BORDER  = 'DDDDDD'
+WHITE   = 'FFFFFF'
+BLACK   = '000000'
+GRAY    = '888888'
+INPUT_V = 'EAF5EA'    # light mint — signals "fill this column"
+
+_b  = Side(style='thin', color=BORDER)
+_bh = Side(style='medium', color=NAVY)
+BDR       = Border(left=_b, right=_b, top=_b, bottom=_b)
+WRAP_TOP  = Alignment(horizontal='left', vertical='top', wrap_text=True)
+LEFT_MID  = Alignment(horizontal='left', vertical='center')
+CTR       = Alignment(horizontal='center', vertical='center')
+CTR_WRAP  = Alignment(horizontal='center', vertical='center', wrap_text=True)
+
+def fill(c):
+    return PatternFill('solid', fgColor=c)
+
+def font(name='Wix Madefor Display', size=9, bold=False, color=BLACK, italic=False):
+    return Font(name=name, size=size, bold=bold, color=color, italic=italic)
+
+# ── Data ──────────────────────────────────────────────────────────────────
 
 input_rows = [
     ('Company & Reporting Context','business_model','Business Model','e.g., B2B SaaS, usage-based SaaS, hybrid, PLG, SLG','Required',None),
@@ -152,134 +168,372 @@ metrics = [
     ('Fiscal Maturity','beat_vs_consensus','Beat Against Revenue Consensus','Derived','(Actual Revenue / Consensus Estimate) - 1','revenue, consensus_estimate', '=IFERROR((XLOOKUP("revenue",Input_Fields!$B:$B,Input_Fields!$F:$F,"")/XLOOKUP("consensus_estimate",Input_Fields!$B:$B,Input_Fields!$F:$F,""))-1,"")'),
 ]
 
+# ── Number format helper ──────────────────────────────────────────────────
+_PCT_KEYS  = {'rate','retention','attainment','margin','coverage','pct','mix','churn','stickiness','adoption','csat','beat','_gdr','_ndr','_mix'}
+_DOLLAR_KEYS = {'arr','bookings','cac','ltv','capacity','opex_per','nnarr_per','productivity'}
+_RATIO_KEYS  = {'magic_number','ltv_cac','ae_per','payback'}
+
+def num_fmt(key):
+    k = key.lower()
+    if any(p in k for p in _PCT_KEYS):   return '0.0%'
+    if any(p in k for p in _DOLLAR_KEYS): return '$#,##0'
+    if any(p in k for p in _RATIO_KEYS):  return '0.00'
+    return '#,##0.0'
+
+# ── Workbook ──────────────────────────────────────────────────────────────
 wb = Workbook()
+
+# ═══════════════════════════════════════════════════════
+#  README
+# ═══════════════════════════════════════════════════════
 ws = wb.active
 ws.title = 'README'
-ws['A1'] = 'GTM Metrics Analyzer Template'
-ws['A1'].font = Font(size=14, bold=True)
-ws['A3'] = 'Purpose'
-ws['A3'].font = bold
-ws['A4'] = 'Use this workbook to separate required uploaded inputs from derived GTM calculations and then surface a clean diagnostic output in one place.'
-ws['A6'] = 'Tab order'
-ws['A6'].font = bold
-for i, line in enumerate([
-    '1. Input_Fields: populate only user-provided fields from uploaded source files.',
-    '2. Metric_Calcs: review formulas, required inputs, and calculated values.',
-    '3. Diagnostic_Output: clean summary of the most decision-useful GTM metrics.',
-    'Do not overwrite raw source exports. Add them as separate tabs if needed.'
-], start=7):
-    ws[f'A{i}'] = line
-ws.column_dimensions['A'].width = 110
-for row in range(1, 12):
-    ws.row_dimensions[row].height = 22
+ws.sheet_properties.tabColor = LT_BLUE[1:] if LT_BLUE.startswith('#') else LT_BLUE
 
+ws.column_dimensions['A'].width = 90
+ws.column_dimensions['B'].width = 20
+
+def readme_row(r, height=18):
+    ws.row_dimensions[r].height = height
+
+# Title block
+ws.merge_cells('A1:B1')
+c = ws['A1']
+c.value = 'GTM Metrics Analyzer'
+c.font = Font(name='Wix Madefor Display SemiBold', size=16, bold=True, color=NAVY)
+c.alignment = LEFT_MID
+readme_row(1, 28)
+
+ws.merge_cells('A2:B2')
+c = ws['A2']
+c.value = 'Input Template + Metric Calculator  ·  B2B SaaS / GTM-Driven Businesses'
+c.font = Font(name='Wix Madefor Display', size=9, color=GRAY)
+c.alignment = LEFT_MID
+readme_row(2, 18)
+
+readme_row(3, 8)
+
+# Section: Purpose
+ws['A4'].value = 'Purpose'
+ws['A4'].font = Font(name='Wix Madefor Display SemiBold', size=10, bold=True, color=BLUE)
+ws['A4'].alignment = LEFT_MID
+readme_row(4, 20)
+
+ws.merge_cells('A5:B5')
+ws['A5'].value = (
+    'Use this workbook to load raw company data into Input_Fields, then review '
+    'derived GTM metric calculations in Metric_Calcs, and surface a clean diagnostic '
+    'summary in Diagnostic_Output. Supports all six GTM metric families: Growth Drivers, '
+    'Sales Funnel, Retention, Efficiency & Economics, Team & Productivity, and Fiscal Maturity.'
+)
+ws['A5'].font = Font(name='Wix Madefor Display', size=9, color=BLACK)
+ws['A5'].alignment = Alignment(horizontal='left', vertical='top', wrap_text=True)
+ws.row_dimensions[5].height = 40
+
+readme_row(6, 8)
+
+# Section: How to Use
+ws['A7'].value = 'How to Use'
+ws['A7'].font = Font(name='Wix Madefor Display SemiBold', size=10, bold=True, color=BLUE)
+ws['A7'].alignment = LEFT_MID
+readme_row(7, 20)
+
+steps = [
+    '1.  Input_Fields    →  Populate the User Value column (column F) with values from uploaded source files. Do not overwrite raw exports — add them as separate tabs if needed.',
+    '2.  Metric_Calcs    →  Review formulas, required inputs, and calculated values. Column G auto-calculates from Input_Fields.',
+    '3.  Diagnostic_Output  →  Clean summary of the 20 most decision-useful GTM metrics, pulled automatically from Metric_Calcs.',
+    '4.  Do not modify column B (Input Key) or column B of Metric_Calcs (Metric Key) — these are the XLOOKUP lookup arrays.',
+]
+for i, step in enumerate(steps, start=8):
+    ws.merge_cells(f'A{i}:B{i}')
+    ws[f'A{i}'].value = step
+    ws[f'A{i}'].font = Font(name='Wix Madefor Display', size=9, color=BLACK)
+    ws[f'A{i}'].alignment = Alignment(horizontal='left', vertical='top', wrap_text=True)
+    ws.row_dimensions[i].height = 30
+
+readme_row(12, 8)
+
+# Section: Requirements
+ws['A13'].value = 'Requirements'
+ws['A13'].font = Font(name='Wix Madefor Display SemiBold', size=10, bold=True, color=BLUE)
+ws['A13'].alignment = LEFT_MID
+readme_row(13, 20)
+
+ws.merge_cells('A14:B14')
+ws['A14'].value = (
+    '⚠️  Requires Excel 365 or Excel 2021+. Formulas use XLOOKUP and FILTER, which are '
+    'not available in older Excel versions or Google Sheets without modification.'
+)
+ws['A14'].font = Font(name='Wix Madefor Display', size=9, color='7F3F00', italic=True)
+ws['A14'].alignment = Alignment(horizontal='left', vertical='top', wrap_text=True)
+ws.row_dimensions[14].height = 28
+
+readme_row(15, 8)
+
+# Section: Metric Families
+ws['A16'].value = 'Metric Families'
+ws['A16'].font = Font(name='Wix Madefor Display SemiBold', size=10, bold=True, color=BLUE)
+ws['A16'].alignment = LEFT_MID
+readme_row(16, 20)
+
+families = [
+    ('Growth Drivers',       '7 metrics  ·  Gross/Net New ARR, ARR Growth, Mix'),
+    ('Sales Funnel',         '6 metrics  ·  Pipeline Coverage, Win Rate, Close Rate, Forecast'),
+    ('Retention',            '10 metrics  ·  NDR, GDR, Logo Retention, Adoption, NPS, CSAT'),
+    ('Efficiency & Economics', '9 metrics  ·  Gross Margin, Magic Number, CAC, LTV, Payback'),
+    ('Team & Productivity',  '10 metrics  ·  Sales Capacity, Attainment, Ramp Rate, FTE Productivity'),
+    ('Fiscal Maturity',      '6 metrics  ·  Plan Attainment, YoY Growth, FCF, Beat vs Guidance'),
+]
+for i, (fam, desc) in enumerate(families, start=17):
+    ws[f'A{i}'].value = fam
+    ws[f'A{i}'].font = Font(name='Wix Madefor Display SemiBold', size=9, bold=True, color=NAVY)
+    ws[f'A{i}'].alignment = LEFT_MID
+    ws[f'B{i}'].value = desc
+    ws[f'B{i}'].font = Font(name='Wix Madefor Display', size=9, color=GRAY)
+    ws[f'B{i}'].alignment = LEFT_MID
+    ws.column_dimensions['B'].width = 52
+    ws.row_dimensions[i].height = 18
+
+# ═══════════════════════════════════════════════════════
+#  INPUT_FIELDS
+# ═══════════════════════════════════════════════════════
 inp = wb.create_sheet('Input_Fields')
-headers = ['Section','Input Key','Input Label','Definition / What to Upload','Input Requirement','User Value','Notes']
-inp.append(headers)
-for c in range(1, len(headers)+1):
-    cell = inp.cell(1,c)
-    cell.fill = header_fill; cell.font = white_font; cell.border = border; cell.alignment = center
-for row in input_rows:
-    inp.append(list(row[:-1]) + [row[-1]])
-for r in range(2, inp.max_row+1):
-    for c in range(1, inp.max_column+1):
-        cell = inp.cell(r,c)
-        cell.border = border
-        cell.alignment = wrap
-        if c == 1 and r > 2 and inp.cell(r,1).value != inp.cell(r-1,1).value:
-            for cc in range(1, inp.max_column+1):
-                inp.cell(r,cc).fill = section_fill
-for col, width in {'A':24,'B':28,'C':28,'D':42,'E':22,'F':16,'G':22}.items():
-    inp.column_dimensions[col].width = width
-input_tab = Table(displayName='InputFields', ref=f'A1:G{inp.max_row}')
-input_tab.tableStyleInfo = TableStyleInfo(name='TableStyleMedium2', showRowStripes=True)
-inp.add_table(input_tab)
+inp.sheet_properties.tabColor = NAVY
 inp.freeze_panes = 'A2'
 
+inp_headers = ['Section', 'Input Key', 'Input Label', 'Definition / What to Upload', 'Input Requirement', 'User Value', 'Notes']
+inp_col_widths = {'A': 24, 'B': 28, 'C': 28, 'D': 44, 'E': 22, 'F': 18, 'G': 24}
+
+# Header row
+for ci, hdr in enumerate(inp_headers, start=1):
+    c = inp.cell(row=1, column=ci, value=hdr)
+    c.fill = fill(NAVY)
+    c.font = Font(name='Wix Madefor Display SemiBold', size=9, bold=True, color=WHITE)
+    c.border = BDR
+    c.alignment = CTR_WRAP
+inp.row_dimensions[1].height = 22
+
+# Data rows
+prev_section = None
+alt_counter = 0
+for ri, row_data in enumerate(input_rows, start=2):
+    section = row_data[0]
+    is_section_start = (section != prev_section)
+    if is_section_start:
+        alt_counter = 0
+    else:
+        alt_counter += 1
+
+    is_alt = (alt_counter % 2 == 1)
+    base_fill = fill(ALT_ROW) if is_alt else fill(WHITE)
+    sect_fill = fill(LT_BLUE)
+
+    for ci, val in enumerate(row_data, start=1):
+        c = inp.cell(row=ri, column=ci, value=val)
+        c.border = BDR
+        c.alignment = WRAP_TOP
+
+        if is_section_start:
+            c.fill = sect_fill
+            c.font = Font(name='Wix Madefor Display SemiBold', size=9, bold=True, color=NAVY)
+        elif ci == 6:   # User Value column — light green tint
+            c.fill = fill(INPUT_V)
+            c.font = Font(name='Wix Madefor Display', size=9, color=BLACK)
+        else:
+            c.fill = base_fill
+            c.font = Font(name='Wix Madefor Display', size=9, color=BLACK)
+
+    inp.row_dimensions[ri].height = 18
+    prev_section = section
+
+# User Value header extra treatment
+inp.cell(1, 6).fill = fill('1A6B2C')   # darker green for "fill here" column header
+inp.cell(1, 6).font = Font(name='Wix Madefor Display SemiBold', size=9, bold=True, color=WHITE)
+
+for col, w in inp_col_widths.items():
+    inp.column_dimensions[col].width = w
+
+inp.auto_filter.ref = f'A1:G{inp.max_row}'
+
+# ═══════════════════════════════════════════════════════
+#  METRIC_CALCS
+# ═══════════════════════════════════════════════════════
 calc = wb.create_sheet('Metric_Calcs')
-calc_headers = ['Metric Family','Metric Key','Metric Name','Type','Formula / Logic','Required Inputs','Calculated Value','Comments']
-calc.append(calc_headers)
-for c in range(1, len(calc_headers)+1):
-    cell = calc.cell(1,c)
-    cell.fill = header_fill; cell.font = white_font; cell.border = border; cell.alignment = center
-for row in metrics:
-    calc.append(list(row) + [''])
-for r in range(2, calc.max_row+1):
-    for c in range(1, calc.max_column+1):
-        cell = calc.cell(r,c)
-        cell.border = border
-        cell.alignment = wrap
-        if c == 1 and r > 2 and calc.cell(r,1).value != calc.cell(r-1,1).value:
-            for cc in range(1, calc.max_column+1):
-                calc.cell(r,cc).fill = section_fill
-for col, width in {'A':20,'B':22,'C':28,'D':10,'E':34,'F':34,'G':16,'H':22}.items():
-    calc.column_dimensions[col].width = width
-for r in range(2, calc.max_row+1):
-    calc.cell(r,7).number_format = '0.0%;-0.0%;0.0%' if any(k in calc.cell(r,2).value for k in ['rate','retention','attainment','margin','coverage','pct','guidance','consensus']) else '#,##0.00'
-metric_tab = Table(displayName='MetricCalcs', ref=f'A1:H{calc.max_row}')
-metric_tab.tableStyleInfo = TableStyleInfo(name='TableStyleMedium9', showRowStripes=True)
-calc.add_table(metric_tab)
+calc.sheet_properties.tabColor = BLUE
 calc.freeze_panes = 'A2'
 
-out = wb.create_sheet('Diagnostic_Output')
-out['A1'] = 'Diagnostic Output'
-out['A1'].font = Font(size=14, bold=True)
-out['A3'] = 'Populate Input_Fields from uploaded source files. This tab pulls selected derived metrics automatically.'
-out['A5'] = 'Metric'
-out['B5'] = 'Value'
-out['C5'] = 'Notes'
-for c in range(1,4):
-    out.cell(5,c).fill = header_fill; out.cell(5,c).font = white_font; out.cell(5,c).border = border
-summary_metrics = [
-    ('Gross New ARR','gross_new_arr','ARR funnel'),
-    ('Net New ARR','net_new_arr','ARR funnel'),
-    ('Ending ARR (Calculated)','ending_arr_calc','ARR funnel'),
-    ('Pipeline Coverage','pipeline_coverage','Sales funnel'),
-    ('Weighted Pipeline Coverage','weighted_pipeline_coverage','Sales funnel'),
-    ('Win Rate','win_rate','Sales funnel'),
-    ('Quarterly Annualized NDR','quarterly_ndr','Retention'),
-    ('Quarterly Annualized GDR','quarterly_gdr','Retention'),
-    ('Logo Retention','logo_retention','Retention'),
-    ('Gross Margin','gross_margin','Economics'),
-    ('Net Magic Number','net_magic_number','Economics'),
-    ('Simple CAC','simple_cac','Economics'),
-    ('Simple LTV','simple_ltv','Economics'),
-    ('LTV / CAC','ltv_cac','Economics'),
-    ('S&M OpEx per FTE','sm_opex_per_fte','Productivity'),
-    ('NNARR per S&M FTE','nnarr_per_sm_fte','Productivity'),
-    ('Sales Capacity','sales_capacity','Productivity'),
-    ('Rep Attainment','rep_attainment','Productivity'),
-    ('Ramp Rate','ramp_rate','Productivity'),
-    ('Ending ARR Attainment','ending_arr_attainment','Fiscal maturity'),
-]
-start = 6
-for i,(label,key,note) in enumerate(summary_metrics, start=start):
-    out[f'A{i}'] = label
-    out[f'B{i}'] = f'=XLOOKUP("{key}",Metric_Calcs!$B:$B,Metric_Calcs!$G:$G,"")'
-    out[f'C{i}'] = note
-    for c in range(1,4):
-        out.cell(i,c).border = border
-        out.cell(i,c).alignment = wrap
-out['E5'] = 'Missing Required Inputs'
-out['E5'].fill = header_fill; out['E5'].font = white_font; out['E5'].border = border
-out['E6'] = '=TEXTJOIN(CHAR(10),TRUE,FILTER(Input_Fields!$C$2:$C$999,(Input_Fields!$E$2:$E$999<>"Optional")*(Input_Fields!$F$2:$F$999=""),""))'
-out['E6'].alignment = wrap
-out['E6'].border = border
-out.column_dimensions['A'].width = 30
-out.column_dimensions['B'].width = 16
-out.column_dimensions['C'].width = 22
-out.column_dimensions['E'].width = 38
-for r in range(6, start+len(summary_metrics)):
-    if any(k in out[f'A{r}'].value.lower() for k in ['rate','retention','margin','attainment','coverage']):
-        out[f'B{r}'].number_format = '0.0%'
-    elif any(k in out[f'A{r}'].value.lower() for k in ['cac','ltv','arr','opex','capacity']):
-        out[f'B{r}'].number_format = '$#,##0.00'
+calc_headers = ['Metric Family', 'Metric Key', 'Metric Name', 'Type', 'Formula / Logic', 'Required Inputs', 'Calculated Value', 'Comments']
+calc_col_widths = {'A': 22, 'B': 24, 'C': 30, 'D': 10, 'E': 38, 'F': 38, 'G': 18, 'H': 24}
 
-for sheet in [ws, inp, calc, out]:
-    for row in sheet.iter_rows():
-        for cell in row:
-            if cell.row > 1:
-                cell.border = border
+# Header row
+for ci, hdr in enumerate(calc_headers, start=1):
+    c = calc.cell(row=1, column=ci, value=hdr)
+    c.fill = fill(NAVY)
+    c.font = Font(name='Wix Madefor Display SemiBold', size=9, bold=True, color=WHITE)
+    c.border = BDR
+    c.alignment = CTR_WRAP
+calc.row_dimensions[1].height = 22
+
+# Data rows
+prev_family = None
+alt_counter = 0
+for ri, row_data in enumerate(metrics, start=2):
+    family = row_data[0]
+    is_family_start = (family != prev_family)
+    if is_family_start:
+        alt_counter = 0
+    else:
+        alt_counter += 1
+
+    is_alt = (alt_counter % 2 == 1)
+    base_fill = fill(ALT_ROW) if is_alt else fill(WHITE)
+
+    row_vals = list(row_data) + ['']
+    for ci, val in enumerate(row_vals, start=1):
+        c = calc.cell(row=ri, column=ci, value=val)
+        c.border = BDR
+        c.alignment = WRAP_TOP
+
+        if is_family_start:
+            c.fill = fill(LT_BLUE)
+            c.font = Font(name='Wix Madefor Display SemiBold', size=9, bold=True, color=NAVY)
+        else:
+            c.fill = base_fill
+            c.font = Font(name='Wix Madefor Display', size=9, color=BLACK)
+
+    # Number format on Calculated Value column (G = col 7)
+    key = row_data[1]
+    calc.cell(ri, 7).number_format = num_fmt(key)
+    calc.row_dimensions[ri].height = 18
+    prev_family = family
+
+for col, w in calc_col_widths.items():
+    calc.column_dimensions[col].width = w
+
+calc.auto_filter.ref = f'A1:H{calc.max_row}'
+
+# ═══════════════════════════════════════════════════════
+#  DIAGNOSTIC_OUTPUT
+# ═══════════════════════════════════════════════════════
+out = wb.create_sheet('Diagnostic_Output')
+out.sheet_properties.tabColor = NAVY
+
+out.column_dimensions['A'].width = 32
+out.column_dimensions['B'].width = 18
+out.column_dimensions['C'].width = 24
+out.column_dimensions['D'].width = 4
+out.column_dimensions['E'].width = 38
+
+# Title block
+out.merge_cells('A1:C1')
+out['A1'].value = 'GTM Diagnostic Output'
+out['A1'].font = Font(name='Wix Madefor Display SemiBold', size=14, bold=True, color=NAVY)
+out['A1'].alignment = LEFT_MID
+out.row_dimensions[1].height = 28
+
+out.merge_cells('A2:C2')
+out['A2'].value = 'Auto-calculated from Input_Fields. Populate the User Value column in Input_Fields to populate this summary.'
+out['A2'].font = Font(name='Wix Madefor Display', size=9, color=GRAY, italic=True)
+out['A2'].alignment = LEFT_MID
+out.row_dimensions[2].height = 18
+out.row_dimensions[3].height = 10
+
+# Section labels + table headers (row 4 = section label, row 5 = headers)
+out['A4'].value = 'Key Metrics'
+out['A4'].font = Font(name='Wix Madefor Display SemiBold', size=10, bold=True, color=BLUE)
+out['A4'].alignment = LEFT_MID
+out['E4'].value = 'Data Quality'
+out['E4'].font = Font(name='Wix Madefor Display SemiBold', size=10, bold=True, color=BLUE)
+out['E4'].alignment = LEFT_MID
+out.row_dimensions[4].height = 20
+
+for ci, hdr in enumerate(['Metric', 'Value', 'Family'], start=1):
+    c = out.cell(row=5, column=ci, value=hdr)
+    c.fill = fill(NAVY)
+    c.font = Font(name='Wix Madefor Display SemiBold', size=9, bold=True, color=WHITE)
+    c.border = BDR
+    c.alignment = CTR
+out.row_dimensions[5].height = 22
+
+out.cell(5, 5).value = 'Missing Required Inputs'
+out.cell(5, 5).fill = fill(NAVY)
+out.cell(5, 5).font = Font(name='Wix Madefor Display SemiBold', size=9, bold=True, color=WHITE)
+out.cell(5, 5).border = BDR
+out.cell(5, 5).alignment = CTR
+
+# Summary metric rows
+summary_metrics = [
+    ('Gross New ARR',              'gross_new_arr',              'Growth Drivers'),
+    ('Net New ARR',                'net_new_arr',                'Growth Drivers'),
+    ('Ending ARR (Calculated)',    'ending_arr_calc',            'Growth Drivers'),
+    ('Pipeline Coverage',         'pipeline_coverage',          'Sales Funnel'),
+    ('Weighted Pipeline Coverage','weighted_pipeline_coverage',  'Sales Funnel'),
+    ('Win Rate',                   'win_rate',                   'Sales Funnel'),
+    ('Quarterly Annualized NDR',   'quarterly_ndr',              'Retention'),
+    ('Quarterly Annualized GDR',   'quarterly_gdr',              'Retention'),
+    ('Logo Retention',             'logo_retention',             'Retention'),
+    ('Gross Margin',               'gross_margin',               'Efficiency & Economics'),
+    ('Net Magic Number',           'net_magic_number',           'Efficiency & Economics'),
+    ('Simple CAC',                 'simple_cac',                 'Efficiency & Economics'),
+    ('Simple LTV',                 'simple_ltv',                 'Efficiency & Economics'),
+    ('LTV / CAC',                  'ltv_cac',                    'Efficiency & Economics'),
+    ('S&M OpEx per FTE',           'sm_opex_per_fte',            'Team & Productivity'),
+    ('NNARR per S&M FTE',          'nnarr_per_sm_fte',           'Team & Productivity'),
+    ('Sales Capacity',             'sales_capacity',             'Team & Productivity'),
+    ('Rep Attainment',             'rep_attainment',             'Team & Productivity'),
+    ('Ramp Rate',                  'ramp_rate',                  'Team & Productivity'),
+    ('Ending ARR Attainment',      'ending_arr_attainment',      'Fiscal Maturity'),
+]
+
+prev_family = None
+for i, (label, key, family) in enumerate(summary_metrics):
+    r = i + 6
+    is_alt = (i % 2 == 1)
+    base = fill(ALT_ROW) if is_alt else fill(WHITE)
+
+    # Metric label
+    c_a = out.cell(row=r, column=1, value=label)
+    c_a.fill = base
+    c_a.font = Font(name='Wix Madefor Display', size=9, color=BLACK)
+    c_a.border = BDR
+    c_a.alignment = LEFT_MID
+
+    # Value (XLOOKUP from Metric_Calcs)
+    c_b = out.cell(row=r, column=2)
+    c_b.value = f'=XLOOKUP("{key}",Metric_Calcs!$B:$B,Metric_Calcs!$G:$G,"")'
+    c_b.fill = fill(LT_BLUE)   # tinted to distinguish calculated from inputs
+    c_b.font = Font(name='Wix Madefor Display SemiBold', size=9, bold=True, color=NAVY)
+    c_b.border = BDR
+    c_b.alignment = CTR
+    c_b.number_format = num_fmt(key)
+
+    # Family tag
+    c_c = out.cell(row=r, column=3, value=family)
+    c_c.fill = base
+    c_c.font = Font(name='Wix Madefor Display', size=9, color=GRAY)
+    c_c.border = BDR
+    c_c.alignment = LEFT_MID
+
+    out.row_dimensions[r].height = 18
+
+# Missing inputs panel — spans all data rows, right column
+missing_start = 6
+missing_end = 6 + len(summary_metrics) - 1
+out.merge_cells(f'E{missing_start}:E{missing_end}')
+c_e = out.cell(missing_start, 5)
+c_e.value = (
+    '=TEXTJOIN(CHAR(10),TRUE,'
+    'FILTER(Input_Fields!$C$2:$C$999,'
+    '(Input_Fields!$E$2:$E$999<>"Optional")'
+    '*(Input_Fields!$E$2:$E$999<>"Optional / shortcut")'
+    '*(Input_Fields!$E$2:$E$999<>"Optional / validation")'
+    '*(Input_Fields!$F$2:$F$999=0)'
+    ',"— All required inputs populated"))'
+)
+c_e.fill = fill(WHITE)
+c_e.font = Font(name='Wix Madefor Display', size=9, color=BLACK)
+c_e.border = BDR
+c_e.alignment = Alignment(horizontal='left', vertical='top', wrap_text=True)
 
 wb.save(OUT)
 print(f'Wrote {OUT}')
