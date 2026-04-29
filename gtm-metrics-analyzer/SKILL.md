@@ -56,7 +56,7 @@ This skill is designed for **uploaded tables and files**.
 Preferred inputs:
 - uploaded xlsx/csv exports
 - board decks or operating review files with GTM data
-- CRM / RevOps exports (HubSpot deal exports, pipeline snapshots)
+- CRM / RevOps exports (deal exports, pipeline snapshots from Salesforce, HubSpot, or other CRM)
 - ARR funnel tables
 - pipeline tables
 - cohort retention tables
@@ -179,7 +179,7 @@ Organize rows into logical sections separated by blank rows. Suggested structure
 2. Logo Counts (New Logo Count)
 3. Retention Rates (GRR Logo, GRR Total, NRR)
 4. Efficiency Metrics (S&M Expense, CAC, Gross Margin %, LTV:CAC)
-5. HubSpot Pipeline Data (monthly closed-won counts and MRR by deal type)
+5. CRM Pipeline Data (monthly closed-won counts and MRR / ARR by deal type)
 6. Any additional monthly data
 
 #### Atomic cell rule
@@ -324,32 +324,9 @@ Open pipeline stage age measures how long currently-open deals have been sitting
 This uses `createDate` as a proxy for stage entry date. The exact stage entry date (when a deal moved into its current stage) is not surfaced by most CRM APIs. If stage history is available via webhooks or audit log, use that instead — it is more accurate.
 
 ### Interpretation
-- Deals in "Verbally agreed" sitting >90 days are a priority risk signal — verbally agreed deals should convert to signed within 30–60 days; if they don't, the verbal agreement is soft
-- Deals in "Product negotiations" or "Commercial negotiations" sitting >180 days indicate a blocked funnel; investigate deal-by-deal
-- "Offer" stage deals often include overages/upsells which have naturally longer ages — consider segmenting offer-stage deals by type (new, renewal, overage) before drawing conclusions
-
----
-
-## HubSpot field coverage guide
-
-When pulling data from HubSpot via MCP:
-
-### Available via search API (all deals, bulk)
-`createDate`, `updateDate`, `closeDate`, `name`, `stage`, `pipeline`, `type`, `totalDealValueInCurrency`, `monthlyRecurringRevenueEur`, `paymentPeriodicity`, `currency`, `startDate`, `endDate`, `earlyTerminationDate`, `region`, `hubspotUrl`
-
-### Available via deal detail API (per deal, requires individual pulls)
-`companyName`, `ownerName`, `csmName`, `billingInfo.country`, `billingInfo.paymentTerms`, `legalInfo.rhEntity`, `legalInfo.terminationClause`, `meddic.*`, `contacts[].numberOfTimesContacted`, `contacts[].lastContacted`, `purchasedServices[].contractedService`, `purchasedServices[].spendLimitInCurrency`, `purchasedServices[].finalPriceInEur`
-
-### High-value derived fields (compute from available data)
-- **Deal cycle days**: `closeDate − createDate`
-- **Contract length (months)**: `(endDate − startDate) / 30.44`
-- **Channel mix**: count distinct `purchasedServices[].contractedService` values per deal (requires detail pull)
-- **Pipeline stage age**: `today − createDate` per open deal
-
-### Fields not available via API
-- Stage entry date (when a deal moved into its current stage) — requires audit log / webhook
-- Quota per rep — stored separately
-- Individual rep activity metrics (calls, emails) — requires activity API
+- Deals in late-stage verbal or verbal-commit stages sitting beyond the company's typical close window (usually 30–60 days) are a priority risk signal — if verbal agreement is not converting to signed, investigate deal-by-deal
+- Deals in negotiation stages sitting beyond 180 days indicate a blocked funnel; identify whether it's a pricing, legal, or stakeholder issue
+- Offer or quote stages that naturally include upsells and renewals tend to have longer ages — segment by deal type before drawing conclusions on what is "stale"
 
 ---
 
