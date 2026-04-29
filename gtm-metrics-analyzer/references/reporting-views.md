@@ -1,6 +1,6 @@
 # Reporting Views
 
-Use this file when Output Mode 3 is requested — the user wants a board deck or operating review layout rather than a raw diagnostic workbook. Maps GTM metrics to standard reporting sections.
+Use this file when Output Mode 4 is requested — the user wants a board deck or operating review layout rather than a raw diagnostic workbook. Maps GTM metrics to standard reporting sections.
 
 ---
 
