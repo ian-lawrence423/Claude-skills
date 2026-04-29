@@ -116,9 +116,9 @@ in base case without explicit disclosure.
 
 ---
 
-## 4. Known Market Sizing (as of March 2026)
+## 4. Known Market Sizing (as of April 2026)
 
-Reference figures from the Commerce v8 research. Update with web search for any
+Reference figures from the Commerce v9 research. Update with web search for any
 figure more than 6 months old. Label every figure with source and confidence level.
 
 ### Stage 4: Cart & Checkout
@@ -172,7 +172,7 @@ specific vendor categories:
 
 ## 5. Vendor Universe
 
-Known vendors with data points as of March 2026. Web search to update any figure
+Known vendors with data points as of April 2026. Web search to update any figure
 before citing. All revenue figures are estimates unless labeled [Public].
 
 ### Stage 4: Cart & Checkout
@@ -205,15 +205,20 @@ before citing. All revenue figures are estimates unless labeled [Public].
 - Manhattan Associates: $1.04B revenue [Public — NASDAQ:MANH]; 6× Forrester Wave Leader;
   Morningstar Wide Moat rating; 18–24 month implementations; ~$500K–$2M ACV
 - Blue Yonder (Panasonic): $1.36B FY24 [disclosed Feb 2025]; Luminate AI platform;
-  Panasonic acquisition (2021) creates roadmap uncertainty
+  One Network Enterprises acquisition ($839M, 2024) completed [F] — adds supply chain
+  network data capability; five new GenAI agents (inventory, warehouse, logistics, shelf,
+  network ops) launched ICON 2025 [F]; Panasonic acquisition (2021) creates roadmap
+  uncertainty; November 2024 ransomware attack (Termite group — resolved Dec 2024)
 - IBM Sterling OMS: ~$500M+ (est.); ~998 enterprise deployments [Enlyft]; losing new logos
   to MACH architecture; 24–52 week implementation
 - Salesforce OMS: bundled in SFCC; Einstein AI; platform lock-in limits cross-channel brands
 - Oracle OMS / NetSuite: bundled in ERP; usage-based pricing added 2024
 
 **Mid-market OMS / MACH:**
-- Kibo Commerce: ~$40–60M ARR; MACH OMS; Agentic Commerce platform (March 2025);
-  167% ROI, sub-6-month implementation [Kibo disclosed]; Forrester Wave Leader
+- Kibo Commerce: ~$40–60M ARR; 30% revenue growth FY2025, 112% NRR [F — Kibo disclosed];
+  MACH OMS; Agentic Commerce platform (March 2025); 167% ROI, sub-6-month implementation
+  [Kibo-commissioned Forrester TEI, Nov 2025]; Named in Forrester Commerce Solutions
+  Landscape Q1 2026 as Notable Vendor; Forrester Wave Leader Q1 2025
 - OneStock: ~$20–30M ARR; EU omnichannel leader; ship-from-store; SFCC/SAP/Shopware
 - Linnworks: ~$30–40M ARR; Amazon + eBay + Shopify depth; SKU-level forecasting
 - Brightpearl (Sage): ~$40M ARR; Sage ownership limits roadmap; no AI differentiation
@@ -221,7 +226,10 @@ before citing. All revenue figures are estimates unless labeled [Public].
 
 **WISMO / AI customer support:**
 - Gorgias: ~$69–75M ARR [Sacra estimate ±~20%, 2024]; #1 Shopify App Store CX;
-  AI Agent 2.0 (July 2025): 50%+ email auto-resolution at $1/resolution
+  AI Agent 2.0 (July 2025): 50%+ email auto-resolution at $1/resolution; Klaviyo
+  ($1.08B ARR) launched helpdesk Oct 2025 [F] but added Gorgias multi-brand integration
+  + routing button same month — near-term partnership, structural risk unchanged;
+  Klaviyo is 15× Gorgias's ARR with the same Shopify customer base
 - eDesk: ~$20–30M ARR; only multi-marketplace CX with native Amazon + eBay + Walmart;
   PE-backed [Tenzing Private Equity]
 
@@ -235,22 +243,31 @@ before citing. All revenue figures are estimates unless labeled [Public].
 ### Stage 6: Post-Purchase Experience
 
 **Enterprise PPX:**
-- Narvar: $105M ARR [Estimated — no public filing]; IRIS AI (74B+ interactions, 14yr history,
-  125M consumers); NAVI autonomous resolution (launched NRF Jan 2026 — only purpose-built
-  enterprise agentic resolution product as of March 2026); Narvar Shield (return fraud);
-  no funding since 2018; ~10% ARR growth constrained by flat contract structure;
-  highest composite moat score in Stage 6 (see moat scorecard)
-- AfterShip: $85M revenue FY2024 [Latka estimate]; 1,200+ carrier integrations [disclosed];
-  multi-platform; tracking commoditizing; enterprise pitch improving
+- Narvar: $105M ARR [Estimated — no public filing]; IRIS AI (42B+ consumer interactions
+  annually [F — Narvar website, 2026]; cross-retailer fraud scheme detection CONFIRMED [F];
+  14yr history, 125M consumers); NAVI autonomous resolution (launched NRF Jan 2026 — only
+  purpose-built enterprise agentic resolution product as of April 2026); Narvar Shield
+  (return fraud launched 2025); no funding since 2018; ~10% ARR growth constrained by flat
+  contract structure; CRITICAL OPEN: no evidence of realized enterprise contract migration
+  to per-resolution pricing as of April 2026; highest composite moat score in Stage 6
+  (see moat scorecard)
+- AfterShip: $85M revenue FY2024 [Latka estimate]; 1,200+ carrier integrations [disclosed]
+  — CONFIRMED as technical API integration, not a behavioral data moat [F — v9]; tracking
+  commoditizing; enterprise pitch improving but no cross-retailer signal advantage
 - parcelLab: ~$30–40M ARR; EU enterprise leader; AI Email Editor + pL Copilot (NRF 2025);
-  limited US penetration; no cross-retailer data moat
+  enterprise customers confirmed: URBN, H&M, IKEA, Chico's, Yeti [F — G2/parcelLab, 2025];
+  G2 Spring 2025: 26 badges, Industry Leader in PPX; CEO change (Giles Whiting, Jul 2024);
+  ESPR destruction ban (July 2026) is a structural compliance tailwind — most directly
+  benefits parcelLab as EU enterprise PPX leader; limited US penetration unchanged
 
 **Shopify-native PPX:**
 - Loop Returns: $53M ARR; exchange-first (Shop Now, Shop Later); Return Bar (Happy Returns
   partnership); Shopify-exclusive — primary moat is also TAM ceiling
 - Redo: $75M CY25 revenue; consumer-funded coverage model (shopper pays optional fee;
-  merchant receives software free); ReturnBear acquisition expands physical footprint;
-  Shopify-exclusive; coverage revenue depends on take rate sustainability
+  merchant receives software free); Acquired Contextual (February 2026) [F — PitchBook];
+  ReturnBear acquisition expands physical footprint; Shopify-exclusive; coverage revenue
+  depends on take rate sustainability; regulatory status of coverage model UNRESOLVED
+  across all 50 US states — open diligence item
 - Route: ~$40–60M ARR; package protection insurance + tracking; 13,000+ merchants;
   state-by-state insurance licensing risk
 - Malomo: ~$5–10M ARR; branded order tracking with in-tracking upsell; Shopify-native only
@@ -272,7 +289,7 @@ before citing. All revenue figures are estimates unless labeled [Public].
 
 ## 6. Porter's Five Forces — Known Scores
 
-Verified scores from Commerce v8 research. Update with web search for material
+Verified scores from Commerce v9 research. Update with web search for material
 changes in market structure before citing.
 
 ### Stage 4: Cart & Checkout
@@ -305,7 +322,7 @@ changes in market structure before citing.
 | Buyer power | 5/10 | Enterprise negotiates at RFP; $500K–$2M switching cost post-deployment |
 | Competitive rivalry | 5/10 | Enterprise rivalry manageable; cross-tier competition is the real risk |
 | Threat of substitution | 4/10 | Low for agentic resolution; moderate for basic tracking |
-| Threat of new entry | 3/10 | Narvar's 74B-interaction IRIS dataset is a structural entry barrier |
+| Threat of new entry | 3/10 | Narvar's IRIS dataset (42B+ interactions annually, 125M consumers [F — confirmed]) is a structural entry barrier |
 | **Industry attractiveness** | **8.0/10** | **Most attractive single-stage investment profile in Stages 5–6** |
 
 ---
@@ -326,7 +343,7 @@ web search — most private company pricing is undisclosed and marked [Estimate]
 | Per-transaction / per-shipment | S5/S6 | Narvar Shield, Signifyd, project44 | Per shipment tracked / per order screened | $0.05–$0.25/shipment; $0.10–$1.50/order | Auto-expands with merchant GMV; aligns incentives |
 | Per-resolution (AI agents) | S6 | Gorgias ($1/resolution), Intercom Fin AI ($0.99) | Per automated ticket resolution | $0.33–$2.00/resolution | Most value-aligned for AI: charges only on successful automation |
 | Consumer-funded coverage | S6 | Redo, Route | Consumer pays optional fee at checkout | $1–3/order (consumer-paid) | Aligns all incentives; Redo is software-free to merchants |
-| Usage-based (compute / API) | S5 | o9, Blue Yonder Luminate, Kibo Agentic | Per planning run / routing decision / API call | $500K–$3M+ ACV enterprise; $0.001–$0.01/API call | Snowflake-analogue for commerce: scales with usage, not headcount |
+| Usage-based (compute / API) | S5 | o9, Blue Yonder Luminate, Kibo Agentic, Oracle NetSuite OMS (usage-based added 2024 [F]), Manhattan Associates (moving toward consumption-based AI agent pricing [E]) | Per planning run / routing decision / API call | $500K–$3M+ ACV enterprise; $0.001–$0.01/API call | Snowflake-analogue for commerce: scales with usage, not headcount |
 
 **Pricing transition signal:** Market is mid-transition from flat annual SaaS toward
 usage-based and per-resolution billing. Narvar's flat contract structure is its primary
@@ -337,7 +354,7 @@ specific diligence question in any Narvar-related research.
 
 ## 8. Competitive Moat Scorecard
 
-20-company scored matrix from Commerce v8. Scores are [Estimate] unless labeled.
+20-company scored matrix from Commerce v9. Scores are [Estimate] unless labeled.
 Update via web search for material changes (new funding, acquisitions, product launches).
 
 Scoring: 1–5 per dimension (25 total).
@@ -346,21 +363,21 @@ Scoring: 1–5 per dimension (25 total).
 | Company | Data Network | Switch Cost | Platform | Regulatory | Physical | Total | Assessment |
 |---------|-------------|-------------|----------|------------|----------|-------|------------|
 | Manhattan Associates | 3 | 5 | 2 | 1 | 2 | 13/25 | CONDITIONAL (Morningstar: Wide Moat, May 2024) |
-| Blue Yonder | 3 | 4 | 2 | 1 | 2 | 12/25 | CONDITIONAL |
+| Blue Yonder | 3 | 4 | 2 | 1 | 2 | 12/25 | CONDITIONAL — One Network acquisition ($839M, 2024) adds data capability; score pending integration depth confirmation |
 | IBM Sterling OMS | 2 | 4 | 2 | 1 | 1 | 10/25 | CONDITIONAL (declining) |
-| Kibo Commerce | 2 | 3 | 2 | 1 | 1 | 9/25 | TRANSIENT (strengthening) |
+| Kibo Commerce | 2 | 3 | 2 | 1 | 1 | 9/25 | TRANSIENT (strengthening — 30% revenue growth, 112% NRR FY2025 [F]) |
 | Salesforce OMS | 2 | 4 | 4 | 1 | 1 | 12/25 | CONDITIONAL |
 | Linnworks | 2 | 3 | 3 | 1 | 1 | 10/25 | TRANSIENT |
-| Gorgias | 3 | 3 | 5 | 1 | 1 | 13/25 | CONDITIONAL |
+| Gorgias | 3 | 3 | 5 | 1 | 1 | 13/25 | CONDITIONAL — Klaviyo partnership near-term stable; structural platform risk unchanged (Klaviyo is 15× ARR with same customer base) |
 | eDesk | 2 | 3 | 3 | 1 | 1 | 10/25 | TRANSIENT |
 | project44 | 4 | 3 | 2 | 1 | 2 | 12/25 | CONDITIONAL |
 | o9 Solutions | 3 | 4 | 2 | 1 | 1 | 11/25 | CONDITIONAL |
-| Narvar | 5 | 5 | 3 | 1 | 2 | 16/25 | CONDITIONAL (approaching STRUCTURAL) |
+| Narvar | 5 | 5 | 3 | 1 | 2 | 16/25 | CONDITIONAL (approaching STRUCTURAL) — *Data network CONFIRMED [F]: IRIS processes 42B+ interactions annually, cross-retailer fraud detection verified [Narvar website, 2026]* |
 | Loop Returns | 2 | 4 | 5 | 2 | 4 | 16/25 | CONDITIONAL (strengthening) |
 | Redo | 3 | 3 | 5 | 2 | 1 | 14/25 | CONDITIONAL (improving) |
-| AfterShip | 2 | 2 | 2 | 1 | 1 | 8/25 | LOW |
-| parcelLab | 2 | 3 | 2 | 1 | 1 | 9/25 | TRANSIENT |
-| Happy Returns (UPS) | 2 | 3 | 2 | 1 | 5 | 13/25 | CONDITIONAL |
+| AfterShip | 2 | 2 | 2 | 1 | 1 | 8/25 | LOW — carrier integration is technical API, not behavioral data moat [CONFIRMED — v9] |
+| parcelLab | 2 | 3 | 2 | 1 | 1 | 9/25 | TRANSIENT — ESPR destruction ban (July 2026) reinforces EU position; limited US enterprise penetration unchanged |
+| Happy Returns (UPS) | 2 | 3 | 2 | 1 | 5 | 13/25 | CONDITIONAL — physical network moat (12,000+ Return Bar locations) gaining strategic value as paid-returns shift drives in-person drop-offs |
 | Route | 2 | 2 | 3 | 3 | 1 | 11/25 | CONDITIONAL |
 | Yotpo | 2 | 3 | 3 | 1 | 1 | 10/25 | CONDITIONAL |
 | Bazaarvoice | 2 | 3 | 2 | 1 | 1 | 9/25 | TRANSIENT |
@@ -377,7 +394,7 @@ Scoring: 1–5 per dimension (25 total).
 
 ## 9. Regulatory Environment
 
-Known regulations as of March 2026. Verify effective dates and enforcement status
+Known regulations as of April 2026. Verify effective dates and enforcement status
 before citing — this area changes faster than market sizing.
 
 | Regulation | Jurisdiction | Core Requirement | Stage 5/6 Impact | Do Not Over-Claim |
@@ -386,22 +403,22 @@ before citing — this area changes faster than market sizing.
 | CCPA/CPRA | California (de facto US) | Right to know, delete, opt-out of sale | Cross-brand PII for fraud detection requires explicit opt-in | California-specific; federal US privacy law still absent |
 | EU AI Act | EU (effective Aug 2026) | Risk classification; high-risk systems require conformity assessment | Return fraud AI scoring consumer behavior is potentially high-risk classification | Fact-specific and still evolving; do not model broad AI Act TAM uplift pending guidance |
 | EU Returns Directive | EU | 14-day minimum return window; clear policy disclosure | Mandated windows increase return volume → direct growth for returns management software | Already law; model as baseline, not as new catalyst |
-| ESPR Destruction Ban | EU/EEA (effective Jul 2026) | Large companies banned from destroying unsold apparel/clothing/footwear | Returns disposition becomes compliance-critical — creates workflow-specific tailwind for resale, grading, compliant disposition software | Applies to apparel only; do not generalize to universal retail software re-rating |
+| ESPR Destruction Ban | EU/EEA (effective Jul 19, 2026) | Large companies banned from destroying unsold apparel/clothing/footwear from July 19, 2026; Digital Product Passport (DPP) required for all textiles mid-2026 — QR-code linked, must contain material composition, environmental footprint, recyclability and reparability data [F — EU Commission, 2026] | Returns disposition becomes compliance-critical; DPP creates new software workflow demand (not merely a feature upgrade to existing portals); EU-native vendors (parcelLab, OneStock, ZigZag) structurally advantaged | Applies to large apparel companies only from Jul 2026; medium-sized from 2030; do not generalize to universal retail re-rating; incremental TAM unquantified — keep separate from base case |
 | Paid Returns Shift | US + UK | 76% of UK fashion retailers charge for postal returns [ZigZag/Retail Gazette] | Real niche tailwind for coverage and returns-tech in stricter return policy segments | Also raises conversion and loyalty risk — model both sides |
 | FTC Return Policy Rules | United States | Clear disclosure; no deceptive practices | Drives standardization of return portal disclosures; AI-powered policy enforcement benefits | Compliance baseline, not a growth driver |
-| Shipping insurance regulation | US (state-by-state) | Insurance products require state licensing; premium collection rules | Redo's coverage model and Route's package protection face state-level licensing risk | Not yet resolved — flag as open regulatory question in any Redo/Route analysis |
+| Shipping insurance regulation | US (state-by-state) | Insurance products require state licensing; premium collection rules | DATA GAP — Redo's coverage model and Route's package protection regulatory status is UNRESOLVED across all 50 US states; some states may require carrier appointment; flag as open diligence item in any Redo/Route analysis | Not yet resolved |
 
 ---
 
 ## 10. Technology Trends & Disruption Vectors
 
-Quantified signals as of March 2026. Verify before citing.
+Quantified signals as of April 2026. Verify before citing.
 
 | Trend | Horizon | Quantified Signal | Stage 5/6 Impact |
 |-------|---------|-------------------|-----------------|
 | Agentic AI resolves post-purchase autonomously | Now–2027 | Gartner: 40% of enterprise apps will include task-specific AI agents by 2026 | Returns, exchanges, delivery exceptions are lowest-risk, highest-frequency autonomous agent actions |
-| Agentic commerce protocols in production | 2026 | MCP (Anthropic, 97M monthly SDK downloads Mar 2026), ACP (Stripe + OpenAI, production Jan 2026), UCP (Shopify + Google, launched Jan 11, 2026) | OMS, checkout, and returns vendors must expose callable protocol interfaces — not roadmap; already in production at major platforms |
-| Agentic commerce traffic surge | 2025–2027 | Adobe: AI-driven retail site traffic up 4,700% YoY (July 2025) | OMS must handle agent-initiated orders with different authentication and fraud profiles |
+| Agentic commerce protocols in production | 2026 | MCP (Anthropic, 97M monthly SDK downloads Mar 2026 [F]); ACP (Stripe + OpenAI, Agentic Commerce Suite live — Etsy, URBN, Copilot integrations [F — Stripe newsroom, 2026]); UCP (Shopify + Google, launched Jan 11, 2026, backed by Walmart/Target/Etsy/Wayfair; Google AI Mode checkout live for eligible US retailers [F]) | All three protocols have crossed from preview to production with named enterprise integrations. Vendors without live agent-callable interfaces are already structurally excluded from a growing share of transaction flow — not a 2028 risk, a 2026 reality |
+| Agentic commerce traffic surge | 2025–2027 | Adobe: AI-to-retail site traffic +393% YoY in Q1 2026; converting 42% BETTER than non-AI traffic (vs. -38% penalty in March 2025) — conversion quality has fully inverted [F — Adobe Analytics, Q1 2026]; AI traffic +670% Cyber Monday 2025; 45% of shoppers have used AI for shopping Q1 2026 [M] | OMS must handle agent-initiated orders with different authentication and fraud profiles; conversion inversion confirms protocol layer is generating real transactions, not just browsing |
 | MACH architecture democratizing OMS | 2024–2027 | Cloud/API-first is now standard OMS buyer requirement [enterprise RFP trend] | Mid-market brands can implement enterprise-grade distributed OMS in 6 months vs. 18–24 months |
 | Return fraud industrialization | 2024–2026 | NRF: $103B return fraud in 2024 [Fact]; Signifyd: abusive return behavior up 64% YoY (updated v9 — prior figure 21% was stale) | Organized rings operate across multiple retailers simultaneously — single-retailer detection is structurally insufficient |
 | AI in demand forecasting | 2025–2028 | IDC: AI spending growing 31.9% CAGR 2025–2029; Walmart AI inventory optimization [disclosed] | ML demand sensing replacing statistical models (ARIMA); real-time agentic replenishment emerging |
@@ -411,7 +428,7 @@ Quantified signals as of March 2026. Verify before citing.
 | Capability Layer | Durable (3–5yr) | At Risk | Disruptive Force |
 |-----------------|-----------------|---------|-----------------|
 | Enterprise OMS routing | Deep ERP integration; distributed order management; multi-node logic | Static rule-based routing; on-premise deployments; proprietary carrier APIs | AI-native routing learns optimal fulfillment paths continuously |
-| Order tracking / notifications | Cross-retailer carrier intelligence; IRIS 74B-interaction dataset | Standalone tracking tools; single-carrier specialty | Consumers query AI agents for status rather than visiting tracking portals |
+| Order tracking / notifications | Cross-retailer carrier intelligence; IRIS 42B+ interactions annually [F — confirmed] | Standalone tracking tools; single-carrier specialty | Consumers query AI agents for status rather than visiting tracking portals |
 | Returns management | Cross-retailer fraud signal networks; physical drop-off infrastructure | Single-retailer rule-based portals; flat annual contracts | NAVI-style autonomous resolution; per-return pricing models |
 | Return fraud prevention | Cross-retailer behavioral signal networks (IRIS: 125M consumers) | Single-retailer fraud rules; chargeback-based detection | AI-powered synthetic identity fraud; deepfake video returns |
 | WISMO / AI customer support | AI policy-enforcement agents; multi-channel resolution | Human support for tier-1 queries; per-seat helpdesk | LLM agents resolving 80–90% of tier-1 support by 2029 [Estimate] |
@@ -427,9 +444,11 @@ Address any OPEN items explicitly in any new commerce infrastructure research.
 **High priority — changes the thesis if wrong:**
 
 1. **[RESOLVED — v9] Does Narvar's IRIS data include return fraud behavioral signals?**
-   CONFIRMED: IRIS explicitly covers cross-retailer fraud detection (125M consumer profiles,
-   74B interactions). The data network moat rating at 5/5 stands. Shield product directly
-   confirms fraud signal scope.
+   CONFIRMED: IRIS explicitly covers cross-retailer fraud detection — specifically detects
+   cross-retailer fraud schemes (buying at discount from one retailer, returning to another
+   for higher refund). IRIS processes 42B+ consumer interactions annually [F — Narvar
+   website, 2026], 125M consumers, 14yr history. The data network moat rating at 5/5
+   stands. Shield product directly confirms fraud signal scope.
 
 2. **[OPEN] Has Narvar actually migrated any customer from flat annual SaaS to per-resolution
    or per-return pricing?** The monetization upside thesis depends on contract
