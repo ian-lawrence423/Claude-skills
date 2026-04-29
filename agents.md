@@ -248,6 +248,7 @@ Skills are grouped by domain. Invoke the most specific skill first; fall back to
 | `saas-revenue-growth-metrics` | Revenue, retention, NRR/GRR, ARR growth, churn, expansion |
 | `saas-economics-efficiency-metrics` | CAC, LTV, payback period, Rule of 40, burn multiple |
 | `business-health-diagnostic` | Full SaaS health check across growth, retention, efficiency, capital |
+| `gtm-metrics-analyzer` | Full GTM diagnostic workbook from uploaded source files (ARR funnel tables, CRM exports, board files). Calculates 48 metrics across 6 families, separates provided inputs from derived outputs, produces 4-tab Excel output. Triggers: "build a GTM workbook", "analyze these GTM metrics", "calculate NDR from this data", "diagnostic on this ARR table", "board prep metrics" |
 | `kpi-tree-builder` | Decompose a budget, forecast, or operating target into causal drivers with owners, cadences, and management actions. Two modes: diligence (audit management budget credibility) and post-close (define tracking architecture). Triggers: "build a KPI tree", "break down this budget", "what should we track post-close", "audit this plan", "define operating metrics" |
 
 ---

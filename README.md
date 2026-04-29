@@ -2,7 +2,7 @@
 
 Pattern's modular skill architecture for Claude. Each skill is a folder containing a `SKILL.md` file that instructs Claude on methodology, output format, and quality standards for a specific domain. Skills are loaded on-demand — Claude reads the relevant `SKILL.md` before executing any task in its domain.
 
-**30 skills across 8 groups and 4 functional layers.** Every formal output runs through at least two layers — usually three or four. Layers are not optional — skipping a layer produces a draft, not a deliverable.
+**31 skills across 8 groups and 4 functional layers.** Every formal output runs through at least two layers — usually three or four. Layers are not optional — skipping a layer produces a draft, not a deliverable.
 
 > **Source of truth:** This README reflects the folders in [`ian-lawrence423/Claude-skills`](https://github.com/ian-lawrence423/Claude-skills). Update this file whenever skills are added or removed from the repo.
 
@@ -78,6 +78,7 @@ All 30 skills organized by group. Invoke the most specific skill first; fall bac
 | `finance-metrics-quickref` | L2 — Research | Quick-reference lookup for financial metric definitions, formulas, and benchmarks. Covers SaaS, PE, and general corporate finance | "what's the formula for", "define [metric]", "what's a good benchmark for" |
 | `saas-revenue-growth-metrics` | L2 — Research | Revenue, retention, NRR/GRR, ARR growth, churn, expansion, and logo retention. Metric definitions, calculation methodology, and benchmark ranges by stage and sector | NRR, GRR, ARR, churn, expansion revenue, retention analysis, revenue quality |
 | `saas-economics-efficiency-metrics` | L2 — Research | CAC, LTV, payback period, Rule of 40, burn multiple, and capital efficiency ratios. Benchmarking against SaaS peers | CAC/LTV analysis, payback period, Rule of 40, efficiency metrics, burn analysis |
+| `gtm-metrics-analyzer` | L2 — Research | Full GTM diagnostic workbook from uploaded source files. Calculates 48 derived metrics across 6 families (ARR funnel, pipeline, retention, efficiency, productivity, fiscal maturity). Produces 4-tab Excel output with inputs, formulas, and diagnostic summary | "build a GTM workbook", "analyze these GTM metrics", "calculate NDR from this data", "diagnostic on this ARR table", "board prep metrics" |
 
 ### Executive Leadership
 
