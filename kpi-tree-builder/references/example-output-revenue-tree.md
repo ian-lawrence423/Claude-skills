@@ -143,3 +143,40 @@ CY2026 Revenue
 | US vs. Non-US quota productivity | Is Non-US quota per rep tracking to plan? If not, identify whether it's a market, territory, or rep quality issue. |
 | PoC pipeline quality | Are PoCs converting at higher or lower ACV than new logo direct sales? Is PoC motion accretive or dilutive to ASP? |
 | Booking timing distribution | Is the quarter back-loaded? A consistently back-loaded pattern structurally reduces in-year realization and creates a recurring Q1 gap. |
+
+---
+
+## Bad output patterns to avoid
+
+### Too high level
+```text
+Revenue
+├─ New Business
+├─ Existing Business
+└─ Other
+```
+Not actionable. These branches have no formulas, no owners, and cannot be tracked.
+
+### Mirrors a spreadsheet rather than the business
+```text
+Revenue
+├─ Rev Build Tab
+├─ Assumption Block
+├─ Waterfall Adj
+└─ Plug
+```
+Label nodes using business language, not model tab names.
+
+### Mixed economic concepts in one node
+```text
+Revenue
+├─ Sales Productivity / Churn / Pricing
+```
+Each economic effect has a different owner, driver, and fix. Never collapse them.
+
+### Stops too early on GTM nodes
+```text
+New Customer Revenue
+└─ Sales Execution
+```
+"Sales Execution" is not a KPI. Decompose it into Capacity → Quota → Attainment → Conversion → Deal Size.

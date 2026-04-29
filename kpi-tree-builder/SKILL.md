@@ -118,6 +118,73 @@ Common patterns are in `references/decomposition-patterns.md`.
 
 If the business is hybrid, build separate trees by revenue or cost stream first, then roll them up.
 
+### Step 2b: apply SaaS GTM decomposition when relevant
+
+For B2B SaaS, recurring software, or other GTM-driven businesses, combine the economic decomposition in `references/decomposition-patterns.md` with the GTM metric system in `references/example-output-gtm-kpi-tree.md`.
+
+For these businesses, do not stop the tree at generic branches such as:
+- sales productivity
+- retention
+- customer health
+- pipeline
+- efficiency
+
+Instead, decompose those branches into explicit GTM metrics when relevant, including:
+
+- ARR funnel metrics:
+  - Beginning ARR
+  - Gross New ARR
+  - New Logo ARR
+  - Expansion ARR
+  - Downsell
+  - Logo Churn
+  - Net New ARR
+  - Ending ARR
+
+- Funnel and pipeline metrics:
+  - MEL, MQL, SAL, SQL
+  - Opportunities
+  - Pipeline $
+  - Weighted Pipeline $
+  - Pipeline Coverage
+  - Weighted Pipeline Coverage
+  - Cycle Time
+  - Win Rate
+  - Close Rate
+  - Average Deal Size / ACV
+  - Forecast as % of Sales Target
+  - Forecast as % of Capacity
+
+- Retention and health metrics:
+  - Net Dollar Retention
+  - Gross Dollar Retention
+  - Logo Retention
+  - Logo Churn Rate
+  - Cohort NDR
+  - Churn and lost reasons
+  - Active User Rate
+  - Adoption Rate
+  - Time to Implement vs Goal
+  - NPS / CES / CSAT
+
+- Efficiency and economics metrics:
+  - Gross Margin
+  - Net Magic Number
+  - Gross Magic Number
+  - CAC
+  - LTV
+  - LTV / CAC
+  - Payback Period
+
+- Team productivity metrics:
+  - S&M OpEx per S&M FTE
+  - NNARR per S&M FTE
+  - Sales Capacity
+  - Quota Attainment
+  - Ramp Rate
+
+Use these metrics only where they improve causal clarity. Do not force every metric into every tree. Prefer the smallest tree that still explains the outcome and supports management action.
+
 ### Step 3: force economic buckets
 Every major branch must be classified into one of:
 - volume
@@ -140,6 +207,30 @@ For each branch, keep drilling down until inputs are:
 - actionable.
 
 Use `references/node-classification.md` to decide whether the decomposition has gone deep enough.
+
+For GTM-driven businesses, a node is not deep enough if it cannot be mapped to a defined operational metric or formula.
+
+Examples of valid GTM atomic inputs:
+- Pipeline Coverage
+- Win Rate
+- Close Rate
+- Average Deal Size
+- Net Dollar Retention
+- Gross Dollar Retention
+- Logo Churn Rate
+- CAC
+- Gross Margin
+- Sales Capacity
+- Quota Attainment
+- Ramp Rate
+
+Avoid stopping at labels like:
+- sales execution
+- customer health
+- pipeline quality
+- commercial efficiency
+
+Those labels are too broad unless they are decomposed into measurable sub-metrics.
 
 ### Step 5: classify each node
 For every node, assign:
@@ -188,6 +279,8 @@ State:
 Present as an indented tree.
 
 For formatting, labeling, and depth, use `references/example-output-revenue-tree.md` as the default example.
+
+When the company is a B2B SaaS or GTM-driven business, also use `references/example-output-gtm-kpi-tree.md` as a default example for full-funnel and operating-metric decomposition.
 
 ### C. driver dictionary
 For each node, include:
@@ -256,6 +349,27 @@ If a node cannot be measured, say so and propose the closest practical proxy.
 
 ### ntb-diligence
 `ntb-diligence` identifies what must be true for the investment thesis to hold and flags which assumptions are unconfirmed. The diligence mode of `kpi-tree-builder` is the mechanism for resolving those gaps — the atomic inputs in the KPI tree are the measurable things that confirm or refute each NTB. When ntb-diligence has produced a GAP item, the kpi-tree-builder diligence view should map that gap to the specific tree node that resolves it.
+
+## Interaction with gtm-metrics-analyzer
+
+`gtm-metrics-analyzer` is the measurement and calculation companion to this skill.
+
+Use `kpi-tree-builder` to design the operating architecture:
+- outcome
+- drivers
+- sub-drivers
+- atomic inputs
+- tracking cadence
+
+Use `gtm-metrics-analyzer` to calculate and interpret the GTM metrics that sit inside those nodes:
+- ARR funnel metrics
+- pipeline and conversion metrics
+- retention metrics
+- efficiency metrics
+- productivity metrics
+- attainment and forecast metrics
+
+This skill may name the metric nodes that should exist in the tree, but it should not perform the full metric-calculation workflow owned by `gtm-metrics-analyzer`.
 
 ## Success standard
 
