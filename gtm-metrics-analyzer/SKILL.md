@@ -25,11 +25,9 @@ This skill is built primarily for B2B SaaS companies with some sales-led motion.
 ## Skill architecture
 
 ```
-saas-revenue-growth-metrics    ──┐
-saas-economics-efficiency-metrics─┤
-financial-model-builder         ─┤──► gtm-metrics-analyzer ──► kpi-tree-builder (post-close)
-driver-tree                     ─┤                          ──► ic-memo (supporting metrics section)
-ntb-diligence                   ─┘
+financial-model-builder  ──┐
+driver-tree              ──┤──► gtm-metrics-analyzer ──► kpi-tree-builder (post-close)
+ntb-diligence            ──┘                          ──► ic-memo (supporting metrics section)
 ```
 
 ### When to use this skill vs. adjacent skills
@@ -37,8 +35,7 @@ ntb-diligence                   ─┘
 | Task | Use |
 |---|---|
 | Quick metric definition or benchmark lookup | `finance-metrics-quickref` |
-| SaaS revenue/retention metric definitions only | `saas-revenue-growth-metrics` |
-| CAC/LTV/efficiency metric definitions only | `saas-economics-efficiency-metrics` |
+| Quick metric definition or benchmark lookup | `finance-metrics-quickref` |
 | Full GTM diagnostic workbook from uploaded files | **this skill** |
 | Causal driver decomposition with owner assignment | `kpi-tree-builder` |
 | Investment Committee memo with GTM section | `ic-memo` (calls this skill for metrics) |
@@ -48,7 +45,7 @@ ntb-diligence                   ─┘
 - **`financial-model-builder`**: Load first if a 3-tab model exists. Pull Revenue, Gross Profit, S&M OpEx directly from the Output Tab rather than asking for re-entry.
 - **`driver-tree`**: If a driver tree has been built, import node values directly as input fields rather than entering them manually.
 - **`ntb-diligence`**: NTB outputs (new logo ARR, cohort retention) feed directly into the ARR funnel and retention sections of this workbook.
-- **`saas-revenue-growth-metrics`** / **`saas-economics-efficiency-metrics`**: Use these for metric definition disputes or benchmark context. This skill handles calculation; those skills handle interpretation.
+- **`finance-metrics-quickref`**: Use for quick metric definition lookups or benchmark checks. This skill handles calculation from uploaded data; `finance-metrics-quickref` handles definition and quick-reference.
 - **`kpi-tree-builder`**: After GTM diagnostic is complete, hand off the derived metric outputs to `kpi-tree-builder` to assign owners, cadences, and thresholds for post-close tracking.
 - **`ic-memo`**: The IC memo's GTM performance section pulls from this skill's Diagnostic_Output tab. Run gtm-metrics-analyzer first; reference the workbook in the memo.
 

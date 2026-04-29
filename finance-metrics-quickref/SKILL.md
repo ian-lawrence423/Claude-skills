@@ -41,7 +41,7 @@ Metrics are organized into four families:
 - You want to identify red flags quickly
 
 **Don't use this when:**
-- You need detailed calculation guidance (use `saas-revenue-growth-metrics` or `saas-economics-efficiency-metrics`)
+- You need a full diagnostic workbook calculated from uploaded data (use `gtm-metrics-analyzer`)
 - You're learning these metrics for the first time (start with deep-dive skills)
 - You need examples and common pitfalls (covered in related skills)
 
@@ -289,8 +289,7 @@ Quick output:
 ## References
 
 ### Related Skills (Deep Dives)
-- `saas-revenue-growth-metrics` — Detailed guidance on revenue, retention, and growth metrics (13 metrics)
-- `saas-economics-efficiency-metrics` — Detailed guidance on unit economics and capital efficiency (17 metrics)
+- `gtm-metrics-analyzer` — Full GTM diagnostic workbook calculated from uploaded source data (48 metrics, 4-tab Excel output)
 - `feature-investment-advisor` — Uses these metrics to evaluate feature ROI
 - `acquisition-channel-advisor` — Uses these metrics to evaluate channel viability
 - `finance-based-pricing-advisor` — Uses these metrics to evaluate pricing changes

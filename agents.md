@@ -245,8 +245,6 @@ Skills are grouped by domain. Invoke the most specific skill first; fall back to
 | `ntb-diligence` | New-to-brand diligence — evaluates customer acquisition quality and whether growth is driven by genuine new customers vs. base recycling. E-commerce and marketplace specific. Triggers: "NTB diligence", "new-to-brand analysis", "customer acquisition quality", "cohort analysis", "is this growth real" |
 | `pre-mortem` | *(also in Group 1)* Assume deal failure, enumerate failure pathways, diagnose information gaps. Distinct from `claim-scrutinizer` — assumes the bull case is wrong, not just poorly argued |
 | `finance-metrics-quickref` | Quick lookup — metric definition, formula, or benchmark |
-| `saas-revenue-growth-metrics` | Revenue, retention, NRR/GRR, ARR growth, churn, expansion |
-| `saas-economics-efficiency-metrics` | CAC, LTV, payback period, Rule of 40, burn multiple |
 | `business-health-diagnostic` | Full SaaS health check across growth, retention, efficiency, capital |
 | `gtm-metrics-analyzer` | Full GTM diagnostic workbook from uploaded source files (ARR funnel tables, CRM exports, board files). Calculates 48 metrics across 6 families, separates provided inputs from derived outputs, produces 4-tab Excel output. Triggers: "build a GTM workbook", "analyze these GTM metrics", "calculate NDR from this data", "diagnostic on this ARR table", "board prep metrics" |
 | `kpi-tree-builder` | Decompose a budget, forecast, or operating target into causal drivers with owners, cadences, and management actions. Two modes: diligence (audit management budget credibility) and post-close (define tracking architecture). Triggers: "build a KPI tree", "break down this budget", "what should we track post-close", "audit this plan", "define operating metrics" |
@@ -306,7 +304,6 @@ Skills are grouped by domain. Invoke the most specific skill first; fall back to
 | `organizational-transformation` | Shifting to empowered product teams, modern product practices |
 | `managing-up` | Executive relationship management, influencing leadership |
 | `cross-functional-collaboration` | PM-engineering dynamics, cross-team conflict, product trios |
-| `having-difficult-conversations` | Hard feedback, performance conversations, terminations |
 | `running-effective-meetings` | Meeting design, agendas, reducing meeting overload |
 | `running-effective-1-1s` | 1:1 structure, career conversations, new manager setup |
 | `conducting-interviews` | Hiring interview loop design, candidate evaluation |
@@ -374,7 +371,7 @@ Skills are grouped by domain. Invoke the most specific skill first; fall back to
 
 When multiple skills could apply, use this tie-breaking order:
 
-1. **Most specific** — prefer a narrow skill (e.g., `saas-revenue-growth-metrics`) over a broad one (e.g., `business-health-diagnostic`)
+1. **Most specific** — prefer a narrow skill (e.g., `gtm-metrics-analyzer`) over a broad one (e.g., `business-health-diagnostic`)
 2. **Pattern-branded first** — for any output file, prefer `pattern-investment-pptx` or `pattern-pptx` over generic `pptx`
 3. **Consulting OS default** — if no skill fits, apply the Default Mode 8-step framework above directly
 

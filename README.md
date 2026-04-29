@@ -2,7 +2,7 @@
 
 Pattern's modular skill architecture for Claude. Each skill is a folder containing a `SKILL.md` file that instructs Claude on methodology, output format, and quality standards for a specific domain. Skills are loaded on-demand — Claude reads the relevant `SKILL.md` before executing any task in its domain.
 
-**31 skills across 8 groups and 4 functional layers.** Every formal output runs through at least two layers — usually three or four. Layers are not optional — skipping a layer produces a draft, not a deliverable.
+**28 skills across 8 groups and 4 functional layers.** Every formal output runs through at least two layers — usually three or four. Layers are not optional — skipping a layer produces a draft, not a deliverable.
 
 > **Source of truth:** This README reflects the folders in [`ian-lawrence423/Claude-skills`](https://github.com/ian-lawrence423/Claude-skills). Update this file whenever skills are added or removed from the repo.
 
@@ -26,7 +26,7 @@ The skill library has four functional layers. The mandatory sequence for any for
 | Layer | Skills | What It Owns | When It Runs |
 |---|---|---|---|
 | **1 — Analytical OS** | `mckinsey-consultant` | Problem structuring, MECE trees, frameworks, claim labeling (F/E/H), Six Screening Questions | Always active for strategy or investment work |
-| **2 — Research** | `market-research`, `ntb-diligence`, `ic-memo`, `competitive-moat-assessment`, `executive-summary-writer`, `driver-tree`, `tam-sam-som-calculator`, `statistics-fundamentals`, `finance-metrics-quickref`, `saas-revenue-growth-metrics`, `saas-economics-efficiency-metrics` | Evidence gathering, research workflow, deliverable architecture, metrics analysis | When research or a specific deliverable type is needed |
+| **2 — Research** | `market-research`, `ntb-diligence`, `ic-memo`, `competitive-moat-assessment`, `executive-summary-writer`, `driver-tree`, `tam-sam-som-calculator`, `statistics-fundamentals`, `finance-metrics-quickref`, `gtm-metrics-analyzer` | Evidence gathering, research workflow, deliverable architecture, metrics analysis | When research or a specific deliverable type is needed |
 | **3 — Quality** | `writing-style` ⚙️, `claim-scrutinizer`, `red-team`, `pre-mortem`, `boundability` | Prose standards, claim testing, adversarial stress-testing, failure mode enumeration | During drafting (`writing-style`) and after draft (all others) |
 | **4 — Production** | `pattern-docx`, `pattern-investment-pptx`, `diligence-ddr`, `financial-model-builder`, `executive-briefing`, `written-communication`, `giving-presentations` | Branded file output in correct format with header/footer/logo | Final step — after analytical and quality layers complete |
 | **4b — QA** | `doc-quality-checker` ⚙️ | Brand compliance, formatting, internal consistency, draft artifact language check | Auto-runs after every Layer 4 file output |
@@ -76,8 +76,6 @@ All 30 skills organized by group. Invoke the most specific skill first; fall bac
 | `ntb-diligence` | L2 — Research | Standalone 4-phase NTB diligence, 2 checkpoints, MOIC sum tolerance ±15%. Evaluates whether growth is driven by genuine new customers vs. base recycling | "NTB diligence", "new-to-brand analysis", "customer acquisition quality", "cohort analysis" |
 | `diligence-ddr` | L4 — Production | Generates or customizes Due Diligence Request Lists for PE buyout / M&A sell-side. Tailored by sector and business model | "DDR", "due diligence request list", "data room requests", "diligence checklist" |
 | `finance-metrics-quickref` | L2 — Research | Quick-reference lookup for financial metric definitions, formulas, and benchmarks. Covers SaaS, PE, and general corporate finance | "what's the formula for", "define [metric]", "what's a good benchmark for" |
-| `saas-revenue-growth-metrics` | L2 — Research | Revenue, retention, NRR/GRR, ARR growth, churn, expansion, and logo retention. Metric definitions, calculation methodology, and benchmark ranges by stage and sector | NRR, GRR, ARR, churn, expansion revenue, retention analysis, revenue quality |
-| `saas-economics-efficiency-metrics` | L2 — Research | CAC, LTV, payback period, Rule of 40, burn multiple, and capital efficiency ratios. Benchmarking against SaaS peers | CAC/LTV analysis, payback period, Rule of 40, efficiency metrics, burn analysis |
 | `gtm-metrics-analyzer` | L2 — Research | Full GTM diagnostic workbook from uploaded source files. Calculates 48 derived metrics across 6 families (ARR funnel, pipeline, retention, efficiency, productivity, fiscal maturity). Produces 4-tab Excel output with inputs, formulas, and diagnostic summary | "build a GTM workbook", "analyze these GTM metrics", "calculate NDR from this data", "diagnostic on this ARR table", "board prep metrics" |
 
 ### Executive Leadership
@@ -87,7 +85,6 @@ All 30 skills organized by group. Invoke the most specific skill first; fall bac
 | `executive-briefing` | L4 — Production | Executive-ready briefing documents: memos, one-pagers, board notes, C-suite briefings. Enforces BLUF structure and decision-oriented formatting | "memo", "board note", "one-pager", "C-suite briefing", "executive summary" |
 | `executive-summary-writer` | L2 — Research | Compresses completed analysis into publication-ready executive summary. Four format variants: one-page memo, deck slide, briefing paragraph, multi-section | "write an executive summary", "summarize for leadership", "condense this" |
 | `managing-up` | Interpersonal | Frameworks for executive relationship management, influencing leadership without authority, and navigating organizational dynamics | "how do I handle this with my boss", "managing up", "influencing leadership" |
-| `having-difficult-conversations` | Interpersonal | Framework for high-stakes conversations: hard feedback, performance discussions, co-ownership framing, escalations. Produces talk tracks, not just advice | "how do I say this to them", "hard conversation", "feedback delivery", "performance conversation" |
 
 ### Communication & Deliverables
 
@@ -126,7 +123,7 @@ When multiple skills could apply, use this tie-breaking order:
 
 | # | Rule | How to Apply |
 |---|---|---|
-| 1 | **Most specific first** | Prefer a narrow skill (e.g., `saas-revenue-growth-metrics`) over a broad one (e.g., `mckinsey-consultant`) when the narrow one directly addresses the task |
+| 1 | **Most specific first** | Prefer a narrow skill (e.g., `gtm-metrics-analyzer`) over a broad one (e.g., `mckinsey-consultant`) when the narrow one directly addresses the task |
 | 2 | **Pattern-branded first** | For any output file, prefer `pattern-investment-pptx` over generic `pptx`; `pattern-docx` over generic Word |
 | 3 | **Consulting OS default** | If no skill fits, apply the Default Mode 8-step framework from `agents.md` directly |
 
