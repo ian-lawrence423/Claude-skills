@@ -400,9 +400,10 @@ Quantified signals as of March 2026. Verify before citing.
 | Trend | Horizon | Quantified Signal | Stage 5/6 Impact |
 |-------|---------|-------------------|-----------------|
 | Agentic AI resolves post-purchase autonomously | Now–2027 | Gartner: 40% of enterprise apps will include task-specific AI agents by 2026 | Returns, exchanges, delivery exceptions are lowest-risk, highest-frequency autonomous agent actions |
+| Agentic commerce protocols in production | 2026 | MCP (Anthropic, 97M monthly SDK downloads Mar 2026), ACP (Stripe + OpenAI, production Jan 2026), UCP (Shopify + Google, launched Jan 11, 2026) | OMS, checkout, and returns vendors must expose callable protocol interfaces — not roadmap; already in production at major platforms |
 | Agentic commerce traffic surge | 2025–2027 | Adobe: AI-driven retail site traffic up 4,700% YoY (July 2025) | OMS must handle agent-initiated orders with different authentication and fraud profiles |
 | MACH architecture democratizing OMS | 2024–2027 | Cloud/API-first is now standard OMS buyer requirement [enterprise RFP trend] | Mid-market brands can implement enterprise-grade distributed OMS in 6 months vs. 18–24 months |
-| Return fraud industrialization | 2024–2026 | NRF: $103B return fraud in 2024 [Fact]; Signifyd: abusive return behavior up 21% YoY | Organized rings operate across multiple retailers simultaneously — single-retailer detection is structurally insufficient |
+| Return fraud industrialization | 2024–2026 | NRF: $103B return fraud in 2024 [Fact]; Signifyd: abusive return behavior up 64% YoY (updated v9 — prior figure 21% was stale) | Organized rings operate across multiple retailers simultaneously — single-retailer detection is structurally insufficient |
 | AI in demand forecasting | 2025–2028 | IDC: AI spending growing 31.9% CAGR 2025–2029; Walmart AI inventory optimization [disclosed] | ML demand sensing replacing statistical models (ARIMA); real-time agentic replenishment emerging |
 
 ### Structural Disruption Map
@@ -420,49 +421,53 @@ Quantified signals as of March 2026. Verify before citing.
 
 ## 11. Key Open Questions (Carry-Forward from Prior Research)
 
-These questions were surfaced in prior iterations and not fully resolved. Address
-them explicitly in any new commerce infrastructure research.
+These questions were surfaced in prior iterations. Status updated after v9 research (April 2026).
+Address any OPEN items explicitly in any new commerce infrastructure research.
 
 **High priority — changes the thesis if wrong:**
 
-1. **Does Narvar's IRIS data include return fraud behavioral signals across retailers,
-   or only tracking and resolution data?** If fraud signals are excluded, the data
-   network moat rating drops materially — fraud signal density is where cross-retailer
-   data is most defensible and most difficult to replicate.
+1. **[RESOLVED — v9] Does Narvar's IRIS data include return fraud behavioral signals?**
+   CONFIRMED: IRIS explicitly covers cross-retailer fraud detection (125M consumer profiles,
+   74B interactions). The data network moat rating at 5/5 stands. Shield product directly
+   confirms fraud signal scope.
 
-2. **Has Narvar actually migrated any customer from flat annual SaaS to per-resolution
+2. **[OPEN] Has Narvar actually migrated any customer from flat annual SaaS to per-resolution
    or per-return pricing?** The monetization upside thesis depends on contract
-   renegotiation, not just product capability. Proof of realized net ARR expansion
-   is required before the repricing thesis is IC-ready.
+   renegotiation, not just product capability. No public proof of realized net ARR expansion
+   after pricing migration found in v9 research. Remains IC-critical — do not advance
+   repricing thesis to [F] without primary diligence evidence.
 
-3. **What is Redo's regulatory status in all 50 US states for its consumer-funded
+3. **[OPEN] What is Redo's regulatory status in all 50 US states for its consumer-funded
    coverage model?** Some states classify this as insurance requiring licensure.
    If Redo must restructure the model in any major e-commerce state (California,
-   New York), the revenue model changes.
+   New York), the revenue model changes. Note: Redo acquired Contextual (April 2026) —
+   verify if the acquisition changes the regulatory exposure profile.
 
-4. **What is the actual competitive dynamic between Narvar and parcelLab for new
+4. **[OPEN] What is the actual competitive dynamic between Narvar and parcelLab for new
    US enterprise logos in 2025–2026?** parcelLab won several US enterprise accounts
-   in late 2024 — win/loss data would confirm whether Narvar's enterprise position
-   is stable or beginning to erode.
+   in late 2024. No win/loss data resolved in v9. Remains open for primary diligence.
 
 **Medium priority — material for specific deal contexts:**
 
-5. What is the realistic agentic resolution automation rate for enterprise returns
+5. **[OPEN]** What is the realistic agentic resolution automation rate for enterprise returns
    (NAVI)? The 50%+ claim is from Gorgias's AI Agent 2.0 for customer support —
    returns resolution is a harder problem. Primary diligence required.
 
-6. Does the EU ESPR destruction ban create genuine demand for new software, or does
-   it primarily benefit existing returns management vendors through expanded use cases?
-   The distinction matters for whether this is a market expansion event or a feature
-   upgrade event.
+6. **[RESOLVED — v9] ESPR market expansion vs. feature upgrade?**
+   CONFIRMED as market expansion event: destruction ban (effective July 19, 2026) creates
+   mandatory new disposition/resale/grading workflow demand for large EU apparel companies.
+   Not merely a feature upgrade to existing returns portals — requires new compliance
+   reporting, Digital Product Passport integration, and alternative disposition workflows.
 
-7. What share of Loop Returns' $53M ARR is exchange revenue vs. returns portal fee?
+7. **[OPEN]** What share of Loop Returns' $53M ARR is exchange revenue vs. returns portal fee?
    The exchange-first model is the primary thesis, but if most revenue is still from
    basic returns, the differentiation is narrower than it appears.
 
-8. Is AfterShip's 1,200+ carrier integration claim a genuine data network effect
-   or primarily a technical API integration? A technical integration without proprietary
-   signal data does not constitute a moat.
+8. **[RESOLVED — v9] Is AfterShip's carrier integration a genuine data network effect?**
+   CONFIRMED as primarily technical API integration, not a data network moat. AfterShip
+   lacks the cross-retailer behavioral signal layer that defines Narvar IRIS. AfterShip
+   moat score 8/25 (LOW) is confirmed. Do not upgrade without evidence of proprietary
+   signal data accumulation.
 
 ---
 
@@ -507,3 +512,10 @@ When this template is loaded, apply the following to all research on this market
 
 6. **Data sensitivity:** Apply the tiering framework in Section 2 to any vendor
    assessment, DDR, or IC memo for any vendor in this market.
+
+---
+
+**Template version:** v9 — Last updated: 2026-04-29
+**Research basis:** Commerce_Market_Research_v9_2026-04-29.docx
+**Open questions resolved this cycle:** Q1 (Narvar IRIS fraud scope), Q6 (ESPR expansion vs. feature), Q8 (AfterShip moat)
+**Still open:** Q2 (Narvar repricing proof), Q3 (Redo regulatory), Q4 (Narvar/parcelLab win-loss), Q5 (NAVI automation rate), Q7 (Loop ARR mix)

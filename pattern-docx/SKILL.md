@@ -457,12 +457,16 @@ BODY_DOCX  = '/home/claude/output_body.docx'
 SKILL_DIR  = '{SKILL_DIR}'                    # absolute path to this skill's directory
 OUT        = '/mnt/user-data/outputs/final.docx'
 
+# Asset resolution: prefer SKILL_DIR/assets; fall back to stable Windows source
+_skill_assets = os.path.join(SKILL_DIR, 'assets')
+_win_assets   = r'C:\Users\IanLawrence\github\Claude-skills\pattern-docx\assets'
+assets = _skill_assets if os.path.isdir(_skill_assets) else _win_assets
+
 shutil.rmtree('/tmp/pat_patch', ignore_errors=True)
 with zipfile.ZipFile(BODY_DOCX, 'r') as z:
     z.extractall('/tmp/pat_patch')
 
 # ── 1. Copy header, footer, media from skill assets ───────────────────────
-assets = SKILL_DIR + '/assets'
 os.makedirs('/tmp/pat_patch/word/media', exist_ok=True)
 os.makedirs('/tmp/pat_patch/word/_rels', exist_ok=True)
 

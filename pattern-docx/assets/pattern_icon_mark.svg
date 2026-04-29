@@ -1,0 +1,15 @@
+<svg width="334" height="254" viewBox="0 0 334 254" fill="none" xmlns="http://www.w3.org/2000/svg">
+<!-- Pattern Icon Mark - extracted from full wordmark -->
+<path d="M2.35216 192.898L193.845 2.38697C196.982 -0.733156 202.147 -0.733156 205.283 2.38697L252.419 49.2806C255.555 52.4925 255.555 57.5398 252.419 60.6599L60.9255 251.171C57.697 254.291 52.6237 254.291 49.4875 251.171L2.35216 204.277C-0.784052 201.157 -0.784052 196.018 2.35216 192.898Z" fill="url(#paint0_icon)"/>
+<path d="M160.087 192.9L272.714 80.8504C275.85 77.7302 281.015 77.7302 284.151 80.8504L331.287 127.744C334.423 130.956 334.423 136.003 331.287 139.123L218.66 251.172C215.432 254.293 210.358 254.293 207.222 251.172L160.087 204.279C156.951 201.159 156.951 196.02 160.087 192.9Z" fill="url(#paint1_icon)"/>
+<defs>
+<linearGradient id="paint0_icon" x1="0" y1="126.78" x2="334" y2="126.78" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0096FA"/>
+<stop offset="1" stop-color="#770BFF"/>
+</linearGradient>
+<linearGradient id="paint1_icon" x1="0" y1="126.78" x2="334" y2="126.78" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0096FA"/>
+<stop offset="1" stop-color="#770BFF"/>
+</linearGradient>
+</defs>
+</svg>
