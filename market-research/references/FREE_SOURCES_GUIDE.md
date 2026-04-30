@@ -245,6 +245,40 @@ Require cross-validation with Tier 1 or other Tier 2 sources. Generally reliable
 - Stanford Graduate School of Business research
 - Wharton School research papers
 
+### Web Traffic and Digital Intelligence
+
+**Similarweb** (https://www.similarweb.com)
+- **Coverage:** Website traffic estimates, traffic sources, audience demographics, app rankings for millions of domains globally
+- **Free access:** Top-line monthly visits, traffic source breakdown (direct, search, social, referral), top referring sites, top destination sites — 3 months of history on free tier
+- **Best for:** Competitor traffic benchmarking, market share proxies for digital businesses, channel mix analysis, growth trajectory triangulation
+- **Key features (free tier):**
+  - Monthly visit estimates and MoM trend
+  - Traffic source breakdown by channel
+  - Geography distribution
+  - Top keywords driving organic/paid traffic
+- **Limitation:** Free tier limited to 3-month window and top-5 results per category; estimates have ±20% variance for smaller sites
+- **Research tip:** Directionally reliable for mid-to-large sites (1M+ visits/month); use for relative comparisons across competitors rather than absolute numbers
+
+**SimilarWeb Alternatives (also free):**
+- **Semrush (free tier):** Organic keyword rankings, backlink profiles, top pages — 10 queries/day free
+- **Ahrefs Webmaster Tools (free for site owners):** Backlink and keyword data for your own domain
+- **SpyFu (limited free):** Competitor keyword and ad spend estimates
+
+### Employee Sentiment and Workplace Intelligence
+
+**Glassdoor** (https://www.glassdoor.com)
+- **Coverage:** 100M+ company reviews, salary data, CEO approval ratings, interview experiences
+- **Free access:** Most review content accessible with free account; some gating after a few views
+- **Best for:** Culture and leadership quality signals, attrition risk assessment, compensation benchmarking, hiring difficulty and talent supply
+- **Research tip:** CEO approval rating and "recommend to a friend" percentage are high-signal management quality proxies; track trend over time more than absolute score
+
+**Blind** (https://www.teamblind.com)
+- **Coverage:** Anonymous professional community; heavy tech/finance concentration
+- **Free access:** All posts visible with free account
+- **Best for:** Unfiltered employee sentiment, internal culture signals, compensation discussions, layoff/headcount intelligence, product strategy gossip
+- **Limitation:** Self-selected, anonymous, skews tech-sector and disgruntled — treat as qualitative signal, not representative data
+- **Research tip:** Highly useful for reading internal morale at acquisition targets or competitors; search company name to surface candid employee discussions not visible on Glassdoor
+
 ### Market Research Snippets
 
 **eMarketer** (https://www.emarketer.com)
@@ -260,6 +294,114 @@ Require cross-validation with Tier 1 or other Tier 2 sources. Generally reliable
 **Forrester** (https://www.forrester.com)
 - **Free access:** Blog posts, report summaries, infographics
 - **Best for:** Technology trends, customer experience research
+
+### Product Review Platforms and User Intelligence
+
+High-quality repositories of detailed end-user product reviews. Particularly valuable for competitive intelligence, feature benchmarking, buyer sentiment, and ICP (ideal customer profile) validation. Reviews are moderated and often verified by purchase or license confirmation.
+
+**G2** (https://www.g2.com)
+- **Coverage:** 2M+ verified reviews across 2,000+ software/services categories
+- **Free access:** Full review text, ratings by category (ease of use, support, value), user demographics, competitive comparisons, feature scoring grids
+- **Best for:** SaaS competitive analysis, product positioning gaps, buyer persona research, implementation pain points, NPS-style sentiment at scale
+- **Key features:**
+  - G2 Grid® (quadrant positioning by market presence and satisfaction — free to view)
+  - "Compare" tool: side-by-side feature and review comparison across competitors
+  - Filters by company size, industry, and region
+  - "What do you like / dislike most?" structured fields surface recurring themes at a glance
+- **Research tip:** Sort by "Most Recent" to detect product trajectory; read 1-star reviews systematically for churn signals and competitive vulnerabilities
+
+**Capterra** (https://www.capterra.com)
+- **Coverage:** 2M+ verified reviews across 900+ software categories (Gartner subsidiary)
+- **Free access:** Full reviews, star ratings, pros/cons fields, pricing tier visibility, integrations lists, screenshots
+- **Best for:** SMB-focused software market analysis, feature comparison, price sensitivity benchmarking, alternatives research
+- **Key features:**
+  - "Shortlist" reports: data-driven rankings by user ratings and review volume (free)
+  - Side-by-side product comparison (up to 3 products)
+  - Filters by business size, industry, and deployment type
+  - Pricing transparency — vendors often disclose starting prices
+- **Research tip:** Capterra skews toward SMB buyers; G2 has broader enterprise coverage. Use both for full market segmentation view.
+
+**TrustRadius** (https://www.trustradius.com)
+- **Coverage:** 800,000+ in-depth reviews, longer-form than G2/Capterra (500+ word minimum)
+- **Free access:** Full reviews, TrustMaps (positioning by satisfaction and research activity), feature ratings
+- **Best for:** Enterprise software diligence, detailed implementation and ROI narratives, vendor switching analysis
+- **Differentiator:** Stricter review standards, no anonymous reviews, LinkedIn-verified identities — higher signal-to-noise for enterprise deals
+
+**GetApp** (https://www.getapp.com)
+- **Coverage:** Capterra sister site (also Gartner) with similar dataset but different UX and category taxonomy
+- **Free access:** Reviews, category reports, feature comparison
+- **Best for:** Cross-referencing against Capterra; slightly different industry categorization catches different comparison sets
+
+**Product Hunt** (https://www.producthunt.com)
+- **Coverage:** Launch-day community reviews and upvotes for new products
+- **Free access:** All content free
+- **Best for:** Emerging competitor identification, launch reception signals, early adopter sentiment
+- **Limitation:** Skews toward tech-forward early adopters, not representative of mainstream buyers
+
+**How to use G2/Capterra/TrustRadius for professional research:**
+1. **Sentiment clustering:** Read 20-30 reviews and tag recurring themes in "likes" and "dislikes" — surfaces product strength/weakness patterns more reliably than analyst reports
+2. **Competitive switching signals:** Filter for reviews mentioning a competitor by name to understand migration patterns and switching reasons
+3. **ICP validation:** Cross-reference reviewer company size and industry against the vendor's stated target market
+4. **Feature gap mapping:** Use G2's feature grid to identify capability gaps across competitors systematically
+5. **Bias check:** Vendors actively solicit positive reviews; weight negative reviews more heavily and cross-validate with Reddit, Blind, or sales call transcripts
+
+### Platform App & Extension Store Reviews
+
+First-party review ecosystems embedded inside major commerce and productivity platforms. Uniquely valuable because reviewers are verified active users of that platform — no fake accounts, no incentivized reviews. Particularly powerful for researching software vendors whose growth is tied to a specific platform ecosystem (e.g., Shopify apps, Salesforce ISVs, Chrome extensions).
+
+**Apple App Store** (https://apps.apple.com)
+- **Coverage:** Millions of reviews across iOS/macOS apps; version-level tagging shows exactly which release triggered a rating change
+- **Free access:** Full review text, star ratings, developer responses, version history
+- **Best for:** Consumer sentiment for mobile-first businesses, product update reception, NPS-proxy at scale
+- **Research tip:** Track rating trend by version — a sudden drop on a specific release pinpoints the exact product failure. Developer responses reveal how management handles criticism.
+
+**Google Play Store** (https://play.google.com)
+- **Coverage:** Android app reviews; often skews more price-sensitive and international than App Store
+- **Free access:** Full reviews, ratings, update history
+- **Best for:** Android-first markets, international consumer sentiment, lower-income segment behavior
+- **Research tip:** Compare App Store vs. Play Store ratings for the same app — divergence often signals platform-specific UX or reliability issues
+
+**Shopify App Store** (https://apps.shopify.com)
+- **Coverage:** 10,000+ apps serving Shopify merchants; verified reviews from active Shopify store owners only
+- **Free access:** Full review text, star ratings, developer responses, pricing tier visibility, install counts
+- **Best for:** Commerce infrastructure competitive intelligence (post-purchase, returns, loyalty, reviews, shipping, inventory); understanding merchant pain points at the operator level; validating product-market fit for Shopify-ecosystem companies
+- **Differentiator:** Reviews are from verified merchants with live stores — exceptionally high-signal for e-commerce diligence. Install count and rating trajectory are strong proxies for ecosystem penetration.
+- **Research tip:** Read 1-star reviews for churn signals and competitive switching mentions; developer response quality signals CS investment and culture. For any commerce infrastructure investment (Narvar, Loop, Redo, AfterShip, etc.), cross-check if they have a Shopify app and what the review trajectory shows.
+
+**Salesforce AppExchange** (https://appexchange.salesforce.com)
+- **Coverage:** 7,000+ apps and components for the Salesforce ecosystem; reviews from verified Salesforce org users
+- **Free access:** Full reviews, star ratings, install counts, pricing, compatibility metadata
+- **Best for:** CRM/sales tech competitive intelligence, enterprise SaaS market analysis, understanding integration quality
+- **Research tip:** AppExchange install count is a credible enterprise adoption signal — much harder to game than web traffic metrics. Filter by industry to understand vertical penetration.
+
+**HubSpot Marketplace** (https://ecosystem.hubspot.com/marketplace)
+- **Coverage:** 1,500+ integrations and apps for the HubSpot CRM/marketing ecosystem
+- **Free access:** Full reviews, star ratings, install counts
+- **Best for:** SMB marketing tech and CRM ecosystem intelligence; particularly relevant for sales enablement and marketing automation competitive analysis
+
+**Chrome Web Store** (https://chromewebstore.google.com)
+- **Coverage:** Browser extensions; millions of reviews across productivity, sales, and developer tools
+- **Free access:** Full reviews, ratings, weekly active user counts (a rare public DAU signal)
+- **Best for:** Sales intelligence tools (e.g., LinkedIn scrapers, email finders), productivity software, developer tooling competitive analysis
+- **Differentiator:** Weekly active users is publicly displayed — one of the only free sources of active usage data (vs. install count, which decays)
+
+**Zapier App Directory** (https://zapier.com/apps)
+- **Coverage:** 6,000+ app integrations; reviews and ratings from automation users
+- **Free access:** Reviews, ratings, integration partner counts
+- **Best for:** Integration ecosystem breadth as a product quality signal; companies with deep Zapier integration tend to have strong API and partner ecosystems
+
+**AWS Marketplace / Azure Marketplace / Google Cloud Marketplace**
+- **Coverage:** Enterprise cloud-native software listings with verified customer reviews
+- **Free access:** Reviews, ratings, deployment counts
+- **Best for:** Cloud infrastructure and enterprise software competitive intelligence; customer counts and cloud-committed revenue signals for cloud-native SaaS
+
+**How to use platform store reviews for professional research:**
+1. **Ecosystem penetration proxy:** Install/active user counts on Shopify, Salesforce, or Chrome are harder to game than website traffic — use as adoption signal
+2. **Version-level forensics:** Track rating drops by release date on App Store/Play Store to identify specific product failures
+3. **Switching signal mining:** Search competitor names in review text to surface migration patterns ("switched from X because...")
+4. **Developer response quality:** How a company responds to negative reviews is a direct window into customer success culture and management maturity
+5. **Cross-platform triangulation:** A vendor with 4.8★ on G2 but 3.2★ on Shopify App Store has a platform-specific problem worth investigating
+6. **Bias check:** Platform stores are less susceptible to vendor-orchestrated review campaigns than G2/Capterra since reviews require verified platform accounts, but still check for review clustering around specific dates (bulk solicitation)
 
 ---
 
@@ -399,6 +541,9 @@ Use these sources for initial leads and context, but always validate with Tier 1
 4. Trade association free reports
 5. Google News with quality filters
 6. Government agency data relevant to industry
+7. G2 / Capterra for competitive product intelligence (software/SaaS markets)
+8. Glassdoor / Blind for employee sentiment and culture signals
+9. Similarweb for digital traffic benchmarking
 
 **Estimated time:** Higher time investment required for source validation
 
