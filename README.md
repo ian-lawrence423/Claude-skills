@@ -2,7 +2,7 @@
 
 Pattern's modular skill architecture for Claude. Each skill is a folder containing a `SKILL.md` file that instructs Claude on methodology, output format, and quality standards for a specific domain. Skills are loaded on-demand — Claude reads the relevant `SKILL.md` before executing any task in its domain.
 
-**28 skills across 8 groups and 4 functional layers.** Every formal output runs through at least two layers — usually three or four. Layers are not optional — skipping a layer produces a draft, not a deliverable.
+**28 skills across 8 groups and 4 functional layers, plus 2 multi-agent pipelines.** Every formal output runs through at least two layers — usually three or four. Layers are not optional — skipping a layer produces a draft, not a deliverable.
 
 > **Source of truth:** This README reflects the folders in [`ian-lawrence423/Claude-skills`](https://github.com/ian-lawrence423/Claude-skills). Update this file whenever skills are added or removed from the repo.
 
@@ -129,7 +129,39 @@ When multiple skills could apply, use this tie-breaking order:
 
 ---
 
-## 5. Adding a New Skill
+## 5. Pipelines
+
+Pipelines are multi-agent workflows composed of skills. They live in their own folders at the repo root alongside the skill folders. Unlike skills, pipelines are not loaded as a single `SKILL.md` — they are orchestrated by an `orchestrator.md` file that dispatches specialist agents in sequence.
+
+| Pipeline | Folder | What It Produces | Mode Flags |
+|----------|--------|-----------------|-----------|
+| `ic-memo-pipeline` | `ic-memo-pipeline/` | Full 10-section IC memo: intake → market research → NTB diligence → driver tree → section drafts → 5 iteration passes → Pattern DOCX → QA | `NTB_MODE`: full/skip · `KPI_MODE`: full/skip |
+| `market-research-pipeline` | `market-research-pipeline/` | Standalone market research report: brief → L4→L3→L2 → themes → draft → iteration passes → Pattern DOCX | — |
+
+**ic-memo-pipeline agent files:**
+
+| File | Phase | Role |
+|------|-------|------|
+| `orchestrator.md` | — | Main orchestrator |
+| `intake.md` | 1 | Structured intake + Six Screening Questions |
+| `l4-market.md` | 2 | Market sizing + PESTLE + trends |
+| `l3-customer.md` | 2 | Customer segments + JTBD + decision journey |
+| `l2-competitive.md` | 2 | Competitor profiles + Porter's Five Forces + white space |
+| `moat-assessment.md` | 2 | Competitive moat verdict per competitor |
+| `ntb-diligence.md` | 3 | NTB registry + diligence plan (NTB_MODE=full) |
+| `driver-tree.md` | 3b | MECE driver tree — NTB→node mapping, cascade scenarios |
+| `draft-sections.md` | 4 | All 10 IC memo sections (SECTION_INDEX param) |
+| `pass1-writing-style.md` | 5 | Claim tagging, inductive chains, artifact removal |
+| `pass2-claim-scrutinizer.md` | 5 | Seven-part claim test |
+| `pass3-red-team.md` | 5 | Adversarial attack pass |
+| `pass4-pre-mortem.md` | 5 | Pre-mortem failure inventory + numeric reconciliation |
+| `pass4c-boundability.md` | 5 | Boundability verdicts + underwriting actions |
+| `output-docx.md` | 6 | pattern-docx body gen + template transplant |
+| `kpi-tree.md` | 8 | Post-close KPI tree + 100-day plan (KPI_MODE=full) |
+
+---
+
+## 6. Adding a New Skill
 
 Follow this checklist to add a new skill without breaking conventions:
 
@@ -147,7 +179,8 @@ Follow this checklist to add a new skill without breaking conventions:
 |---|---|---|
 | `agents.md` | Repo root / OneDrive sync | Always-on operating layer — default mode, work-mode templates, full skill directory, file output rules |
 | `README.md` | Repo root | Source of truth for deployed skills — skill index, invocation guide, architecture overview |
-| `Claude_Skills_CheatSheet.docx` | `docs/` / OneDrive | Quick-reference card: 23 skills · 4 layers · what each does and its output format |
+| `CHEATSHEET.md` | Repo root | Quick-reference: task→skill map, layer sequence, pipeline phase map, brand constants |
+| `Claude_Skills_CheatSheet.docx` | `docs/` / OneDrive | Legacy quick-reference card (see CHEATSHEET.md for current version) |
 | `Claude_Skill_Library_External (Finance).docx` | `docs/` / OneDrive | Deep reference for PE/investment workflow: skill architecture, inventory, IC memo sequential prompts |
 | `Claude_Skills_README.docx` | `docs/` | Pattern-branded Word version of this README |
 | `MBB_METHODOLOGY.md` | `mckinsey-consultant/references/` | Full MBB 7-step methodology reference |
