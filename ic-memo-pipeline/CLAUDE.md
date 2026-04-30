@@ -8,9 +8,9 @@ Multi-agent pipeline for producing Pattern-branded Investment Committee memos.
 |------|-------|-----------|
 | `orchestrator.md` | — | Main orchestrator — reads this first |
 | `intake.md` | 1 | Structured intake + Six Screening Questions |
-| `l4-market.md` | 2 | Market sizing + trends (IC memo mode) |
-| `l3-customer.md` | 2 | Customer segments + JTBD (IC memo mode) |
-| `l2-competitive.md` | 2 | Competitor profiles + white space (IC memo mode) |
+| `l4-market.md` | 2 | Market sizing + trends + PESTLE (IC memo mode) |
+| `l3-customer.md` | 2 | Customer segments + JTBD + decision journey (IC memo mode) |
+| `l2-competitive.md` | 2 | Competitor profiles + Porter's Five Forces + white space (IC memo mode) |
 | `moat-assessment.md` | 2 | Competitive moat verdict per competitor |
 | `ntb-diligence.md` | 3 | NTB registry + diligence plan (if NTB_MODE=full) |
 | `driver-tree.md` | 3b | MECE driver tree — NTB→node mapping, load-bearing nodes, cascade scenarios |
@@ -21,12 +21,15 @@ Multi-agent pipeline for producing Pattern-branded Investment Committee memos.
 | `pass4-pre-mortem.md` | 5 | Pre-mortem failure mode inventory + numeric reconciliation |
 | `pass4c-boundability.md` | 5 | Boundability verdicts per NTB/driver node; underwriting actions |
 | `output-docx.md` | 6 | pattern-docx body gen + template transplant |
+| `kpi-tree.md` | 8 | Post-close KPI tree + 100-day plan (if KPI_MODE=full) |
 
 ## Key skills consumed
 
 - ic-memo, market-research, mckinsey-consultant
 - ntb-diligence, competitive-moat-assessment, driver-tree
 - writing-style, claim-scrutinizer, red-team, pre-mortem, boundability
+- executive-summary-writer (S2 exec summary), tam-sam-som-calculator (L4 TAM/SAM)
+- kpi-tree-builder (Phase 8 post-close KPI tree, if KPI_MODE=full)
 - pattern-docx, doc-quality-checker
 
 ## Output location convention

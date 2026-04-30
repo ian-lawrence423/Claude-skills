@@ -20,6 +20,7 @@ MATERIALS_PATH:       [path to CIM, management deck, or prior research — or "n
 SKILLS_PATH:          [absolute path to /skills/user/]
 WORK_DIR:             [absolute path to working directory for this run]
 NTB_MODE:             [full | skip]  ← full = run ntb-diligence phase; skip = proceed without it
+KPI_MODE:             [full | skip]  ← full = run Phase 8 KPI tree; skip = stop at Gate 4
 ```
 
 ---
@@ -51,6 +52,8 @@ Phase 5   Pass 1 → Pass 2 → Pass 3 → Pass 4 → Pass 4b → Pass 4c (stric
 Phase 6   Output agent (pattern-docx)
           ↓ Gate 4
 Phase 7   QA gate (doc-quality-checker)
+          ↓
+Phase 8   KPI Tree (if KPI_MODE=full) — post-close operating architecture
 ```
 
 ---
@@ -121,6 +124,7 @@ Create the following directory structure under WORK_DIR:
 ├── data-gaps.md
 ├── open-issues.md
 ├── run-log.md
+├── kpi-tree.md                    ← written only if KPI_MODE=full
 └── final-output.docx
 ```
 
@@ -380,6 +384,29 @@ Maximum 1 re-run. If still failing: write `GATE_4_FAILED` to run-log and report 
 
 ---
 
+## Step 9 — Phase 8: KPI Tree (if KPI_MODE=full)
+
+Invoke: `prompts/kpi-tree.md`
+
+Reads:
+- `{WORK_DIR}/intake.md`
+- `{WORK_DIR}/research/driver-tree.md`
+- `{WORK_DIR}/ntb-registry.md` (if exists)
+- `{WORK_DIR}/draft/s7-financials.md`
+- `{WORK_DIR}/draft/s10-recommendation.md`
+- `{WORK_DIR}/iteration/pass4c-boundability.md`
+
+Writes: `{WORK_DIR}/kpi-tree.md`
+
+If `KPI_MODE=skip`:
+- Log: `[KPI TREE SKIPPED] KPI_MODE=skip`
+- Pipeline complete at Gate 4
+
+**No gate for Phase 8.** It is an additive post-close deliverable — it does not block
+the IC memo from being declared complete.
+
+---
+
 ## Error Handling
 
 | Condition | Action |
@@ -391,6 +418,7 @@ Maximum 1 re-run. If still failing: write `GATE_4_FAILED` to run-log and report 
 | Pass revision cap hit | Advance, write unresolved issues to open-issues.md |
 | MATERIALS_PATH not found | Log warning, continue — intake agent must note the gap |
 | NTB_MODE=skip + claim-scrutinizer flags NTB gap | Add to open-issues.md; do not halt |
+| KPI_MODE=skip | Log skip, declare pipeline complete at Gate 4 |
 
 ---
 
