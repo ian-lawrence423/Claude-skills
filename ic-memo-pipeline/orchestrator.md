@@ -36,6 +36,8 @@ Phase 2   L4 → L3 → L2  (strictly sequential)
           ↓ Gate 2
 Phase 3   NTB Diligence  (if NTB_MODE=full)
           ↓
+Phase 3b  Driver Tree  (decomposes thesis into MECE causal tree; maps NTBs to nodes)
+          ↓
 Phase 4   Section drafts
           4a: S1-Cover (first, independent)
           4b: S3/S4/S5/S6/S7/S8 (parallel — all require Phase 2 to complete)
@@ -44,6 +46,7 @@ Phase 4   Section drafts
           4e: S2-Exec Summary (last — synthesizes all sections)
           ↓
 Phase 5   Pass 1 → Pass 2 → Pass 3 → Pass 4 → Pass 4b → Pass 4c (strictly sequential)
+          Pass 4 = pre-mortem; Pass 4b = numeric reconciliation; Pass 4c = boundability
           ↓ Gate 3
 Phase 6   Output agent (pattern-docx)
           ↓ Gate 4
@@ -205,6 +208,30 @@ If `NTB_MODE=skip`:
 
 ---
 
+## Step 4b — Phase 3b: Driver Tree
+
+Invoke: `prompts/driver-tree.md`
+
+Reads: intake + ntb-registry (if exists) + all research files
+Writes: `{WORK_DIR}/research/driver-tree.md`
+
+The driver tree runs after NTB diligence (or after moat assessment if
+NTB_MODE=skip) and before section drafting. It:
+- Decomposes the governing thesis into a MECE causal tree
+- Assigns evidence tiers (T1–T4) to each node
+- Identifies load-bearing nodes (highest variance contribution)
+- Maps each NTB to its corresponding gating node in the tree
+- Produces cascade scenarios that reconcile to s7 Base Assumptions Table
+
+**draft-sections.md SECTION_INDEX=4 reads driver-tree.md** to construct
+Section 4 thesis pillars — the three pillars correspond to the top three
+load-bearing nodes in the driver tree.
+
+**pass4c-boundability.md reads driver-tree.md** to use load-bearing nodes
+as the unit of boundability assessment when no NTB registry exists.
+
+---
+
 ## Step 5 — Phase 4: Section Drafts
 
 All section agents receive:
@@ -295,19 +322,28 @@ Reads: all draft files (post-Pass 3) + ntb-registry (if exists)
 Writes: `{WORK_DIR}/iteration/pass4-pre-mortem.md`
 Updates: s9-risks.md (adds failure modes) + s10-recommendation.md (adds open items)
 
+Blocking: any failure mode whose Severe scenario exceeds Bear case in s7 without
+acknowledgement in s9.
+
 ### Pass 4b — Numeric Reconciliation
 Invoke: `prompts/pass4b-numeric-reconciliation.md`
 Reads: all draft files + pass4 output
 Writes: `{WORK_DIR}/iteration/pass4b-numeric-reconciliation.md`
 Updates: any sections with reconciled figures
 
-Blocking: any cross-section numeric contradiction.
+Blocking: any cross-section numeric contradiction (e.g., a figure that appears
+with different values in s4-thesis and s7-financials).
 
 ### Pass 4c — Boundability
 Invoke: `prompts/pass4c-boundability.md`
-Reads: all draft files + ntb-registry + pass4 output
+Reads: research/driver-tree.md + ntb-registry (if exists) + pass4 output +
+       s7-financials + s9-risks + s10-recommendation
 Writes: `{WORK_DIR}/iteration/pass4c-boundability.md`
-Updates: s10-recommendation.md (adds boundability verdicts per NTB)
+Updates: s10-recommendation.md (adds boundability summary table per NTB/node)
+         open-issues.md (appends any Unboundable items)
+
+Blocking: any Unboundable item not listed in open-issues.md with a named action.
+Non-blocking: Partially Boundable items — carry forward as flags.
 
 **Gate 3 — check before Phase 6:**
 - [ ] Zero open KILL-rated claims or attacks

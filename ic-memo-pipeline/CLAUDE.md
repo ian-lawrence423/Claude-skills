@@ -13,17 +13,19 @@ Multi-agent pipeline for producing Pattern-branded Investment Committee memos.
 | `l2-competitive.md` | 2 | Competitor profiles + white space (IC memo mode) |
 | `moat-assessment.md` | 2 | Competitive moat verdict per competitor |
 | `ntb-diligence.md` | 3 | NTB registry + diligence plan (if NTB_MODE=full) |
+| `driver-tree.md` | 3b | MECE driver tree — NTB→node mapping, load-bearing nodes, cascade scenarios |
 | `draft-sections.md` | 4 | All 10 IC memo sections (SECTION_INDEX param) |
 | `pass1-writing-style.md` | 5 | Claim tagging, inductive chains, artifact removal |
 | `pass2-claim-scrutinizer.md` | 5 | Seven-part claim test |
 | `pass3-red-team.md` | 5 | Adversarial attack pass |
-| `pass4-pre-mortem.md` | 5 | Pre-mortem + numeric reconciliation + boundability |
+| `pass4-pre-mortem.md` | 5 | Pre-mortem failure mode inventory + numeric reconciliation |
+| `pass4c-boundability.md` | 5 | Boundability verdicts per NTB/driver node; underwriting actions |
 | `output-docx.md` | 6 | pattern-docx body gen + template transplant |
 
 ## Key skills consumed
 
 - ic-memo, market-research, mckinsey-consultant
-- ntb-diligence, competitive-moat-assessment
+- ntb-diligence, competitive-moat-assessment, driver-tree
 - writing-style, claim-scrutinizer, red-team, pre-mortem, boundability
 - pattern-docx, doc-quality-checker
 
