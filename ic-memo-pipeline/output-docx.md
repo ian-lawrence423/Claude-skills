@@ -38,7 +38,7 @@ from pattern-docx SKILL.md. Apply these section-specific rules:
 
 **Phase 2 — Template transplant (Python):**
 Transplant canonical header/footer from:
-`C:\Users\IanLawrence\OneDrive - Pattern\Ian Productivity\Claude\artifacts\research\pattern-redo-pe\Pattern_Redo_PE_Memo_v7_2026-03-20.docx`
+`C:\Users\IanLawrence\OneDrive - Pattern\Ian Productivity\Claude\artifacts\research\agentic-commerce-pattern\Commerce_Market_Research_v9_2026-04-29.docx`
 
 Update header title to: `[COMPANY] — Investment Committee Memorandum`
 

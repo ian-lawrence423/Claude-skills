@@ -126,4 +126,4 @@ C:\Users\IanLawrence\OneDrive - Pattern\Ian Productivity\Claude\artifacts\resear
 | Orange callouts | `#C55A11` |
 | Green callouts | `#375623` |
 | Word doc header | Pattern logo + gradient line — Python XML patch, NOT docx-js |
-| Canonical template | `Pattern_Redo_PE_Memo_v7_2026-03-20.docx` |
+| Canonical template | `Commerce_Market_Research_v9_2026-04-29.docx` |
