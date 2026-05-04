@@ -1,6 +1,6 @@
 ---
 name: competitive-landscape-deliverable
-description: Triggers when converting a competitive landscape, market mapping, or M&A target spreadsheet into a board-ready executive deliverable. Preserves the raw research sheet and adds a second sheet using 7–10-word phrases, verdict-led layout, Pattern brand styling, and consulting-grade formatting. Mines the rating-and-rationale source format produced by the Pattern competitive landscape pipeline and emits crisp executive language.
+description: Triggers when converting a competitive landscape, market mapping, or M&A target spreadsheet into a board-ready executive deliverable. Preserves the raw research sheet and adds a second sheet that compresses each cell while preserving the full rating + key evidence — fidelity over brevity. Verdict-led layout, Pattern brand styling, and consulting-grade formatting. Mines the rating-and-rationale source format produced by the Pattern competitive landscape pipeline.
 ---
 
 # Competitive Landscape Deliverable
@@ -112,41 +112,92 @@ Total ~108 rows + 6-row header = ~114-row deliverable.
 
 See `references/output-row-spec.md` for the exact label list and source-field mapping.
 
-## Phrase rules
+## Phrase rules — fidelity over brevity
 
-Every company-facing cell must be a 7–10-word phrase, not a paragraph.
+The deliverable must be **as concise as possible without losing or transforming meaning**. Compression is achieved by removing filler and transitional language, NOT by truncating substantive content.
 
-Rules:
-- 7–10 words target; never exceed 12 unless cell explicitly requires nuance
-- No trailing periods
-- Sentence case (proper nouns Title Case)
-- Active, precise; strategic implication > generic description
-- Banned filler: `leading`, `robust`, `innovative`, `comprehensive`, `cutting-edge`, `best-in-class` (unless backed by specific evidence)
-- Uncertainty qualifiers: `Likely`, `Reported`, `Unclear`, `Validate`, `Requires confirmation`
-- Empty source → `—` (em-dash, NOT empty string)
-- Low-confidence source → prefix `Validate:` or suffix `(unconfirmed)`
+### Core principle: preserve the rating, compress the rationale
 
-Good:
-- `Returns orchestration for enterprise merchants`
-- `Post-purchase system of record across 1,200+ carriers`
-- `High switching cost from OMS workflow embedding`
-- `Likely partner before acquisition target`
+Source cells follow `"Rating — McKinsey rationale"`. Both halves carry meaning:
+- **The rating IS the answer** for many fields (e.g., `Yes`, `Tier B`, `Strong`, `Critical`, `4`). Never drop it.
+- **The rationale provides the evidence** that makes the rating credible. Compress, but don't truncate mid-clause.
 
-Bad:
-- `This company provides a comprehensive returns platform.` (full sentence + filler)
-- `AI` (too sparse)
-- `High` (no content)
+### Output format by field type
 
-### Mining the rationale
+| Source pattern | Output format | Example |
+|---|---|---|
+| Both rating and rationale | `Rating — compressed rationale` | `Yes — embedded across OMS, helpdesk, customer notifications` |
+| Rating only (no rationale) | `Rating` (verbatim) | `Tier B` |
+| Numeric score + rationale | `N — qualifier` | `4 — captures returns data across 1,200+ carriers` |
+| Rationale only (no rating) | Compressed rationale | `Recently acquired by Blue Yonder August 2025` |
+| List values (Notable Customers, etc.) | First 5 items + `(+N more)` | `Sephora, Levi's, Patagonia, Adidas, Lululemon (+12 more)` |
+| Empty source | `—` (em-dash) | `—` |
 
-Source cells follow `"Rating — McKinsey rationale"`. The rationale is the goldmine. Example:
+### Compression rules
 
+Apply in this order:
+
+1. **Strip citations** (`<cite index="...">` tags from agent output)
+2. **Remove transitional filler** (`for example`, `notably`, `in particular`, `as evidenced by`, `the company`, `which is`, etc.)
+3. **Remove banned hype** (`leading`, `robust`, `innovative`, `comprehensive`, `cutting-edge`, `best-in-class`) UNLESS the rating itself contains it (then preserve)
+4. **Collapse whitespace**, strip trailing punctuation
+5. **If still over budget**: break at clause boundary (comma, semicolon) — never mid-sentence
+
+### Length targets (NOT hard caps)
+
+- **Combined cell** (rating + rationale): 12–18 words typical, up to 22 acceptable
+- **Rating-only cells**: as long as the rating itself
+- **Free-text pass-through fields**: up to 22 words
+- **Hard ceiling for QC warning**: 26 words (above this, the script flags for review)
+
+These are fidelity ceilings, not aspirational caps. Going under doesn't earn points if it sacrifices meaning.
+
+### Good vs bad transformations
+
+✅ **Good** (rating preserved, evidence compressed):
 ```
-Source cell:  "Yes — embedded across OMS, helpdesk, and customer notification workflows"
-Output cell:  "Embedded across OMS, helpdesk, and notifications"
+Source: "Partial — owns return and exchange records but synchronizes core order data from Shopify or OMS upstream"
+Output: "Partial — owns return/exchange records, syncs orders from Shopify or OMS"
 ```
 
-The engine script does this transform automatically; do not re-derive phrases that the rationale already supplies.
+✅ **Good** (rating + rich rationale):
+```
+Source: "Strong — implementation complexity creates ~12-month migration cost; deeply embedded in helpdesk, OMS, and customer notification workflows"
+Output: "Strong — embedded in helpdesk, OMS, customer notifications; ~12mo migration"
+```
+
+❌ **Bad** (drops the rating, loses verdict):
+```
+Source: "Yes — embedded across OMS, helpdesk, and customer notification workflows"
+Output: "embedded across OMS, helpdesk, and notifications"        # missing "Yes"
+```
+
+❌ **Bad** (truncates mid-clause, loses meaning):
+```
+Source: "Tier B — captures order, return, and shipment data but excludes payment card data and PII routed to Stripe"
+Output: "captures order, return, and shipment data but excludes"   # mid-clause cut
+```
+
+❌ **Bad** (over-compresses to the point of distortion):
+```
+Source: "Pass — Blue Yonder's August 2025 acquisition eliminates buy option while returns management represents non-core capability"
+Output: "Off the table"                                            # loses the WHY
+```
+
+### Free-text fields — pass through, don't synthesize
+
+For fields where the source is already a list or descriptive text rather than a rated assessment, use lighter cleanup:
+- Notable Customers / Key Investors / Direct Competitors / Comparable Transactions: trim to 5 items, add `(+N more)` if more
+- Funding Raised: pass through (`$208M Series D`)
+- Target Contact / Owners: pass through verbatim
+
+The engine script handles this via `is_passthrough_field()` and `trim_list()`.
+
+### Empty / low-confidence handling
+
+- Truly empty source → `—`
+- Source has rating like `Unknown` or `Unclear` → keep verbatim, don't substitute
+- If the rationale starts with `Likely`, `Reported`, `Validate`, preserve that qualifier — it's the epistemic signal the executive needs
 
 ## Field synthesis rules
 

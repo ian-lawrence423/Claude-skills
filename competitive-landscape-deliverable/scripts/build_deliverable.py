@@ -186,39 +186,181 @@ def split_rating_rationale(text: Optional[str]) -> tuple[str, str]:
     return s, ""
 
 
-def truncate_words(text: str, max_words: int = 11) -> str:
-    """Trim a phrase to max_words. Strip trailing periods."""
+# Filler/transitional phrases that can be safely removed without losing meaning
+FILLER_PHRASES = [
+    r"\bfor example,?\s*",
+    r"\bsuch as\s+",
+    r"\bnamely,?\s*",
+    r"\bin particular,?\s*",
+    r"\bspecifically,?\s*",
+    r"\bnotably,?\s*",
+    r"\bin addition,?\s*",
+    r"\badditionally,?\s*",
+    r"\bmoreover,?\s*",
+    r"\bfurthermore,?\s*",
+    r"\bhowever,?\s*",
+    r"\balthough\s+",
+    r"\bdespite\s+the\s+fact\s+that\s+",
+    r"\bdue\s+to\s+the\s+fact\s+that\s+",
+    r"\bbased\s+on\s+",
+    r"\baccording\s+to\s+",
+    r"\bas\s+evidenced\s+by\s+",
+    r"\bas\s+demonstrated\s+by\s+",
+    r"\bthe\s+company\s+",
+    r"\bcite\s+",
+    r"\bwhich\s+(?:is|are|was|were|has|have|had)\s+",
+    r"\bthat\s+(?:is|are|was|were|has|have|had)\s+",
+]
+
+
+def compress_rationale(text: str, max_words: int = 18) -> str:
+    """Compress a rationale by removing filler/transitions while preserving substantive content.
+
+    Strategy:
+    1. Strip citation tags
+    2. Remove filler phrases
+    3. Collapse whitespace
+    4. If still over max_words, prefer breaking at clause boundary (comma, semicolon)
+    5. Strip trailing punctuation
+    """
     if not text:
-        return "—"
-    words = re.findall(r"\S+", text)
+        return ""
+
+    s = str(text)
+    # Strip citations
+    s = re.sub(r"<cite[^>]*>", "", s, flags=re.IGNORECASE)
+    s = re.sub(r"</cite>", "", s, flags=re.IGNORECASE)
+
+    # Remove filler phrases (case-insensitive)
+    for pattern in FILLER_PHRASES:
+        s = re.sub(pattern, "", s, flags=re.IGNORECASE)
+
+    # Collapse whitespace
+    s = re.sub(r"\s+", " ", s).strip()
+
+    # Strip trailing period/comma
+    s = s.rstrip(".,;: ")
+
+    words = re.findall(r"\S+", s)
     if len(words) <= max_words:
-        out = " ".join(words)
-    else:
-        out = " ".join(words[:max_words])
-    return out.rstrip(".,;:")
+        return s
+
+    # Over budget — try to break at a clause boundary within a 20% window of max_words
+    target_low = int(max_words * 0.7)
+    target_high = max_words + 3
+    best_break = None
+    for i in range(target_low, min(target_high + 1, len(words))):
+        if words[i - 1].endswith((",", ";", ":")):
+            best_break = i
+            break
+
+    if best_break:
+        return " ".join(words[:best_break]).rstrip(".,;: ")
+
+    # No clause boundary — hard cut at max_words
+    return " ".join(words[:max_words]).rstrip(".,;: ")
+
+
+def is_passthrough_field(label: str) -> bool:
+    """Free-text fields where we should pass content through with light cleanup, not synthesize."""
+    pass_through = {
+        "customer proof", "notable customer signal", "direct competitor set",
+        "substitute pressure", "platform-native threat", "differentiation angle",
+        "key feature set", "data captured", "comparable transaction signal",
+        "funding and investor context", "target contact", "research ownership",
+        "deal ownership", "next action owner", "evidence quality",
+    }
+    return label.lower() in pass_through
+
+
+def is_numeric_score_field(label: str) -> bool:
+    """Fields where rating is a numeric score (1-5 or 1-10)."""
+    return label.lower() in {
+        "data network strength", "switching cost strength", "platform lock-in strength",
+        "regulatory or liability moat", "physical network moat", "overall moat score",
+        "deal priority",
+    }
+
+
+def trim_list(text: str, max_items: int = 5) -> str:
+    """Trim comma-or-semicolon separated lists to max_items with '+N more'."""
+    if not text:
+        return ""
+    parts = re.split(r"\s*[;,]\s*", text)
+    parts = [p.strip() for p in parts if p.strip()]
+    if len(parts) <= max_items:
+        return ", ".join(parts)
+    extra = len(parts) - max_items
+    return ", ".join(parts[:max_items]) + f" (+{extra} more)"
 
 
 def synthesize_phrase(label: str, source_values: list[tuple[str, str]]) -> str:
-    """Build the executive phrase from a list of (rating, rationale) tuples for the source fields.
+    """Build the executive phrase preserving rating + compressed rationale.
 
-    Strategy: prefer the rationale of the first non-empty source. If only ratings exist (no rationale),
-    concatenate ratings. If both are empty, return '—'.
+    Fidelity rules:
+    1. Always keep the rating verbatim if present (it IS the verdict for many fields)
+    2. Append compressed rationale only when it adds substantive evidence beyond the rating
+    3. If no rating but rationale exists, use compressed rationale alone
+    4. Pass-through for free-text fields (Notable Customers etc.) — no synthesis
+    5. Numeric score fields: number alone (or with brief qualifier)
+    6. Empty → em-dash
     """
-    # Find first source with a rationale (the rich content)
+    # Find primary source (first non-empty rating OR rationale)
+    primary_rating = ""
+    primary_rationale = ""
     for rating, rationale in source_values:
-        if rationale:
-            return truncate_words(rationale, max_words=11)
+        if rating or rationale:
+            primary_rating = rating
+            primary_rationale = rationale
+            break
 
-    # No rationale anywhere — fall back to concatenated ratings
-    ratings = [r for r, _ in source_values if r and r != "—"]
-    if not ratings:
+    if not primary_rating and not primary_rationale:
         return "—"
 
-    # Numeric score handling — pass through as-is
-    if len(ratings) == 1 and re.fullmatch(r"-?\d+(\.\d+)?", ratings[0]):
-        return ratings[0]
+    label_l = label.lower()
 
-    return truncate_words(", ".join(ratings[:2]), max_words=10)
+    # Pass-through fields: combine rating + rationale lightly, trim list-like content
+    if is_passthrough_field(label_l):
+        combined = " — ".join(p for p in [primary_rating, primary_rationale] if p)
+        if not combined:
+            return "—"
+        # If it looks like a list, trim to 5 items
+        if re.search(r"[,;]", combined) and " — " not in combined and "because" not in combined.lower():
+            return trim_list(combined, max_items=5)
+        return compress_rationale(combined, max_words=22)
+
+    # Numeric score fields: number + brief qualifier from rationale
+    if is_numeric_score_field(label_l):
+        num_match = re.match(r"\s*(-?\d+(?:\.\d+)?)", primary_rating or "")
+        if num_match:
+            num = num_match.group(1)
+            if primary_rationale:
+                qualifier = compress_rationale(primary_rationale, max_words=10)
+                return f"{num} — {qualifier}" if qualifier else num
+            return num
+        # No number found — fall through to default
+
+    # Default: rating + compressed rationale
+    rating = primary_rating.strip()
+    rationale = compress_rationale(primary_rationale, max_words=14)
+
+    # If the rating itself is descriptive (>3 words, no rationale), it's the full content
+    if rating and not rationale:
+        return rating if len(re.findall(r"\S+", rating)) <= 18 else compress_rationale(rating, max_words=18)
+
+    # If rating is empty, rationale carries the meaning
+    if not rating and rationale:
+        return rationale
+
+    # Both present — combine: "Rating — compressed rationale"
+    # Skip if rationale is redundant with rating (substring check)
+    if rating and rationale:
+        if rating.lower() in rationale.lower() and len(rationale.split()) >= 6:
+            # Rating is contained in rationale — rationale alone is fine, but lead with rating
+            return f"{rating} — {rationale}"
+        return f"{rating} — {rationale}"
+
+    return rating or rationale or "—"
 
 
 def find_field_index(ws: Worksheet, field_col: int, field_name: str) -> Optional[int]:
@@ -391,11 +533,11 @@ def write_deliverable(out: Worksheet, company_data: list[dict], get_cell):
     thin = Side(border_style="thin", color=BORDER_GREY)
     border = Border(top=thin, bottom=thin, left=thin, right=thin)
 
-    # Column widths
+    # Column widths — give body cells room for full rating + compressed rationale
     out.column_dimensions["A"].width = 18
     out.column_dimensions["B"].width = 28
     for i, _ in enumerate(company_data):
-        out.column_dimensions[get_column_letter(3 + i)].width = 32
+        out.column_dimensions[get_column_letter(3 + i)].width = 38
 
     # Row 1: title band
     out.merge_cells(start_row=1, start_column=1, end_row=1, end_column=2 + n_companies)
@@ -545,8 +687,8 @@ def quality_checks(out: Worksheet, company_data: list[dict]) -> list[str]:
             v = out.cell(row=r, column=col).value
             if v and isinstance(v, str):
                 wc = len(re.findall(r"\S+", v))
-                if wc > 14:
-                    warnings.append(f"row {r} col {get_column_letter(col)}: {wc} words ('{v[:60]}...')")
+                if wc > 26:
+                    warnings.append(f"row {r} col {get_column_letter(col)}: {wc} words — exceeds fidelity ceiling ('{v[:80]}...')")
                 low = v.lower()
                 for filler in BANNED_FILLER:
                     if filler in low:
