@@ -186,6 +186,23 @@ def split_rating_rationale(text: Optional[str]) -> tuple[str, str]:
     return s, ""
 
 
+def truncate_words(text: str, max_words: int = 14) -> str:
+    """Trim a phrase to max_words at clause boundary if possible. For headline cells only."""
+    if not text:
+        return "—"
+    s = re.sub(r"<cite[^>]*>", "", str(text), flags=re.IGNORECASE)
+    s = re.sub(r"</cite>", "", s, flags=re.IGNORECASE)
+    s = re.sub(r"\s+", " ", s).strip().rstrip(".,;:")
+    words = re.findall(r"\S+", s)
+    if len(words) <= max_words:
+        return s
+    # Try clause boundary within budget
+    for i in range(max_words, max(0, max_words - 4), -1):
+        if words[i - 1].endswith((",", ";", ":")):
+            return " ".join(words[:i]).rstrip(".,;:")
+    return " ".join(words[:max_words]).rstrip(".,;:")
+
+
 # Filler/transitional phrases that can be safely removed without losing meaning
 FILLER_PHRASES = [
     r"\bfor example,?\s*",
@@ -213,52 +230,94 @@ FILLER_PHRASES = [
 ]
 
 
+# Words that must never end a phrase (connectors, articles, prepositions, comparators)
+DANGLING_WORDS = {
+    "a", "an", "the", "and", "or", "but", "nor", "yet", "so",
+    "to", "in", "on", "at", "by", "for", "of", "with", "from", "as",
+    "into", "onto", "upon", "over", "under", "across", "through",
+    "is", "are", "was", "were", "be", "been", "being",
+    "has", "have", "had", "having",
+    "this", "that", "these", "those",
+    "than", "more", "less", "fewer", "greater", "smaller", "higher", "lower",
+    "added", "covers", "covering", "including", "such",
+    "very", "quite", "rather", "much",
+}
+
+
 def compress_rationale(text: str, max_words: int = 18) -> str:
     """Compress a rationale by removing filler/transitions while preserving substantive content.
 
-    Strategy:
-    1. Strip citation tags
-    2. Remove filler phrases
-    3. Collapse whitespace
-    4. If still over max_words, prefer breaking at clause boundary (comma, semicolon)
-    5. Strip trailing punctuation
+    Fidelity-first strategy:
+    1. Strip citation tags + filler phrases + collapse whitespace
+    2. If under max_words, return as-is
+    3. Search WIDE window for clause boundary (commas/semicolons) — prefer the latest within reasonable budget
+    4. If no clause boundary found in window, expand search to entire text — find nearest boundary that doesn't lose >40% of content
+    5. If still no good boundary, return FULL text rather than mangle (fidelity over brevity)
+    6. Always back off dangling/connector words
     """
     if not text:
         return ""
 
     s = str(text)
-    # Strip citations
     s = re.sub(r"<cite[^>]*>", "", s, flags=re.IGNORECASE)
     s = re.sub(r"</cite>", "", s, flags=re.IGNORECASE)
 
-    # Remove filler phrases (case-insensitive)
     for pattern in FILLER_PHRASES:
         s = re.sub(pattern, "", s, flags=re.IGNORECASE)
 
-    # Collapse whitespace
-    s = re.sub(r"\s+", " ", s).strip()
-
-    # Strip trailing period/comma
-    s = s.rstrip(".,;: ")
+    s = re.sub(r"\s+", " ", s).strip().rstrip(".,;: ")
 
     words = re.findall(r"\S+", s)
     if len(words) <= max_words:
         return s
 
-    # Over budget — try to break at a clause boundary within a 20% window of max_words
-    target_low = int(max_words * 0.7)
-    target_high = max_words + 3
-    best_break = None
-    for i in range(target_low, min(target_high + 1, len(words))):
-        if words[i - 1].endswith((",", ";", ":")):
-            best_break = i
-            break
+    # Find clause boundaries (positions where word ends with , ; or :)
+    boundaries = [i + 1 for i, w in enumerate(words) if w.endswith((",", ";", ":"))]
 
-    if best_break:
-        return " ".join(words[:best_break]).rstrip(".,;: ")
+    # Window: [70% of max_words, 130% of max_words]
+    win_low = max(1, int(max_words * 0.7))
+    win_high = int(max_words * 1.30)
 
-    # No clause boundary — hard cut at max_words
-    return " ".join(words[:max_words]).rstrip(".,;: ")
+    in_window = [b for b in boundaries if win_low <= b <= win_high]
+    if in_window:
+        # Pick the latest boundary in window (preserves most content)
+        result_words = words[: in_window[-1]]
+    else:
+        # No clause boundary in window — fall back to FULL text (fidelity over brevity)
+        # Better to have a long, accurate cell than a truncated, mangled one
+        result_words = words
+
+    # Back off dangling/connector words from the tail
+    while result_words and re.sub(r"[^\w]", "", result_words[-1]).lower() in DANGLING_WORDS:
+        result_words.pop()
+
+    return " ".join(result_words).rstrip(".,;: ")
+
+
+# Fields where source is descriptive prose — allow longer phrases (up to 26 words)
+DESCRIPTIVE_FIELDS = {
+    "core product wedge", "primary use case", "acquisition thesis",
+    "compliance risk notes", "data retention posture",
+    "competitive weakness", "differentiation angle", "moat type",
+}
+
+
+def looks_like_list(text: str) -> bool:
+    """Heuristic: does this text look like a comma-separated list of short items?
+
+    Returns True if the text has 4+ comma-separated parts, each part is short (≤8 words),
+    and there are no em-dashes or 'because'/sentence patterns.
+    """
+    if not text or " — " in text:
+        return False
+    if re.search(r"\b(because|whereas|although|however|therefore|since)\b", text, re.IGNORECASE):
+        return False
+    parts = re.split(r"\s*[,;]\s*", text)
+    parts = [p.strip() for p in parts if p.strip()]
+    if len(parts) < 4:
+        return False
+    avg_words = sum(len(re.findall(r"\S+", p)) for p in parts) / len(parts)
+    return avg_words <= 8
 
 
 def is_passthrough_field(label: str) -> bool:
@@ -319,13 +378,16 @@ def synthesize_phrase(label: str, source_values: list[tuple[str, str]]) -> str:
 
     label_l = label.lower()
 
+    # If the rating itself is a comma-separated list of differentiators (no rationale), trim
+    if not primary_rationale and looks_like_list(primary_rating):
+        return trim_list(primary_rating, max_items=5)
+
     # Pass-through fields: combine rating + rationale lightly, trim list-like content
     if is_passthrough_field(label_l):
         combined = " — ".join(p for p in [primary_rating, primary_rationale] if p)
         if not combined:
             return "—"
-        # If it looks like a list, trim to 5 items
-        if re.search(r"[,;]", combined) and " — " not in combined and "because" not in combined.lower():
+        if looks_like_list(combined):
             return trim_list(combined, max_items=5)
         return compress_rationale(combined, max_words=22)
 
@@ -335,14 +397,23 @@ def synthesize_phrase(label: str, source_values: list[tuple[str, str]]) -> str:
         if num_match:
             num = num_match.group(1)
             if primary_rationale:
-                qualifier = compress_rationale(primary_rationale, max_words=10)
+                qualifier = compress_rationale(primary_rationale, max_words=12)
                 return f"{num} — {qualifier}" if qualifier else num
             return num
-        # No number found — fall through to default
 
-    # Default: rating + compressed rationale
+    # Descriptive fields — allow up to 26 words for the prose
+    if label_l in DESCRIPTIVE_FIELDS:
+        rating = primary_rating.strip()
+        rationale = compress_rationale(primary_rationale, max_words=22)
+        if rating and not rationale:
+            return rating if len(re.findall(r"\S+", rating)) <= 26 else compress_rationale(rating, max_words=26)
+        if rating and rationale:
+            return f"{rating} — {rationale}"
+        return rationale or rating or "—"
+
+    # Default: rating + compressed rationale (clause-aware, no dangling words)
     rating = primary_rating.strip()
-    rationale = compress_rationale(primary_rationale, max_words=14)
+    rationale = compress_rationale(primary_rationale, max_words=16)
 
     # If the rating itself is descriptive (>3 words, no rationale), it's the full content
     if rating and not rationale:
@@ -615,7 +686,7 @@ def write_deliverable(out: Worksheet, company_data: list[dict], get_cell):
     out.cell(row=thesis_row, column=2, value="Acquisition thesis").font = Font(name=FONT_BOLD, size=9, bold=True)
     out.cell(row=thesis_row, column=2).alignment = Alignment(vertical="top", indent=1)
     for i, cd in enumerate(company_data):
-        c = out.cell(row=thesis_row, column=3 + i, value=truncate_words(cd["thesis"] or "", max_words=14))
+        c = out.cell(row=thesis_row, column=3 + i, value=truncate_words(cd["thesis"] or "", max_words=20))
         c.font = Font(name=FONT_BODY, size=9, italic=True)
         c.alignment = Alignment(horizontal="left", vertical="top", wrap_text=True, indent=1)
         c.border = border
