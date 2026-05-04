@@ -203,6 +203,55 @@ def truncate_words(text: str, max_words: int = 14) -> str:
     return " ".join(words[:max_words]).rstrip(".,;:")
 
 
+# Verbose phrase substitutions — replace wordy constructions with concise equivalents
+# (pattern, replacement). Applied in order. Case-insensitive.
+VERBOSE_SUBSTITUTIONS = [
+    (r"\bin order to\b", "to"),
+    (r"\bfor the purpose of\b", "to"),
+    (r"\bis able to\b", "can"),
+    (r"\bare able to\b", "can"),
+    (r"\bwas able to\b", "could"),
+    (r"\bwere able to\b", "could"),
+    (r"\bhas the ability to\b", "can"),
+    (r"\bhave the ability to\b", "can"),
+    (r"\bas well as\b", "and"),
+    (r"\bin addition to\b", "plus"),
+    (r"\bdue to the fact that\b", "because"),
+    (r"\bowing to the fact that\b", "because"),
+    (r"\bin light of the fact that\b", "because"),
+    (r"\bdespite the fact that\b", "though"),
+    (r"\bin spite of\b", "despite"),
+    (r"\bthe fact that\b", "that"),
+    (r"\bwith regard to\b", "for"),
+    (r"\bwith regards to\b", "for"),
+    (r"\bwith respect to\b", "for"),
+    (r"\bin terms of\b", "for"),
+    (r"\bapproximately\b", "~"),
+    (r"\ba number of\b", "several"),
+    (r"\ba variety of\b", "various"),
+    (r"\bmake use of\b", "use"),
+    (r"\bmakes use of\b", "uses"),
+    (r"\bin the event that\b", "if"),
+    (r"\bat this point in time\b", "now"),
+    (r"\bat the present time\b", "now"),
+    (r"\bprior to\b", "before"),
+    (r"\bsubsequent to\b", "after"),
+    (r"\bin the process of\b", ""),
+    (r"\bis responsible for ([\w]+ing)\b", r"\1s"),
+    (r"\bare responsible for ([\w]+ing)\b", r"\1"),
+    (r"\bcompletely\s+(eliminated|removed|destroyed)\b", r"\1"),
+    (r"\bfully\s+(integrated|automated|compliant)\b", r"\1"),
+    (r"\bvery\s+", ""),
+    (r"\breally\s+", ""),
+    (r"\bextremely\s+", ""),
+    (r"\bquite\s+", ""),
+    (r"\bsignificantly\s+", ""),
+    (r"\bsubstantially\s+", ""),
+    (r"\bprovides ([\w]+) capabilities\b", r"\1"),
+    (r"\bcapability to ([\w]+)\b", r"can \1"),
+]
+
+
 # Filler/transitional phrases that can be safely removed without losing meaning
 FILLER_PHRASES = [
     r"\bfor example,?\s*",
@@ -261,6 +310,10 @@ def compress_rationale(text: str, max_words: int = 18) -> str:
     s = str(text)
     s = re.sub(r"<cite[^>]*>", "", s, flags=re.IGNORECASE)
     s = re.sub(r"</cite>", "", s, flags=re.IGNORECASE)
+
+    # Aggressive verbose-phrase substitutions (apply BEFORE filler removal)
+    for pattern, replacement in VERBOSE_SUBSTITUTIONS:
+        s = re.sub(pattern, replacement, s, flags=re.IGNORECASE)
 
     for pattern in FILLER_PHRASES:
         s = re.sub(pattern, "", s, flags=re.IGNORECASE)
