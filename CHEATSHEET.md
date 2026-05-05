@@ -29,6 +29,7 @@
 | GTM diagnostic workbook | `gtm-metrics-analyzer` |
 | SaaS metric lookup | `finance-metrics-quickref` |
 | Post-close KPI tree + 100-day plan | `kpi-tree-builder` (via ic-memo-pipeline Phase 8) |
+| Executive view of competitive landscape sheet | `competitive-landscape-deliverable` |
 | Pattern Word document | `pattern-docx` |
 | Pattern investment deck | `pattern-investment-pptx` |
 | QA a Pattern document | `doc-quality-checker` (auto-runs) |

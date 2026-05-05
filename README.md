@@ -2,7 +2,7 @@
 
 Pattern's modular skill architecture for Claude. Each skill is a folder containing a `SKILL.md` file that instructs Claude on methodology, output format, and quality standards for a specific domain. Skills are loaded on-demand — Claude reads the relevant `SKILL.md` before executing any task in its domain.
 
-**28 skills across 8 groups and 4 functional layers, plus 2 multi-agent pipelines.** Every formal output runs through at least two layers — usually three or four. Layers are not optional — skipping a layer produces a draft, not a deliverable.
+**29 skills across 8 groups and 4 functional layers, plus 2 multi-agent pipelines.** Every formal output runs through at least two layers — usually three or four. Layers are not optional — skipping a layer produces a draft, not a deliverable.
 
 > **Source of truth:** This README reflects the folders in [`ian-lawrence423/Claude-skills`](https://github.com/ian-lawrence423/Claude-skills). Update this file whenever skills are added or removed from the repo.
 
@@ -99,6 +99,7 @@ All 30 skills organized by group. Invoke the most specific skill first; fall bac
 | `pattern-investment-pptx` | L4 — Production | Institutional-grade investment decks: IC, PE, acquirer materials. 10×5.625" format | Investment deck, investor presentation, due diligence deck, M&A deck |
 | `written-communication` | L4 — Production | Emails, memos, strategy documents, and announcements. Covers tone calibration, audience framing, structure, and edit passes | "write an email", "draft a memo", "help me communicate this", "write an announcement" |
 | `giving-presentations` | L4 — Production | Talk track prep, slide deck narrative design, and presentation delivery coaching | "help me prep for this presentation", "talk track", "what's the narrative for this deck" |
+| `competitive-landscape-deliverable` | L4 — Production | Converts a competitive landscape, market mapping, or M&A target spreadsheet into a board-ready Executive Deliverable. Preserves rating + key evidence (fidelity over brevity), verdict-led layout, Pattern brand styling. Handles Pattern n8n pipeline output (`Rating — McKinsey rationale`) | "make an executive view of this landscape", "build deliverable from competitor sheet", "summarize this competitive grid", "executive deliverable for [companies]" |
 | `writing-style` | L3 — Quality ⚙️ | 5-step prose self-review. Runs on **all** formal outputs before document production. Enforces claim tagging, inductive chain check, data gap flagging, prose standards | Auto-runs — do not invoke manually |
 | `doc-quality-checker` | L4b — QA ⚙️ | Brand compliance QA gate. Auto-runs after every `pattern-docx` or `pattern-investment-pptx` output. Checks formatting, structural logic, table integrity, narrative flow | Auto-runs after Layer 4 production output |
 
