@@ -101,6 +101,44 @@ const C = {
 };
 ```
 
+
+## Step 3b: Color Methodology
+
+Keep the Pattern color constants exactly as defined above. Apply them using this methodology:
+
+### Foundation first
+
+- Start with neutrals: `C.white` for content slide backgrounds, `C.black`/`C.textDark` for primary text, `C.textMid`/`C.textMuted` for supporting text, and `C.textFaint` for quiet structure
+- Use whitespace, alignment, proximity, font size, and `F.semibold` before adding color
+- If the slide works in neutral text and gray structure, do not add emphasis color
+
+### Highlight second
+
+- Use `C.brandBlue` as the primary highlight color for the one element that carries the slide's main message: a key heading, data value, chart series, label, rule, directional marker, or visual entry point
+- Highlight only what requires emphasis. Do not color every bullet, every heading, or every data label
+- For negative meaning use `C.alertRed`; for positive meaning use `C.tealPrimary` or `C.tealLight`. These colors are semantic, not decorative
+- Use secondary blues only when a chart or diagram genuinely needs additional series distinction
+
+### De-emphasize before adding more color
+
+- When one element needs focus, first reduce surrounding elements to `C.textMuted`, `C.textFaint`, `C.chartGray`, or `C.chartGrayLt`
+- Prefer a gray base plus one `C.brandBlue` highlight over multiple competing colors
+- If a heading, label, icon, line, and chart series are all blue, the slide has lost hierarchy. Keep only the highest-signal blue element and neutralize the rest
+
+### Never use color as structure
+
+- Do not use color-filled text boxes to organize normal slide content. Use whitespace, alignment, size, outlines, and dividing lines instead
+- Do not color-code entire blocks of text to match a diagram, process, or chart. Start with default text color, then add selective text highlight only if needed
+- Do not color-highlight words inside titles, subtitles, sentences, or dense paragraphs
+- Do not mix text highlighting and broad color-coding on the same slide
+- Color-filled shapes are acceptable only when they are genuine diagrams, Gantt/task bars, title-slide elements, or intentional big-statement/section moments
+
+### Consistency test
+
+Before generating code, answer: what does each color mean on this slide? If the answer is not clear, remove or neutralize the color. Across a deck, the same color should signal the same role or meaning.
+
+---
+
 ### Fonts
 
 ```javascript
@@ -340,7 +378,7 @@ slide.addText(colHeading, {
 });
 ```
 
-**Use directional button** (chevron) only to show a left→right relationship when applicable. Two-column slides should have clear column alignment, concise headings, and minimal dividing lines. Use a divider only when density requires it. Use numbering circles only for genuine process flow or ranked hierarchy. For key ideas, prefer larger text, whitespace, and position over filled callout boxes or full-block text color.
+**Use directional button** (chevron) to show left→right relationship when applicable.
 
 ### D. Three Column — Two-Thirds / One-Third (Key Message)
 
@@ -352,12 +390,8 @@ Best for: wide chart/visual left + numbered key points right.
 // Divider line: x:6.65, y:0.801, h:4.399, 0.75pt textFaint
 
 // Keep right column minimal — move detail to speaker notes or Detail slides
-// Use numbering system only for process, ranking, or visual element mapping
-// Use the larger column for the main chart, diagram, table, or analytical evidence
-// Use divider line to ground the smaller column so it does not float
+// Use numbering system for key points (filled brandBlue circle, white number)
 ```
-
-Three-column Key Message slides should reserve the larger column for the main chart, diagram, or table and the smaller column for concise numbered takeaways. Keep right-column details short; move detailed support to speaker notes or Detail slides. Use a divider line to visually ground the smaller column. Use numbered circles only when they map to a process, ranked hierarchy, or specific visual elements. Use chart highlight color sparingly — primary accent for the main idea, gray for supporting context.
 
 ### E. Three Column — Equal
 
@@ -604,7 +638,9 @@ Triangle tab flush to top-right corner of slide.
 
 - Remove anything not required for validity — no bevels, shadows, photography near charts
 - No plot area fill or border unless it is a dashboard
-- Use `brandBlue` to highlight the key data series; gray for everything else
+- Start charts in gray, then use `brandBlue` only for the data point, series, label, or callout that carries the main idea
+- De-emphasize supporting series with `chartGray` or `chartGrayLt` before adding additional accent colors
+- If the whole chart is the key idea, a monochromatic blue scheme is acceptable; otherwise use gray base + one blue highlight
 - Data labels: use strategically — if too many become noise, omit; can replace y-axis/legend
 - Never use default chart leader lines — draw manually as a shape if one is needed
 - Every chart needs a source in the footnote
@@ -621,7 +657,13 @@ Triangle tab flush to top-right corner of slide.
 ### Color Schemes
 
 ```javascript
-// Monochromatic blue — default for most charts
+// Default analytical chart scheme — gray base + one Pattern highlight
+const grayBaseWithHighlight = {
+  base: [C.chartGray, C.chartGrayLt, C.panelGray],
+  highlight: C.brandBlue,
+};
+
+// Monochromatic blue — use only when the whole chart is the key idea
 const chartColors = ["4285F4", "0D5BDC", "2700A8", "3A00FD", "6E6F73", "B5B5B5"];
 
 // Differentiate — one series is primary
@@ -631,6 +673,8 @@ const chartColors = ["4285F4", "0D5BDC", "2700A8", "3A00FD", "6E6F73", "B5B5B5"]
 // Monochromatic gray — supporting/de-emphasis context
 const grayScale = ["3C4043", "6E6F73", "B5B5B5", "E8ECF0"];
 ```
+
+**Method:** decide the chart story first, then color it. For ranking, correlation, or one highlighted variance, default to gray bars/lines plus one `brandBlue` data point or series. For positive/negative variance, use `tealPrimary` or `alertRed` only on the variance or label that encodes valence. Do not use the full blue sequence unless multiple peer series must be distinguished.
 
 ### Chart Types
 
@@ -650,15 +694,12 @@ highlight. Stacked = callout labels on key values, not data labels on every segm
 
 ### Design Principles
 
-- Structure data for comparison first — tables should help readers compare information, not merely store it
-- Order/group rows and columns logically before styling
-- Abbreviate headings only when space is constrained and meaning remains obvious
-- Include units in parentheses (Revenue ($M), Headcount (FTEs))
-- For Key Message slides, limit table content to what supports the main idea; move supplementary tables to Detail slides
+- Structure data logically: order/group rows and columns clearly
+- Abbreviate headings; include units in parentheses (Revenue ($M), Headcount (FTEs))
 - Set margin at the **table level only** — never per-cell (see Common Pitfalls)
-- Avoid shading to define structure; use only to highlight key information
-- Avoid color-coding entire blocks of text; use color selectively for emphasis, hierarchy, or data meaning
-- Prefer alignment, spacing, weight, and concise labels before adding color treatments
+- Use alignment, whitespace, and selective horizontal rules before adding fills or gridlines
+- Avoid shading to define structure; use shading only to highlight key information, totals, or true callout rows
+- Use font color sparingly for category grouping or a key value; never color-code whole table sections when alignment or spacing would work
 - Bold only on: headings, totals, grouping subheadings — never individual cells
 - Only rotate column header text as a last resort due to space constraints
 
@@ -671,12 +712,10 @@ highlight. Stacked = callout labels on key values, not data labels on every segm
 | Long numbers / decimals | Right | Right |
 | Graphics / icons | Center | Center |
 
-Column headers: vertically centered; body rows: top-aligned. Set each cell's `align` based on its column type, and ensure header helpers use the same horizontal alignment as the associated column. Use `valign: "middle"` for headers and `valign: "top"` for body cells. Do not rely on full-row text color or block fills to create table hierarchy.
+Column headers: vertically centered; body rows: top-aligned.
 
 ### Gridlines
 
-- Use whitespace within and around tables for balance before adding borders
-- Colored gridlines carry no meaning; use them only as a last resort for organization
 - Horizontal borders only — 0.75pt solid `CDD5E2` for standard rows
 - Use `dashed` border type for dotted separator rows (e.g., between Business Overview sub-rows)
 - Set `{ pt: 0 }` on right and left borders to suppress vertical lines
@@ -757,20 +796,24 @@ slide.addTable(rows, {
 { fill: { color: C.tableHeaderDark }, color: "FFFFFF", fontFace: F.semibold, fontSize: SIZE.tableHeader }
 
 // Section divider row (spans full width via explicit cells, not colspan)
+// Use sparingly for actual section breaks; avoid using filled rows as default structure
 { fill: { color: "1C3461" }, color: "FFFFFF", fontFace: F.semibold }
 
 // Body rows
 { fontFace: F.medium, fontSize: SIZE.tableBody, fill: { color: C.white } }
 
-// Alternating highlight row (sparingly — key info only)
+// Alternating highlight row (sparingly — key info only; never candy-striping)
 { fill: { color: C.tableRowAlt } }
 
 // Category / group text highlight — F.semibold, not bold:true
+// Use only for row/column groups or a key value that needs a visual entry point
 { color: C.brandBlue, fontFace: F.semibold }
 
 // Shading for callout row
 { fill: { color: C.panelGray } }  // Never to define rows structurally
 ```
+
+**Table color method:** default body cells to white with dark text. Use `tableHeaderDark` only for the header row, `brandBlue` text for a small number of group labels or key values, and `panelGray`/`tableRowAlt` only for totals or callout rows. Never use full-row or full-column color coding to compensate for weak table structure.
 
 > **Font rule in tables:** Never use `bold: true`. Use `fontFace: F.semibold` for all
 > emphasis — header rows, group labels, totals.
@@ -807,10 +850,12 @@ const dataH = remaining / numStandardRows;
 | Process flow or ranked list | Any layout + Numbering System |
 
 **Key rules:**
-- Two column: headings left-aligned, sentence case, max 2 lines, `brandBlue`
+- Two column: headings left-aligned, sentence case, max 2 lines, `brandBlue` only when the heading is a true visual entry point
 - Three column (2/3+1/3): right column minimal — detail in speaker notes
 - Three column (equal): align all chart axes and labels when multiple charts present
 - Four column: no bullets at top level; wide paragraph spacing replaces them; left-align all elements
+- For diagrams and process layouts, do not color-code the surrounding text to match each segment; use neutral text and selective `brandBlue` highlight only where meaning changes
+- On slides with large color panels or filled diagram shapes, keep text minimal and avoid adding competing color elsewhere
 
 ---
 
@@ -1050,6 +1095,7 @@ If any answer is "no," fix it before outputting the final file.
 
 ## Common Pitfalls
 
+- **Color is a signal, not decoration** — keep Pattern palette constants unchanged, but apply color with restraint: gray/neutral base, one `brandBlue` highlight, semantic teal/red only for valence. Do not color-code blocks of text, fill textboxes to organize content, or use multiple accents when whitespace, alignment, or de-emphasis would create the hierarchy more cleanly.
 - **`margin` is table-level only — never per-cell** — passing `margin` inside individual cell `options` objects is silently ignored and corrupts layout. Always set margin at the `addTable(rows, { margin: [...] })` level only:
   ```javascript
   // ❌ WRONG — margin in cell options is silently ignored
