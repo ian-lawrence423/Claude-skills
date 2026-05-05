@@ -50,6 +50,8 @@
 - Use `brandBlue` for the primary/highlight series; gray for supporting series
 - Positive data: `tealLight` or `tealPrimary`; Negative data: `alertRed`
 - Shading: use only to highlight key information, never to define rows/columns structurally
+- Avoid color-coding entire blocks of text; use color as a selective signal for emphasis, hierarchy, or data meaning
+- Prefer alignment, spacing, weight, and concise labels before applying color
 - Dark slides: `090A0F` background (only the title slide uses a dark background)
 
 ---
@@ -193,17 +195,31 @@ Remove: gridlines if data is labeled. Add gridlines only if data is not labeled 
 
 ### Content Structure
 
-- Order and group information logically before styling
-- Make headings clear — abbreviate where understood, include units in parentheses
+- Structure tables to compare information, not merely store it
+- Order and group rows and columns logically before styling
+- Make headings clear — abbreviate only where understood and include units in parentheses
 - For Key Message slides: show only what's needed to support the main point
-- For Detail slides: full table with supporting annotations
+- Move supplementary or explanatory tables to Detail slides rather than crowding the primary slide
+- After the data structure is clear, refine alignment, whitespace, and styling
 
 ### Whitespace Rules
 
 - Generous cell padding — whitespace is the first tool for readability
+- Use whitespace within and around tables to create balance, order, and readability
 - Subheadings naturally create rows of whitespace — use them instead of gridlines
+- Colored gridlines hold no information; use them only as a last resort for organization
 - Use bottom gridlines to separate the table from footnotes when whitespace isn't enough
 - Don't add extra labels or callouts around the table — add a Detail slide instead
+
+### Alignment Rules
+
+- Align column headers to match the content beneath them
+- Text columns: left-align body content and headers
+- Short numbers: center-align body content and headers
+- Longer numbers or decimals: right-align or decimal-align body content and headers
+- Graphics, buttons, logos, or icons: center-align body content and headers
+- Vertically center column headers within the header row; top-align body content
+- Use alignment and whitespace to reduce reliance on gridlines
 
 ### Gridline Specifications
 
@@ -243,14 +259,20 @@ Remove: gridlines if data is labeled. Add gridlines only if data is not labeled 
 
 ### Two Column Rules
 
+- Use when comparing details, placing a chart next to commentary, or pairing a key idea with supporting evidence
 - Left heading: `brandBlue`, SemiBold, sentence case, max 2 lines
-- Dividing line: only when dense; 0.75pt `textFaint`
-- Directional button between columns when showing cause→effect
+- Dividing line: only when dense; 0.75pt `textFaint`; too many lines create noise
+- Directional button between columns only when showing cause→effect or a clear relationship
+- Numbering systems only for a process, sequence, or hierarchy — never decorative bullets
 - Key idea: use color + position + size — not a filled shape callout
+- Chart highlighting: use primary accent for the main idea; gray or muted colors for supporting information
 
 ### Three Column (2/3 + 1/3) Rules
 
-- Right column: succinct numbered points only — move details to speaker notes
+- Use when one portion of the content needs more space, such as a wide chart paired with concise supporting points
+- Larger column: main chart, diagram, table, or analytical evidence
+- Right column: succinct numbered points only — move details to speaker notes or a Detail slide
+- Numbering systems only for a process, sequence, ranked hierarchy, or specific relationship to visual elements
 - Chart highlight: `brandBlue` on key series; gray for supporting
 - Dividing line grounds the right column — don't leave it floating
 

@@ -340,7 +340,7 @@ slide.addText(colHeading, {
 });
 ```
 
-**Use directional button** (chevron) to show left→right relationship when applicable.
+**Use directional button** (chevron) only to show a left→right relationship when applicable. Two-column slides should have clear column alignment, concise headings, and minimal dividing lines. Use a divider only when density requires it. Use numbering circles only for genuine process flow or ranked hierarchy. For key ideas, prefer larger text, whitespace, and position over filled callout boxes or full-block text color.
 
 ### D. Three Column — Two-Thirds / One-Third (Key Message)
 
@@ -352,8 +352,12 @@ Best for: wide chart/visual left + numbered key points right.
 // Divider line: x:6.65, y:0.801, h:4.399, 0.75pt textFaint
 
 // Keep right column minimal — move detail to speaker notes or Detail slides
-// Use numbering system for key points (filled brandBlue circle, white number)
+// Use numbering system only for process, ranking, or visual element mapping
+// Use the larger column for the main chart, diagram, table, or analytical evidence
+// Use divider line to ground the smaller column so it does not float
 ```
+
+Three-column Key Message slides should reserve the larger column for the main chart, diagram, or table and the smaller column for concise numbered takeaways. Keep right-column details short; move detailed support to speaker notes or Detail slides. Use a divider line to visually ground the smaller column. Use numbered circles only when they map to a process, ranked hierarchy, or specific visual elements. Use chart highlight color sparingly — primary accent for the main idea, gray for supporting context.
 
 ### E. Three Column — Equal
 
@@ -646,10 +650,15 @@ highlight. Stacked = callout labels on key values, not data labels on every segm
 
 ### Design Principles
 
-- Structure data logically: order/group rows and columns clearly
-- Abbreviate headings; include units in parentheses (Revenue ($M), Headcount (FTEs))
+- Structure data for comparison first — tables should help readers compare information, not merely store it
+- Order/group rows and columns logically before styling
+- Abbreviate headings only when space is constrained and meaning remains obvious
+- Include units in parentheses (Revenue ($M), Headcount (FTEs))
+- For Key Message slides, limit table content to what supports the main idea; move supplementary tables to Detail slides
 - Set margin at the **table level only** — never per-cell (see Common Pitfalls)
 - Avoid shading to define structure; use only to highlight key information
+- Avoid color-coding entire blocks of text; use color selectively for emphasis, hierarchy, or data meaning
+- Prefer alignment, spacing, weight, and concise labels before adding color treatments
 - Bold only on: headings, totals, grouping subheadings — never individual cells
 - Only rotate column header text as a last resort due to space constraints
 
@@ -662,10 +671,12 @@ highlight. Stacked = callout labels on key values, not data labels on every segm
 | Long numbers / decimals | Right | Right |
 | Graphics / icons | Center | Center |
 
-Column headers: vertically centered; body rows: top-aligned.
+Column headers: vertically centered; body rows: top-aligned. Set each cell's `align` based on its column type, and ensure header helpers use the same horizontal alignment as the associated column. Use `valign: "middle"` for headers and `valign: "top"` for body cells. Do not rely on full-row text color or block fills to create table hierarchy.
 
 ### Gridlines
 
+- Use whitespace within and around tables for balance before adding borders
+- Colored gridlines carry no meaning; use them only as a last resort for organization
 - Horizontal borders only — 0.75pt solid `CDD5E2` for standard rows
 - Use `dashed` border type for dotted separator rows (e.g., between Business Overview sub-rows)
 - Set `{ pt: 0 }` on right and left borders to suppress vertical lines
