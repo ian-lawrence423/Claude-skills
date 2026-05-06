@@ -1,7 +1,7 @@
 {
   "name": "deal-intelligence",
   "version": "0.1.0",
-  "description": "Full PE/M&A deal workflow — sourcing through IC memo production",
+  "description": "Full PE/M&A deal workflow: sourcing through IC memo production",
   "author": {
     "name": "Pattern"
   },
