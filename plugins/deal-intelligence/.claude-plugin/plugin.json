@@ -1,0 +1,9 @@
+{
+  "name": "deal-intelligence",
+  "version": "0.1.0",
+  "description": "Full PE/M&A deal workflow — sourcing through IC memo production",
+  "author": {
+    "name": "Pattern"
+  },
+  "keywords": ["investment", "IC memo", "diligence", "NTB", "PE", "M&A", "deal workflow", "equity research"]
+}
