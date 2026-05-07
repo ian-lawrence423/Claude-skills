@@ -65,12 +65,13 @@ TAB_COL_SPECS = {
         "D": (14,    16),     # category
         "E": (22,    26),     # model line
         "F": (12,    13),     # frequency
-        "G": (14,    15),     # budget
-        "H": (14,    15),     # actual
-        "I": (12,    13),     # $ variance
-        "J": (10,    11),     # % variance
-        "K": (14,    16),     # status
-        "L": (36,    45),     # notes (wrap)
+        "G": (14,    15),     # actual (FY2025A)
+        "H": (14,    15),     # budget (FY2026E)
+        "I": (14,    15),     # exit year (FY2028E)
+        "J": (12,    13),     # $ variance
+        "K": (11,    12),     # % variance
+        "L": (14,    16),     # status
+        "M": (36,    45),     # notes (wrap)
     },
     "NTB REGISTRY": {
         "A": (1.5,   1.5),
