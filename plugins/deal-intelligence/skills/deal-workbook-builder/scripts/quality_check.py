@@ -68,10 +68,9 @@ TAB_COL_SPECS = {
         "G": (14,    15),     # actual (FY2025A)
         "H": (14,    15),     # budget (FY2026E)
         "I": (14,    15),     # exit year (FY2028E)
-        "J": (12,    13),     # $ variance
-        "K": (11,    12),     # % variance
-        "L": (14,    16),     # status
-        "M": (36,    45),     # notes (wrap)
+        "J": (13,    14),     # Δ vs Budget (ppt or %)
+        "K": (13,    14),     # status
+        "L": (36,    45),     # notes (wrap)
     },
     "NTB REGISTRY": {
         "A": (1.5,   1.5),
