@@ -50,15 +50,15 @@ the source model for every metric the workbook needs.
 
 Required metrics and their typical model locations:
 
-| Metric | Model row | FY2026E col | FY2028E col |
-|--------|-----------|-------------|-------------|
-| Total Revenue ($M) | IS row 17 | G | I |
-| GMV ($B) | Drivers row 41 | G | I |
-| GPV% of GMV | Drivers row 42 | G | I |
-| Attach Rate (decimal) | Drivers row 43 | G | I |
-| MRR ($M) | Drivers row 44 | G | I |
-| EBITDA margin | IS row 26 | G | I |
-| FY2025A baseline for each (prior period) | same rows | F | — |
+| Metric | Model row | FY2025A col | FY2026E col | FY2028E col |
+|--------|-----------|-------------|-------------|-------------|
+| Total Revenue ($M) | IS row 17 | F | G | I |
+| GMV ($B) | Drivers row 41 | F | G | I |
+| GPV% of GMV | Drivers row 42 | F | G | I |
+| Attach Rate (decimal) | Drivers row 43 | F | G | I |
+| MRR ($M) | Drivers row 44 | F | G | I |
+| EBITDA margin | IS row 26 | F | G | I |
+| FCF ($M) | IS row 38 | F | G | I |
 
 **Do this mapping first, before writing any code.** Read a sample of
 cells from the actual file and confirm they contain the expected values.
@@ -137,6 +137,20 @@ J22 = I22 * INPUTS!$C$86   (Plus MRR delta × multiplier)
 J23 = I23 * INPUTS!$C$86   (Core MRR delta × multiplier)
 ```
 
+### Delta column (col I) — units and formatting
+The delta column shows exit minus entry in the metric's native unit:
+
+| Row type | Unit stored | Δ formula | Number format |
+|----------|-------------|-----------|---------------|
+| GMV sub-drivers | $B | `=H-G` | `#,##0.0` |
+| Attach rate (bps) | bps | `=H-G` | `#,##0.0` |
+| GPV% penetration | ppt | `=(H-G)*100` | `+0.0"ppt";-0.0"ppt";"-"` |
+| Revenue / MRR | $M | `=H-G` | `#,##0` |
+
+**GPV% specifically:** multiply by 100 so the stored value is a ppt number
+(e.g., 8.0 not 0.08) and apply the `"ppt"` literal format. Do NOT use
+the `%` format for this delta — it would show `+800%` instead of `+8.0ppt`.
+
 ### EBITDA and EV cascade
 
 For every driver row:
@@ -168,7 +182,88 @@ positive contribution when the cash position improves.
 
 ---
 
-## Step 4 — Build NTB REGISTRY tab
+## Step 4 — Build KPI TREE tab
+
+The KPI tree is a management audit grid: FY2025A Actual vs. FY2026E
+Budget, with FY2028E Exit as a reference column. Every model-linked cell
+must use a formula; analyst-estimated rows (where no model exit value
+exists) are the only acceptable hardcodes.
+
+### Column layout
+
+| Col | Header | Content | Format |
+|-----|--------|---------|--------|
+| B | Lvl | Hierarchy level (NS / 1 / 2) | General |
+| C | KPI Name | Metric label (indented for L2) | General |
+| D | Category | Growth / Margin / Payments / Cash / Efficiency | General |
+| E | Financial Model Line | Source row reference | General |
+| F | Frequency | Monthly / Quarterly | General |
+| G | FY2025A Actual | `='FINANCIAL MODEL'!F{row}` | metric-appropriate |
+| H | FY2026E Budget | `='FINANCIAL MODEL'!G{row}` or INPUTS link | metric-appropriate |
+| I | FY2028E Exit | `='FINANCIAL MODEL'!I{row}` | metric-appropriate |
+| J | Δ vs Budget | Smart delta — see below | ppt or % per metric |
+| K | Status | IF formula: On Track / Watch / Behind Plan | General |
+| L | Notes | Analyst commentary (wrap text) | General |
+
+### Δ vs Budget column (col J) — the critical rule
+
+**Margin / rate rows** (EBITDA %, gross margins, GPV%, take rate, S&M%,
+R&D%, OpEx%, FCF margin, capex%) — delta in **percentage points**:
+```
+=IFERROR((G{r}-H{r})*100,"-")
+number_format = '+0.0"ppt";-0.0"ppt";"-"'
+```
+
+**Dollar / volume rows** (Revenue $M, GMV $B, MRR $M, FCF $M) — delta
+as **% change**:
+```
+=IFERROR((G{r}-H{r})/ABS(H{r}),"-")
+number_format = '+0.0%;-0.0%;"-"'
+```
+
+Do not mix these: applying `%` format to an absolute dollar delta
+(e.g., ΔGMV = 5.7 formatted as `0.0%`) produces nonsense (570%).
+
+### Status formula (col K)
+
+For revenue / margin rows where higher is better:
+```
+=IFERROR(IF((G{r}-H{r})/ABS(H{r})>-0.05,"On Track",
+         IF((G{r}-H{r})/ABS(H{r})>-0.15,"Watch","Behind Plan")),"-")
+```
+
+For cost / efficiency rows where lower is better (S&M%, R&D%, OpEx%,
+capex%):
+```
+=IFERROR(IF((G{r}-H{r})/ABS(H{r})<0.05,"On Track",
+         IF((G{r}-H{r})/ABS(H{r})<0.15,"Watch","Off Plan")),"-")
+```
+
+Apply conditional formatting on K7:K26 for text colour:
+- "On Track" → green `#375623`
+- "Watch" → amber `#9C5700`
+- "Plan" (matches "Behind Plan" and "Off Plan") → red `#C00000`
+
+### Model links by row
+
+| Row | KPI | G (Actual) | H (Budget) | I (Exit) |
+|-----|-----|-----------|-----------|---------|
+| 7 | GMV ($B) | `'FM'!F41` | `'FM'!G41` | `'FM'!I41` |
+| 8 | Total Revenue ($M) | `'FM'!F17` | `'FM'!G17` | `'FM'!I17` |
+| 9 | Sub Solutions ($M) | Derived (F17−attach) | `INPUTS!C60` | `INPUTS!C61` |
+| 10 | Merch Solutions ($M) | Derived (F41×F43×1000) | `INPUTS!C56` | `INPUTS!C57` |
+| 11 | MRR ($M) | `'FM'!F44` | `'FM'!G44` | `'FM'!I44` |
+| 12 | Blended Gross Margin | `F19/F17` | `'FM'!G8` | `I19/I17` |
+| 15 | Adj. EBITDA Margin | `'FM'!F26` | `'FM'!G26` | `'FM'!I26` |
+| 20 | GPV Penetration % | `'FM'!F42` | `'FM'!G42` | `'FM'!I42` |
+| 21 | Payments Take Rate | `'FM'!F43` | `'FM'!G43` | `'FM'!I43` |
+| 24 | Free Cash Flow ($M) | `'FM'!F38` | `'FM'!G38` | `'FM'!I38` |
+
+(`'FM'` = `'FINANCIAL MODEL'`)
+
+---
+
+## Step 5 — Build NTB REGISTRY tab
 
 NTB REGISTRY maps investment thesis pillars to model-computed EV. All
 base EV and base MOIC columns must be formula-linked to DRIVER TREE.
@@ -196,7 +291,7 @@ hardcoded inputs; they are not model-derived.
 
 ---
 
-## Step 5 — Build MOIC BRIDGE tab
+## Step 6 — Build MOIC BRIDGE tab
 
 The bridge is a cumulative waterfall: Entry equity (1.00×) + NTB
 contributions + compression + net cash = Exit MOIC.
@@ -228,7 +323,55 @@ formula is broken — audit the chain before saving.
 
 ---
 
-## Step 6 — Run quality check (mandatory after every build or edit)
+## Step 7 — Apply formatting (McKinsey-style)
+
+Formatting is applied **after** all formulas are correct and QC is
+clean. Style is minimalistic: color is used sparingly as a structural
+signal, not decoration.
+
+### Palette
+
+| Use | Color | Where |
+|-----|-------|-------|
+| Section headers / col headers | `#0F4761` (dark navy) | Fill + white text |
+| Subtotal rows | `#F0F0F0` (light grey) | Fill, bold text |
+| All data rows | White / no fill | Default |
+| Status: On Track | `#375623` (dark green) | **Text only**, no fill |
+| Status: Watch | `#9C5700` (dark amber) | **Text only**, no fill |
+| Status: Behind Plan / Off Plan | `#C00000` (dark red) | **Text only**, no fill |
+| Notes / footnotes | `#666666` (grey) + italic | Font color only |
+
+**Do not** apply fill colors to individual data rows (no alternating
+stripes, no blue-tinted row bands). Hierarchy is conveyed through bold
+weight and thin horizontal borders only.
+
+### DRIVER TREE formatting rules
+
+| Row type | Fill | Font |
+|----------|------|------|
+| Banner (row 1) + col headers (row 6) | Navy `0F4761` | White bold |
+| Section headers (MERCHANT, SUBSCRIPTION, VALUE BRIDGE) | Navy `0F4761` | White bold |
+| Sub-section labels (GMV Volume Effect, Attach Rate) | None | Black bold |
+| L3 driver rows | None | Normal |
+| Subtotals (GMV Volume, Attach Rate, MRR subtotals) | `F0F0F0` | Bold |
+| Total rows (TOTAL MERCH, TOTAL SUB, TOTAL REVENUE) | None | Bold + thin top/bottom border |
+| MOIC CHECK row | Navy `0F4761` | White bold |
+| Footnote row | None | Grey italic, 8pt |
+
+### KPI TREE formatting rules
+
+| Row type | Fill | Font |
+|----------|------|------|
+| Col headers (row 6) | Navy `0F4761` | White bold |
+| NS / L1 KPI rows | None | Bold, thin top border |
+| L2 sub-KPI rows | None | Normal |
+| Section header rows (GMV Specific KPIs) | `F0F0F0` | Bold |
+| Status column K | None | Conditional text color (see above) |
+| Notes column L | None | Grey italic |
+
+---
+
+## Step 8 — Run quality check (mandatory after every build or edit)
 
 After every build, every formula edit, and every save, run:
 
@@ -249,13 +392,23 @@ it can:
 
 **Column width specs** (defined in `scripts/quality_check.py`):
 
-| Tab | Key columns |
-|-----|------------|
-| DRIVER TREE | B=34, D=22 (wrap), J-M=12-13 |
-| INPUTS | B=40 (label), C=13 (value), E=42 (notes, wrap) |
-| KPI TREE | C=32, L=36 (notes, wrap) |
-| NTB REGISTRY | D=50 (thesis, wrap), E-H=14 |
-| MOIC BRIDGE | B=48 (label), C-E=16 |
+| Tab | Col | Width | Purpose |
+|-----|-----|-------|---------|
+| DRIVER TREE | B | 34 | driver label |
+| DRIVER TREE | D | 22 | metric description (wrap) |
+| DRIVER TREE | J–M | 12–13 | impact columns |
+| INPUTS | B | 40 | label |
+| INPUTS | C | 13 | value |
+| INPUTS | E | 42 | notes (wrap) |
+| KPI TREE | C | 32 | KPI name |
+| KPI TREE | G–I | 14 | actual / budget / exit |
+| KPI TREE | J | 13 | Δ vs Budget |
+| KPI TREE | K | 13 | status |
+| KPI TREE | L | 36 | notes (wrap) |
+| NTB REGISTRY | D | 50 | thesis (wrap) |
+| NTB REGISTRY | E–H | 14 | EV / MOIC columns |
+| MOIC BRIDGE | B | 48 | component label |
+| MOIC BRIDGE | C–E | 16 | value columns |
 
 **If formula errors are reported**, fix them before delivering. Common
 causes:
@@ -272,14 +425,16 @@ causes:
 
 After the script runs clean, do a visual spot-check in the workbook:
 
-1. **DRIVER TREE row heights**: commentary rows (rows 2-3, row 8, row 14,
-   row 35) should be tall enough to show all text without truncation.
-2. **NTB REGISTRY thesis col D**: each thesis cell is ~600-800 chars.
+1. **DRIVER TREE row heights**: commentary rows (rows 2, 8, 14, 35)
+   should be tall enough to show all text without truncation.
+2. **KPI TREE col J (Δ vs Budget)**: margin rows should show `+X.Xppt`,
+   dollar rows should show `+X.X%`. If any margin row shows a raw
+   decimal (0.05) or a %-formatted absolute value (500%), the format
+   or formula is wrong — see Step 4.
+3. **NTB REGISTRY thesis col D**: each thesis cell is ~600-800 chars.
    Confirm wrap_text=True and row height ≥ 70pt for data rows 7-11.
-3. **MOIC BRIDGE row labels (col B)**: component names are 50-60 chars.
+4. **MOIC BRIDGE row labels (col B)**: component names are 50-60 chars.
    Confirm col B width ≥ 48 and no truncation.
-4. **INPUTS note col E**: each note is 40-100 chars. Confirm wrap and
-   row height ≥ 22pt for annotated rows.
 5. **DRIVER TREE N column**: verify sign convention — revenue drivers
    should be positive, multiple compression negative, net cash positive.
 6. **MOIC check**: open workbook in Excel, navigate to DRIVER TREE
@@ -296,6 +451,21 @@ NTB REGISTRY E/F columns, or MOIC BRIDGE C/D columns that contains a
 number literal (not a formula starting with `=`) is hardcoded and wrong.
 Trace back through `references/formula-architecture.md` to find the
 correct formula and replace it.
+
+### KPI TREE variance column shows wrong values
+**Symptom**: Δ vs Budget for GMV shows something like "570%" or a raw
+decimal like "0.05" for EBITDA margin.
+
+**Cause**: formula and number format are mismatched. Two failure modes:
+1. Absolute delta (G-H) with `%` format — Excel multiplies by 100,
+   so a 5.7B GMV delta displays as 570%.
+2. Relative delta (G-H)/H with `General` format — shows raw 0.06
+   instead of +6.0%.
+
+**Fix**: apply the correct formula *and* format per metric type (see
+Step 4). After a column shift (adding or removing columns), always
+re-verify that each J formula uses the right column references and the
+correct ppt vs. % logic.
 
 ### MOIC check ≠ INPUTS!C34
 Work backwards:
@@ -333,7 +503,9 @@ ws.row_dimensions[row_num].height = 80  # e.g., for NTB thesis rows
 2. Confirm 0 formula errors in the output
 3. Confirm column width and row height issues are all FIXED
 4. Open in Excel, recalculate (Ctrl+Alt+F9), confirm MOIC check ≈ 1.58×
-5. Save file to the deal folder, version as vN+1
+5. Visual pass: KPI Tree Δ column shows ppt for margins, % for volumes
+6. Save file to the deal folder, version as vN+1
 
-The workbook is not complete until quality_check.py exits 0 and the
-MOIC check passes.
+The workbook is not complete until quality_check.py exits 0, the
+MOIC check passes, and the KPI Tree variance column is correctly
+formatted.
