@@ -131,6 +131,42 @@ EXPECTED_FORMATS = {
 
 FORMULA_ERROR_TOKENS = {"#REF!", "#DIV/0!", "#VALUE!", "#N/A", "#NAME?", "#NULL!", "#NUM!"}
 
+# ---------------------------------------------------------------------------
+# McKinsey formatting specs
+# Specifies which rows in each tab should be navy, grey, or plain white.
+# "navy"     rows should have solid fill fgColor == 0F4761 (ARGB FF0F4761)
+# "grey"     rows should have solid fill fgColor in {F0F0F0, EBEBEB}
+# "no_color" rows should have NO colored fill (white or transparent only)
+# All checks are report-only (no auto-fix for fills).
+# ---------------------------------------------------------------------------
+MCKINSEY_FILL_SPECS = {
+    "DRIVER TREE": {
+        "navy": [6, 7, 20, 28, 34],   # col header + section headers + MOIC check
+        "grey": [13, 17, 24],          # subtotals
+    },
+    "KPI TREE": {
+        "navy": [6],                   # col header only
+        "no_color": list(range(7, 27)),# data rows: no colored fills allowed
+    },
+}
+
+NAVY_RGB  = "0F4761"
+GREY_RGBS = {"F0F0F0", "EBEBEB"}
+TRANSPARENT_WHITE = {"00000000", "FFFFFFFF", "00FFFFFF"}
+
+
+def get_fill_rgb6(cell):
+    """Return 6-char RGB hex string for a cell's foreground fill, or None if no fill."""
+    if not cell.fill or cell.fill.fill_type not in ("solid", "patternFill"):
+        return None
+    try:
+        argb = cell.fill.fgColor.rgb  # 8-char ARGB
+    except Exception:
+        return None
+    if argb in TRANSPARENT_WHITE or argb is None:
+        return None
+    return argb[-6:] if len(argb) >= 6 else argb
+
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -305,6 +341,58 @@ def check_text_overflow(ws, tab_name, issues=None, verbose=False):
     return issues
 
 
+def check_mckinsey_formatting(ws, tab_name, issues=None, verbose=False):
+    """Check McKinsey-style fill colors on key structural rows (report-only, no auto-fix).
+
+    Catches regressions introduced by quality_check --fix runs or new build scripts
+    that accidentally apply wrong fills to section headers or data rows.
+    """
+    if issues is None:
+        issues = []
+    specs = MCKINSEY_FILL_SPECS.get(tab_name)
+    if not specs:
+        return issues
+
+    # Navy rows: section headers, col headers, MOIC check row
+    for r in specs.get("navy", []):
+        cell = ws.cell(r, 2)
+        rgb = get_fill_rgb6(cell)
+        if rgb != NAVY_RGB:
+            msg = (f"  [{tab_name}] row {r}: expected navy fill ({NAVY_RGB}), "
+                   f"got {rgb!r} — check McKinsey header formatting")
+            print(msg)
+            issues.append(("mckinsey_fill", tab_name, f"row {r}", "expected_navy", rgb))
+        elif verbose:
+            print(f"  [{tab_name}] row {r}: navy fill OK")
+
+    # Grey rows: subtotal rows
+    for r in specs.get("grey", []):
+        cell = ws.cell(r, 2)
+        rgb = get_fill_rgb6(cell)
+        if rgb not in GREY_RGBS:
+            msg = (f"  [{tab_name}] row {r}: expected grey fill {GREY_RGBS}, "
+                   f"got {rgb!r} — check McKinsey subtotal formatting")
+            print(msg)
+            issues.append(("mckinsey_fill", tab_name, f"row {r}", "expected_grey", rgb))
+        elif verbose:
+            print(f"  [{tab_name}] row {r}: grey fill OK")
+
+    # No-color rows: KPI TREE data rows should have no colored fill
+    for r in specs.get("no_color", []):
+        cell = ws.cell(r, 2)
+        if cell.value is None:
+            continue  # skip empty rows
+        rgb = get_fill_rgb6(cell)
+        if rgb is not None and rgb not in {"FFFFFF"}:
+            msg = (f"  [{tab_name}] row {r}: data row has unexpected fill {rgb!r} "
+                   f"— remove fill to keep McKinsey clean style")
+            if verbose:
+                print(msg)
+            issues.append(("mckinsey_fill", tab_name, f"row {r}", "unexpected_fill", rgb))
+
+    return issues
+
+
 # ---------------------------------------------------------------------------
 # Main runner
 # ---------------------------------------------------------------------------
@@ -343,6 +431,7 @@ def run_quality_check(workbook_path: str, fix: bool = False, verbose: bool = Fal
         check_formula_errors(ws, tab_name, issues=all_issues, verbose=verbose)
         check_number_formats(ws, tab_name, fix=fix, issues=all_issues, verbose=verbose)
         check_text_overflow(ws, tab_name, issues=all_issues, verbose=verbose)
+        check_mckinsey_formatting(ws, tab_name, issues=all_issues, verbose=verbose)
         print()
 
     # Summary
@@ -353,8 +442,8 @@ def run_quality_check(workbook_path: str, fix: bool = False, verbose: bool = Fal
 
     print(f"{'='*60}")
     print(f"SUMMARY: {len(all_issues)} issue(s) found")
-    # overflow is always report-only; formula_error is never auto-fixed
-    REPORT_ONLY = {"overflow", "formula_error"}
+    # overflow, formula_error, and mckinsey_fill are always report-only (no auto-fix)
+    REPORT_ONLY = {"overflow", "formula_error", "mckinsey_fill"}
     for t, count in sorted(by_type.items()):
         if t in REPORT_ONLY:
             status = "REVIEW MANUALLY"
