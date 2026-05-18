@@ -2,7 +2,7 @@
 
 Pattern's modular skill architecture for Claude. Each skill is a folder containing a `SKILL.md` file that instructs Claude on methodology, output format, and quality standards for a specific domain. Skills are loaded on-demand — Claude reads the relevant `SKILL.md` before executing any task in its domain.
 
-**29 skills across 8 groups and 4 functional layers, plus 2 multi-agent pipelines.** Every formal output runs through at least two layers — usually three or four. Layers are not optional — skipping a layer produces a draft, not a deliverable.
+**31 skills across 8 groups and 4 functional layers, plus 2 multi-agent pipelines.** Every formal output runs through at least two layers — usually three or four. Layers are not optional — skipping a layer produces a draft, not a deliverable.
 
 > **Source of truth:** This README reflects the folders in [`ian-lawrence423/Claude-skills`](https://github.com/ian-lawrence423/Claude-skills). Update this file whenever skills are added or removed from the repo.
 
@@ -48,7 +48,7 @@ All other skills are invoked by name when the task matches their trigger criteri
 
 ## 3. Complete Skill Index
 
-All 30 skills organized by group. Invoke the most specific skill first; fall back to broader skills if needed.
+All 31 skills organized by group. Invoke the most specific skill first; fall back to broader skills if needed.
 
 ### Strategy & Problem Solving
 
@@ -100,6 +100,8 @@ All 30 skills organized by group. Invoke the most specific skill first; fall bac
 | `written-communication` | L4 — Production | Emails, memos, strategy documents, and announcements. Covers tone calibration, audience framing, structure, and edit passes | "write an email", "draft a memo", "help me communicate this", "write an announcement" |
 | `giving-presentations` | L4 — Production | Talk track prep, slide deck narrative design, and presentation delivery coaching | "help me prep for this presentation", "talk track", "what's the narrative for this deck" |
 | `competitive-landscape-deliverable` | L4 — Production | Converts a competitive landscape, market mapping, or M&A target spreadsheet into a board-ready Executive Deliverable. Preserves rating + key evidence (fidelity over brevity), verdict-led layout, Pattern brand styling. Handles Pattern n8n pipeline output (`Rating — McKinsey rationale`) | "make an executive view of this landscape", "build deliverable from competitor sheet", "summarize this competitive grid", "executive deliverable for [companies]" |
+| `Deck_Refresh` | L4 — Production | Swaps numbers across an existing deck without rebuilding it. 4-phase: get data → find every instance (text, tables, chart axes, footnotes) → approval gate → execute. Never reformats; flags derived numbers (growth rates, share %) that may be stale. | "update the deck with Q4 numbers", "refresh the comps", "roll this forward", "change all the $485M to $512M" |
+| `Deck_Check` | L4b — QA | IB-grade deck QC across 4 dimensions: number consistency (runs `extract_numbers.py` to normalize units and flag cross-slide mismatches), data-narrative alignment, language polish against IB standards, visual/formatting. Outputs Critical / Important / Minor findings. Read-only — no edits. | "check my numbers", "reconcile figures across slides", "is this client-ready", "proof this deck", "what am I missing before I send this out" |
 | `writing-style` | L3 — Quality ⚙️ | 5-step prose self-review. Runs on **all** formal outputs before document production. Enforces claim tagging, inductive chain check, data gap flagging, prose standards | Auto-runs — do not invoke manually |
 | `doc-quality-checker` | L4b — QA ⚙️ | Brand compliance QA gate. Auto-runs after every `pattern-docx` or `pattern-investment-pptx` output. Checks formatting, structural logic, table integrity, narrative flow | Auto-runs after Layer 4 production output |
 

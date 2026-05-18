@@ -319,6 +319,8 @@ Skills are grouped by domain. Invoke the most specific skill first; fall back to
 | `pattern-investment-pptx` | **Pattern investment decks** — investor presentations, PE-grade analysis (Ian's primary deck skill) |
 | `pattern-pptx` | **Pattern internal presentations** — strategy, ops, board slides |
 | `mckinsey-consultant` | McKinsey-style structured PPT with issue trees and hypotheses |
+| `Deck_Refresh` | **Swap numbers across an existing deck** — quarterly refreshes, earnings updates, comp rolls. 4-phase: get data → find all instances → approval gate → execute. Never reformats; flags derived numbers. Triggers: "update the deck with Q4 numbers", "refresh the comps", "roll this forward", "change all the $485M to $512M" |
+| `Deck_Check` | **IB deck QC** — full quality check across 4 dimensions: number consistency (runs `extract_numbers.py`), data-narrative alignment, language polish against IB standards, visual/formatting. Outputs Critical / Important / Minor findings. Triggers: "check my numbers", "reconcile figures", "is this client-ready", "proof this", "what am I missing before I send this out" |
 | `executive-briefing` | Memo, briefing doc, one-pager output |
 | `executive-summary-writer` | Tight executive summaries from longer docs or analyses — conclusion-first, strict length discipline. Triggers: "write an exec summary", "summarize this for leadership", "condense this" |
 | `written-communication` | Emails, memos, strategy docs, announcements |
@@ -364,6 +366,29 @@ Skills are grouped by domain. Invoke the most specific skill first; fall back to
 | `loop` | Recurring task on an interval (e.g., poll status every 5 min) |
 | `schedule` | One-time or cron-scheduled task |
 | `simplify` | Review changed code for reuse, quality, and efficiency |
+
+---
+
+### GROUP 9 — n8n Automations
+
+*Deployed on: https://community-prod-n8n.pattern.com*
+*Repo: https://github.com/ian-lawrence423/n8n-workflows*
+*Local workspace: `C:\Users\IanLawrence\OneDrive - Pattern\Ian Productivity\n8n folder\`*
+
+These are live n8n workflows. Reference them when asked about Pattern automation capabilities or when building/debugging these pipelines.
+
+| Workflow | Folder | Purpose |
+|---|---|---|
+| `m&a-deal-intake` | `m&a-deal-intake/` | Daily Gmail → SharePoint automation — extracts deal emails ("Acquisition Opportunity" or "Project [Name]"), creates SharePoint subfolders, saves attachments. Deduplicates via `n8n-processed` Gmail label. |
+| `market-research-pipeline` | `market-research-pipeline/` | Automated market research pipeline — webhook-triggered structured research runs → Pattern-branded DOCX output |
+| `ic-memo-pipeline` | `ic-memo-pipeline/` | IC memo multi-agent pipeline — accepts deal inputs (company, deal type, thesis, materials), orchestrates via Claude Code, delivers Pattern-branded DOCX. Inputs: COMPANY, DEAL_TYPE, ENTRY_VAL, THESIS, HOLD_PERIOD, MATERIALS_PATH, NTB_MODE |
+| `competitive-landscape-mapping` | `competitive-landscape-mapping/` | 11-workflow automated competitive M&A landscape mapping — webhook trigger → 10 sequential agents → Google Sheet write. Each agent fills one section of the 148-row template (entity, market taxonomy, product, data/compliance, commercial traction, competitive intel, moat scoring, strategic fit, M&A attractiveness, synthesis). Output: Google Sheet + ACQUIRE/MONITOR/PASS recommendation with scores. |
+
+**competitive-landscape-mapping runtime config:**
+- Webhook: `POST /webhook/competitive-landscape/run`
+- LLM: `claude-sonnet-4-5-20250929` via `https://bifrost.pattern.com/anthropic/v1/messages`
+- Output sheet: https://docs.google.com/spreadsheets/d/159cKsL9YEWmIoo0BTt6NelobAmAm6qan-VyOagUJuJ4/edit
+- Run time: ~10 min/company; HTTP 504 is expected — workflow continues, poll executions API or check sheet
 
 ---
 
