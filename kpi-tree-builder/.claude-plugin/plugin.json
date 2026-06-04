@@ -1,0 +1,10 @@
+{
+  "name": "kpi-tree-builder",
+  "version": "1.0.0",
+  "description": "Build and audit company-specific KPI trees and management plan credibility assessments.",
+  "category": "deal-intelligence",
+  "author": {
+    "name": "Ian Lawrence"
+  },
+  "repository": "https://github.com/ian-lawrence423/Claude-skills"
+}

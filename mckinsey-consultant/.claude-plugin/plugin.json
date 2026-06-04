@@ -1,0 +1,10 @@
+{
+  "name": "mckinsey-consultant",
+  "version": "1.0.0",
+  "description": "McKinsey-level structured consulting: issue trees, hypothesis-driven analysis, Six Screening Questions.",
+  "category": "analysis",
+  "author": {
+    "name": "Ian Lawrence"
+  },
+  "repository": "https://github.com/ian-lawrence423/Claude-skills"
+}

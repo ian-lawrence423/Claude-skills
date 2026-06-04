@@ -1,0 +1,10 @@
+{
+  "name": "pre-mortem",
+  "version": "1.0.0",
+  "description": "10-category failure taxonomy, compound failure paths, IC-facing risk narrative.",
+  "category": "deal-intelligence",
+  "author": {
+    "name": "Ian Lawrence"
+  },
+  "repository": "https://github.com/ian-lawrence423/Claude-skills"
+}

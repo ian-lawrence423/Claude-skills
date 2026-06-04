@@ -1,0 +1,10 @@
+{
+  "name": "claim-scrutinizer",
+  "version": "1.0.0",
+  "description": "Analyzes investment memos for structural gaps, unsupported claims, and logic errors. Seven-part test per material claim.",
+  "category": "deal-intelligence",
+  "author": {
+    "name": "Ian Lawrence"
+  },
+  "repository": "https://github.com/ian-lawrence423/Claude-skills"
+}

@@ -1,0 +1,10 @@
+{
+  "name": "vibe-coding",
+  "version": "1.0.0",
+  "description": "Rapid prototyping and code generation workflow.",
+  "category": "development",
+  "author": {
+    "name": "Ian Lawrence"
+  },
+  "repository": "https://github.com/ian-lawrence423/Claude-skills"
+}

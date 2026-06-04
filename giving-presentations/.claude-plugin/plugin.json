@@ -1,0 +1,10 @@
+{
+  "name": "giving-presentations",
+  "version": "1.0.0",
+  "description": "Guidance on delivering effective presentations.",
+  "category": "communication",
+  "author": {
+    "name": "Ian Lawrence"
+  },
+  "repository": "https://github.com/ian-lawrence423/Claude-skills"
+}

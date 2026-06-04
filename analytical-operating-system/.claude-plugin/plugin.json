@@ -1,0 +1,10 @@
+{
+  "name": "analytical-operating-system",
+  "version": "1.0.0",
+  "description": "Universal investment analysis framework: thesis-first reasoning, MECE structure, Bayesian updating, evidence standards [F/E/H], and action bias.",
+  "category": "analysis",
+  "author": {
+    "name": "Ian Lawrence"
+  },
+  "repository": "https://github.com/ian-lawrence423/Claude-skills"
+}

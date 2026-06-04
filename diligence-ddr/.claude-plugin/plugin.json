@@ -1,0 +1,10 @@
+{
+  "name": "diligence-ddr",
+  "version": "1.0.0",
+  "description": "Generate a comprehensive Data Room Request tailored to the company and deal context.",
+  "category": "deal-intelligence",
+  "author": {
+    "name": "Ian Lawrence"
+  },
+  "repository": "https://github.com/ian-lawrence423/Claude-skills"
+}

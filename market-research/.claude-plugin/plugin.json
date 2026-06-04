@@ -1,0 +1,10 @@
+{
+  "name": "market-research",
+  "version": "1.0.0",
+  "description": "Execute professional-grade market research: L4 market context, L3 customer insights, L2 competitive landscape.",
+  "category": "research",
+  "author": {
+    "name": "Ian Lawrence"
+  },
+  "repository": "https://github.com/ian-lawrence423/Claude-skills"
+}

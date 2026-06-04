@@ -1,0 +1,10 @@
+{
+  "name": "driver-tree",
+  "version": "1.0.0",
+  "description": "Decomposes investment theses into MECE causal trees mapped to NTBs and MOIC.",
+  "category": "deal-intelligence",
+  "author": {
+    "name": "Ian Lawrence"
+  },
+  "repository": "https://github.com/ian-lawrence423/Claude-skills"
+}

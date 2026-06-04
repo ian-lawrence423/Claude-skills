@@ -1,0 +1,10 @@
+{
+  "name": "deal-master",
+  "version": "1.0.0",
+  "description": "Single entry point for all deal intelligence. Inventories existing research, loads context, and routes to the right phase.",
+  "category": "deal-intelligence",
+  "author": {
+    "name": "Ian Lawrence"
+  },
+  "repository": "https://github.com/ian-lawrence423/Claude-skills"
+}

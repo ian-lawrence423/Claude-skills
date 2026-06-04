@@ -1,0 +1,10 @@
+{
+  "name": "finance-metrics-quickref",
+  "version": "1.0.0",
+  "description": "Look up SaaS finance metrics, formulas, and benchmarks instantly during analysis.",
+  "category": "analysis",
+  "author": {
+    "name": "Ian Lawrence"
+  },
+  "repository": "https://github.com/ian-lawrence423/Claude-skills"
+}

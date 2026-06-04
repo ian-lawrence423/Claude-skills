@@ -1,0 +1,10 @@
+{
+  "name": "pattern-docx",
+  "version": "1.0.0",
+  "description": "Generate on-brand Word documents using the Pattern template.",
+  "category": "output",
+  "author": {
+    "name": "Ian Lawrence"
+  },
+  "repository": "https://github.com/ian-lawrence423/Claude-skills"
+}

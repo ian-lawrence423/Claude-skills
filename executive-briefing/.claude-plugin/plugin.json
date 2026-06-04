@@ -1,0 +1,10 @@
+{
+  "name": "executive-briefing",
+  "version": "1.0.0",
+  "description": "Transform research findings into executive-ready briefings for C-suite or board audiences.",
+  "category": "output",
+  "author": {
+    "name": "Ian Lawrence"
+  },
+  "repository": "https://github.com/ian-lawrence423/Claude-skills"
+}
