@@ -1,0 +1,10 @@
+{
+  "name": "deal-diligence",
+  "version": "1.0.0",
+  "description": "Phase 3 deep diligence: NTB quality check, driver tree, boundability assessment, financial model, GTM metrics, and KPI tree. Requires data room for financial/GTM skills.",
+  "category": "deal-intelligence",
+  "author": {
+    "name": "Ian Lawrence"
+  },
+  "repository": "https://github.com/ian-lawrence423/Claude-skills"
+}

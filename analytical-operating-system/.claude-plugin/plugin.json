@@ -1,8 +1,8 @@
 {
   "name": "analytical-operating-system",
   "version": "1.0.0",
-  "description": "Universal investment analysis framework: thesis-first reasoning, MECE structure, Bayesian updating, evidence standards [F/E/H], and action bias.",
-  "category": "analysis",
+  "description": "Universal investment analysis framework: thesis-first reasoning, MECE structure, Bayesian updating, evidence standards [F/E/H], and action bias. Governs all analysis.",
+  "category": "deal-intelligence",
   "author": {
     "name": "Ian Lawrence"
   },

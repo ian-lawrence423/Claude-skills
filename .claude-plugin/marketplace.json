@@ -1,60 +1,15 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "claude-skills",
-  "description": "Ian Lawrence personal skill library for investment analysis, deal intelligence, and strategic research",
+  "description": "Ian Lawrence personal skill library for investment analysis and deal intelligence",
   "owner": {
     "name": "Ian Lawrence",
     "email": "ian.lawrence@pattern.com"
   },
   "plugins": [
     {
-      "name": "analytical-operating-system",
-      "description": "Universal investment analysis framework: thesis-first reasoning, MECE structure, Bayesian updating, evidence standards [F/E/H], and action bias.",
-      "category": "analysis",
-      "source": "./analytical-operating-system",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "boundability",
-      "description": "Assess which investment risks are bounded, partially bounded, or unbounded. Two-layer framework: driver tree tiers + six-module issue assessment.",
-      "category": "deal-intelligence",
-      "source": "./boundability",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "claim-scrutinizer",
-      "description": "Analyzes investment memos for structural gaps, unsupported claims, and logic errors. Seven-part test per material claim.",
-      "category": "deal-intelligence",
-      "source": "./claim-scrutinizer",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "competitive-landscape-deliverable",
-      "description": "Transforms a competitor spreadsheet into a formatted competitive landscape deliverable.",
-      "category": "deal-intelligence",
-      "source": "./competitive-landscape-deliverable",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "competitive-moat-assessment",
-      "description": "Build a rigorous moat verdict per named competitor. Five moat types, existence-to-durability framework.",
-      "category": "deal-intelligence",
-      "source": "./competitive-moat-assessment",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
       "name": "deal-master",
-      "description": "Single entry point for all deal intelligence. Inventories existing research, loads context, and routes to the right phase.",
+      "description": "Single entry point for all deal intelligence. Inventories existing research, loads the analytical operating system, initializes the belief register, and routes to the right phase.",
       "category": "deal-intelligence",
       "source": "./deal-master",
       "author": {
@@ -62,244 +17,37 @@
       }
     },
     {
-      "name": "deck-check",
-      "description": "Review and audit presentation decks for structure, clarity, and completeness.",
-      "category": "output",
-      "source": "./Deck_Check",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "deck-refresh",
-      "description": "Refresh and update existing presentation decks with new content.",
-      "category": "output",
-      "source": "./Deck_Refresh",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "diligence-ddr",
-      "description": "Generate a comprehensive Data Room Request tailored to the company and deal context.",
+      "name": "analytical-operating-system",
+      "description": "Universal investment analysis framework: thesis-first reasoning, MECE structure, Bayesian updating, evidence standards [F/E/H], and action bias. Governs all analysis.",
       "category": "deal-intelligence",
-      "source": "./diligence-ddr",
+      "source": "./analytical-operating-system",
       "author": {
         "name": "Ian Lawrence"
       }
     },
     {
-      "name": "doc-quality-checker",
-      "description": "Quality and formatting check on Pattern-branded documents. Flags CRITICAL issues before distribution.",
+      "name": "deal-research",
+      "description": "Phase 2 research tools: market sizing, competitive landscape, moat assessment, TAM/SAM/SOM, DDR generation, and structured screening.",
       "category": "deal-intelligence",
-      "source": "./doc-quality-checker",
+      "source": "./deal-research",
       "author": {
         "name": "Ian Lawrence"
       }
     },
     {
-      "name": "driver-tree",
-      "description": "Decomposes investment theses into MECE causal trees mapped to NTBs and MOIC.",
+      "name": "deal-diligence",
+      "description": "Phase 3 deep diligence: NTB quality check, driver tree, boundability assessment, financial model, GTM metrics, and KPI tree. Requires data room for financial/GTM skills.",
       "category": "deal-intelligence",
-      "source": "./driver-tree",
+      "source": "./deal-diligence",
       "author": {
         "name": "Ian Lawrence"
       }
     },
     {
-      "name": "executive-briefing",
-      "description": "Transform research findings into executive-ready briefings for C-suite or board audiences.",
-      "category": "output",
-      "source": "./executive-briefing",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "executive-summary-writer",
-      "description": "Write a publication-ready executive summary from a completed IC memo or research report.",
+      "name": "deal-output",
+      "description": "Phase 4-6 drafting and production: IC memo, quality passes (claim scrutinizer, red team, pre-mortem), Pattern-branded DOCX/PPTX output, and executive summary.",
       "category": "deal-intelligence",
-      "source": "./executive-summary-writer",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "finance-metrics-quickref",
-      "description": "Look up SaaS finance metrics, formulas, and benchmarks instantly during analysis.",
-      "category": "analysis",
-      "source": "./finance-metrics-quickref",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "financial-model-builder",
-      "description": "Build a 3-tab operating model from source P&L or financial data. Requires data room access.",
-      "category": "deal-intelligence",
-      "source": "./financial-model-builder",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "giving-presentations",
-      "description": "Guidance on delivering effective presentations.",
-      "category": "communication",
-      "source": "./giving-presentations",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "gtm-metrics-analyzer",
-      "description": "Calculate and package 48 GTM metrics across 6 families. Requires company metrics data.",
-      "category": "deal-intelligence",
-      "source": "./gtm-metrics-analyzer",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "ic-memo",
-      "description": "Write a structured Investment Committee memo. 10-section structure with NTB registry and disaggregation table.",
-      "category": "deal-intelligence",
-      "source": "./ic-memo",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "kpi-tree-builder",
-      "description": "Build and audit company-specific KPI trees and management plan credibility assessments.",
-      "category": "deal-intelligence",
-      "source": "./kpi-tree-builder",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "managing-up",
-      "description": "Framework for managing up effectively in a corporate environment.",
-      "category": "communication",
-      "source": "./managing-up",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "market-research",
-      "description": "Execute professional-grade market research: L4 market context, L3 customer insights, L2 competitive landscape.",
-      "category": "research",
-      "source": "./market-research",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "mckinsey-consultant",
-      "description": "McKinsey-level structured consulting: issue trees, hypothesis-driven analysis, Six Screening Questions.",
-      "category": "analysis",
-      "source": "./mckinsey-consultant",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "ntb-diligence",
-      "description": "4-phase Need-to-Believe quality check with MOIC sum tolerance enforcement.",
-      "category": "deal-intelligence",
-      "source": "./ntb-diligence",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "pattern-docx",
-      "description": "Generate on-brand Word documents using the Pattern template.",
-      "category": "output",
-      "source": "./pattern-docx",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "pattern-investment-pptx",
-      "description": "Generate on-brand investment-grade PowerPoint decks in Pattern IC deck format.",
-      "category": "output",
-      "source": "./pattern-investment-pptx",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "pre-mortem",
-      "description": "10-category failure taxonomy, compound failure paths, IC-facing risk narrative.",
-      "category": "deal-intelligence",
-      "source": "./pre-mortem",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "red-team",
-      "description": "Adversarial stress-test: attack vectors, kill scenarios, bear case, adversarial scorecard.",
-      "category": "deal-intelligence",
-      "source": "./red-team",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "skill-authoring-workflow",
-      "description": "Workflow for creating new skills following best practices.",
-      "category": "meta",
-      "source": "./skill-authoring-workflow",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "statistics-fundamentals",
-      "description": "Core statistics concepts and their application in business analysis.",
-      "category": "analysis",
-      "source": "./statistics-fundamentals",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "tam-sam-som-calculator",
-      "description": "Size a market with top-down and bottom-up methodologies. Validates divergence, Year 1-3 projections.",
-      "category": "research",
-      "source": "./tam-sam-som-calculator",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "vibe-coding",
-      "description": "Rapid prototyping and code generation workflow.",
-      "category": "development",
-      "source": "./vibe-coding",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "writing-style",
-      "description": "Governs prose quality, claim standards, and epistemic tagging [F/E/H].",
-      "category": "output",
-      "source": "./writing-style",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "written-communication",
-      "description": "Best practices for professional written communication.",
-      "category": "communication",
-      "source": "./written-communication",
+      "source": "./deal-output",
       "author": {
         "name": "Ian Lawrence"
       }

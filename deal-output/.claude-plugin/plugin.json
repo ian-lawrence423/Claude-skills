@@ -1,0 +1,10 @@
+{
+  "name": "deal-output",
+  "version": "1.0.0",
+  "description": "Phase 4-6 drafting and production: IC memo, quality passes (claim scrutinizer, red team, pre-mortem), Pattern-branded DOCX/PPTX output, and executive summary.",
+  "category": "deal-intelligence",
+  "author": {
+    "name": "Ian Lawrence"
+  },
+  "repository": "https://github.com/ian-lawrence423/Claude-skills"
+}

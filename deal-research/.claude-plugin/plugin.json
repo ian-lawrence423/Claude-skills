@@ -1,0 +1,10 @@
+{
+  "name": "deal-research",
+  "version": "1.0.0",
+  "description": "Phase 2 research tools: market sizing, competitive landscape, moat assessment, TAM/SAM/SOM, DDR generation, and structured screening.",
+  "category": "deal-intelligence",
+  "author": {
+    "name": "Ian Lawrence"
+  },
+  "repository": "https://github.com/ian-lawrence423/Claude-skills"
+}
