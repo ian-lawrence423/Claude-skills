@@ -58,6 +58,68 @@ Phase 8   KPI Tree (if KPI_MODE=full) — post-close operating architecture
 
 ---
 
+## Step -1 — Load Governing Framework
+
+Before anything else, load:
+`{SKILLS_PATH}/analytical-operating-system/SKILL.md`
+
+This governs how ALL agents in this pipeline reason and communicate.
+Every output must follow its evidence standards ([F/E/H] tagging),
+MECE structure, Bayesian updating, and action bias. Log:
+`[FRAMEWORK LOADED] analytical-operating-system — all agents governed by evidence standards`
+
+---
+
+## Step 0a — Pipeline Inventory Check
+
+Before running any research phase, scan MATERIALS_PATH for files produced
+by the overnight n8n pipeline. Skip any phase whose output already exists.
+
+```
+N8N PIPELINE FILES → PHASE SKIP MAP
+competitive-landscape-briefing.md  → Skip Phase 2 cold research (load as context instead)
+research/l4-market-context.md      → Skip L4 (load as l4-market.md equivalent)
+research/l3-customer-insights.md   → Skip L3 (load as l3-customer.md equivalent)
+research/tam-sam-som.md            → Skip TAM calculation (load as market sizing context)
+research/competitive-moat-assessment.md → Skip moat assessment (load as moat context)
+data-room-request.md               → DDR already issued; note in intake.md
+thesis-validation/claim-scrutinizer.md → Load as prior context for Phase 5 passes
+thesis-validation/red-team.md      → Load as prior context for Phase 5 passes
+thesis-validation/pre-mortem.md    → Load as prior context for Phase 5 passes
+```
+
+Log what was found:
+```
+[PIPELINE INVENTORY]
+  Found: [list of n8n files]
+  Skipping: [list of phases with reason]
+  Loading as context: [list of files]
+  Starting at: Phase [N]
+```
+
+**Important:** Thesis-validation files from the overnight pipeline ran on
+the competitive landscape thesis — not the IC memo draft. They are context,
+not substitutes. Phase 5 must still run on the completed memo draft.
+
+---
+
+## Step 0b — IC Memo Resume Check
+
+If WORK_DIR already contains files from a prior run, resume rather than restart.
+
+```
+intake.md present         → Phase 1 complete; skip to Phase 3
+ntb-registry.md present   → Phase 3 complete; skip to Phase 3b
+research/driver-tree.md   → Phase 3b complete; skip to Phase 4
+draft/*.md present        → Phase 4 in progress; check completeness
+iteration/pass*.md        → Phase 5 in progress or complete
+final-output.docx         → Phase 6 complete; quality check only
+```
+
+Log: `[RESUME] Detected prior run at Phase [N]. Resuming from [next phase].`
+
+---
+
 ## Step 0 — Domain Template Check
 
 Before anything else, scan COMPANY and DEAL_TYPE against the domain template
