@@ -1,7 +1,7 @@
 {
   "name": "deal-master",
   "version": "1.0.0",
-  "description": "Single entry point for all deal intelligence. Inventories existing research, loads mckinsey-consultant plus analytical-operating-system, initializes the belief register, and routes to the right phase.",
+  "description": "Single entry point for deal intelligence: inventories prior work, loads mckinsey-consultant and AOS, initializes the belief register, and routes the next phase.",
   "category": "deal-intelligence",
   "author": {
     "name": "Ian Lawrence"
