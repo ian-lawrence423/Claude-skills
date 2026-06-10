@@ -1,7 +1,7 @@
 # Skill Change Backlog
 
 Date: 2026-06-10
-Branch: `codex/skill-content-refinement` after Work Packages 1-3 were merged
+Branch: `codex/pattern-production-spec-split` after Work Package 4 first slice was merged
 
 ## P0 - Applied in Work Package 1
 
@@ -88,7 +88,7 @@ Scope:
 Exit criteria:
 - High-priority skills are easier to invoke and less likely to overlap
 
-Status: first slice implemented on `codex/skill-content-refinement`. Added compact examples and anti-pattern boundaries to the core deal workflow stack, then added matching content-refinement smoke tests in `docs/skill-workflow-tests.md`. Splitting the large DOCX/PPTX production specs remains deferred to a separate branch because those files encode exact generation behavior and should be migrated with dedicated render/QA verification.
+Status: second slice implemented on `codex/pattern-production-spec-split`. The first slice added compact examples, anti-pattern boundaries, and smoke tests. This branch moves detailed Pattern DOCX and investment PPTX production specifications into dedicated reference files while leaving root skill files focused on routing, execution order, critical rules, and QA gates.
 
 ## So What?
 
