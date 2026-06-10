@@ -68,6 +68,40 @@ Consumed by (downstream):
 
 ---
 
+## Dependency Contract
+
+Loads before this skill:
+- `mckinsey-consultant` for problem framing, MECE hypothesis tree, analytical lenses, and Pyramid Principle.
+- `analytical-operating-system` when research is part of an active deal, IC memo, diligence, or investment thesis workflow.
+
+Loads after this skill:
+- `competitive-moat-assessment` when competitor durability, moat depth, or displacement path matters.
+- `writing-style` after draft sections exist and before formal delivery.
+- `claim-scrutinizer` after a claim set, memo draft, or report draft exists.
+- `red-team` after claim-scrutinizer hardening when an adversarial pass is required.
+- `pattern-docx` or `pattern-investment-pptx` only when producing a file.
+- `doc-quality-checker` after a branded file is produced.
+
+Inputs required:
+- Decision to support, target market or company, geography, time horizon, known materials, source constraints, and expected output format.
+
+Outputs produced:
+- Research brief, source strategy, pyramid evidence base, source bibliography, structural themes, draft report/deck content, and evidence handoff for downstream skills.
+
+Do not load with:
+- `claim-scrutinizer` before claims exist.
+- `pattern-docx` or `pattern-investment-pptx` unless the user requested a file or the workflow explicitly requires one.
+
+## Workflow Mode
+
+| Mode | Use When | Minimum Output |
+|---|---|---|
+| Quick | User asks for a market view, source plan, or directional answer | Scope, hypothesis, 3-5 findings, source caveats, next research step |
+| Standard | User asks for market research, competitive analysis, or a research brief | Brief, evidence plan, pyramid findings, source log, synthesis |
+| Full | User asks for full analysis, IC/board-ready work, or a deliverable | All phases: brief, pyramid research, themes, draft, quality passes, production, QA |
+
+---
+
 ## Execution Flow — Full Overview
 
 ```

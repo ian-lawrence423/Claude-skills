@@ -29,6 +29,39 @@ Read this entire file before beginning any analysis.
 
 ---
 
+## Dependency Contract
+
+Loads before this skill:
+- `mckinsey-consultant` for analytical structure when the source document lacks a clear issue tree.
+- `market-research` only if the task requires new evidence gathering before claims can be judged.
+- `ic-memo`, `market-research`, `pattern-docx`, or `pattern-investment-pptx` when those skills produced the draft being reviewed.
+
+Loads after this skill:
+- `red-team` when the user needs an adversarial case beyond claim-level critique.
+- `pre-mortem` when investment failure pathways must be mapped after claim weaknesses are known.
+- `writing-style` when prose edits are required after analytical fixes.
+- `pattern-docx` or `pattern-investment-pptx` only if the hardened output must be regenerated as a file.
+
+Inputs required:
+- Draft memo, deck, argument, claim set, or thesis; intended audience; decision context; and any source pack used to support the claims.
+
+Outputs produced:
+- Logic tree, assumption audit, claim-level verdicts, evidence gaps, repair actions, and priority redline summary.
+
+Do not load with:
+- Empty source material. This skill needs a draft, claim set, or argument to scrutinize.
+- `market-research` as a replacement for redline work. Research gathers evidence; this skill judges whether claims survive.
+
+## Workflow Mode
+
+| Mode | Use When | Minimum Output |
+|---|---|---|
+| Quick | User wants top weaknesses or IC-readiness triage | Governing-thesis check, top 5 issues, repair priorities |
+| Standard | User wants a memo/deck redline | Logic tree, assumption audit, claim verdicts, evidence gaps, fixes |
+| Full | User wants investment-grade pressure test | Six Screening Questions, full claim registry, base-rate checks, repair plan, handoff to red-team/pre-mortem |
+
+---
+
 ## Step 1: Detect Document Type
 
 Before analyzing, classify the document:

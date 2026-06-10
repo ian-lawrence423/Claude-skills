@@ -65,6 +65,39 @@ RESOLVE FIRST posture. Do not duplicate those operating artifacts here.
 
 ---
 
+## Dependency Contract
+
+Loads before this skill:
+- None required for standalone strategy work.
+- `deal-master` may load before this skill in full deal workflows to inventory existing work and route the phase.
+
+Loads after this skill:
+- `analytical-operating-system` for deal workflows that need belief registers, evidence states, or decision posture.
+- `market-research` when new external evidence, source validation, or citation tracking is required.
+- `financial-model-builder` when the answer depends on an operating model or return case.
+- `writing-style` before any formal deliverable leaves draft state.
+- `claim-scrutinizer`, `red-team`, or `pre-mortem` after a draft thesis, memo, or recommendation exists.
+- `pattern-docx` or `pattern-investment-pptx` only when producing a file.
+
+Inputs required:
+- Decision to be made, scope boundaries, known facts, existing evidence, and output format.
+
+Outputs produced:
+- Problem statement, MECE issue tree, Day-1 hypothesis, 20/80 analysis plan, analytical lens selection, and recommendation structure.
+
+Do not use this skill alone when:
+- The task requires original research, evidence triangulation, belief-register tracking, financial model construction, or branded file production.
+
+## Workflow Mode
+
+| Mode | Use When | Minimum Output |
+|---|---|---|
+| Quick | User needs structure, an issue tree, or a rapid recommendation from known facts | BLUF, issue tree, 2-3 key drivers, next step |
+| Standard | User needs a strategy or investment analysis using existing evidence | Problem definition, MECE tree, hypothesis, evidence by branch, recommendation |
+| Full | User needs an IC-grade or board-ready workflow | This skill plus evidence control, research, quality review, and production skills as needed |
+
+---
+
 ## Core Methodology: MBB 7-Step Problem Solving
 
 Apply these steps in order for any strategy or analysis request. Steps may compress for simple

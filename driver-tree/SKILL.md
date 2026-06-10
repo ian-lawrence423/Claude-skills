@@ -81,6 +81,42 @@ the framework self-audit (Section 9).
 
 ---
 
+## Dependency Contract
+
+Loads before this skill:
+- `mckinsey-consultant` for thesis framing, MECE discipline, and investment context.
+- `analytical-operating-system` when driver evidence must update an active belief register.
+- `market-research` when bottom-level driver evidence is missing or stale.
+- `financial-model-builder` when the tree must tie to a live operating model.
+
+Loads after this skill:
+- `boundability` to translate driver findings into underwriting boundaries.
+- `pre-mortem` to map out-of-tree risks and compound failure paths.
+- `claim-scrutinizer` to test the bull-case logic after driver decomposition.
+- `kpi-tree-builder` when drivers must become post-close operating metrics.
+- `deal-workbook-builder` when driver outputs need formula-based workbook implementation.
+- `pattern-docx` only when producing a formal methodology document.
+
+Inputs required:
+- Company or asset, governing thesis, target outcome, segment definitions, historical metrics, model assumptions, evidence base, and time horizon.
+
+Outputs produced:
+- MECE driver tree, segment driver tables, evidence tiers, base-rate overlay, vintage check, variance amplification assessment, cascade scenarios, and self-audit.
+
+Do not load with:
+- Portfolio construction, position sizing, or cross-asset allocation tasks.
+- `pre-mortem` as a substitute for driver decomposition. Pre-mortem covers failure paths; driver-tree decomposes thesis mechanics.
+
+## Workflow Mode
+
+| Mode | Use When | Minimum Output |
+|---|---|---|
+| Quick | User wants to see what drives a thesis or metric | Top-level driver tree, load-bearing drivers, evidence gaps |
+| Standard | User wants diligence-ready decomposition | Full tree, segment tables, tiers, base-rate overlay, vintage check |
+| Full | User wants IC/workbook handoff | Standard output plus cascade scenarios, self-audit, and downstream handoff notes |
+
+---
+
 ## Step 1 — Construct the driver tree
 
 A driver tree decomposes an outcome (revenue, EBITDA, IRR, market share) into

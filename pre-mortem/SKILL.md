@@ -141,6 +141,40 @@ qualitative description is the honest output.
 
 ---
 
+## Dependency Contract
+
+Loads before this skill:
+- `mckinsey-consultant` for deal framing and investment gate context.
+- `claim-scrutinizer` when the bull-case argument has not yet been tested.
+- `ntb-diligence` when an NTB registry exists or the failure modes should map to NTBs.
+- `red-team` when adversarial attack vectors already identify likely thesis breaks.
+
+Loads after this skill:
+- `boundability` when failure modes must be converted into underwriting actions, protections, or reprice logic.
+- `ic-memo` when failure modes must feed the memo risk section.
+- `writing-style` before formal delivery.
+- `pattern-docx` or `pattern-investment-pptx` only when producing a file or deck.
+
+Inputs required:
+- Deal context, working thesis, base assumptions, existing evidence, NTB registry if available, source pack, and decision stage.
+
+Outputs produced:
+- Failure frame, base assumptions table, failure mode registry, information-state diagnosis, compound failure paths, data requests, and risk narrative handoff.
+
+Do not load with:
+- `claim-scrutinizer` as a substitute. Claim-scrutinizer asks whether the bull case is supported; pre-mortem assumes failure and maps how it happened.
+- `boundability` before failure modes or load-bearing drivers are identified.
+
+## Workflow Mode
+
+| Mode | Use When | Minimum Output |
+|---|---|---|
+| Quick | User asks "how does this fail?" | Top failure modes, information gaps, data that would change the view |
+| Standard | User wants diligence-ready failure analysis | Failure registry, boundability labels, data requests, compound paths |
+| Full | User wants IC-ready risk work | Full registry, NTB mapping, compound scenarios, risk narrative handoff to IC memo/boundability |
+
+---
+
 ## Step 1: Establish the Failure Frame + Lock the Base Assumptions Table
 
 State the bull case being stress-tested, the information state governing this analysis,

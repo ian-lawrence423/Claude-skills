@@ -82,6 +82,41 @@ embed risk (e.g., a large customer win that creates concentration).
 
 ---
 
+## Dependency Contract
+
+Loads before this skill:
+- `mckinsey-consultant` for thesis framing and MECE investment logic.
+- `driver-tree` when a separate structural decomposition already exists.
+- `claim-scrutinizer` when bull-case logic weaknesses should inform issue objects.
+- `ntb-diligence` when an NTB registry exists.
+- `pre-mortem` when failure modes should be converted into underwriting action.
+
+Loads after this skill:
+- `ic-memo` when underwriting actions need to become IC memo risk, recommendation, or protection language.
+- `deal-workbook-builder` when quantified issue objects need workbook implementation.
+- `writing-style` before formal delivery.
+- `pattern-docx` or `pattern-investment-pptx` only when producing IC materials.
+
+Inputs required:
+- Investment thesis, driver tree or thesis mechanics, material diligence findings, failure modes if available, evidence tiers, base/upside/downside assumptions, and decision context.
+
+Outputs produced:
+- Driver tree, issue objects, six-module scores, underwriting treatment, case scenarios, cascade scenarios, and final deal view.
+
+Do not load with:
+- Portfolio construction or position sizing tasks.
+- `pre-mortem` as a duplicate. Pre-mortem identifies failure pathways; boundability converts load-bearing drivers and risks into underwriting structure.
+
+## Workflow Mode
+
+| Mode | Use When | Minimum Output |
+|---|---|---|
+| Quick | User asks whether a risk or driver can be underwritten | Boundability label, evidence gap, underwriting implication |
+| Standard | User wants issue-by-issue underwriting analysis | Driver tree, issue objects, scores, treatment, scenarios |
+| Full | User wants IC-ready underwriting structure | Six-module assessment, cascade scenarios, protections/reprice/pass logic, memo handoff |
+
+---
+
 ## Step 1: Driver Tree Decomposition + Tier Assignment
 
 Before any risk statements are written, decompose the thesis into a driver tree
