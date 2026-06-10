@@ -18,6 +18,43 @@ is not abbreviated. Read this entire file before beginning the review.
 
 ---
 
+## Dependency Contract
+
+Loads before this skill:
+- The primary drafting skill for the output type: `market-research`, `ic-memo`, `diligence-ddr`, `executive-summary-writer`, `pattern-investment-pptx`, or another formal-output skill.
+- `mckinsey-consultant` when the prose depends on a structured strategic or investment argument.
+
+Loads after this skill:
+- `claim-scrutinizer` when the document needs analytical redline after prose and attribution cleanup.
+- `pattern-docx` or `pattern-investment-pptx` when generating a final file after prose has been hardened.
+- `doc-quality-checker` after a branded file has been produced.
+
+Inputs required:
+- Near-final prose, claim sources, intended audience, output format, and any attribution rules supplied by the source workflow.
+
+Outputs produced:
+- Claim tags, attribution fixes, softened unsupported assertions, clearer inductive chain, tightened prose, and a self-review summary.
+
+Do not load with:
+- Casual chat answers, scratch notes, raw research collection, or early outlines unless the user explicitly asks for prose polish.
+- Branded production skills before this pass has completed on the formal text.
+
+## Workflow Mode
+
+| Mode | Use When | Minimum Output |
+|---|---|---|
+| Quick | Polishing a paragraph, email, or short executive note | Claim-tag check, attribution check, rewritten passage |
+| Standard | Reviewing a memo section, deck narrative, or formal answer | Five-step self-review, edits applied, residual gaps |
+| Full | Reviewing a complete formal deliverable | Full claim/attribution/prose pass before production and QA |
+
+## Auto-Run Boundary
+
+Auto-run this skill only for final or near-final formal outputs. Do not auto-run it for
+interim analysis, research notes, source collection, workflow planning, or conversational
+responses.
+
+---
+
 ## The Self-Review Pass
 
 The self-review has five sequential steps. Run them in order. Each step produces either

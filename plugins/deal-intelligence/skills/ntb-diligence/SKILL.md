@@ -69,6 +69,41 @@ exists yet; run `pre-mortem` after to extend coverage.
 
 ---
 
+## Dependency Contract
+
+Loads before this skill:
+- `mckinsey-consultant` for thesis structure, investment gates, and MECE logic.
+- `analytical-operating-system` when the NTB registry must update an active belief register or decision posture.
+- `market-research` when evidence gaps require external research before NTBs can be classified.
+
+Loads after this skill:
+- `ic-memo` when the NTB package becomes the authoritative thesis structure for a full memo.
+- `pre-mortem` to extend the NTB registry into failure modes and compound-risk paths.
+- `boundability` to convert open NTB gaps into underwriting boundaries and action.
+- `claim-scrutinizer` after the NTB stress-test output exists.
+- `writing-style` before formal delivery.
+- `pattern-docx` only when the user explicitly requests a Word deliverable.
+
+Inputs required:
+- Company, deal context, working thesis, proposed value-creation levers, existing evidence, known gaps, and any prior memo/research outputs.
+
+Outputs produced:
+- NTB registry, evidence-state table, diligence gap plan, stress tests, kill triggers, cross-NTB correlation notes, and handoff mapping to IC memo sections.
+
+Do not load with:
+- `pre-mortem` as a substitute for NTB creation. Run NTB diligence first when no registry exists.
+- `ic-memo` re-derivation of NTBs when this skill has already produced the authoritative registry.
+
+## Workflow Mode
+
+| Mode | Use When | Minimum Output |
+|---|---|---|
+| Quick | User wants an initial NTB list or diligence triage | Candidate NTBs, evidence gaps, top diligence questions |
+| Standard | User wants a reusable NTB registry | Confirmed NTBs, evidence states, diligence plan, preliminary stress tests |
+| Full | User wants IC-ready NTB diligence | Four-phase workflow with checkpoints, stress tests, kill triggers, and memo handoff mapping |
+
+---
+
 ## Trigger Phrases
 
 Any of these phrases should load this skill:

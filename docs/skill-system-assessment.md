@@ -1,7 +1,7 @@
 # Skill System Assessment
 
 Date: 2026-06-10
-Branch: `codex/skill-overview-assessment`
+Branch: `main` after Work Package 1; updated on `codex/skill-dependency-contracts`
 
 ## BLUF
 
@@ -19,8 +19,8 @@ The core skills are effective when manually invoked by someone who understands t
 
 | Finding | Evidence | Implication |
 |---|---|---|
-| README was directionally useful but not fully authoritative | `deal-master` was a root skill but was not in the README skill index; this branch adds it as the L0 deal orchestration entry point | Users now have a clearer default starting point for full deal workflows |
-| Root and plugin copies can drift | `mckinsey-consultant` root copy differed from `plugins/deal-intelligence/skills/mckinsey-consultant/SKILL.md`; this branch syncs the grouped plugin copy | Packaged plugin users now get the same analytical ownership rules as root-skill users |
+| README was directionally useful but not fully authoritative | `deal-master` was a root skill but was not in the README skill index; Work Package 1 added it as the L0 deal orchestration entry point | Users now have a clearer default starting point for full deal workflows |
+| Root and plugin copies can drift | `mckinsey-consultant` root copy differed from `plugins/deal-intelligence/skills/mckinsey-consultant/SKILL.md`; Work Package 1 synced the grouped plugin copy | Packaged plugin users now get the same analytical ownership rules as root-skill users |
 | Metadata is not validator-ready | `skill-authoring-workflow` requires description <= 200 chars; most major skills exceed that | Skill discovery and upload surfaces may truncate or reject descriptions |
 | Dependencies are implicit in prose | High-dependency skills name other skills, but most do not expose a formal dependency block | Agents can load skills in the wrong order |
 | Quality stack is strong but heavy | `writing-style`, `claim-scrutinizer`, `red-team`, `pre-mortem`, and `doc-quality-checker` create a good control system | Workflows need explicit "lite vs full" gates to avoid over-processing small tasks |
@@ -48,7 +48,7 @@ The core skills are effective when manually invoked by someone who understands t
 
 ### P0 - Source-of-Truth and Packaging
 
-Applied in this branch:
+Applied in Work Package 1:
 
 1. Synced `mckinsey-consultant` root content into the grouped `deal-intelligence` plugin copy.
 2. Added `deal-master` to README and CHEATSHEET as the L0 orchestration entry point.

@@ -59,6 +59,39 @@ If uncertain, ask before proceeding.
 
 ---
 
+## Dependency Contract
+
+Loads before this skill:
+- `claim-scrutinizer` when a claim-level redline should identify the weak points before adversarial simulation.
+- `mckinsey-consultant` when the document lacks a clear governing thesis or issue tree.
+- `market-research`, `ic-memo`, or another drafting skill when those skills produced the target document.
+
+Loads after this skill:
+- `pre-mortem` when the work should move from attack vectors to investment failure pathways.
+- `boundability` when attack findings need underwriting structure, reprice logic, or protections.
+- `writing-style` when prose needs to be repaired after adversarial findings.
+- `pattern-docx` or `pattern-investment-pptx` only if the hardened output must be regenerated as a file.
+
+Inputs required:
+- Target document, governing thesis, intended audience, decision context, known source pack, and any prior claim-scrutinizer findings.
+
+Outputs produced:
+- Attack map, thesis kill conditions, attack vectors by pillar, claim-level adversarial verdicts, and prioritized hardening requirements.
+
+Do not load with:
+- No thesis or target argument. This skill attacks a position; it does not create the initial argument.
+- `claim-scrutinizer` as a duplicate pass on the same question. Claim-scrutinizer tests support; red-team simulates the motivated opposing case.
+
+## Workflow Mode
+
+| Mode | Use When | Minimum Output |
+|---|---|---|
+| Quick | User wants the bear case or top objections | Thesis kill conditions, top attack vectors, strongest counterargument |
+| Standard | User wants a red-team pass on a memo/deck/report | Logic reconstruction, attack vectors, severity, hardening actions |
+| Full | User wants IC-grade adversarial simulation | Full attack map, claim verdicts, kill scenarios, handoff to pre-mortem/boundability |
+
+---
+
 ## Step 1: Map the Target — Logic Tree Reconstruction
 
 Reconstruct the document's argument as the author intended it. This is the target you

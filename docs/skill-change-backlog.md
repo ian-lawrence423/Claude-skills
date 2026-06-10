@@ -1,7 +1,7 @@
 # Skill Change Backlog
 
 Date: 2026-06-10
-Branch: `codex/skill-overview-assessment`
+Branch: `main` after Work Package 1; updated on `codex/skill-dependency-contracts`
 
 ## P0 - Applied in Work Package 1
 
@@ -52,7 +52,7 @@ Exit criteria:
 - `deal-master` is discoverable and metadata-compliant
 - README accurately describes deployment shapes
 
-Status: implemented in this branch; final hash and diff verification remains before commit.
+Status: implemented and merged in Work Package 1.
 
 ### Work Package 2 - Dependency Contracts
 
@@ -63,6 +63,8 @@ Scope:
 
 Exit criteria:
 - A user can trace market research, competitive analysis, IC memo, and GTM diagnostic workflows without reading every skill file
+
+Status: in progress on `codex/skill-dependency-contracts`. Initial contracts and mode gates have been added to the core strategy, research, memo, diligence, adversarial, and underwriting workflow skills: `mckinsey-consultant`, `market-research`, `ic-memo`, `ntb-diligence`, `driver-tree`, `claim-scrutinizer`, `writing-style`, `red-team`, `pre-mortem`, and `boundability`. `pattern-docx` remains deferred to the separate stashed workflow update.
 
 ### Work Package 3 - Metadata Cleanup
 

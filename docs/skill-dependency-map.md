@@ -1,7 +1,7 @@
 # Skill Dependency Map
 
 Date: 2026-06-10
-Branch: `codex/skill-overview-assessment`
+Branch: `main` after Work Package 1; updated on `codex/skill-dependency-contracts`
 
 ## Canonical Layer Model
 
@@ -91,15 +91,18 @@ These skills have the most inbound references from other root skills and should 
 
 | Item | Status | Action |
 |---|---|---|
-| `mckinsey-consultant` root vs `plugins/deal-intelligence` copy | Synced in this branch | Keep root-to-package sync before publishing grouped plugin |
+| `mckinsey-consultant` root vs `plugins/deal-intelligence` copy | Synced in Work Package 1 | Keep root-to-package sync before publishing grouped plugin |
 | `deal-master` root vs packaged copy under `deal-master/skills` | In sync | Keep source-copy rule |
 | `analytical-operating-system` root vs packaged copy under `analytical-operating-system/skills` | In sync | Keep source-copy rule |
-| `deal-master` / `analytical-operating-system` root vs grouped plugin copies | Added and synced in this branch | Keep source-copy rule |
+| `deal-master` / `analytical-operating-system` root vs grouped plugin copies | Added and synced in Work Package 1 | Keep source-copy rule |
 | `pattern-docx` root vs grouped plugin copy | Current root file is dirty | Resolve separately before judging package drift |
 
 ## Proposed Standard Dependency Block
 
-Add this section to each high-priority skill:
+Add this section to each high-priority skill. Work Package 2 has started with the core
+strategy, research, memo, diligence, adversarial, and underwriting workflow stack; remaining
+production-heavy skills should follow after the `pattern-docx` workflow update is handled
+separately.
 
 ```markdown
 ## Dependency Contract
@@ -119,6 +122,25 @@ Outputs produced:
 Do not load with:
 - `[skill]` when [condition]
 ```
+
+## Proposed Workflow Mode Block
+
+Add this section after the dependency contract for workflow skills:
+
+```markdown
+## Workflow Mode
+
+| Mode | Use When | Minimum Output |
+|---|---|---|
+| Quick | [small request / directional answer] | [minimum useful handoff] |
+| Standard | [normal reusable analysis] | [core deliverable / handoff] |
+| Full | [IC-ready, board-ready, or file-producing workflow] | [full dependency chain and QA] |
+```
+
+Mode rules:
+- Quick mode should not produce files unless explicitly requested.
+- Standard mode should produce reusable handoff artifacts.
+- Full mode should include evidence control, quality passes, and production QA when a branded file is requested.
 
 ## So What?
 

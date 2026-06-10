@@ -92,6 +92,43 @@ Do NOT re-derive the NTBs inline when ntb-diligence has already produced them.
 
 ---
 
+## Dependency Contract
+
+Loads before this skill:
+- `deal-master` for full deal workflows that need existing-work inventory and phase routing.
+- `mckinsey-consultant` plus `investment-evaluation-framework.md` for analytical method and Six Screening Questions.
+- `analytical-operating-system` for belief register, evidence states, thesis-change log, and decision posture.
+- `ntb-diligence` when a standalone NTB registry already exists or the thesis has 4+ load-bearing assumptions.
+- `market-research` when market, customer, competitive, or sector evidence is missing.
+
+Loads after this skill:
+- `writing-style` before any formal memo delivery or document generation.
+- `claim-scrutinizer` after the first complete memo draft.
+- `red-team` after claim-scrutinizer hardening.
+- `pre-mortem` after red-team for failure mode coverage.
+- `pattern-docx` when the user requests a Word memo.
+- `doc-quality-checker` after the Word memo is produced.
+
+Inputs required:
+- Company, deal type, decision, valuation/deal structure, working thesis, hold period, available materials, key diligence findings, and open questions.
+
+Outputs produced:
+- IC memo architecture, section-by-section draft, NTB-integrated thesis, risk register, recommendation, open items, and production-ready memo text.
+
+Do not load with:
+- `market-research` in standalone-output mode inside an IC memo. In this workflow, market-research produces evidence inputs, not a separate report.
+- `pattern-docx` before the memo draft and writing-style pass are complete.
+
+## Workflow Mode
+
+| Mode | Use When | Minimum Output |
+|---|---|---|
+| Quick | User needs memo outline, section rewrite, or IC-readiness guidance | BLUF, missing inputs, section plan, critical gaps |
+| Standard | User has materials and wants a memo draft or investment write-up | 10-section memo draft, sourced claims, risks, open items |
+| Full | User wants IC-ready package | Deal-master routing, evidence control, research, NTB/driver work as needed, quality stack, Pattern DOCX, QA |
+
+---
+
 ## Before Writing Anything
 
 **Load the investment evaluation framework:**
