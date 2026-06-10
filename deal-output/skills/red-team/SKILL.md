@@ -97,6 +97,20 @@ Do not load with:
 
 ---
 
+## Example And Anti-Pattern
+
+Example prompt:
+> "Make the strongest bear case against this investment thesis."
+
+Expected use:
+- Reconstruct the thesis, then attack the load-bearing assumptions rather than surface details.
+- Produce counter-theses, evidence that would prove the bear case, and kill conditions.
+- Hand off only decision-relevant issues to pre-mortem, claim repair, or diligence.
+
+Anti-pattern:
+- Do not produce a generic risk list, rewrite the memo, or treat weak evidence as proof the thesis is false.
+
+---
 ## Step 1: Map the Target — Logic Tree Reconstruction
 
 Reconstruct the document's argument as the author intended it. This is the target you

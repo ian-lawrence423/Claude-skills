@@ -175,6 +175,17 @@ Never silently revise a prior position.
 
 ---
 
+## Example
+
+Example prompt:
+> "Update the belief register after this customer call transcript and tell me whether the posture changed."
+
+Expected use:
+- Extract only material assertions that can change the investment decision.
+- Update evidence states, priors, posteriors, and direction of change.
+- End with PROCEED, REPRICE, PASS, or RESOLVE FIRST plus the evidence that would change it.
+
+---
 ## Output Templates
 
 ### Evidence-Control Block

@@ -67,6 +67,20 @@ Do not load with:
 
 ---
 
+## Example And Anti-Pattern
+
+Example prompt:
+> "Pressure-test this IC memo and show me which claims will not survive committee."
+
+Expected use:
+- Reconstruct the governing logic tree before judging individual claims.
+- Tag claim-level verdicts with evidence gaps, assumption failures, math issues, and repair actions.
+- Prioritize findings by decision impact, not by page order.
+
+Anti-pattern:
+- Do not gather new research as a substitute for redline work or summarize the memo instead of challenging its claims.
+
+---
 ## Step 1: Detect Document Type
 
 Before analyzing, classify the document:

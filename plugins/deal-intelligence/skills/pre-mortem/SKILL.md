@@ -179,6 +179,20 @@ Do not load with:
 
 ---
 
+## Example And Anti-Pattern
+
+Example prompt:
+> "Assume this investment failed in year 3; walk backward through how it happened."
+
+Expected use:
+- Enumerate concrete failure pathways tied to NTBs, evidence state, and observable warning signs.
+- Identify what data would sharpen or reverse each failure hypothesis.
+- Separate failure diagnosis from the investment decision.
+
+Anti-pattern:
+- Do not recommend proceed/pass, suppress hard-to-quantify risks, or soften failure modes into generic caveats.
+
+---
 ## Step 1: Establish the Failure Frame + Lock the Base Assumptions Table
 
 State the bull case being stress-tested, the information state governing this analysis,

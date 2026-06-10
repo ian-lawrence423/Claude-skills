@@ -107,6 +107,20 @@ Do not load with:
 
 ---
 
+## Example And Anti-Pattern
+
+Example prompt:
+> "Build a research brief for agentic commerce in enterprise procurement."
+
+Expected use:
+- Define the decision, hypothesis tree, source plan, and validation standard before collecting evidence.
+- Build pyramid findings with citations and explicit source-quality notes.
+- Invoke production and QA skills only after a hardened draft exists.
+
+Anti-pattern:
+- Do not produce a standalone report inside an IC memo workflow or skip source validation because the answer feels directionally right.
+
+---
 ## Execution Flow — Full Overview
 
 ```

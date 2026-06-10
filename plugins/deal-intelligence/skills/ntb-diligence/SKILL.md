@@ -108,6 +108,20 @@ Do not load with:
 
 ---
 
+## Example And Anti-Pattern
+
+Example prompt:
+> "What do we need to believe for Company X to be an attractive buyout candidate?"
+
+Expected use:
+- Convert the thesis into a short registry of load-bearing Need-to-Believe statements.
+- Assign evidence states and define the diligence data that confirms, weakens, or kills each NTB.
+- Produce stress tests and kill triggers for downstream IC memo or driver-tree work.
+
+Anti-pattern:
+- Do not turn every generic risk into an NTB or make the final investment decision inside the diligence registry.
+
+---
 ## Trigger Phrases
 
 Any of these phrases should load this skill:

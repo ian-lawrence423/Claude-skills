@@ -22,6 +22,20 @@ writing any code.
 
 ---
 
+## Example And Anti-Pattern
+
+Example prompt:
+> "Turn this approved IC memo draft into a Pattern DOCX using the canonical template shell."
+
+Expected use:
+- Start from the base DOCX skill and the canonical Pattern template workflow.
+- Preserve header/footer assets, section properties, typography, tables, and brand colors.
+- Run render/structural QA and then `doc-quality-checker` after production.
+
+Anti-pattern:
+- Do not build a Pattern document from scratch with generic DOCX defaults or skip template transplant verification.
+
+---
 ## Step 1: Read the Base DOCX Skill First
 
 Before writing any code, read the base docx skill for API usage, pitfalls, and XML repair patterns:

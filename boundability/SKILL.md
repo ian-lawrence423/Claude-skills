@@ -120,6 +120,20 @@ Do not load with:
 
 ---
 
+## Example And Anti-Pattern
+
+Example prompt:
+> "Where does this company's moat stop being defensible across geography, segment, and product line?"
+
+Expected use:
+- Test the boundary conditions of each claimed advantage against evidence.
+- Translate bounded advantages into underwriting cases, protections, reprice logic, or pass conditions.
+- Make degradation points explicit so downstream IC work does not overgeneralize the moat.
+
+Anti-pattern:
+- Do not treat a real advantage in one context as universal across all products, geographies, or customer segments.
+
+---
 ## Step 1: Driver Tree Decomposition + Tier Assignment
 
 Before any risk statements are written, decompose the thesis into a driver tree

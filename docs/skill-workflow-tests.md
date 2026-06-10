@@ -36,6 +36,30 @@ artifact without invoking unnecessary downstream skills.
 - `claim-scrutinizer` runs only after a draft, thesis, or claim set exists.
 - `pattern-docx` and `pattern-investment-pptx` run only after prose is hardened.
 
+## Content Refinement Smoke Tests
+
+These prompts validate that each core skill now has a concrete example path and an explicit
+anti-pattern boundary. A test passes when the agent follows the expected use case and avoids
+the named anti-pattern.
+
+| Skill | Smoke-Test Prompt | Expected Signal | Anti-Pattern To Catch |
+|---|---|---|---|
+| `deal-master` | "Resume the IC memo for Company X from this deal folder." | Inventories prior work, loads governing skills, routes to next phase | Starts fresh analysis without inventory |
+| `mckinsey-consultant` | "Structure the investment case from these existing materials." | Produces decision, hypothesis, MECE tree, and recommendation logic | Gathers new sources or creates branded output |
+| `analytical-operating-system` | "Update the belief register after this transcript." | Updates material assertions, confidence, and posture | Rebuilds the issue tree or tracks immaterial claims |
+| `market-research` | "Build a research brief for this market." | Defines scope, hypothesis tree, source plan, and validation standard | Produces final report before evidence validation |
+| `ic-memo` | "Draft the IC memo from this source pack." | Consumes upstream evidence and drafts memo sections before production | Starts with DOCX generation |
+| `ntb-diligence` | "What do we need to believe for this deal to work?" | Produces load-bearing NTBs, evidence states, and diligence tests | Turns every risk into an NTB |
+| `driver-tree` | "Decompose the thesis into value drivers." | Produces causal driver tree and load-bearing tiers | Gives final deal verdict |
+| `claim-scrutinizer` | "Pressure-test this memo for IC." | Reconstructs logic tree and redlines claims | Summarizes instead of challenging claims |
+| `writing-style` | "Tighten this final memo section." | Fixes claim tags, attribution, language, and flow | Auto-runs on scratch notes |
+| `red-team` | "Make the strongest bear case." | Attacks load-bearing assumptions and names kill conditions | Produces generic risk list |
+| `pre-mortem` | "Assume this investment failed in year 3." | Maps concrete failure pathways and evidence needs | Recommends proceed/pass instead of diagnosing |
+| `boundability` | "Where does this moat stop working?" | Tests geography, segment, and product boundaries | Treats advantage as universal |
+| `pattern-docx` | "Turn this approved memo into a Pattern DOCX." | Uses canonical template workflow and runs QA | Builds from generic DOCX defaults |
+| `pattern-investment-pptx` | "Build a Pattern investment deck from this approved memo." | Uses Pattern deck system and hardened content | Creates a generic marketing deck |
+| `doc-quality-checker` | "QA this Pattern memo before I send it." | Severity-rates exact-location findings | Silently auto-fixes or gives general opinion |
+
 ## So What?
 
 Use this file as a smoke-test checklist before publishing future skill changes. If a workflow
