@@ -1,6 +1,9 @@
 ---
 name: pre-mortem
-description: |
+description: >-
+  Run investment pre-mortems that assume failure, map failure pathways to NTBs, diagnose
+  evidence state, and surface diligence data needs.
+intent: >-
   Runs a structured investment pre-mortem: assumes the deal has failed and works backward
   to enumerate every failure pathway, diagnose the information state for each, and surface
   the data that would change the picture. Use whenever Ian asks to "pre-mortem this deal",
@@ -9,9 +12,10 @@ description: |
   risk", or "give me a failure mode analysis." Also triggers for "run a pre-mortem on
   [company]." Complementary to claim-scrutinizer but distinct: claim-scrutinizer tests
   whether the bull case is well-argued; pre-mortem assumes the bull case is wrong and asks
-  how. Produces a complete failure mode inventory with honest epistemic diagnosis. Does not
-  make decisions, assign kill triggers, block deal advancement, or tell Ian what to do
+  how. Produces a complete failure mode inventory with honest epistemic diagnosis. Does
+  not make decisions, assign kill triggers, block deal advancement, or tell Ian what to do
   with any risk — that is Ian's job.
+type: workflow
 ---
 
 # Pre-Mortem Diligence Skill

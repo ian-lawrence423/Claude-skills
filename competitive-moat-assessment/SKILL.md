@@ -1,22 +1,24 @@
 ---
 name: competitive-moat-assessment
-description: |
+description: >-
+  Assess a company's moat type, depth, durability, erosion risk, and displacement path
+  using competitor evidence and investment-grade tests.
+intent: >-
   Build a rigorous, evidence-based assessment of a company's competitive moat — the
-  structural advantage that allows it to earn above-market returns sustainably. Use
-  this skill whenever Ian asks to "assess the moat," "analyze competitive advantage,"
-  "how defensible is this business," "what protects this company," "evaluate the moat,"
-  "is this moat real," "rate the competitive position," or "what makes this business
-  hard to displace." Also triggers for: "switching cost analysis," "network effect
-  analysis," "competitive defensibility," "moat durability," "barrier to entry."
-
-  This skill builds the affirmative case for a moat with the specific evidence standard
-  required to survive adversarial IC scrutiny. It is distinct from:
-  - Competitor profiling (market-research Level 2 — describes what competitors do)
-  - Moat attack vectors (red-team-investment-attacks.md — challenges moat claims)
-  - Moat type taxonomy (mckinsey-consultant Dimension 4 — lists moat categories)
-
-  This skill owns the methodology for PROVING a moat is real, measuring its strength,
-  assessing its durability, and producing an IC-ready moat verdict.
+  structural advantage that allows it to earn above-market returns sustainably. Use this
+  skill whenever Ian asks to "assess the moat," "analyze competitive advantage," "how
+  defensible is this business," "what protects this company," "evaluate the moat," "is
+  this moat real," "rate the competitive position," or "what makes this business hard to
+  displace." Also triggers for: "switching cost analysis," "network effect analysis,"
+  "competitive defensibility," "moat durability," "barrier to entry." This skill builds
+  the affirmative case for a moat with the specific evidence standard required to survive
+  adversarial IC scrutiny. It is distinct from: - Competitor profiling (market-research
+  Level 2 — describes what competitors do) - Moat attack vectors
+  (red-team-investment-attacks.md — challenges moat claims) - Moat type taxonomy
+  (mckinsey-consultant Dimension 4 — lists moat categories) This skill owns the
+  methodology for PROVING a moat is real, measuring its strength, assessing its
+  durability, and producing an IC-ready moat verdict.
+type: workflow
 ---
 
 # Competitive Moat Assessment

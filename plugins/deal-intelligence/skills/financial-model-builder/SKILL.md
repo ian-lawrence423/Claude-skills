@@ -1,10 +1,20 @@
 ---
 name: financial-model-builder
-description: |
-  **SaaS / Operating Model Financial Template Builder**: Reads a source Excel operating model (P&L, Balance Sheet) and generates a standardized 3-tab financial model with Input Page, Financial Model Template, and Output Tab.
-  - MANDATORY TRIGGERS: "build financial model", "run the template", "create financial model template", "3-tab model", "generate financial model", "financial model from P&L"
-  - Use this skill whenever a user uploads an Excel file containing a P&L or income statement and wants a structured financial model built from it
-  - Also triggers for: "Input Page + FMT + Output Tab", "6+6 analysis", "go-forward analysis", "SaaS model template", "turn this P&L into a model", "build a model from this", "model this out", "create a financial template", "build the pattern template model"
+description: >-
+  Build the canonical 3-tab SaaS operating model from a source P&L and balance sheet, with
+  input, financial model, and output tabs.
+intent: >-
+  **SaaS / Operating Model Financial Template Builder**: Reads a source Excel operating
+  model (P&L, Balance Sheet) and generates a standardized 3-tab financial model with Input
+  Page, Financial Model Template, and Output Tab. - MANDATORY TRIGGERS: "build financial
+  model", "run the template", "create financial model template", "3-tab model", "generate
+  financial model", "financial model from P&L" - Use this skill whenever a user uploads an
+  Excel file containing a P&L or income statement and wants a structured financial model
+  built from it - Also triggers for: "Input Page + FMT + Output Tab", "6+6 analysis",
+  "go-forward analysis", "SaaS model template", "turn this P&L into a model", "build a
+  model from this", "model this out", "create a financial template", "build the pattern
+  template model"
+type: workflow
 ---
 
 # Financial Model Template Builder

@@ -1,18 +1,23 @@
 ---
 name: market-research
-description: |
-  Execute professional-grade market research projects using a structured, hypothesis-driven
-  methodology. Use this skill whenever Ian asks to conduct market research, build a research
-  brief, run a market analysis, size a market, profile competitors, or produce a research
-  deliverable for any deal, product, or strategic initiative. Trigger even for partial requests
-  like "help me build a brief for X", "what's the market look like for Y", "I need a research
-  plan", "run diligence on this market", or "put together a research framework." This skill
-  governs the full research workflow — from brief creation through pyramid analysis, theme
-  development, report architecture, and the mandatory iteration loop — to final DOCX or PPTX
-  output. Integrates with mckinsey-consultant (analytical methodology), writing-style (prose
-  and claim discipline), claim-scrutinizer (logic redline), red-team (adversarial pass), and
+description: >-
+  Run structured market research, competitive analysis, market sizing, source validation,
+  and executive synthesis for deals or strategy work.
+intent: >-
+  Execute professional-grade market research projects using a structured,
+  hypothesis-driven methodology. Use this skill whenever Ian asks to conduct market
+  research, build a research brief, run a market analysis, size a market, profile
+  competitors, or produce a research deliverable for any deal, product, or strategic
+  initiative. Trigger even for partial requests like "help me build a brief for X",
+  "what's the market look like for Y", "I need a research plan", "run diligence on this
+  market", or "put together a research framework." This skill governs the full research
+  workflow — from brief creation through pyramid analysis, theme development, report
+  architecture, and the mandatory iteration loop — to final DOCX or PPTX output.
+  Integrates with mckinsey-consultant (analytical methodology), writing-style (prose and
+  claim discipline), claim-scrutinizer (logic redline), red-team (adversarial pass), and
   pattern-docx / pattern-investment-pptx (file output). Does not duplicate logic owned by
   those skills.
+type: workflow
 ---
 
 # Market Research Skill
@@ -65,6 +70,40 @@ Consumed by (downstream):
       └── ic-memo                 ← when producing an IC memo, this skill runs in
                                      IC Memo Mode (see Phase 1 IC Memo Mode section)
 ```
+
+---
+
+## Dependency Contract
+
+Loads before this skill:
+- `mckinsey-consultant` for problem framing, MECE hypothesis tree, analytical lenses, and Pyramid Principle.
+- `analytical-operating-system` when research is part of an active deal, IC memo, diligence, or investment thesis workflow.
+
+Loads after this skill:
+- `competitive-moat-assessment` when competitor durability, moat depth, or displacement path matters.
+- `writing-style` after draft sections exist and before formal delivery.
+- `claim-scrutinizer` after a claim set, memo draft, or report draft exists.
+- `red-team` after claim-scrutinizer hardening when an adversarial pass is required.
+- `pattern-docx` or `pattern-investment-pptx` only when producing a file.
+- `doc-quality-checker` after a branded file is produced.
+
+Inputs required:
+- Decision to support, target market or company, geography, time horizon, known materials, source constraints, and expected output format.
+
+Outputs produced:
+- Research brief, source strategy, pyramid evidence base, source bibliography, structural themes, draft report/deck content, and evidence handoff for downstream skills.
+
+Do not load with:
+- `claim-scrutinizer` before claims exist.
+- `pattern-docx` or `pattern-investment-pptx` unless the user requested a file or the workflow explicitly requires one.
+
+## Workflow Mode
+
+| Mode | Use When | Minimum Output |
+|---|---|---|
+| Quick | User asks for a market view, source plan, or directional answer | Scope, hypothesis, 3-5 findings, source caveats, next research step |
+| Standard | User asks for market research, competitive analysis, or a research brief | Brief, evidence plan, pyramid findings, source log, synthesis |
+| Full | User asks for full analysis, IC/board-ready work, or a deliverable | All phases: brief, pyramid research, themes, draft, quality passes, production, QA |
 
 ---
 

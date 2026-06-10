@@ -1,6 +1,15 @@
 ---
 name: deck-refresh
-description: Updates a presentation with new numbers — quarterly refreshes, earnings updates, comp rolls, rebased market data. Use whenever the user asks to "update the deck with Q4 numbers", "refresh the comps", "roll this forward", "swap in the new earnings", "change all the $485M to $512M", or any request to swap figures across an existing deck without rebuilding it.
+description: >-
+  Update numbers across an existing deck for earnings, comp rolls, market data, or
+  quarterly refreshes while preserving formatting and approvals.
+intent: >-
+  Updates a presentation with new numbers — quarterly refreshes, earnings updates, comp
+  rolls, rebased market data. Use whenever the user asks to "update the deck with Q4
+  numbers", "refresh the comps", "roll this forward", "swap in the new earnings", "change
+  all the $485M to $512M", or any request to swap figures across an existing deck without
+  rebuilding it.
+type: workflow
 ---
 
 # Deck Refresh

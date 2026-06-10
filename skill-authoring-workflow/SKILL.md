@@ -1,17 +1,12 @@
 ---
 name: skill-authoring-workflow
-description: Turn raw PM content into a compliant, publish-ready skill. Use when creating or updating a repo skill without breaking standards.
+description: >-
+  Create or update repo skills with compliant metadata, dependency contracts, package
+  sync, marketplace descriptions, and validation workflow.
 intent: >-
-  Create or update PM skills without chaos. This workflow turns rough notes, workshop content, or half-baked prompt dumps into compliant `skills/<skill-name>/SKILL.md` assets that actually pass validation and belong in this repo.
+  Turn raw PM content into a compliant, publish-ready skill. Use when creating or updating
+  a repo skill without breaking standards.
 type: workflow
-best_for:
-  - "Creating a new repo skill from notes or source material"
-  - "Updating an existing skill while keeping standards intact"
-  - "Running the full authoring and validation workflow before commit"
-scenarios:
-  - "Help me turn these workshop notes into a new PM skill"
-  - "I need to update an existing skill without breaking the repo standards"
-  - "What workflow should I use to author a new skill in this repo?"
 ---
 
 ## Purpose

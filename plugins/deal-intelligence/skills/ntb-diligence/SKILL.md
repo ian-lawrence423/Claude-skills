@@ -1,20 +1,24 @@
 ---
 name: ntb-diligence
-description: |
+description: >-
+  Build Need-to-Believe registries, evidence states, diligence plans, stress tests, and
+  kill triggers for investment theses and IC workflows.
+intent: >-
   Standalone Need-to-Believe (NTB) diligence skill. Produces a comprehensive NTB registry,
-  a prioritised diligence plan keyed to each gap, and adversarial stress tests of every NTB
-  assumption. Use this skill
-  whenever Ian asks to "run NTB diligence", "run NTB analysis", "build the NTB registry",
-  "what do I need to believe about [company]", "stress test the thesis", "map out the NTBs",
-  "work out the need-to-believes", "figure out the diligence plan for [deal]", "surface the
-  assumptions", "what's the NTB on this", "map the base case assumptions", or "early-stage
-  diligence triage". Runs standalone for early-stage diligence when no IC memo exists yet;
-  its output plugs directly into ic-memo when the full memo is later produced. Structured
-  workflow with intake protocol and four sequential phases — not a one-pass tool. Default
-  output is evidence-tagged markdown; .docx output on explicit request via pattern-docx.
-  Complementary to ic-memo (runs before it), claim-scrutinizer (tests a completed thesis
-  whereas this skill builds the scaffolding), pre-mortem (enumerates failure modes against
-  this skill's NTBs), and boundability (converts this skill's gaps into underwriting action).
+  a prioritised diligence plan keyed to each gap, and adversarial stress tests of every
+  NTB assumption. Use this skill whenever Ian asks to "run NTB diligence", "run NTB
+  analysis", "build the NTB registry", "what do I need to believe about [company]",
+  "stress test the thesis", "map out the NTBs", "work out the need-to-believes", "figure
+  out the diligence plan for [deal]", "surface the assumptions", "what's the NTB on this",
+  "map the base case assumptions", or "early-stage diligence triage". Runs standalone for
+  early-stage diligence when no IC memo exists yet; its output plugs directly into ic-memo
+  when the full memo is later produced. Structured workflow with intake protocol and four
+  sequential phases — not a one-pass tool. Default output is evidence-tagged markdown;
+  .docx output on explicit request via pattern-docx. Complementary to ic-memo (runs before
+  it), claim-scrutinizer (tests a completed thesis whereas this skill builds the
+  scaffolding), pre-mortem (enumerates failure modes against this skill's NTBs), and
+  boundability (converts this skill's gaps into underwriting action).
+type: workflow
 ---
 
 # NTB Diligence — Standalone Skill

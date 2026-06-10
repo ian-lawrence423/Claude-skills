@@ -1,6 +1,12 @@
 ---
 name: deal-master
-description: Orchestrates end-to-end deal intelligence by inventorying existing work, loading core frameworks, initializing the belief register, and routing to the next phase.
+description: >-
+  Orchestrate Pattern deal workflows across market research, diligence, IC memos, outputs,
+  QA, dependency handoffs, and package routing.
+intent: >-
+  Orchestrates end-to-end deal intelligence by inventorying existing work, loading core
+  frameworks, initializing the belief register, and routing to the next phase.
+type: workflow
 ---
 
 # Deal Master — Single Entry Point for All Deal Intelligence Work

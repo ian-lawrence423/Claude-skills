@@ -1,6 +1,9 @@
 ---
 name: pre-mortem
-description: |
+description: >-
+  Run investment pre-mortems that assume failure, map failure pathways to NTBs, diagnose
+  evidence state, and surface diligence data needs.
+intent: >-
   Runs a structured investment pre-mortem: assumes the deal has failed and works backward
   to enumerate every failure pathway, diagnose the information state for each, and surface
   the data that would change the picture. Use whenever Ian asks to "pre-mortem this deal",
@@ -9,9 +12,10 @@ description: |
   risk", or "give me a failure mode analysis." Also triggers for "run a pre-mortem on
   [company]." Complementary to claim-scrutinizer but distinct: claim-scrutinizer tests
   whether the bull case is well-argued; pre-mortem assumes the bull case is wrong and asks
-  how. Produces a complete failure mode inventory with honest epistemic diagnosis. Does not
-  make decisions, assign kill triggers, block deal advancement, or tell Ian what to do
+  how. Produces a complete failure mode inventory with honest epistemic diagnosis. Does
+  not make decisions, assign kill triggers, block deal advancement, or tell Ian what to do
   with any risk — that is Ian's job.
+type: workflow
 ---
 
 # Pre-Mortem Diligence Skill
@@ -138,6 +142,40 @@ qualitative description is the honest output.
 > presented, pricing pressure from [Competitor X] could drive a race-to-zero dynamic
 > in the SMB segment, where 40% of current ARR sits. We do not have the data to
 > assess how likely this is."
+
+---
+
+## Dependency Contract
+
+Loads before this skill:
+- `mckinsey-consultant` for deal framing and investment gate context.
+- `claim-scrutinizer` when the bull-case argument has not yet been tested.
+- `ntb-diligence` when an NTB registry exists or the failure modes should map to NTBs.
+- `red-team` when adversarial attack vectors already identify likely thesis breaks.
+
+Loads after this skill:
+- `boundability` when failure modes must be converted into underwriting actions, protections, or reprice logic.
+- `ic-memo` when failure modes must feed the memo risk section.
+- `writing-style` before formal delivery.
+- `pattern-docx` or `pattern-investment-pptx` only when producing a file or deck.
+
+Inputs required:
+- Deal context, working thesis, base assumptions, existing evidence, NTB registry if available, source pack, and decision stage.
+
+Outputs produced:
+- Failure frame, base assumptions table, failure mode registry, information-state diagnosis, compound failure paths, data requests, and risk narrative handoff.
+
+Do not load with:
+- `claim-scrutinizer` as a substitute. Claim-scrutinizer asks whether the bull case is supported; pre-mortem assumes failure and maps how it happened.
+- `boundability` before failure modes or load-bearing drivers are identified.
+
+## Workflow Mode
+
+| Mode | Use When | Minimum Output |
+|---|---|---|
+| Quick | User asks "how does this fail?" | Top failure modes, information gaps, data that would change the view |
+| Standard | User wants diligence-ready failure analysis | Failure registry, boundability labels, data requests, compound paths |
+| Full | User wants IC-ready risk work | Full registry, NTB mapping, compound scenarios, risk narrative handoff to IC memo/boundability |
 
 ---
 

@@ -1,14 +1,19 @@
 ---
 name: pattern-investment-pptx
-description: >
-  Generate professional, on-brand investment-grade PowerPoint decks for Pattern. Use this skill
-  whenever Ian asks to create an investment deck, investor presentation, due diligence deck, M&A
-  deck, deal deck, board deck, pitch to investors, or any financial or strategic presentation
-  intended for external investors, PE firms, or acquirers. This skill encodes the exact visual
-  system, fonts, colors, layout patterns, chart rules, table rules, editorial standards, and slide
-  types from Pattern's investment deck template — including financial tables, market sizing, unit
-  economics, EBITDA bridges, and thesis sections. Always use this skill instead of the generic
-  pptx or pattern-pptx skills for any investment or deal materials.
+description: >-
+  Create Pattern-branded investment decks for IC, diligence, M&A, PE, board, and investor
+  materials using the institutional deck system.
+intent: >-
+  Generate professional, on-brand investment-grade PowerPoint decks for Pattern. Use this
+  skill whenever Ian asks to create an investment deck, investor presentation, due
+  diligence deck, M&A deck, deal deck, board deck, pitch to investors, or any financial or
+  strategic presentation intended for external investors, PE firms, or acquirers. This
+  skill encodes the exact visual system, fonts, colors, layout patterns, chart rules,
+  table rules, editorial standards, and slide types from Pattern's investment deck
+  template — including financial tables, market sizing, unit economics, EBITDA bridges,
+  and thesis sections. Always use this skill instead of the generic pptx or pattern-pptx
+  skills for any investment or deal materials.
+type: workflow
 ---
 
 # Pattern Investment Deck Generator

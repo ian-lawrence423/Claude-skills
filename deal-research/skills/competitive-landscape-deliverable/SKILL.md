@@ -1,6 +1,16 @@
 ---
 name: competitive-landscape-deliverable
-description: Triggers when converting a competitive landscape, market mapping, or M&A target spreadsheet into a board-ready executive deliverable. Preserves the raw research sheet and adds a second sheet that compresses each cell while preserving the full rating + key evidence — fidelity over brevity. Verdict-led layout, Pattern brand styling, and consulting-grade formatting. Mines the rating-and-rationale source format produced by the Pattern competitive landscape pipeline.
+description: >-
+  Turn a competitive landscape or M&A target spreadsheet into a board-ready executive
+  workbook with compressed ratings, evidence, and recommendation.
+intent: >-
+  Triggers when converting a competitive landscape, market mapping, or M&A target
+  spreadsheet into a board-ready executive deliverable. Preserves the raw research sheet
+  and adds a second sheet that compresses each cell while preserving the full rating + key
+  evidence — fidelity over brevity. Verdict-led layout, Pattern brand styling, and
+  consulting-grade formatting. Mines the rating-and-rationale source format produced by
+  the Pattern competitive landscape pipeline.
+type: workflow
 ---
 
 # Competitive Landscape Deliverable

@@ -1,6 +1,13 @@
 ---
 name: written-communication
-description: Help users communicate more effectively in writing. Use when someone is drafting memos, emails, strategy docs, announcements, or any written communication that needs to be clear, concise, and persuasive.
+description: >-
+  Improve emails, memos, strategy docs, announcements, and other writing for clarity,
+  concision, structure, tone, and persuasion.
+intent: >-
+  Help users communicate more effectively in writing. Use when someone is drafting memos,
+  emails, strategy docs, announcements, or any written communication that needs to be
+  clear, concise, and persuasive.
+type: workflow
 ---
 
 # Written Communication

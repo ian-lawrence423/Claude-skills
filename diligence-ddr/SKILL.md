@@ -1,7 +1,17 @@
 ---
 name: diligence-ddr
-description: >
-  Generate or customize a comprehensive Due Diligence Request List (DDR) for PE buyout or M&A sell-side transactions. Use this skill whenever the user mentions due diligence, a DDR, data room requests, diligence checklist, or wants to prepare or tailor a request list for a deal. Trigger even if the user just says "I need a DDR for [company]", "help me build out diligence questions for [deal]", or "customize this request list." This skill covers full DDR generation from scratch given a company description, and targeted customization of an existing DDR to a specific business model, sector, and deal context.
+description: >-
+  Generate or tailor due diligence request lists for PE buyout or M&A sell-side deals
+  based on company, sector, business model, and deal context.
+intent: >-
+  Generate or customize a comprehensive Due Diligence Request List (DDR) for PE buyout or
+  M&A sell-side transactions. Use this skill whenever the user mentions due diligence, a
+  DDR, data room requests, diligence checklist, or wants to prepare or tailor a request
+  list for a deal. Trigger even if the user just says "I need a DDR for [company]", "help
+  me build out diligence questions for [deal]", or "customize this request list." This
+  skill covers full DDR generation from scratch given a company description, and targeted
+  customization of an existing DDR to a specific business model, sector, and deal context.
+type: workflow
 ---
 
 # Due Diligence Request List (DDR) Skill

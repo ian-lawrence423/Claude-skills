@@ -1,20 +1,22 @@
 ---
 name: ic-memo
-description: |
+description: >-
+  Draft Pattern-standard IC memos for PE buyouts, acquisitions, and strategic investments
+  using deal gates, NTBs, risks, and recommendation structure.
+intent: >-
   Write a structured, publication-ready Investment Committee memo for a PE buyout,
-  acquisition, or strategic investment. Use this skill whenever Ian asks to "write
-  the IC memo," "draft the investment memo," "build the IC package," "write up the
-  deal," "draft the investment thesis memo," or "put together the IC write-up."
-  Also triggers for: "memo for IC," "investment committee write-up," "deal memo,"
-  "write up the thesis," "IC-ready memo."
-
-  This skill governs IC memo document architecture — section structure, length
-  calibration, how the Six Screening Questions map to memo sections, and formatting
-  via pattern-docx. It does not govern: analytical methodology (mckinsey-consultant),
-  Six Screening Questions content (investment-evaluation-framework.md), claim standards
+  acquisition, or strategic investment. Use this skill whenever Ian asks to "write the IC
+  memo," "draft the investment memo," "build the IC package," "write up the deal," "draft
+  the investment thesis memo," or "put together the IC write-up." Also triggers for: "memo
+  for IC," "investment committee write-up," "deal memo," "write up the thesis," "IC-ready
+  memo." This skill governs IC memo document architecture — section structure, length
+  calibration, how the Six Screening Questions map to memo sections, and formatting via
+  pattern-docx. It does not govern: analytical methodology (mckinsey-consultant), Six
+  Screening Questions content (investment-evaluation-framework.md), claim standards
   (writing-style), logic redlining (claim-scrutinizer), adversarial stress-testing
-  (red-team), or moat evidence methodology (competitive-moat-assessment). Defer to
-  those skills for their respective responsibilities.
+  (red-team), or moat evidence methodology (competitive-moat-assessment). Defer to those
+  skills for their respective responsibilities.
+type: workflow
 ---
 
 # IC Memo Skill

@@ -1,18 +1,23 @@
 ---
 name: market-research
-description: |
-  Execute professional-grade market research projects using a structured, hypothesis-driven
-  methodology. Use this skill whenever Ian asks to conduct market research, build a research
-  brief, run a market analysis, size a market, profile competitors, or produce a research
-  deliverable for any deal, product, or strategic initiative. Trigger even for partial requests
-  like "help me build a brief for X", "what's the market look like for Y", "I need a research
-  plan", "run diligence on this market", or "put together a research framework." This skill
-  governs the full research workflow — from brief creation through pyramid analysis, theme
-  development, report architecture, and the mandatory iteration loop — to final DOCX or PPTX
-  output. Integrates with mckinsey-consultant (analytical methodology), writing-style (prose
-  and claim discipline), claim-scrutinizer (logic redline), red-team (adversarial pass), and
+description: >-
+  Run structured market research, competitive analysis, market sizing, source validation,
+  and executive synthesis for deals or strategy work.
+intent: >-
+  Execute professional-grade market research projects using a structured,
+  hypothesis-driven methodology. Use this skill whenever Ian asks to conduct market
+  research, build a research brief, run a market analysis, size a market, profile
+  competitors, or produce a research deliverable for any deal, product, or strategic
+  initiative. Trigger even for partial requests like "help me build a brief for X",
+  "what's the market look like for Y", "I need a research plan", "run diligence on this
+  market", or "put together a research framework." This skill governs the full research
+  workflow — from brief creation through pyramid analysis, theme development, report
+  architecture, and the mandatory iteration loop — to final DOCX or PPTX output.
+  Integrates with mckinsey-consultant (analytical methodology), writing-style (prose and
+  claim discipline), claim-scrutinizer (logic redline), red-team (adversarial pass), and
   pattern-docx / pattern-investment-pptx (file output). Does not duplicate logic owned by
   those skills.
+type: workflow
 ---
 
 # Market Research Skill

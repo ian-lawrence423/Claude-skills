@@ -1,7 +1,7 @@
 # Skill Change Backlog
 
 Date: 2026-06-10
-Branch: `main` after Work Package 1; updated on `codex/skill-dependency-contracts`
+Branch: `codex/skill-metadata-cleanup` after Work Packages 1-2 were merged
 
 ## P0 - Applied in Work Package 1
 
@@ -25,9 +25,9 @@ Branch: `main` after Work Package 1; updated on `codex/skill-dependency-contract
 
 | Item | Why It Matters | Proposed Change | Files |
 |---|---|---|---|
-| Shorten descriptions over 200 chars | Repo standard requires descriptions <= 200 chars | Convert descriptions to trigger-focused summaries; move detail to `intent` or body | Most major skills |
-| Normalize frontmatter fields | Metadata is inconsistent across skills | Standardize `name`, `description`, `intent`, `type`, `best_for`, `scenarios` | All skills |
-| Fix folder/name mismatch | Folder `Deck_Check` has frontmatter name `ib-check-deck`; `Deck_Refresh` has `deck-refresh` | Decide whether folder or metadata name is canonical | `Deck_Check`, `Deck_Refresh`, README |
+| Shorten descriptions over 200 chars | Repo standard requires descriptions <= 200 chars | Applied concise discovery summaries and moved prior trigger prose to `intent` | Root skill set plus matching packaged copies |
+| Normalize frontmatter fields | Metadata is inconsistent across skills | Standardized `name`, `description`, `intent`, and `type` on root skills and synced package copies | Root skill set plus matching packaged copies |
+| Fix folder/name mismatch | Folder `Deck_Check` has frontmatter name `ib-check-deck`; `Deck_Refresh` has `deck-refresh` | Kept frontmatter `name` as canonical invocation name; folder names remain legacy packaging paths | `Deck_Check`, `Deck_Refresh` |
 
 ## P3 - Content Quality Improvements
 
@@ -64,7 +64,7 @@ Scope:
 Exit criteria:
 - A user can trace market research, competitive analysis, IC memo, and GTM diagnostic workflows without reading every skill file
 
-Status: in progress on `codex/skill-dependency-contracts`. Initial contracts and mode gates have been added to the core strategy, research, memo, diligence, adversarial, and underwriting workflow skills: `mckinsey-consultant`, `market-research`, `ic-memo`, `ntb-diligence`, `driver-tree`, `claim-scrutinizer`, `writing-style`, `red-team`, `pre-mortem`, and `boundability`. `pattern-docx` remains deferred to the separate stashed workflow update.
+Status: implemented and merged in Work Package 2. Dependency contracts and mode gates were added to the core strategy, research, memo, diligence, adversarial, and underwriting workflow skills: `mckinsey-consultant`, `market-research`, `ic-memo`, `ntb-diligence`, `driver-tree`, `claim-scrutinizer`, `writing-style`, `red-team`, `pre-mortem`, and `boundability`. The separate Pattern DOCX workflow update was also merged.
 
 ### Work Package 3 - Metadata Cleanup
 
@@ -75,6 +75,8 @@ Scope:
 
 Exit criteria:
 - All skills satisfy the stated metadata standard
+
+Status: implemented on `codex/skill-metadata-cleanup`. Root skill frontmatter now uses concise `description` values, preserves fuller trigger/context text in `intent`, and includes `type: workflow`. Matching packaged copies were synced from root sources.
 
 ### Work Package 4 - Content Refinement
 

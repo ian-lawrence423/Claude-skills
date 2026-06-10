@@ -1,9 +1,12 @@
 ---
 name: tam-sam-som-calculator
-description: Calculate TAM, SAM, and SOM with explicit assumptions, methods, and caveats. Use when sizing a market for a product idea, business case, or executive review.
+description: >-
+  Calculate TAM, SAM, and SOM with explicit methods, assumptions, caveats, and
+  triangulation for markets, products, and investment cases.
 intent: >-
-  Guide product managers through calculating Total Addressable Market (TAM), Serviceable Available Market (SAM), and Serviceable Obtainable Market (SOM) for a product idea by asking adaptive, contextually relevant questions. Use this to build defensible market size estimates backed by real-world citations, economic projections, and population data—essential for pitching to investors, securing budget, or validating product-market fit.
-type: interactive
+  Calculate TAM, SAM, and SOM with explicit assumptions, methods, and caveats. Use when
+  sizing a market for a product idea, business case, or executive review.
+type: workflow
 ---
 
 

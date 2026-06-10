@@ -1,17 +1,12 @@
 ---
 name: finance-metrics-quickref
-description: Look up SaaS finance metrics, formulas, and benchmarks fast. Use when you need a quick metric definition, formula, or benchmark during analysis.
+description: >-
+  Look up SaaS finance metric definitions, formulas, benchmarks, and interpretation
+  guidance during investment or operating analysis.
 intent: >-
-  Quick reference for any SaaS finance metric without deep teaching. Use this when you need a fast formula lookup, benchmark check, or decision framework reminder. For detailed explanations, calculations, and examples, see the related deep-dive skills.
-type: component
-best_for:
-  - "Quick metric lookups during product or finance reviews"
-  - "Checking formulas and benchmarks without reading a long explainer"
-  - "Refreshing decision rules for common SaaS metrics"
-scenarios:
-  - "What is the formula for NRR and what is a good benchmark?"
-  - "Give me a quick reference for CAC payback and Rule of 40"
-  - "I need a fast SaaS metrics cheat sheet for a business review"
+  Look up SaaS finance metrics, formulas, and benchmarks fast. Use when you need a quick
+  metric definition, formula, or benchmark during analysis.
+type: workflow
 ---
 
 
