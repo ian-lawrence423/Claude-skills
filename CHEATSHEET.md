@@ -8,6 +8,7 @@
 
 | Task | Skill(s) to invoke |
 |------|--------------------|
+| Start or resume a deal workflow | `deal-master` |
 | Structure a problem / build issue tree | `mckinsey-consultant` |
 | Track evidence state / belief register for a deal | `analytical-operating-system` |
 | Market research — full project | `market-research` |
@@ -41,18 +42,19 @@
 ## Mandatory layer sequence for any formal output
 
 ```
-1. mckinsey-consultant        — frame the problem, govern methodology
+0. deal-master                 — inventory existing work, route deal workflow
+1. mckinsey-consultant         — frame the problem, govern methodology
 2. analytical-operating-system — maintain evidence states, belief register, decision posture
-3. market-research            — gather evidence (L4→L3→L2)
-4. writing-style              — prose quality, claim tagging       ← AUTO
-5. claim-scrutinizer          — seven-part claim test
-6. red-team                   — adversarial pass
-7. pre-mortem                 — failure mode inventory
-8. pattern-docx / pptx        — produce the file
-9. doc-quality-checker        — brand + QA gate                   ← AUTO
+3. market-research             — gather evidence (L4→L3→L2)
+4. writing-style               — prose quality, claim tagging       ← AUTO
+5. claim-scrutinizer           — seven-part claim test
+6. red-team                    — adversarial pass
+7. pre-mortem                  — failure mode inventory
+8. pattern-docx / pptx         — produce the file
+9. doc-quality-checker         — brand + QA gate                   ← AUTO
 ```
 
-Not every output requires all 9 steps. Steps 4 and 9 are always mandatory.
+Not every output requires the full sequence. Step 0 applies to full deal workflows. Steps 4 and 9 are always mandatory when a formal file is produced.
 Step 2 is mandatory for deal-master, IC memo, diligence, and investment thesis workflows.
 Steps 5–7 are mandatory for IC memos and investment documents.
 

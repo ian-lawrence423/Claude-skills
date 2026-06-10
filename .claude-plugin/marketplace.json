@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "deal-master",
-      "description": "Single entry point for all deal intelligence. Inventories existing research, loads mckinsey-consultant plus analytical-operating-system, initializes the belief register, and routes to the right phase.",
+      "description": "Deal workflow entry point: inventories existing work, loads the analytical and evidence-control layers, initializes the belief register, and routes the next phase.",
       "category": "deal-intelligence",
       "source": "./deal-master",
       "author": {

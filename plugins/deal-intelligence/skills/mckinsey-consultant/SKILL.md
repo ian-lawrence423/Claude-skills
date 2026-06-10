@@ -10,7 +10,9 @@ description: |
   validation — that is market-research's job. For any task that requires original data collection
   (market sizing, competitive intelligence, customer research), invoke market-research on top of
   this skill. For financial modeling, use financial-model-builder. For PPTX/docx output, use
-  pattern-investment-pptx or pattern-docx.
+  pattern-investment-pptx or pattern-docx. In deal workflows, pair this skill with
+  analytical-operating-system for persistent belief registers, Bayesian updates, kill
+  triggers, and decision posture tracking.
 ---
 
 # McKinsey Consultant Skill — Analytical OS
@@ -37,6 +39,12 @@ mckinsey-consultant   ← YOU ARE HERE — analytical methodology, always active
       └── claim-scrutinizer      ← invoke when stress-testing a completed document
 ```
 
+**Ownership boundary:** This skill owns analytical method: problem definition, MECE issue
+trees, strategy dimensions, Pyramid Principle, analytical modules, and investment screening
+questions. `analytical-operating-system` owns the deal evidence-control layer: evidence-state
+tags, belief registers, Bayesian update logs, kill triggers, and PROCEED / REPRICE / PASS /
+RESOLVE FIRST posture. Do not duplicate those operating artifacts here.
+
 **When to invoke market-research on top of this skill:**
 - Task requires gathering new external data (market sizing, competitive landscape, customer research)
 - Task involves a structured research project with a brief and deliverable
@@ -47,6 +55,13 @@ mckinsey-consultant   ← YOU ARE HERE — analytical methodology, always active
 - Structuring an argument, building an issue tree, or designing a framework
 - Synthesizing known information into a recommendation
 - Any analytical task where the data is in hand and the job is to think clearly about it
+- Any task that does not require a persistent belief register, claim ledger, or thesis update log
+
+**When to invoke analytical-operating-system on top of this skill:**
+- Deal-master, IC memo pipeline, diligence, or investment thesis workflows where assertions must be tracked over time
+- Any active deal update where new evidence may confirm, weaken, or kill a load-bearing assertion
+- Any recommendation that needs an explicit PROCEED / REPRICE / PASS / RESOLVE FIRST decision posture
+- Any situation where prior beliefs, evidence state, and posterior confidence need to be auditable
 
 ---
 
@@ -116,6 +131,11 @@ For each prioritized branch, apply the relevant analytical lens:
 - **fact** — sourced, verifiable, cited
 - **estimate** — reasoned from available data with stated assumptions
 - **hypothesis** — untested, requires validation
+
+For investment workflows, persistent claim tracking belongs in `analytical-operating-system`.
+Use this skill to decide which claims matter and how they fit the issue tree. Use
+`analytical-operating-system` to maintain the belief register, update log, kill triggers,
+and decision posture across deal phases.
 
 **When evidence gathering is required at this step:** invoke market-research to execute
 the relevant pyramid level(s). Market-research governs source selection, validation, and
