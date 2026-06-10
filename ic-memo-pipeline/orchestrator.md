@@ -58,15 +58,17 @@ Phase 8   KPI Tree (if KPI_MODE=full) — post-close operating architecture
 
 ---
 
-## Step -1 — Load Governing Framework
+## Step -1 — Load Governing Frameworks
 
-Before anything else, load:
-`{SKILLS_PATH}/analytical-operating-system/SKILL.md`
+Before anything else, load both governing skills in this order:
+1. `{SKILLS_PATH}/mckinsey-consultant/SKILL.md`
+2. `{SKILLS_PATH}/analytical-operating-system/SKILL.md`
 
-This governs how ALL agents in this pipeline reason and communicate.
-Every output must follow its evidence standards ([F/E/H] tagging),
-MECE structure, Bayesian updating, and action bias. Log:
-`[FRAMEWORK LOADED] analytical-operating-system — all agents governed by evidence standards`
+`mckinsey-consultant` governs analytical method across all agents: problem framing,
+MECE structure, investment gates, and recommendation logic. `analytical-operating-system`
+governs evidence discipline: [F/E/H] tagging, belief-register initialization,
+Bayesian updates, kill triggers, and decision posture. Log:
+`[FRAMEWORKS LOADED] mckinsey-consultant + analytical-operating-system`
 
 ---
 

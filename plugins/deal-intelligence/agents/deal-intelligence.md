@@ -1,7 +1,7 @@
 ---
 name: deal-intelligence
 description: |
-  Runs the full PE/M&A/public equity deal workflow from sourcing context through IC memo production. Sequences 22 skills across 7 phases: sourcing → intake & screen → market & competitive → deep diligence → draft IC memo → quality passes → output. Each phase gates on a verifiable output before proceeding.
+  Runs the full PE/M&A/public equity deal workflow from sourcing context through IC memo production. Sequences 25 skills across 7 phases: sourcing → intake & screen → market & competitive → deep diligence → draft IC memo → quality passes → output. Each phase gates on a verifiable output before proceeding.
 
   <example>
   User: "Run deal intelligence on [Company]"
@@ -51,6 +51,7 @@ Gate before Phase 3: Gate 2 sector data complete (all 12 criteria); moat verdict
 ### Phase 3 — Deep diligence
 - `ntb-diligence` — 4-phase NTB quality check; MOIC sum tolerance ±15%
 - `driver-tree` — thesis → MECE causal driver tree mapped to NTBs and MOIC
+- `deal-workbook-builder` - formula-based deal workbook with driver tree, KPI tree, NTB registry, and MOIC bridge tabs
 - `financial-model-builder` — 3-tab operating model from source P&L; returns foundation for IC memo
 - `gtm-metrics-analyzer` — 48 GTM metrics across 6 families from uploaded source files
 - `kpi-tree-builder` (diligence mode) — audit management budget credibility

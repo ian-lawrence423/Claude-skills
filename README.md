@@ -2,30 +2,34 @@
 
 Pattern's modular skill architecture for Claude. Each skill is a folder containing a `SKILL.md` file that instructs Claude on methodology, output format, and quality standards for a specific domain. Skills are loaded on-demand — Claude reads the relevant `SKILL.md` before executing any task in its domain.
 
-**31 skills across 8 groups and 4 functional layers, plus 2 multi-agent pipelines.** Every formal output runs through at least two layers — usually three or four. Layers are not optional — skipping a layer produces a draft, not a deliverable.
+**33 skills across 8 groups, one orchestration entry point, 5 functional layers, and 2 multi-agent pipelines.** Every formal output runs through at least two layers — usually three or four. Layers are not optional — skipping a layer produces a draft, not a deliverable.
 
-> **Source of truth:** This README reflects the folders in [`ian-lawrence423/Claude-skills`](https://github.com/ian-lawrence423/Claude-skills). Update this file whenever skills are added or removed from the repo.
+> **Source of truth:** Root skill folders in this repo are the canonical authoring source. Packaged copies under grouped plugin folders must be synced from root before publishing. Update this README whenever skills are added, removed, repackaged, or promoted as workflow entry points.
 
 ---
 
 ## 1. How Skills Fit Together
 
-The skill library has four functional layers. The mandatory sequence for any formal output:
+The skill library has one orchestration entry point and five functional layers. For deal workflows, start with `deal-master`; for standalone tasks, invoke the most specific skill directly.
 
-1. **Analytical OS** → frames the problem, governs methodology, structures NTB registry (investment work)
-2. **Research/Analysis** → gathers evidence, builds NTB-ready findings, confirms Gate 2 scorecard
-3. **writing-style** → runs on all prose before any document code is written
-4. **claim-scrutinizer** → redlines every material claim, checks IC memo structure (investment work)
-5. **red-team** → adversarial pass on load-bearing pillars
-6. **pre-mortem** → failure mode inventory with NTB mapping (IC/investment work)
-7. **Document production** → generates the file using canonical template
-8. **doc-quality-checker** → auto-runs after file delivery
+0. **Deal Orchestration** → `deal-master` inventories existing work and routes to the right phase
+1. **Analytical Method** → `mckinsey-consultant` frames the problem and governs methodology
+2. **Evidence Control** → `analytical-operating-system` maintains evidence states, belief registers, Bayesian updates, and decision posture
+3. **Research/Analysis** → gathers evidence, builds NTB-ready findings, confirms Gate 2 scorecard
+4. **writing-style** → runs on all prose before any document code is written
+5. **claim-scrutinizer** → redlines every material claim, checks IC memo structure (investment work)
+6. **red-team** → adversarial pass on load-bearing pillars
+7. **pre-mortem** → failure mode inventory with NTB mapping (IC/investment work)
+8. **Document production** → generates the file using canonical template
+9. **doc-quality-checker** → auto-runs after file delivery
 
 > **Critical:** Never trigger a document production skill without running the quality layer first. A file produced without `writing-style` and `claim-scrutinizer` will fail the `doc-quality-checker` pass and require a full rebuild.
 
 | Layer | Skills | What It Owns | When It Runs |
 |---|---|---|---|
-| **1 — Analytical OS** | `mckinsey-consultant` | Problem structuring, MECE trees, frameworks, claim labeling (F/E/H), Six Screening Questions | Always active for strategy or investment work |
+| **0 — Deal Orchestration** | `deal-master` | Existing-work inventory, deal state assessment, phase routing, belief-register initialization | Default entry point for full deal workflows |
+| **1 — Analytical Method** | `mckinsey-consultant` | Problem structuring, MECE trees, frameworks, Pyramid Principle, Six Screening Questions | Always active for strategy or investment work |
+| **1b — Evidence Control** | `analytical-operating-system` | Evidence-state tagging, belief registers, Bayesian updates, kill triggers, decision posture | Deal-master, IC memo, diligence, and investment thesis workflows |
 | **2 — Research** | `market-research`, `ntb-diligence`, `ic-memo`, `competitive-moat-assessment`, `executive-summary-writer`, `driver-tree`, `tam-sam-som-calculator`, `statistics-fundamentals`, `finance-metrics-quickref`, `gtm-metrics-analyzer` | Evidence gathering, research workflow, deliverable architecture, metrics analysis | When research or a specific deliverable type is needed |
 | **3 — Quality** | `writing-style` ⚙️, `claim-scrutinizer`, `red-team`, `pre-mortem`, `boundability` | Prose standards, claim testing, adversarial stress-testing, failure mode enumeration | During drafting (`writing-style`) and after draft (all others) |
 | **4 — Production** | `pattern-docx`, `pattern-investment-pptx`, `diligence-ddr`, `financial-model-builder`, `executive-briefing`, `written-communication`, `giving-presentations` | Branded file output in correct format with header/footer/logo | Final step — after analytical and quality layers complete |
@@ -48,13 +52,15 @@ All other skills are invoked by name when the task matches their trigger criteri
 
 ## 3. Complete Skill Index
 
-All 31 skills organized by group. Invoke the most specific skill first; fall back to broader skills if needed.
+All 33 skills organized by group. Invoke the most specific skill first; fall back to broader skills if needed.
 
 ### Strategy & Problem Solving
 
 | Skill | Layer | What It Does | Triggers |
 |---|---|---|---|
-| `mckinsey-consultant` | L1 — Analytical OS | Problem structuring, MECE trees, 7 strategy dimensions, Pyramid Principle, Six Screening Questions — analytical OS for all strategy/investment work | Issue trees, MECE frameworks, structured diagnosis, storyline design |
+| `deal-master` | L0 — Deal Orchestration | Single entry point for deal intelligence: inventories existing work, loads core frameworks, initializes the belief register, and routes to the next phase | "run deal intelligence", "start this deal", "resume this IC memo", "where are we in diligence" |
+| `mckinsey-consultant` | L1 — Analytical Method | Problem structuring, MECE trees, 7 strategy dimensions, Pyramid Principle, Six Screening Questions — canonical analytical method for strategy/investment work | Issue trees, MECE frameworks, structured diagnosis, storyline design |
+| `analytical-operating-system` | L1b — Evidence Control | Evidence-state tagging, belief-register initialization, Bayesian updates, kill triggers, and PROCEED / REPRICE / PASS / RESOLVE FIRST decision posture | Deal-master, IC memo, diligence, investment thesis, active deal update |
 | `market-research` | L2 — Research | Full research workflow: intake → brief → pyramid (L4→L1) → deep dives → draft → iteration loop. Integrates `mckinsey-consultant`, `writing-style`, `claim-scrutinizer`, `competitive-moat-assessment` | "conduct market research", "competitive landscape", "full analysis", "size a market" |
 | `competitive-moat-assessment` | L2 — Research | 5-step moat evidence methodology: classify → existence test → strength rating → durability → verdict. Mandatory at L2b in all market research | "assess the moat", "how defensible is X", "moat depth", "durability of advantage" |
 | `pre-mortem` | L3 — Quality | Assumes deal/project failed and works backward to enumerate every failure pathway. Maps failure modes to NTBs. Distinct from `claim-scrutinizer` — assumes the bull case is wrong | "pre-mortem this", "how does this fail", "war game", "stress test downside" |

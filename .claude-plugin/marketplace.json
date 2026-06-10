@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "deal-master",
-      "description": "Single entry point for all deal intelligence. Inventories existing research, loads the analytical operating system, initializes the belief register, and routes to the right phase.",
+      "description": "Deal workflow entry point: inventories existing work, loads the analytical and evidence-control layers, initializes the belief register, and routes the next phase.",
       "category": "deal-intelligence",
       "source": "./deal-master",
       "author": {
@@ -18,7 +18,7 @@
     },
     {
       "name": "analytical-operating-system",
-      "description": "Universal investment analysis framework: thesis-first reasoning, MECE structure, Bayesian updating, evidence standards [F/E/H], and action bias. Governs all analysis.",
+      "description": "Evidence-control layer for deal work: F/E/H claim tagging, belief registers, Bayesian updates, kill triggers, and PROCEED / REPRICE / PASS / RESOLVE FIRST posture.",
       "category": "deal-intelligence",
       "source": "./analytical-operating-system",
       "author": {

@@ -3,14 +3,20 @@
 **Author:** Pattern  
 **Version:** 0.1.0
 
-Full PE/M&A/public equity deal workflow — sourcing through IC memo production. Sequences 22 skills across 7 phases. Each phase gates on a verifiable output before proceeding.
+Full PE/M&A/public equity deal workflow — sourcing through IC memo production. Sequences 25 skills across 7 phases. Each phase gates on a verifiable output before proceeding.
 
-## Skills (22)
+## Skills (25)
+
+### Orchestration
+| Skill | Trigger phrases |
+|---|---|
+| `deal-master` | "run deal intelligence", "start this deal", "resume this IC memo", "where are we in diligence" |
 
 ### Analytical OS
 | Skill | Trigger phrases |
 |---|---|
 | `mckinsey-consultant` | "structure this problem", "screen this deal", "evaluate this investment", "Six Screening Questions", "issue tree" |
+| `analytical-operating-system` | "track belief register", "update evidence state", "what changed the thesis", "decision posture" |
 
 ### Research & Diligence
 | Skill | Trigger phrases |
@@ -22,6 +28,7 @@ Full PE/M&A/public equity deal workflow — sourcing through IC memo production.
 | `competitive-landscape-deliverable` | "make an executive view of this landscape", "build deliverable from competitor sheet" |
 | `ntb-diligence` | "NTB diligence", "new-to-brand analysis", "customer acquisition quality", "cohort analysis" |
 | `driver-tree` | "build a driver tree", "decompose this thesis", "what drives MOIC here" |
+| `deal-workbook-builder` | "build the deal workbook", "rebuild the driver tree", "link the NTB registry to the model" |
 | `financial-model-builder` | "build financial model", "3-tab model", "turn this P&L into a model" |
 | `gtm-metrics-analyzer` | "analyze these GTM metrics", "build a GTM workbook", "diagnostic on this ARR table" |
 | `kpi-tree-builder` | "audit this plan", "break down this budget", "what should we track post-close" |
@@ -56,9 +63,9 @@ Full PE/M&A/public equity deal workflow — sourcing through IC memo production.
 | Phase | Skills | Gate |
 |---|---|---|
 | 0 — Sourcing context | `competitive-landscape-deliverable` | Landscape framing confirmed |
-| 1 — Intake & screen | `mckinsey-consultant` · `diligence-ddr` | Gates 1/2/3 scored; DDR issued |
+| 1 — Intake & screen | `deal-master` · `mckinsey-consultant` · `analytical-operating-system` · `diligence-ddr` | Gates 1/2/3 scored; belief register initialized; DDR issued |
 | 2 — Market & competitive | `market-research` · `tam-sam-som-calculator` · `competitive-moat-assessment` · `boundability` | Gate 2 complete; moat verdict; NTB Alignment Check |
-| 3 — Deep diligence | `ntb-diligence` · `driver-tree` · `financial-model-builder` · `gtm-metrics-analyzer` · `kpi-tree-builder` | Model built; GTM workbook complete; NTBs evidenced |
+| 3 — Deep diligence | `ntb-diligence` · `driver-tree` · `deal-workbook-builder` · `financial-model-builder` · `gtm-metrics-analyzer` · `kpi-tree-builder` | Model built; deal workbook complete; GTM workbook complete; NTBs evidenced |
 | 4 — Draft IC memo | `ic-memo` · `writing-style` | 10-section draft; all claims tagged |
 | 5 — Quality passes | `claim-scrutinizer` · `red-team` · `pre-mortem` | All 🔴 CRITICAL resolved; KILL claims hardened |
 | 6 — Output | `pattern-docx` / `pattern-investment-pptx` · `doc-quality-checker` · `executive-summary-writer` | Zero 🔴 CRITICAL QC issues |
@@ -69,3 +76,9 @@ This plugin is **opt-in only**. It is not auto-loaded. Reference it explicitly:
 - *"Load deal-intelligence"*
 - *"Run deal intelligence on [company]"*
 - Or invoke any individual skill by name
+
+## Source-of-truth policy
+
+Root skill folders in `ian-lawrence423/Claude-skills` are the canonical authoring source.
+Packaged copies under `plugins/deal-intelligence/skills/` must be synced from root before
+publishing or installing this grouped plugin.

@@ -1,3 +1,8 @@
+---
+name: deal-master
+description: Orchestrates end-to-end deal intelligence by inventorying existing work, loading core frameworks, initializing the belief register, and routing to the next phase.
+---
+
 # Deal Master — Single Entry Point for All Deal Intelligence Work
 
 You are the master orchestrator for all deal and investment analysis work.
@@ -12,13 +17,15 @@ Read this entire file before doing anything.
 
 ## Governing Framework
 
-Before anything else, load:
-`{SKILLS_PATH}/analytical-operating-system/SKILL.md`
+Before anything else, load both governing skills in this order:
+1. `{SKILLS_PATH}/mckinsey-consultant/SKILL.md`
+2. `{SKILLS_PATH}/analytical-operating-system/SKILL.md`
 
-This governs how ALL subsequent analysis is reasoned, structured, and
-communicated. Every output — from intake through final memo — must follow
-its evidence standards ([F/E/H] tagging), MECE structure, Bayesian updating,
-and action bias. Do not proceed without loading it.
+`mckinsey-consultant` governs analytical method: problem framing, MECE
+structure, investment gates, and recommendation logic. `analytical-operating-system`
+governs evidence discipline: [F/E/H] tagging, belief-register initialization,
+Bayesian updates, kill triggers, and decision posture. Do not proceed without
+loading both.
 
 ---
 
@@ -147,7 +154,7 @@ Based on State, route to the appropriate skill:
 ### Phase 1 — Intake & Screen (State A only, or if no intake.md)
 ```
 Invoke: ic-memo-pipeline/intake.md
-Load first: analytical-operating-system/SKILL.md
+Load first: mckinsey-consultant/SKILL.md, then analytical-operating-system/SKILL.md
 Pass: COMPANY, DEAL_TYPE, ENTRY_VAL, THESIS, HOLD_PERIOD, all MATERIALS
 Gate 1: Company description confirmed | Thesis has ≥1 pillar | ≥1 known risk | Six Screening Questions mapped
 ```
@@ -249,4 +256,4 @@ This is how intuition accumulates into verified knowledge over time.
 **One entry point, always.**
 Every deal engagement starts here. Not at ic-memo directly. Not at
 market-research. Here — so context is loaded, work is not repeated,
-and the analytical operating system governs from the first token.
+and the analytical method plus evidence discipline govern from the first token.
