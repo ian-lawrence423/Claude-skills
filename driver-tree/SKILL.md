@@ -1,23 +1,25 @@
 ---
 name: driver-tree
-description: |
-  Decomposes investment theses into MECE driver trees, assigns evidence tiers
-  (T1–T4) to each leaf node, and surfaces what a thesis is actually built on.
-  Use when Ian asks to "build a driver tree," "decompose this thesis," "score
-  the drivers," "map the revenue tree," "what's load-bearing in this thesis,"
-  "tier the drivers," "run a base-rate overlay," "check the vintage on this
-  evidence," "run a cascade scenario," "what's the variance-dominant driver,"
-  or "do a structural assessment of [company]." Single-asset methodology only.
-  Produces a driver tree with tiers and directionality, segment driver tables
-  with historical/today/path/tier/impact/boundability columns, base-rate overlay
-  for load-bearing drivers, vintage check on supporting evidence, variance
-  amplification analysis, downside and upside cascade scenarios, and a
-  framework self-audit. Output is a methodology document — does not produce
-  underwriting actions, deal verdicts, or position sizing. Distinct from
-  boundability (which converts driver work into underwriting structure),
-  pre-mortem (which enumerates failure pathways), and claim-scrutinizer
-  (which tests bull-case logic). Driver-tree is the structural decomposition
-  step that those other skills build on.
+description: >-
+  Decompose a single-asset thesis into MECE drivers, evidence tiers, base rates, vintage
+  checks, and cascade scenarios for diligence handoff.
+intent: >-
+  Decomposes investment theses into MECE driver trees, assigns evidence tiers (T1–T4) to
+  each leaf node, and surfaces what a thesis is actually built on. Use when Ian asks to
+  "build a driver tree," "decompose this thesis," "score the drivers," "map the revenue
+  tree," "what's load-bearing in this thesis," "tier the drivers," "run a base-rate
+  overlay," "check the vintage on this evidence," "run a cascade scenario," "what's the
+  variance-dominant driver," or "do a structural assessment of [company]." Single-asset
+  methodology only. Produces a driver tree with tiers and directionality, segment driver
+  tables with historical/today/path/tier/impact/boundability columns, base-rate overlay
+  for load-bearing drivers, vintage check on supporting evidence, variance amplification
+  analysis, downside and upside cascade scenarios, and a framework self-audit. Output is a
+  methodology document — does not produce underwriting actions, deal verdicts, or position
+  sizing. Distinct from boundability (which converts driver work into underwriting
+  structure), pre-mortem (which enumerates failure pathways), and claim-scrutinizer (which
+  tests bull-case logic). Driver-tree is the structural decomposition step that those
+  other skills build on.
+type: workflow
 ---
 
 # Driver Tree — Single-Asset Methodology

@@ -1,6 +1,17 @@
 ---
 name: gtm-metrics-analyzer
-description: calculate, interpret, and package b2b saas go-to-market metrics into a diagnostic excel workbook using the bundled metric catalog, formulas, and input requirements. use when a user uploads gtm tables, exports, board files, forecasts, or operating spreadsheets and wants a clean excel-based diagnostic analysis of growth drivers, arr funnel, pipeline, retention, efficiency, productivity, or forecast metrics. ask for missing uploaded inputs, distinguish provided values from derived calculations, and populate the bundled workbook tabs for inputs, metric calculations, and diagnostic output.
+description: >-
+  Analyze B2B SaaS GTM data and build a diagnostic workbook covering ARR funnel, pipeline,
+  retention, sales efficiency, and growth drivers.
+intent: >-
+  calculate, interpret, and package b2b saas go-to-market metrics into a diagnostic excel
+  workbook using the bundled metric catalog, formulas, and input requirements. use when a
+  user uploads gtm tables, exports, board files, forecasts, or operating spreadsheets and
+  wants a clean excel-based diagnostic analysis of growth drivers, arr funnel, pipeline,
+  retention, efficiency, productivity, or forecast metrics. ask for missing uploaded
+  inputs, distinguish provided values from derived calculations, and populate the bundled
+  workbook tabs for inputs, metric calculations, and diagnostic output.
+type: workflow
 ---
 
 Build a stand-alone GTM diagnostic workbook from uploaded tables and files.

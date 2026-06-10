@@ -1,6 +1,13 @@
 ---
 name: vibe-coding
-description: Help users build software using AI coding tools. Use when someone is using AI to generate code, building prototypes without deep technical skills, or exploring how non-engineers can create functional software through natural language.
+description: >-
+  Help non-engineers use AI coding tools to build prototypes, debug generated code, choose
+  tools, and turn natural language into working software.
+intent: >-
+  Help users build software using AI coding tools. Use when someone is using AI to
+  generate code, building prototypes without deep technical skills, or exploring how
+  non-engineers can create functional software through natural language.
+type: workflow
 ---
 
 # Vibe Coding

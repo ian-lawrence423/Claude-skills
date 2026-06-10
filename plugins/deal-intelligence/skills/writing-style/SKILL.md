@@ -1,13 +1,17 @@
 ---
 name: writing-style
-description: |
+description: >-
+  Run final prose and claim-discipline review for formal outputs, including claim tags,
+  attribution integrity, epistemic language, and clarity.
+intent: >-
   Governs prose quality, claim standards, and epistemic discipline for all formal outputs
   via an explicit self-review pass after drafting. Auto-runs on every formal output —
   market research reports, IC memos, investment theses, strategy memos, and PPTX narrative
-  text — without needing to be explicitly invoked. Always runs alongside mckinsey-consultant,
-  market-research, diligence-ddr, pattern-docx, and pattern-investment-pptx. Does NOT run
-  on conversational responses or interim analytical work — only on final or near-final
-  formal outputs.
+  text — without needing to be explicitly invoked. Always runs alongside
+  mckinsey-consultant, market-research, diligence-ddr, pattern-docx, and
+  pattern-investment-pptx. Does NOT run on conversational responses or interim analytical
+  work — only on final or near-final formal outputs.
+type: workflow
 ---
 
 # Writing Style — Formal Outputs

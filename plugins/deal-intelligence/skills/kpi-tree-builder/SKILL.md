@@ -1,6 +1,17 @@
 ---
 name: kpi-tree-builder
-description: build, audit, and maintain company-specific kpi trees that decompose a budget, forecast, or operating target into causal drivers and atomic inputs. use when a user wants to break revenue, margin, opex, headcount, cash flow, or other plan lines into measurable drivers; create a diligence-ready budget framework; translate a model into operating inputs; or define what should be tracked weekly and monthly post-close. especially useful in late diligence, annual planning, monthly business reviews, and post-acquisition operating cadence design.
+description: >-
+  Build or audit KPI trees that decompose budgets, forecasts, or operating targets into
+  causal drivers, owners, cadences, and management actions.
+intent: >-
+  build, audit, and maintain company-specific kpi trees that decompose a budget, forecast,
+  or operating target into causal drivers and atomic inputs. use when a user wants to
+  break revenue, margin, opex, headcount, cash flow, or other plan lines into measurable
+  drivers; create a diligence-ready budget framework; translate a model into operating
+  inputs; or define what should be tracked weekly and monthly post-close. especially
+  useful in late diligence, annual planning, monthly business reviews, and
+  post-acquisition operating cadence design.
+type: workflow
 ---
 
 Build KPI trees that connect financial outcomes to measurable operational inputs.

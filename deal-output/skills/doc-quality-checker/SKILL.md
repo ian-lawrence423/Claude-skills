@@ -1,14 +1,18 @@
 ---
 name: doc-quality-checker
-description: |
+description: >-
+  QA Pattern DOCX and investment PPTX outputs for brand formatting, table integrity,
+  structural logic, number consistency, and narrative flow.
+intent: >-
   Runs a comprehensive quality and formatting check on Pattern Word documents (.docx) and
   Pattern investment PPTX decks after they are created. Checks brand formatting, content
-  quality, structural logic, table integrity, header/footer, page numbers, and narrative flow.
-  AUTO-RUNS after any pattern-docx or pattern-investment-pptx output is produced — do not
-  wait to be asked. Also triggers when Ian says "check this", "QA this", "review this doc",
-  "proof this", "quality check", "run a check on this", "does this look right", or "is this
-  ready". Always produces a severity-rated inline issue list with exact locations. Never
-  auto-fixes — list issues only and let Ian decide what to fix.
+  quality, structural logic, table integrity, header/footer, page numbers, and narrative
+  flow. AUTO-RUNS after any pattern-docx or pattern-investment-pptx output is produced —
+  do not wait to be asked. Also triggers when Ian says "check this", "QA this", "review
+  this doc", "proof this", "quality check", "run a check on this", "does this look right",
+  or "is this ready". Always produces a severity-rated inline issue list with exact
+  locations. Never auto-fixes — list issues only and let Ian decide what to fix.
+type: workflow
 ---
 
 # Pattern Document Quality Checker

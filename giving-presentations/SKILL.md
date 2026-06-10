@@ -1,6 +1,13 @@
 ---
 name: giving-presentations
-description: Help users create and deliver compelling presentations. Use when someone is preparing a talk, building a slide deck, dealing with presentation anxiety, practicing for a keynote, or asking how to be more engaging when presenting.
+description: >-
+  Coach presentation planning, narrative, delivery, audience engagement, and practice for
+  talks, keynotes, pitches, or executive updates.
+intent: >-
+  Help users create and deliver compelling presentations. Use when someone is preparing a
+  talk, building a slide deck, dealing with presentation anxiety, practicing for a
+  keynote, or asking how to be more engaging when presenting.
+type: workflow
 ---
 
 # Giving Presentations

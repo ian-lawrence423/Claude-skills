@@ -1,18 +1,23 @@
 ---
 name: mckinsey-consultant
-description: |
-  McKinsey-level structured consulting methodology for strategy, analysis, and problem-solving.
-  This is the analytical OS — load it for any strategy work, investment evaluation, structured
-  diagnosis, framework design, or McKinsey-style document. It owns all analytical methodology:
-  7-step MBB problem solving, MECE issue trees, 7 strategy dimensions, Pyramid Principle,
-  Six Screening Questions for investments, and all analytical modules (Porter's, SWOT, market
-  sizing, positioning maps, value chain). It does NOT govern evidence gathering or source
-  validation — that is market-research's job. For any task that requires original data collection
-  (market sizing, competitive intelligence, customer research), invoke market-research on top of
-  this skill. For financial modeling, use financial-model-builder. For PPTX/docx output, use
+description: >-
+  Structure strategy and investment problems with MECE issue trees, hypotheses, MBB
+  problem solving, Pyramid Principle, and analytical lenses.
+intent: >-
+  McKinsey-level structured consulting methodology for strategy, analysis, and
+  problem-solving. This is the analytical OS — load it for any strategy work, investment
+  evaluation, structured diagnosis, framework design, or McKinsey-style document. It owns
+  all analytical methodology: 7-step MBB problem solving, MECE issue trees, 7 strategy
+  dimensions, Pyramid Principle, Six Screening Questions for investments, and all
+  analytical modules (Porter's, SWOT, market sizing, positioning maps, value chain). It
+  does NOT govern evidence gathering or source validation — that is market-research's job.
+  For any task that requires original data collection (market sizing, competitive
+  intelligence, customer research), invoke market-research on top of this skill. For
+  financial modeling, use financial-model-builder. For PPTX/docx output, use
   pattern-investment-pptx or pattern-docx. In deal workflows, pair this skill with
   analytical-operating-system for persistent belief registers, Bayesian updates, kill
   triggers, and decision posture tracking.
+type: workflow
 ---
 
 # McKinsey Consultant Skill — Analytical OS

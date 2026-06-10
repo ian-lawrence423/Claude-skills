@@ -1,18 +1,23 @@
 ---
 name: red-team
-description: |
+description: >-
+  Build the strongest opposing case against a thesis, memo, deck, or strategy by mapping
+  attack vectors, kill conditions, and counter-evidence.
+intent: >-
   Adversarial stress-test skill that attempts to disprove every assertion in a document
   using structured logic, factual counter-evidence, and attack vectors. Use this skill
   whenever Ian asks to "red team this", "try to disprove this", "argue against this",
-  "play devil's advocate on this", "attack this thesis", "find the holes in this argument",
-  "what would a bear say", "what's the bear case", "strongest counterargument", or
-  "what would an opponent say." Also triggers for: "challenge this", "stress-test from the
-  other side", "how would someone refute this", "kill this thesis", "what's wrong with this
-  logic." Works on investment memos / IC docs, strategy memos, and market research reports.
-  Produces a hybrid output: adversarial attack vectors organized by thesis pillar, plus a
-  claim-level verdict for each assertion. Verdict labels map to claim-scrutinizer taxonomy
-  AND carry an independent attack severity rating. This is not a quality review — it is an
-  adversarial simulation whose goal is to disprove the document's conclusions.
+  "play devil's advocate on this", "attack this thesis", "find the holes in this
+  argument", "what would a bear say", "what's the bear case", "strongest counterargument",
+  or "what would an opponent say." Also triggers for: "challenge this", "stress-test from
+  the other side", "how would someone refute this", "kill this thesis", "what's wrong with
+  this logic." Works on investment memos / IC docs, strategy memos, and market research
+  reports. Produces a hybrid output: adversarial attack vectors organized by thesis
+  pillar, plus a claim-level verdict for each assertion. Verdict labels map to
+  claim-scrutinizer taxonomy AND carry an independent attack severity rating. This is not
+  a quality review — it is an adversarial simulation whose goal is to disprove the
+  document's conclusions.
+type: workflow
 ---
 
 # Red Team

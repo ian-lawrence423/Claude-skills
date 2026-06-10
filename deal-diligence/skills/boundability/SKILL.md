@@ -1,21 +1,24 @@
 ---
 name: boundability
-description: |
-  Decomposes investment theses into driver trees with T1–T4 evidence tiers, then
-  converts load-bearing drivers and material diligence findings into underwriting
-  decisions through a 6-module assessment. Use when Ian asks to "assess
-  boundability," "bound this risk," "build a driver tree," "decompose this thesis,"
-  "score the drivers," "run underwriting analysis on [issue]," "what does this
-  mean for our underwrite," "convert diligence to underwriting," "score this for
-  IC," "price this risk," "what's the perimeter on X," "can we underwrite this?"
-  "how confidently can we bound this driver," "what's load-bearing in this
-  thesis," or "run a cascade scenario." Produces a driver tree, structured issue
-  objects, deal summary, and final deal view (proceed / proceed with
-  protections / reprice / pass). Single-asset analysis only — does not perform
-  portfolio construction or position sizing. Distinct from pre-mortem (which
-  enumerates failure pathways) and claim-scrutinizer (which tests bull-case
-  logic). Boundability decomposes the thesis, isolates what is load-bearing,
-  and converts identified risk into specific underwriting action.
+description: >-
+  Convert load-bearing thesis drivers and diligence findings into underwriting actions,
+  cases, protections, reprice logic, or pass decisions for single-asset deals.
+intent: >-
+  Decomposes investment theses into driver trees with T1–T4 evidence tiers, then converts
+  load-bearing drivers and material diligence findings into underwriting decisions through
+  a 6-module assessment. Use when Ian asks to "assess boundability," "bound this risk,"
+  "build a driver tree," "decompose this thesis," "score the drivers," "run underwriting
+  analysis on [issue]," "what does this mean for our underwrite," "convert diligence to
+  underwriting," "score this for IC," "price this risk," "what's the perimeter on X," "can
+  we underwrite this?" "how confidently can we bound this driver," "what's load-bearing in
+  this thesis," or "run a cascade scenario." Produces a driver tree, structured issue
+  objects, deal summary, and final deal view (proceed / proceed with protections / reprice
+  / pass). Single-asset analysis only — does not perform portfolio construction or
+  position sizing. Distinct from pre-mortem (which enumerates failure pathways) and
+  claim-scrutinizer (which tests bull-case logic). Boundability decomposes the thesis,
+  isolates what is load-bearing, and converts identified risk into specific underwriting
+  action.
+type: workflow
 ---
 
 # Boundability — Driver Tree Decomposition + Diligence-to-Underwriting Framework
@@ -79,6 +82,41 @@ material failure mode typically becomes one or more boundability issue objects.
 Boundability also runs on items pre-mortem did not surface — load-bearing
 drivers identified through Layer 1 decomposition, plus positive findings that
 embed risk (e.g., a large customer win that creates concentration).
+
+---
+
+## Dependency Contract
+
+Loads before this skill:
+- `mckinsey-consultant` for thesis framing and MECE investment logic.
+- `driver-tree` when a separate structural decomposition already exists.
+- `claim-scrutinizer` when bull-case logic weaknesses should inform issue objects.
+- `ntb-diligence` when an NTB registry exists.
+- `pre-mortem` when failure modes should be converted into underwriting action.
+
+Loads after this skill:
+- `ic-memo` when underwriting actions need to become IC memo risk, recommendation, or protection language.
+- `deal-workbook-builder` when quantified issue objects need workbook implementation.
+- `writing-style` before formal delivery.
+- `pattern-docx` or `pattern-investment-pptx` only when producing IC materials.
+
+Inputs required:
+- Investment thesis, driver tree or thesis mechanics, material diligence findings, failure modes if available, evidence tiers, base/upside/downside assumptions, and decision context.
+
+Outputs produced:
+- Driver tree, issue objects, six-module scores, underwriting treatment, case scenarios, cascade scenarios, and final deal view.
+
+Do not load with:
+- Portfolio construction or position sizing tasks.
+- `pre-mortem` as a duplicate. Pre-mortem identifies failure pathways; boundability converts load-bearing drivers and risks into underwriting structure.
+
+## Workflow Mode
+
+| Mode | Use When | Minimum Output |
+|---|---|---|
+| Quick | User asks whether a risk or driver can be underwritten | Boundability label, evidence gap, underwriting implication |
+| Standard | User wants issue-by-issue underwriting analysis | Driver tree, issue objects, scores, treatment, scenarios |
+| Full | User wants IC-ready underwriting structure | Six-module assessment, cascade scenarios, protections/reprice/pass logic, memo handoff |
 
 ---
 

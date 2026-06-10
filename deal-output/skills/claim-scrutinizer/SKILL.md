@@ -1,15 +1,20 @@
 ---
 name: claim-scrutinizer
-description: |
+description: >-
+  Redline claims in IC memos, decks, strategy docs, and investment theses by testing
+  logic, evidence, assumptions, base rates, and derivative math.
+intent: >-
   Analyzes investment memos, IC decks, strategy memos, and PowerPoint presentations and
   produces a redlined critique of every claim using McKinsey MECE logic tree structure.
-  Use this skill whenever Ian asks to "redline", "scrutinize", "pressure-test", "stress-test",
-  "critique", "review the logic of", or "check the claims in" a memo or deck. Also triggers for:
-  "poke holes in this", "what's missing from this memo", "is this IC-ready", "check this
-  argument", "review this investment thesis", "fact-check this deck". For IC memos and
-  investment documents, applies the Six Screening Questions as the primary analytical lens.
-  For other documents, applies pure MECE logic tree analysis. Always produces a structured
-  redline output — not a general summary — that flags specific claims with specific verdicts.
+  Use this skill whenever Ian asks to "redline", "scrutinize", "pressure-test",
+  "stress-test", "critique", "review the logic of", or "check the claims in" a memo or
+  deck. Also triggers for: "poke holes in this", "what's missing from this memo", "is this
+  IC-ready", "check this argument", "review this investment thesis", "fact-check this
+  deck". For IC memos and investment documents, applies the Six Screening Questions as the
+  primary analytical lens. For other documents, applies pure MECE logic tree analysis.
+  Always produces a structured redline output — not a general summary — that flags
+  specific claims with specific verdicts.
+type: workflow
 ---
 
 # Claim Scrutinizer
@@ -26,6 +31,39 @@ is "directionally reasonable" as a reason to let it pass. If a claim would not s
 hostile IC member's first question, it does not pass.
 
 Read this entire file before beginning any analysis.
+
+---
+
+## Dependency Contract
+
+Loads before this skill:
+- `mckinsey-consultant` for analytical structure when the source document lacks a clear issue tree.
+- `market-research` only if the task requires new evidence gathering before claims can be judged.
+- `ic-memo`, `market-research`, `pattern-docx`, or `pattern-investment-pptx` when those skills produced the draft being reviewed.
+
+Loads after this skill:
+- `red-team` when the user needs an adversarial case beyond claim-level critique.
+- `pre-mortem` when investment failure pathways must be mapped after claim weaknesses are known.
+- `writing-style` when prose edits are required after analytical fixes.
+- `pattern-docx` or `pattern-investment-pptx` only if the hardened output must be regenerated as a file.
+
+Inputs required:
+- Draft memo, deck, argument, claim set, or thesis; intended audience; decision context; and any source pack used to support the claims.
+
+Outputs produced:
+- Logic tree, assumption audit, claim-level verdicts, evidence gaps, repair actions, and priority redline summary.
+
+Do not load with:
+- Empty source material. This skill needs a draft, claim set, or argument to scrutinize.
+- `market-research` as a replacement for redline work. Research gathers evidence; this skill judges whether claims survive.
+
+## Workflow Mode
+
+| Mode | Use When | Minimum Output |
+|---|---|---|
+| Quick | User wants top weaknesses or IC-readiness triage | Governing-thesis check, top 5 issues, repair priorities |
+| Standard | User wants a memo/deck redline | Logic tree, assumption audit, claim verdicts, evidence gaps, fixes |
+| Full | User wants investment-grade pressure test | Six Screening Questions, full claim registry, base-rate checks, repair plan, handoff to red-team/pre-mortem |
 
 ---
 

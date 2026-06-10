@@ -1,6 +1,13 @@
 ---
 name: executive-briefing
-description: "Transforms research findings into executive-ready briefings. Automatically activated when user mentions 'executive', 'briefing', 'C-suite', 'board', 'leadership', or 'presentation'."
+description: >-
+  Turn complex updates into executive-ready briefings, one-pagers, board notes, and
+  leadership summaries with clear decisions and implications.
+intent: >-
+  Transforms research findings into executive-ready briefings. Automatically activated
+  when user mentions 'executive', 'briefing', 'C-suite', 'board', 'leadership', or
+  'presentation'.
+type: workflow
 ---
 
 # Executive Briefing Skill

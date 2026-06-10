@@ -1,15 +1,20 @@
 ---
 name: claim-scrutinizer
-description: |
+description: >-
+  Redline claims in IC memos, decks, strategy docs, and investment theses by testing
+  logic, evidence, assumptions, base rates, and derivative math.
+intent: >-
   Analyzes investment memos, IC decks, strategy memos, and PowerPoint presentations and
   produces a redlined critique of every claim using McKinsey MECE logic tree structure.
-  Use this skill whenever Ian asks to "redline", "scrutinize", "pressure-test", "stress-test",
-  "critique", "review the logic of", or "check the claims in" a memo or deck. Also triggers for:
-  "poke holes in this", "what's missing from this memo", "is this IC-ready", "check this
-  argument", "review this investment thesis", "fact-check this deck". For IC memos and
-  investment documents, applies the Six Screening Questions as the primary analytical lens.
-  For other documents, applies pure MECE logic tree analysis. Always produces a structured
-  redline output — not a general summary — that flags specific claims with specific verdicts.
+  Use this skill whenever Ian asks to "redline", "scrutinize", "pressure-test",
+  "stress-test", "critique", "review the logic of", or "check the claims in" a memo or
+  deck. Also triggers for: "poke holes in this", "what's missing from this memo", "is this
+  IC-ready", "check this argument", "review this investment thesis", "fact-check this
+  deck". For IC memos and investment documents, applies the Six Screening Questions as the
+  primary analytical lens. For other documents, applies pure MECE logic tree analysis.
+  Always produces a structured redline output — not a general summary — that flags
+  specific claims with specific verdicts.
+type: workflow
 ---
 
 # Claim Scrutinizer

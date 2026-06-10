@@ -1,16 +1,23 @@
 ---
 name: mckinsey-consultant
-description: |
-  McKinsey-level structured consulting methodology for strategy, analysis, and problem-solving.
-  This is the analytical OS — load it for any strategy work, investment evaluation, structured
-  diagnosis, framework design, or McKinsey-style document. It owns all analytical methodology:
-  7-step MBB problem solving, MECE issue trees, 7 strategy dimensions, Pyramid Principle,
-  Six Screening Questions for investments, and all analytical modules (Porter's, SWOT, market
-  sizing, positioning maps, value chain). It does NOT govern evidence gathering or source
-  validation — that is market-research's job. For any task that requires original data collection
-  (market sizing, competitive intelligence, customer research), invoke market-research on top of
-  this skill. For financial modeling, use financial-model-builder. For PPTX/docx output, use
-  pattern-investment-pptx or pattern-docx.
+description: >-
+  Structure strategy and investment problems with MECE issue trees, hypotheses, MBB
+  problem solving, Pyramid Principle, and analytical lenses.
+intent: >-
+  McKinsey-level structured consulting methodology for strategy, analysis, and
+  problem-solving. This is the analytical OS — load it for any strategy work, investment
+  evaluation, structured diagnosis, framework design, or McKinsey-style document. It owns
+  all analytical methodology: 7-step MBB problem solving, MECE issue trees, 7 strategy
+  dimensions, Pyramid Principle, Six Screening Questions for investments, and all
+  analytical modules (Porter's, SWOT, market sizing, positioning maps, value chain). It
+  does NOT govern evidence gathering or source validation — that is market-research's job.
+  For any task that requires original data collection (market sizing, competitive
+  intelligence, customer research), invoke market-research on top of this skill. For
+  financial modeling, use financial-model-builder. For PPTX/docx output, use
+  pattern-investment-pptx or pattern-docx. In deal workflows, pair this skill with
+  analytical-operating-system for persistent belief registers, Bayesian updates, kill
+  triggers, and decision posture tracking.
+type: workflow
 ---
 
 # McKinsey Consultant Skill — Analytical OS
@@ -37,6 +44,12 @@ mckinsey-consultant   ← YOU ARE HERE — analytical methodology, always active
       └── claim-scrutinizer      ← invoke when stress-testing a completed document
 ```
 
+**Ownership boundary:** This skill owns analytical method: problem definition, MECE issue
+trees, strategy dimensions, Pyramid Principle, analytical modules, and investment screening
+questions. `analytical-operating-system` owns the deal evidence-control layer: evidence-state
+tags, belief registers, Bayesian update logs, kill triggers, and PROCEED / REPRICE / PASS /
+RESOLVE FIRST posture. Do not duplicate those operating artifacts here.
+
 **When to invoke market-research on top of this skill:**
 - Task requires gathering new external data (market sizing, competitive landscape, customer research)
 - Task involves a structured research project with a brief and deliverable
@@ -47,6 +60,46 @@ mckinsey-consultant   ← YOU ARE HERE — analytical methodology, always active
 - Structuring an argument, building an issue tree, or designing a framework
 - Synthesizing known information into a recommendation
 - Any analytical task where the data is in hand and the job is to think clearly about it
+- Any task that does not require a persistent belief register, claim ledger, or thesis update log
+
+**When to invoke analytical-operating-system on top of this skill:**
+- Deal-master, IC memo pipeline, diligence, or investment thesis workflows where assertions must be tracked over time
+- Any active deal update where new evidence may confirm, weaken, or kill a load-bearing assertion
+- Any recommendation that needs an explicit PROCEED / REPRICE / PASS / RESOLVE FIRST decision posture
+- Any situation where prior beliefs, evidence state, and posterior confidence need to be auditable
+
+---
+
+## Dependency Contract
+
+Loads before this skill:
+- None required for standalone strategy work.
+- `deal-master` may load before this skill in full deal workflows to inventory existing work and route the phase.
+
+Loads after this skill:
+- `analytical-operating-system` for deal workflows that need belief registers, evidence states, or decision posture.
+- `market-research` when new external evidence, source validation, or citation tracking is required.
+- `financial-model-builder` when the answer depends on an operating model or return case.
+- `writing-style` before any formal deliverable leaves draft state.
+- `claim-scrutinizer`, `red-team`, or `pre-mortem` after a draft thesis, memo, or recommendation exists.
+- `pattern-docx` or `pattern-investment-pptx` only when producing a file.
+
+Inputs required:
+- Decision to be made, scope boundaries, known facts, existing evidence, and output format.
+
+Outputs produced:
+- Problem statement, MECE issue tree, Day-1 hypothesis, 20/80 analysis plan, analytical lens selection, and recommendation structure.
+
+Do not use this skill alone when:
+- The task requires original research, evidence triangulation, belief-register tracking, financial model construction, or branded file production.
+
+## Workflow Mode
+
+| Mode | Use When | Minimum Output |
+|---|---|---|
+| Quick | User needs structure, an issue tree, or a rapid recommendation from known facts | BLUF, issue tree, 2-3 key drivers, next step |
+| Standard | User needs a strategy or investment analysis using existing evidence | Problem definition, MECE tree, hypothesis, evidence by branch, recommendation |
+| Full | User needs an IC-grade or board-ready workflow | This skill plus evidence control, research, quality review, and production skills as needed |
 
 ---
 
@@ -116,6 +169,11 @@ For each prioritized branch, apply the relevant analytical lens:
 - **fact** — sourced, verifiable, cited
 - **estimate** — reasoned from available data with stated assumptions
 - **hypothesis** — untested, requires validation
+
+For investment workflows, persistent claim tracking belongs in `analytical-operating-system`.
+Use this skill to decide which claims matter and how they fit the issue tree. Use
+`analytical-operating-system` to maintain the belief register, update log, kill triggers,
+and decision posture across deal phases.
 
 **When evidence gathering is required at this step:** invoke market-research to execute
 the relevant pyramid level(s). Market-research governs source selection, validation, and

@@ -1,10 +1,14 @@
 ---
 name: analytical-operating-system
-description: |
-  Enforces investment evidence discipline: F/E/H claim tagging, belief-register initialization,
-  Bayesian updates, kill triggers, and PROCEED / REPRICE / PASS / RESOLVE FIRST decision posture.
-  Use with deal-master, IC memo, diligence, and investment thesis workflows after
-  mckinsey-consultant has framed the problem.
+description: >-
+  Track deal evidence states, belief registers, Bayesian updates, kill triggers, and
+  decision posture for IC memo, diligence, and investment thesis workflows.
+intent: >-
+  Enforces investment evidence discipline: F/E/H claim tagging, belief-register
+  initialization, Bayesian updates, kill triggers, and PROCEED / REPRICE / PASS / RESOLVE
+  FIRST decision posture. Use with deal-master, IC memo, diligence, and investment thesis
+  workflows after mckinsey-consultant has framed the problem.
+type: workflow
 ---
 
 # Analytical Operating System - Evidence Discipline

@@ -1,6 +1,13 @@
 ---
 name: managing-up
-description: Help users work effectively with their manager and executives. Use when someone is struggling with their manager relationship, needs to influence leadership, wants to get better at executive communication, or is trying to build trust with their boss.
+description: >-
+  Advise on manager and executive communication, influence, trust-building, and
+  relationship repair when working with senior stakeholders.
+intent: >-
+  Help users work effectively with their manager and executives. Use when someone is
+  struggling with their manager relationship, needs to influence leadership, wants to get
+  better at executive communication, or is trying to build trust with their boss.
+type: workflow
 ---
 
 # Managing Up

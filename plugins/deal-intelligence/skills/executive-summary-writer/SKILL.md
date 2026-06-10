@@ -1,20 +1,22 @@
 ---
 name: executive-summary-writer
-description: |
+description: >-
+  Write concise executive summaries from completed research, memos, diligence, or strategy
+  work with answer-first synthesis and claim discipline.
+intent: >-
   Write a publication-ready executive summary that compresses completed analytical work
   into a tight, answer-first synthesis for a senior audience. Use this skill whenever Ian
-  asks to "write the exec summary," "summarize this for IC," "draft the one-pager,"
-  "write the opening," "summarize the findings," or "what's the so what on this."
-  Also triggers for: "board summary," "executive briefing," "key takeaways for leadership,"
-  "compress this into one page," "write the lede." Works on any completed analytical
-  deliverable: market research reports, IC memos, strategy memos, diligence findings,
-  competitive analyses, investment theses.
-
-  This skill governs compression discipline — how to reduce 20–40 pages of analysis to
-  400–600 words without losing the argument or softening the conclusions. It does not
-  govern prose standards (writing-style), claim discipline (writing-style / claim-scrutinizer),
-  or brand formatting (pattern-docx / pattern-investment-pptx). Defer to those skills
-  for their respective responsibilities.
+  asks to "write the exec summary," "summarize this for IC," "draft the one-pager," "write
+  the opening," "summarize the findings," or "what's the so what on this." Also triggers
+  for: "board summary," "executive briefing," "key takeaways for leadership," "compress
+  this into one page," "write the lede." Works on any completed analytical deliverable:
+  market research reports, IC memos, strategy memos, diligence findings, competitive
+  analyses, investment theses. This skill governs compression discipline — how to reduce
+  20–40 pages of analysis to 400–600 words without losing the argument or softening the
+  conclusions. It does not govern prose standards (writing-style), claim discipline
+  (writing-style / claim-scrutinizer), or brand formatting (pattern-docx /
+  pattern-investment-pptx). Defer to those skills for their respective responsibilities.
+type: workflow
 ---
 
 # Executive Summary Writer

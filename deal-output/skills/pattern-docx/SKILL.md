@@ -1,12 +1,17 @@
 ---
 name: pattern-docx
-description: >
-  Generate professional, on-brand Word documents (.docx) for Pattern. Use this skill whenever
-  Ian asks to create a memo, report, analysis, due diligence document, or any professional
-  Word document for Pattern. This skill encodes Pattern's exact typography (Wix Madefor Display),
-  brand colors, header/footer with logo, section structure, table styles, and paragraph
-  formatting — all extracted directly from Pattern's canonical Word template. Always use this
-  skill instead of the generic docx skill when working on Pattern materials.
+description: >-
+  Generate Pattern-branded Word documents using the canonical template shell, exact
+  typography, colors, tables, headers, footers, and QA workflow.
+intent: >-
+  Generate professional, on-brand Word documents (.docx) for Pattern. Use this skill
+  whenever Ian asks to create a memo, report, analysis, due diligence document, or any
+  professional Word document for Pattern. This skill encodes Pattern's exact typography
+  (Wix Madefor Display), brand colors, header/footer with logo, section structure, table
+  styles, and paragraph formatting — all extracted directly from Pattern's canonical Word
+  template. Always use this skill instead of the generic docx skill when working on
+  Pattern materials.
+type: workflow
 ---
 
 # Pattern Word Document Generator
