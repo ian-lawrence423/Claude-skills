@@ -119,6 +119,20 @@ Do not load with:
 
 ---
 
+## Example And Anti-Pattern
+
+Example prompt:
+> "Decompose the thesis into a driver tree and show what is load-bearing."
+
+Expected use:
+- Break the thesis into MECE value drivers, evidence tiers, and causal links.
+- Identify which drivers are necessary for the underwriting case to work.
+- Hand off evidence gaps, base-rate overlays, and scenario dependencies to downstream diligence.
+
+Anti-pattern:
+- Do not turn the driver tree into a final deal verdict, valuation answer, or generic KPI list.
+
+---
 ## Step 1 — Construct the driver tree
 
 A driver tree decomposes an outcome (revenue, EBITDA, IRR, market share) into

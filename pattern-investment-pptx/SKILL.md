@@ -24,6 +24,20 @@ writing any code.
 
 ---
 
+## Example And Anti-Pattern
+
+Example prompt:
+> "Build a Pattern investment deck from this approved IC memo and operating model."
+
+Expected use:
+- Use Pattern investment deck assets, slide rules, table rules, chart rules, and editorial standards.
+- Build data-dense investor slides from hardened content, not raw brainstorming notes.
+- Run slide QA before delivery and then `doc-quality-checker` on the output.
+
+Anti-pattern:
+- Do not create a generic marketing deck, improvise colors/fonts, or start slide production before the narrative and numbers are hardened.
+
+---
 ## Step 1: Read the Technical Reference First
 
 Before writing any code, read the full pptxgenjs reference for API usage, pitfalls, and best

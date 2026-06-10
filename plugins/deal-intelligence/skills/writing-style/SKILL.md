@@ -51,6 +51,20 @@ Do not load with:
 | Standard | Reviewing a memo section, deck narrative, or formal answer | Five-step self-review, edits applied, residual gaps |
 | Full | Reviewing a complete formal deliverable | Full claim/attribution/prose pass before production and QA |
 
+## Example And Anti-Pattern
+
+Example prompt:
+> "Tighten this IC memo section before it becomes a Pattern DOCX."
+
+Expected use:
+- Check claim tags, attribution integrity, epistemic language, and inductive flow.
+- Rewrite unsupported certainty into precise fact, estimate, or hypothesis language.
+- Return the tightened prose plus residual data gaps that still matter.
+
+Anti-pattern:
+- Do not auto-run on scratch analysis, source collection, workflow planning, or conversational brainstorming.
+
+---
 ## Auto-Run Boundary
 
 Auto-run this skill only for final or near-final formal outputs. Do not auto-run it for

@@ -35,6 +35,20 @@ loading both.
 
 ---
 
+## Example And Anti-Pattern
+
+Example prompt:
+> "Resume the IC memo for Company X from C:\Deals\CompanyX and tell me the next phase."
+
+Expected use:
+- Inventory the deal folder and classify current pipeline state.
+- Load `mckinsey-consultant` and `analytical-operating-system` before routing.
+- Route to the next incomplete phase without redoing completed work.
+
+Anti-pattern:
+- Do not run the analysis yourself, skip inventory, or regenerate outputs that already exist.
+
+---
 ## Your Inputs
 
 ```

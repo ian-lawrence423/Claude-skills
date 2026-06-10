@@ -131,6 +131,20 @@ Do not load with:
 
 ---
 
+## Example And Anti-Pattern
+
+Example prompt:
+> "Draft the IC memo for Company X using the CIM, model, and diligence notes in this folder."
+
+Expected use:
+- Consume upstream research, NTB, driver-tree, and belief-register outputs before drafting.
+- Produce the 10-section memo with sourced claims, risks, open items, and recommendation logic.
+- Run writing and analytical quality passes before any Pattern DOCX production.
+
+Anti-pattern:
+- Do not start with DOCX generation, re-run completed research cold, or bury unresolved kill criteria in generic risk language.
+
+---
 ## Before Writing Anything
 
 **Load the investment evaluation framework:**

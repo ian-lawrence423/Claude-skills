@@ -26,6 +26,20 @@ also be invoked manually on any existing Pattern document.
 
 ---
 
+## Example And Anti-Pattern
+
+Example prompt:
+> "QA this Pattern memo before I send it."
+
+Expected use:
+- Identify whether the artifact is DOCX, PPTX, or both and load the matching brand spec.
+- Report severity-rated issues with exact page, slide, section, table, or paragraph locations.
+- Separate critical send-blockers from warning and minor polish issues.
+
+Anti-pattern:
+- Do not silently auto-fix the artifact, give a general opinion, or skip exact locations for findings.
+
+---
 ## Step 1: Identify Document Type and Load Brand Spec
 
 Before running any checks, identify what you are auditing:

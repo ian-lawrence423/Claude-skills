@@ -103,6 +103,20 @@ Do not use this skill alone when:
 
 ---
 
+## Example And Anti-Pattern
+
+Example prompt:
+> "Structure the investment case for Company X using this existing CIM and management deck."
+
+Expected use:
+- Define the decision, Day-1 hypothesis, MECE issue tree, binding driver, and recommendation logic.
+- Use known evidence only; invoke `market-research` if new source collection is required.
+- Hand off to `analytical-operating-system` when belief registers or decision posture are required.
+
+Anti-pattern:
+- Do not use this skill to gather new sources, maintain evidence registers, build financial models, or generate branded files.
+
+---
 ## Core Methodology: MBB 7-Step Problem Solving
 
 Apply these steps in order for any strategy or analysis request. Steps may compress for simple
