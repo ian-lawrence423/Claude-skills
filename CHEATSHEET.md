@@ -9,6 +9,7 @@
 | Task | Skill(s) to invoke |
 |------|--------------------|
 | Structure a problem / build issue tree | `mckinsey-consultant` |
+| Track evidence state / belief register for a deal | `analytical-operating-system` |
 | Market research — full project | `market-research` |
 | Size a market (TAM/SAM/SOM) | `tam-sam-som-calculator` |
 | Competitive landscape + moat verdict | `market-research` → `competitive-moat-assessment` |
@@ -40,18 +41,20 @@
 ## Mandatory layer sequence for any formal output
 
 ```
-1. mckinsey-consultant   — frame the problem, govern methodology
-2. market-research       — gather evidence (L4→L3→L2)
-3. writing-style         — prose quality, claim tagging       ← AUTO
-4. claim-scrutinizer     — seven-part claim test
-5. red-team              — adversarial pass
-6. pre-mortem            — failure mode inventory
-7. pattern-docx / pptx  — produce the file
-8. doc-quality-checker   — brand + QA gate                   ← AUTO
+1. mckinsey-consultant        — frame the problem, govern methodology
+2. analytical-operating-system — maintain evidence states, belief register, decision posture
+3. market-research            — gather evidence (L4→L3→L2)
+4. writing-style              — prose quality, claim tagging       ← AUTO
+5. claim-scrutinizer          — seven-part claim test
+6. red-team                   — adversarial pass
+7. pre-mortem                 — failure mode inventory
+8. pattern-docx / pptx        — produce the file
+9. doc-quality-checker        — brand + QA gate                   ← AUTO
 ```
 
-Not every output requires all 8 steps. Steps 3 and 8 are always mandatory.
-Steps 4–6 are mandatory for IC memos and investment documents.
+Not every output requires all 9 steps. Steps 4 and 9 are always mandatory.
+Step 2 is mandatory for deal-master, IC memo, diligence, and investment thesis workflows.
+Steps 5–7 are mandatory for IC memos and investment documents.
 
 ---
 
@@ -68,6 +71,8 @@ Steps 4–6 are mandatory for IC memos and investment documents.
 
 | If you invoke... | Also load... |
 |-----------------|-------------|
+| `deal-master` | `mckinsey-consultant`, `analytical-operating-system` |
+| `ic-memo-pipeline` | `mckinsey-consultant`, `analytical-operating-system` |
 | `market-research` | `mckinsey-consultant`, `competitive-moat-assessment` (post-L2) |
 | `ic-memo` | `ntb-diligence` (if NTB_MODE=full), `driver-tree`, `executive-summary-writer` (S2) |
 | `driver-tree` | `boundability` (use load-bearing nodes as boundability units) |
