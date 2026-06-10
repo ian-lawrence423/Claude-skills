@@ -34,8 +34,8 @@ for this deal (or a comparable canonical template) already exists. Pattern docum
 often contain richer template assets than the skill's stock `{SKILL_DIR}/assets/` folder
 provides — specifically:
 
-- 6 header/footer files (header1/2/3, footer1/2/3) supporting titlePg behavior where
-  the first page (cover) uses a different header/footer than body pages
+- 6 header/footer files (header1/2/3, footer1/2/3) supporting first/even/default
+  page behavior where the cover can use a different header/footer than body pages
 - Multiple media assets (logo image, icon mark, gradient rule SVG) that render
   differently in header vs. footer contexts
 - Specific page margins (typically 720 DXA all sides, 1080 DXA top) matching
@@ -58,19 +58,17 @@ provides — specifically:
 
 **When to use stock assets (`{SKILL_DIR}/assets/`):**
 
-1. First memo in a new deal
-2. No canonical reference available
-3. Ian has not specified a template source
+1. The canonical template path is unavailable
+2. Ian has not provided another Pattern reference document
+3. The task explicitly allows a stock Pattern shell
 
 **Transplant procedure:**
 
-Before Phase 1 (body generation), unpack the canonical template:
+Start by unpacking the canonical template shell:
 
 ```bash
-# 1. Unzip canonical template
-mkdir -p /tmp/canonical_unpack
-cd /tmp/canonical_unpack
-unzip -q /path/to/canonical_template.docx
+# 1. Unpack canonical template
+py "{SKILL_DIR}/scripts/office/unpack.py" "/path/to/canonical_template.docx" "/tmp/pattern_unpack"
 
 # 2. Inventory assets
 ls word/                  # Should show header1/2/3.xml, footer1/2/3.xml, media/
@@ -86,31 +84,33 @@ print(m.group() if m else 'NOT FOUND')
 "
 ```
 
-After Phase 1 (body generation), apply the transplant in Phase 2:
+Then replace the body content inside the unpacked template:
 
-1. Unzip the body-only docx produced by docx-js
-2. Replace single header1.xml / footer1.xml with the canonical set of 6 files
-3. Copy canonical media folder (image1, image2, image3)
-4. Copy header*.xml.rels and footer*.xml.rels from canonical
-5. Replace sectPr in body document.xml with canonical sectPr (6 header/footer references,
-   titlePg flag, canonical margins)
-6. Update document.xml.rels to reference all 6 header/footer files (rId7-rId12)
-7. Add Override entries in [Content_Types].xml for header2/3 and footer2/3
+1. Build the new body XML according to the paragraph and table specs below.
+2. Replace the existing body children in `word/document.xml`.
+3. Preserve the canonical `<w:sectPr>` exactly, including 6 header/footer references,
+   any title-page behavior, canonical margins, header distance, and footer distance.
+4. Update only the document title text in the canonical header XML.
+5. Repack the existing shell with `py "{SKILL_DIR}/scripts/office/pack.py" ... --validate false`.
 
-**CRITICAL — titlePg behavior:** The canonical template uses a `<w:titlePg/>` element in
-sectPr so that the cover page (first page) uses header3/footer3 (typically empty) while
-body pages use header2/footer2 (with logo and icon mark). Without titlePg, the cover
-page shows the logo header overlaying the title block — a visible distribution-blocking
-defect.
+**CRITICAL — first-page behavior:** The canonical template may express first-page behavior
+through first/even/default header and footer references, with or without an explicit
+`<w:titlePg/>` element. Preserve the canonical `<w:sectPr>` exactly instead of trying to
+recreate this logic. Otherwise the cover page can inherit the body header/footer or lose
+the Pattern shell.
 
 **Semantic color verification after transplant:** Canonical templates use Pattern's
 full brand palette, not just H1/H2 colors:
 - `#4280F4` — H1 section titles (bright blue)
 - `#3A00FD` — H2 subsection titles (indigo)
 - `#0F4761` — Table header fill (dark teal) + accent text
+- `#F5F8FF` — Alternating table row fill
+- `#D9E2F3` — Highlighted/totals row fill
 - `#C00000` — Red callouts (negative values, GAP, FAILED, CRITICAL)
 - `#C55A11` — Orange callouts (CONDITIONAL, WATCH, STRUCTURAL, OPEN)
-- `#375623` — Green callouts (PASS, CONFIRMED, STABLE)
+- `#375623` — Green status callouts (CONFIRMED, STABLE, positive values)
+- `#E2EFDA` / `#1A5C1A` — ACQUIRE verdict fill/text
+- `#FFE0E0` / `#8B1A1A` — PASS verdict fill/text
 - `#444444` — Dark grey body/metadata text
 - `#666666` — Mid grey captions/secondary text
 
@@ -132,11 +132,11 @@ After Phase 2 transplant, apply these body-color corrections:
 # Table header rows: dark teal fill with white text
 # Swap fill #D5E8F0 -> #0F4761; swap text color #0F4761 -> #FFFFFF within those rows
 
-# Alternating row shading: standard grey
-# Swap fill #F5F9FC -> #F2F2F2
+# Alternating row shading: Pattern light blue
+# Swap fill #F5F9FC or #F2F2F2 -> #F5F8FF
 
 # Semantic callouts: pattern-match text content to assign color
-# PASS/CONFIRMED/STABLE -> #375623 (green)
+# CONFIRMED/STABLE/positive values -> #375623 (green)
 # CONDITIONAL/WATCH/STRUCTURAL/OPEN -> #C55A11 (orange)
 # GAP/FAILED/CRITICAL -> #C00000 (red)
 ```
@@ -146,27 +146,49 @@ inspection of each cell.
 
 ---
 
-## Step 2: Understand the Two-Phase Build Process
+## Step 2: Canonical Template XML Workflow
 
 Pattern's header contains a **gradient line shape** and an **anchored logo image** that cannot
-be produced by docx-js. The correct workflow is always:
+be produced by docx-js. The default workflow is the canonical-template XML workflow:
 
-**Phase 1 — Generate body with docx-js**
-Write all document content (paragraphs, tables, bullets) via docx-js. Do NOT attempt to create
-header or footer in docx-js — leave sections with no header/footer.
+**Canonical source**
 
-**Phase 2 — Python XML patch**
-After generating the .docx:
-1. Unzip the file
-2. Copy in the template header1.xml, footer1.xml, their rels, and media assets from `{SKILL_DIR}/assets/`
-3. Add header/footer relationship entries to `word/_rels/document.xml.rels`
-4. Inject `<w:headerReference>` and `<w:footerReference>` into `<w:sectPr>` in document.xml
-5. Add Override entries for header1.xml and footer1.xml to `[Content_Types].xml`
-6. Repack
+Use this template when available:
 
-**CRITICAL — Content_Types.xml**: Without Override entries for header1.xml and footer1.xml,
-Word silently ignores them even if everything else is wired correctly. This is the #1 cause
-of missing headers/footers.
+```text
+C:\Users\IanLawrence\OneDrive - Pattern\Ian Productivity\Claude\artifacts\research\agentic-commerce-pattern\Commerce_Market_Research_v9_2026-04-29.docx
+```
+
+**Phase 1 - Unpack the canonical shell**
+
+```powershell
+py "{SKILL_DIR}/scripts/office/unpack.py" "<canonical-template.docx>" "<working-unpack-dir>"
+```
+
+Preserve the unpacked header, footer, relationships, media, styles, settings, numbering,
+theme, and `[Content_Types].xml` files. These are part of the Pattern template system.
+
+**Phase 2 - Replace the body XML only**
+
+1. Generate new `word/document.xml` body content using the XML specs below.
+2. Replace only the document body content.
+3. Preserve the canonical `<w:sectPr>` from the template.
+4. Update only the header title text in the canonical header XML.
+5. Leave all other header/footer XML, rels, media, styles, settings, and theme files untouched.
+
+**Phase 3 - Repack**
+
+```powershell
+py "{SKILL_DIR}/scripts/office/pack.py" "<working-unpack-dir>" "<final.docx>" --validate false
+```
+
+Use docx-js body generation only as a fallback when no canonical template is available. If
+using that fallback, the XML patch step is mandatory because docx-js cannot reproduce the
+Pattern header/footer shell.
+
+**Critical:** Never overwrite canonical header/footer/media/theme files when the canonical
+template exists. The only safe edits to the template shell are replacing body content and
+updating the header title text.
 
 ---
 
@@ -181,18 +203,22 @@ SUBHEADER       = '3A00FD'   # H2 text: deep blue/purple
 BODY            = '000000'   # Normal body text
 BODY_BOLD_LEAD  = '000000'   # Bold lead paragraph
 BODY_SECONDARY  = '444444'   # Secondary/supporting body
-BODY_NOTE       = '0F4761'   # Dark navy — callout/important note (SemiBold)
+BODY_NOTE       = '0F4761'   # Dark navy - callout/important note (SemiBold)
 BODY_SUBTLE     = '333333'   # Subtle variation
 CAPTION         = '666666'   # Footnotes, captions (sz=16)
 RED             = 'C00000'   # Risk items, critical callouts
-ORANGE          = 'C55A11'   # Warnings, conditional verdicts
-GREEN           = '375623'   # Pass verdicts
+ORANGE          = 'C55A11'   # Warnings, conditional/open status callouts
+GREEN           = '375623'   # Positive/confirmed status callouts
 TABLE_HEADER    = '0F4761'   # Table header row fill (dark teal/navy)
-TABLE_ROW_ALT   = 'F2F2F2'   # Alternating data row fill
+TABLE_ROW_ALT   = 'F5F8FF'   # Alternating data row fill
 TABLE_HIGHLIGHT = 'D9E2F3'   # Highlighted/totals row fill
 TABLE_BORDER    = 'DDDDDD'   # Cell borders
 SECTION_RULE    = 'BBBBBB'   # H1 bottom rule
 FOOTER_BORDER   = 'D9D9D9'   # Footer top rule
+ACQUIRE_FILL    = 'E2EFDA'   # Acquire verdict fill
+ACQUIRE_TEXT    = '1A5C1A'   # Acquire verdict text
+PASS_FILL       = 'FFE0E0'   # Pass verdict fill
+PASS_TEXT       = '8B1A1A'   # Pass verdict text
 WHITE           = 'FFFFFF'
 ```
 
@@ -206,6 +232,17 @@ FONT_SB   = 'Wix Madefor Display SemiBold' # Subheaders (H2), footer page number
 installed, but the font name must still be set correctly in the XML — Word/Google Docs will
 render it correctly when opened.
 
+Use these exact type specs:
+
+| Element | Font | Size | Color | Spacing / rule |
+|---------|------|------|-------|----------------|
+| Body / Normal | Wix Madefor Display | 18 half-pts (9pt) | `000000` | after 120 |
+| Body bold lead | Wix Madefor Display + `<w:b/>` | 18 half-pts (9pt) | `000000` | after 120 |
+| Section label | Wix Madefor Display + `<w:b/>` | 22 half-pts (11pt) | `4280F4` | pageBreakBefore, bottom border `BBBBBB`, before 160, after 100, tracking 40 |
+| Sub-heading | Wix Madefor Display SemiBold | 18 half-pts (9pt) | `3A00FD` | before 200, after 80 |
+| Header doc title | Wix Madefor Display SemiBold | 22 half-pts (11pt) | `000000` | update text only |
+| Footer page number | Wix Madefor Display SemiBold | 16 half-pts (8pt) | template default | right aligned |
+
 ### Page Layout
 ```
 Page size:    12240 × 15840 DXA  (US Letter)
@@ -214,6 +251,21 @@ Header dist:  432 DXA
 Footer dist:  288 DXA
 Content width: 10800 DXA  (= 12240 − 720 − 720)
 ```
+
+### XML Body Replacement Rules
+
+When using the canonical-template workflow, build body XML with namespace-aware XML tools
+where practical. Avoid broad regex edits for final structural changes.
+
+Required paragraph property order:
+
+```text
+pageBreakBefore -> pBdr -> spacing -> ind -> jc -> rPr
+```
+
+When replacing `word/document.xml`, preserve the canonical `<w:sectPr>` exactly. It carries
+the header/footer references, first-page behavior, page size, margins, header distance, and
+footer distance.
 
 ---
 
@@ -231,8 +283,9 @@ new Paragraph({
   },
   children: [new TextRun({
     text,
-    font: 'Wix Madefor Display SemiBold',
+    font: 'Wix Madefor Display',
     size: 22,                      // 11pt
+    bold: true,                    // XML equivalent: <w:b/>
     color: '4280F4',
     characterSpacing: 40,          // Slight tracking
   })]
@@ -263,7 +316,7 @@ spacing: { before: 140, after: 60 }
 ### Body — Normal paragraph
 ```javascript
 new Paragraph({
-  spacing: { before: 0, after: 80 },
+  spacing: { before: 0, after: 120 },
   children: [new TextRun({
     text,
     font: 'Wix Madefor Display',
@@ -275,9 +328,10 @@ new Paragraph({
 
 ### Body Bold Lead — Opening paragraph of a section
 ```javascript
-// Same as Body but font: 'Wix Madefor Display SemiBold' — used as the first paragraph after H1
+// Same as Body but bold: true - used as the first paragraph after H1
 spacing: { before: 0, after: 120 }
-font: 'Wix Madefor Display SemiBold'
+font: 'Wix Madefor Display'
+bold: true
 ```
 
 ### Body Secondary — Supporting context
@@ -324,7 +378,11 @@ numbering: { reference: 'bullets', level: 1 }
 Use standard Body paragraph with font set to SemiBold and color:
 - Red callout: `font: 'Wix Madefor Display SemiBold'`, `color: 'C00000'`
 - Orange/conditional: `color: 'C55A11'`
-- Green/pass: `color: '375623'`
+- Green status: `color: '375623'`
+
+Formal verdict cells use filled cells, not only colored text:
+- ACQUIRE: fill `E2EFDA`, text `1A5C1A`
+- PASS: fill `FFE0E0`, text `8B1A1A`
 
 ---
 
@@ -414,12 +472,12 @@ new Table({
         })]
       })
     )}),
-    // Data rows — alternate FFFFFF / F2F2F2
+    // Data rows - alternate FFFFFF / F5F8FF
     ...dataRows.map((row, ri) => new TableRow({ children: row.map((text, ci) =>
       new TableCell({
         borders: CELL_BORDERS,
         width: { size: colWidths[ci], type: WidthType.DXA },
-        shading: { fill: ri % 2 === 0 ? 'FFFFFF' : 'F2F2F2', type: ShadingType.CLEAR, color: 'auto' },
+        shading: { fill: ri % 2 === 0 ? 'FFFFFF' : 'F5F8FF', type: ShadingType.CLEAR, color: 'auto' },
         margins: CELL_MARGINS,
         verticalAlign: VerticalAlign.CENTER,
         children: [new Paragraph({
@@ -446,9 +504,10 @@ font: 'Wix Madefor Display SemiBold', color: 'C00000'
 
 ---
 
-## Step 7: Phase 2 — Python Patch Script
+## Step 7: Fallback-Only Python Patch Script
 
-Use this exact script structure. Substitute `{DOC_TITLE}` with the document title for the header.
+Use this script only when no canonical Pattern template is available. The canonical-template
+workflow in Step 2 is preferred. Substitute `{DOC_TITLE}` with the document title for the header.
 
 ```python
 import zipfile, os, shutil, re
@@ -924,15 +983,17 @@ new Paragraph({
 ## Step 9: Critical Rules
 
 1. **Never use Arial** — all text must use Wix Madefor Display or Wix Madefor Display SemiBold
-2. **Never use bold: true** — use `font: 'Wix Madefor Display SemiBold'` instead for all emphasis (H1, H2, Body Bold Lead, Body Note, table headers, callouts). Setting `bold: true` alongside SemiBold double-bolds and breaks the visual system.
+2. **Use bold only where the template requires `<w:b/>`** — H1 section labels and Body Bold Lead use `font: 'Wix Madefor Display'` plus bold; H2, header title, footer page numbers, notes, table headers, and callouts use `font: 'Wix Madefor Display SemiBold'` without an extra bold flag.
 3. **Content width = 10800 DXA** — all tables must use this width; columnWidths must sum to 10800
 4. **ShadingType.CLEAR** — always use CLEAR, never SOLID (SOLID turns backgrounds black)
 5. **Never use unicode bullets directly** — always use `numbering` config with `LevelFormat.BULLET`
-6. **Phase 2 is always required** — never try to generate header/footer in docx-js
-7. **Content_Types.xml Override entries are mandatory** — missing them = invisible header/footer
-8. **Footer tab stop** — use `<w:tab w:val="right" w:pos="10800"/>` in pPr tabs + `<w:tab/>` run element; do NOT use `<w:ptab>` (unreliable across renderers)
-9. **Page margins are 0.5 inch (720 DXA)** — not the docx-js default of 1 inch
-10. **characterSpacing: 40** on H1 text runs — this is the slight tracking on section headers
+6. **Canonical template first** — unpack the canonical Pattern .docx, replace body XML, preserve canonical sectPr, and repack
+7. **Header/footer XML is template-owned** — update the header title text only; do not rewrite logos, gradient rules, rels, media, theme, styles, or footer XML
+8. **docx-js is fallback only** — if no canonical template is available, generate body content with docx-js and then run the XML patch workflow
+9. **Content_Types.xml Override entries are mandatory in fallback mode** — missing them = invisible header/footer
+10. **Footer tab stop** — use `<w:tab w:val="right" w:pos="10800"/>` in pPr tabs + `<w:tab/>` run element; do NOT use `<w:ptab>` (unreliable across renderers)
+11. **Page margins are 0.5 inch (720 DXA)** — not the docx-js default of 1 inch
+12. **characterSpacing: 40** on H1 text runs — this is the slight tracking on section headers
 
 ---
 
@@ -940,4 +1001,5 @@ new Paragraph({
 
 See the Sea Limited PE Strategy Analysis document as the canonical reference implementation.
 It demonstrates all paragraph types, all table variants, multi-section layout, and the complete
-Phase 2 patch workflow.
+canonical-template XML workflow, with the fallback patch workflow used only when a template is
+unavailable.
