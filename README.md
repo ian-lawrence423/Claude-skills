@@ -2,9 +2,11 @@
 
 Pattern's modular skill architecture for Claude. Each skill is a folder containing a `SKILL.md` file that instructs Claude on methodology, output format, and quality standards for a specific domain. Skills are loaded on-demand — Claude reads the relevant `SKILL.md` before executing any task in its domain.
 
-**33 skills across 8 groups, one orchestration entry point, 5 functional layers, and 2 multi-agent pipelines.** Every formal output runs through at least two layers — usually three or four. Layers are not optional — skipping a layer produces a draft, not a deliverable.
+**33 skills across 8 groups, one orchestration entry point, 5 functional layers, 2 multi-agent pipelines, and 8 generated reference documents.** Every formal output runs through at least two layers — usually three or four. Layers are not optional — skipping a layer produces a draft, not a deliverable.
 
 > **Source of truth:** Root skill folders in this repo are the canonical authoring source. Packaged copies under grouped plugin folders must be synced from root before publishing. Update this README whenever skills are added, removed, repackaged, or promoted as workflow entry points.
+
+> **Reference docs:** Generated Word reference files in `docs/` are rebuilt from this repo with `docs/generate_claude_docs.py`. Do not hand-edit the DOCX files without also updating the Markdown/source generator.
 
 ---
 
@@ -61,7 +63,7 @@ All 33 skills organized by group. Invoke the most specific skill first; fall bac
 | `deal-master` | L0 — Deal Orchestration | Single entry point for deal intelligence: inventories existing work, loads core frameworks, initializes the belief register, and routes to the next phase | "run deal intelligence", "start this deal", "resume this IC memo", "where are we in diligence" |
 | `mckinsey-consultant` | L1 — Analytical Method | Problem structuring, MECE trees, 7 strategy dimensions, Pyramid Principle, Six Screening Questions — canonical analytical method for strategy/investment work | Issue trees, MECE frameworks, structured diagnosis, storyline design |
 | `analytical-operating-system` | L1b — Evidence Control | Evidence-state tagging, belief-register initialization, Bayesian updates, kill triggers, and PROCEED / REPRICE / PASS / RESOLVE FIRST decision posture | Deal-master, IC memo, diligence, investment thesis, active deal update |
-| `market-research` | L2 — Research | Full research workflow: intake → brief → pyramid (L4→L1) → gold-standard report architecture → iteration loop. Requires decision-grade artifacts in Full mode | "conduct market research", "competitive landscape", "full analysis", "size a market" |
+| `market-research` | L2 — Research | Full research workflow: intake → brief → pyramid (L4→L1) → gold-standard report architecture → iteration loop. Full-mode standalone reports use `docs/market-research-gold-standard-guide.md` plus `market-research/references/gold-standard-report-template.md` | "conduct market research", "competitive landscape", "full analysis", "size a market" |
 | `competitive-moat-assessment` | L2 — Research | 5-step moat evidence methodology: classify → existence test → strength rating → durability → verdict. Mandatory at L2b in all market research | "assess the moat", "how defensible is X", "moat depth", "durability of advantage" |
 | `pre-mortem` | L3 — Quality | Assumes deal/project failed and works backward to enumerate every failure pathway. Maps failure modes to NTBs. Distinct from `claim-scrutinizer` — assumes the bull case is wrong | "pre-mortem this", "how does this fail", "war game", "stress test downside" |
 | `red-team` | L3 — Quality | Adversarial review — constructs the strongest opposing case with evidence. 6-gate attack lenses. Produces a structured rebuttal, not a general critique | "red team this", "make the bear case", "argue against this", "steelman the opposition" |
@@ -145,7 +147,7 @@ Pipelines are multi-agent workflows composed of skills. They live in their own f
 | Pipeline | Folder | What It Produces | Mode Flags |
 |----------|--------|-----------------|-----------|
 | `ic-memo-pipeline` | `ic-memo-pipeline/` | Full 10-section IC memo: intake → market research → NTB diligence → driver tree → section drafts → 5 iteration passes → Pattern DOCX → QA | `NTB_MODE`: full/skip · `KPI_MODE`: full/skip |
-| `market-research-pipeline` | `market-research-pipeline/` | Standalone market research report: brief → L4→L3→L2 → gold-standard report architecture → iteration passes → Pattern DOCX | — |
+| `market-research-pipeline` | `market-research-pipeline/` | Standalone market research report: brief → L4→L3→L2 → gold-standard guide/template → iteration passes → Pattern DOCX | — |
 
 **ic-memo-pipeline agent files:**
 
@@ -170,7 +172,21 @@ Pipelines are multi-agent workflows composed of skills. They live in their own f
 
 ---
 
-## 6. Adding a New Skill
+## 6. Gold-Standard Deliverable Guides
+
+Use these one-off reference documents when the goal is the most thorough version of a major strategic deliverable.
+
+| Guide | Source | DOCX |
+|---|---|---|
+| Market Research Gold Standard | `docs/market-research-gold-standard-guide.md` | `docs/Market_Research_Gold_Standard_Guide.docx` |
+| IC Memo Gold Standard | `docs/ic-memo-gold-standard-guide.md` | `docs/IC_Memo_Gold_Standard_Guide.docx` |
+| Competitive Assessment Gold Standard | `docs/competitive-assessment-gold-standard-guide.md` | `docs/Competitive_Assessment_Gold_Standard_Guide.docx` |
+| Executive Summary Gold Standard | `docs/executive-summary-gold-standard-guide.md` | `docs/Executive_Summary_Gold_Standard_Guide.docx` |
+| Strategic Diligence Gold Standard | `docs/strategic-diligence-gold-standard-guide.md` | `docs/Strategic_Diligence_Gold_Standard_Guide.docx` |
+
+---
+
+## 7. Adding a New Skill
 
 Follow this checklist to add a new skill without breaking conventions:
 
@@ -182,15 +198,26 @@ Follow this checklist to add a new skill without breaking conventions:
 
 ---
 
-## 6. Related Files
+## 8. Related Files
 
 | File | Location | Purpose |
 |---|---|---|
 | `agents.md` | Repo root / OneDrive sync | Always-on operating layer — default mode, work-mode templates, full skill directory, file output rules |
 | `README.md` | Repo root | Source of truth for deployed skills — skill index, invocation guide, architecture overview |
 | `CHEATSHEET.md` | Repo root | Quick-reference: task→skill map, layer sequence, pipeline phase map, brand constants |
-| `Claude_Skills_CheatSheet.docx` | `docs/` / OneDrive | Legacy quick-reference card (see CHEATSHEET.md for current version) |
-| `Claude_Skill_Library_External (Finance).docx` | `docs/` / OneDrive | Deep reference for PE/investment workflow: skill architecture, inventory, IC memo sequential prompts |
-| `Claude_Skills_README.docx` | `docs/` | Pattern-branded Word version of this README |
+| `Claude_Skills_README.docx` | `docs/` | Generated Pattern-branded Word version of this README |
+| `Claude_Skills_CheatSheet_v2.docx` | `docs/` / OneDrive | Generated quick-reference card for common tasks, mandatory layers, pairings, and brand constants |
+| `Claude_Skill_Library_External (Finance)_v6.docx` | `docs/` / OneDrive | Generated finance/investment reference: skill architecture, inventory, IC memo workflow, finance handoff rules |
+| `Market_Research_Gold_Standard_Guide.docx` | `docs/` | Generated standalone guide for creating the most thorough market research report |
+| `IC_Memo_Gold_Standard_Guide.docx` | `docs/` | Generated standalone guide for a full Pattern IC memo |
+| `Competitive_Assessment_Gold_Standard_Guide.docx` | `docs/` | Generated standalone guide for competitive assessment and moat analysis |
+| `Executive_Summary_Gold_Standard_Guide.docx` | `docs/` | Generated standalone guide for two-page executive summaries |
+| `Strategic_Diligence_Gold_Standard_Guide.docx` | `docs/` | Generated standalone guide for NTB diligence and underwriting handoff |
+| `market-research-gold-standard-guide.md` | `docs/` | Markdown source for the standalone market research guide |
+| `ic-memo-gold-standard-guide.md` | `docs/` | Markdown source for the IC memo guide |
+| `competitive-assessment-gold-standard-guide.md` | `docs/` | Markdown source for the competitive assessment guide |
+| `executive-summary-gold-standard-guide.md` | `docs/` | Markdown source for the executive summary guide |
+| `strategic-diligence-gold-standard-guide.md` | `docs/` | Markdown source for the strategic diligence guide |
+| `generate_claude_docs.py` | `docs/` | Rebuilds the README, cheat sheet, finance library, and market research Word references |
 | `MBB_METHODOLOGY.md` | `mckinsey-consultant/references/` | Full MBB 7-step methodology reference |
 | `VALIDATION_FRAMEWORKS.md` | `mckinsey-consultant/references/` | Source validation, CRAAP scoring, triangulation standards |

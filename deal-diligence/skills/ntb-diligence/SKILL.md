@@ -38,7 +38,7 @@ Read this entire file before beginning.
 ntb-diligence        ← YOU ARE HERE — NTB registry, diligence plan, stress test
       │
       ├── mckinsey-consultant          ← analytical OS; loaded for thesis structuring
-      ├── investment-evaluation        ← NTB format spec (claim-scrutinizer/references/)
+      ├── investment-evaluation        ← NTB format spec (mckinsey-consultant/references/)
       ├── market-research              ← invoked if evidence gathering is required
       ├── claim-scrutinizer            ← runs on the stress-test output
       ├── writing-style                ← runs on all prose before delivery
@@ -207,7 +207,7 @@ NTB DILIGENCE INTAKE — please answer all six questions in one reply
 
 **Before proceeding, scan for a domain template match:**
 
-Check `/mnt/skills/user/ic-memo/references/domain-templates/` for any file whose trigger
+Check `{SKILL_DIR}/../ic-memo/references/domain-templates/` for any file whose trigger
 list matches the company or topic. If a match is found, load it immediately — it pre-loads
 confirmed data, known gaps, and prior NTB work that would otherwise be re-derived. State in
 Phase 2 output: "Domain template loaded: [filename]. [N] confirmed data points pre-loaded.
@@ -584,7 +584,7 @@ a failure mechanism, a leading indicator, cascade effects, and a kill trigger. E
 those is a testable claim.
 
 ```
-Load: /mnt/skills/user/claim-scrutinizer/SKILL.md
+Load: {SKILL_DIR}/../claim-scrutinizer/SKILL.md
 ```
 
 Run claim-scrutinizer's seven-part test against the full Phase 4 output. Focus areas:
@@ -648,7 +648,7 @@ primary handoff format because it plugs cleanly into `ic-memo` without reformatt
 
 **Hard dependencies:**
 - `mckinsey-consultant` — thesis structuring and MECE discipline
-- `investment-evaluation-framework.md` (at `claim-scrutinizer/references/`) — NTB format spec
+- `investment-evaluation-framework.md` (at `mckinsey-consultant/references/`) — NTB format spec
 
 **Conditional dependencies:**
 - `market-research` — invoked only if evidence gathering requires primary research
@@ -737,15 +737,15 @@ Every `ntb-diligence` output must pass all of the following before delivery:
 
 ```
 NTB format spec (mandatory load in Phase 3):
-  /mnt/skills/user/claim-scrutinizer/references/investment-evaluation-framework.md
+  {SKILL_DIR}/../mckinsey-consultant/references/investment-evaluation-framework.md
   → Section 3.2: Need-to-Believe Registry — Required Format
 
 Domain templates (auto-load if company matches):
-  /mnt/skills/user/ic-memo/references/domain-templates/
+  {SKILL_DIR}/../ic-memo/references/domain-templates/
 
 Pre-mortem coordination:
-  /mnt/skills/user/pre-mortem/SKILL.md
+  {SKILL_DIR}/../pre-mortem/SKILL.md
 
 IC memo integration:
-  /mnt/skills/user/ic-memo/SKILL.md
+  {SKILL_DIR}/../ic-memo/SKILL.md
 ```
