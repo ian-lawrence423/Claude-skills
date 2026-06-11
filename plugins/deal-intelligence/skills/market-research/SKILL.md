@@ -137,9 +137,10 @@ Phase 3 │ THEME DEVELOPMENT  ← most critical phase, do not skip
         │ Themes are the report spine — not pyramid levels, not data summaries
         │
 Phase 4 │ DRAFT
+        │ For Full-mode reports, load the Gold-Standard Report Template
         │ Build document using Report Architecture below
-        │ Organize by themes, never by pyramid levels
-        │ Apply Section Anatomy to every theme section
+        │ Organize by decision-grade sections, never by pyramid levels
+        │ Apply Section Anatomy to every analytical section
         │ Apply Competitor Profile Anatomy to every named competitor
         │
 Phase 5 │ ITERATION LOOP  (three sequential passes — none optional)
@@ -584,8 +585,21 @@ for unresolved primary data items.
 
 ## Phase 4: Draft — Report Architecture
 
-**The report is organized by themes, not pyramid levels.** Pyramid levels are analytical
-scaffolding. They do not appear as section headers in the final output.
+**The report is organized by decision-grade sections, not pyramid levels.** Pyramid
+levels are analytical scaffolding. They do not appear as section headers in the final
+output.
+
+For Full-mode DOCX reports, load the gold-standard reference before drafting:
+
+```
+Read: {SKILL_DIR}/references/gold-standard-report-template.md
+```
+
+The gold-standard template is mandatory for full market research reports unless Ian
+explicitly asks for a lighter output or a different structure. It is the consistency
+standard for thoughtful Pattern research: fixed report architecture, required
+analytical artifacts, market-sizing arithmetic checks, evidence labels, and final QA
+gates.
 
 ### Document Structure
 
@@ -594,16 +608,20 @@ scaffolding. They do not appear as section headers in the final output.
 2.  Executive Summary       — two-page six-section synthesis via executive-summary-writer:
                                Company Overview, Product Offering, Market Dynamic,
                                Business Model, Thesis, Open Questions
-3.  Market Context          — condensed Level 4 findings: establishes the stage
-                               (1–2 pages / 1–2 slides). Not the full analysis.
-4.  [Theme 1 Section]
-5.  [Theme 2 Section]
-6.  [Theme 3 Section]
-7.  [Theme 4 Section]
-8.  [Theme 5–6 Section]     — if warranted
-9.  Strategic Implications  — what the themes mean for the company or investment decision
-                               Owner + timeline per implication
-10. Appendix                — sources, methodology, detailed sizing model, CRAAP scores
+3.  Context and Scope       — value-chain/workflow map, in-scope vs. out-of-scope,
+                               data sensitivity tiering where relevant
+4.  Market Sizing           — frame comparison, source/scope reconciliation,
+                               sub-segment/geography views, arithmetic checks
+5.  Customer Segmentation   — buyer archetypes, JTBD, budgets, buying behavior
+6.  Competitive Landscape   — competitor tiers, substitutes, Porter's Five Forces
+                               when rivalry or substitution changes the answer
+7.  Pricing & Economics     — pricing archetypes, value capture, unit economics
+8.  Technology Trends       — quantified signals, disruption map, timing
+9.  Regulatory / Risk       — documented scope, implications, do-not-overclaim guardrails
+10. Competitive Moat        — moat types, replicability horizon, scorecard, verdicts
+11. Strategic Implications  — key findings and what Pattern/operator/IC should underwrite
+12. Appendix                — source labels, methodology, arithmetic corrections,
+                               detailed sizing model, CRAAP scores
 ```
 
 **When feeding an IC memo:** Add a section after Strategic Implications:
@@ -616,16 +634,28 @@ scaffolding. They do not appear as section headers in the final output.
 ```
 
 **Calibration:**
-- Market context: 1–2 pages
-- Each theme section: 2–4 pages (DOCX) / 2–3 slides (PPTX)
+- Context and Scope: 1–2 pages
+- Each analytical section: 2–4 pages (DOCX) / 2–3 slides (PPTX)
 - Strategic implications: 1–2 pages
 - NTB Evidence Summary (if applicable): 1 page per NTB
 - Appendix: as needed
 
-### Section Anatomy — apply to every theme section
+### Gold-standard artifact rule
 
-Every theme section must follow this internal structure exactly. Sections that deviate
-produce the data-dump output the iteration loop exists to catch.
+Every major section must contain at least one decision-grade artifact from the
+gold-standard reference. Prose-only sections are incomplete. Typical artifacts include
+market-frame comparison tables, source/scope tables, buyer archetype tables, competitive
+maps, pricing archetype tables, unit-economics benchmarks, disruption maps, regulatory
+scope tables, moat scorecards, IC underwriting tables, source-label appendices, and
+arithmetic correction logs.
+
+If the artifact is not relevant to the specific market, state why and substitute a
+decision-equivalent artifact. Do not silently omit artifacts.
+
+### Section Anatomy — apply to every analytical section
+
+Every analytical section must follow this internal structure exactly. Sections that
+deviate produce the data-dump output the iteration loop exists to catch.
 
 **1. Section headline — governing insight**
 A complete declarative sentence stating the theme as a finding. Not a label. Not a
@@ -883,8 +913,10 @@ A deliverable is ready for output only when every item below passes.
       format used for findings intended to transfer to ntb-diligence
 
 **Draft architecture**
-- [ ] Document organized by themes, not pyramid levels
-- [ ] Every theme section follows the four-element Section Anatomy
+- [ ] Full-mode report uses the gold-standard report architecture or documents why not
+- [ ] Document organized by decision-grade sections, not pyramid levels
+- [ ] Every analytical section includes at least one decision-grade artifact
+- [ ] Every analytical section follows the four-element Section Anatomy
 - [ ] Every named competitor has a complete six-element Competitor Profile
 - [ ] Executive summary leads with the governing synthesis, not a topic preview
 - [ ] Every section headline is a governing insight statement, not a label

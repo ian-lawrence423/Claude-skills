@@ -61,7 +61,7 @@ All 33 skills organized by group. Invoke the most specific skill first; fall bac
 | `deal-master` | L0 — Deal Orchestration | Single entry point for deal intelligence: inventories existing work, loads core frameworks, initializes the belief register, and routes to the next phase | "run deal intelligence", "start this deal", "resume this IC memo", "where are we in diligence" |
 | `mckinsey-consultant` | L1 — Analytical Method | Problem structuring, MECE trees, 7 strategy dimensions, Pyramid Principle, Six Screening Questions — canonical analytical method for strategy/investment work | Issue trees, MECE frameworks, structured diagnosis, storyline design |
 | `analytical-operating-system` | L1b — Evidence Control | Evidence-state tagging, belief-register initialization, Bayesian updates, kill triggers, and PROCEED / REPRICE / PASS / RESOLVE FIRST decision posture | Deal-master, IC memo, diligence, investment thesis, active deal update |
-| `market-research` | L2 — Research | Full research workflow: intake → brief → pyramid (L4→L1) → deep dives → draft → iteration loop. Integrates `mckinsey-consultant`, `writing-style`, `claim-scrutinizer`, `competitive-moat-assessment` | "conduct market research", "competitive landscape", "full analysis", "size a market" |
+| `market-research` | L2 — Research | Full research workflow: intake → brief → pyramid (L4→L1) → gold-standard report architecture → iteration loop. Requires decision-grade artifacts in Full mode | "conduct market research", "competitive landscape", "full analysis", "size a market" |
 | `competitive-moat-assessment` | L2 — Research | 5-step moat evidence methodology: classify → existence test → strength rating → durability → verdict. Mandatory at L2b in all market research | "assess the moat", "how defensible is X", "moat depth", "durability of advantage" |
 | `pre-mortem` | L3 — Quality | Assumes deal/project failed and works backward to enumerate every failure pathway. Maps failure modes to NTBs. Distinct from `claim-scrutinizer` — assumes the bull case is wrong | "pre-mortem this", "how does this fail", "war game", "stress test downside" |
 | `red-team` | L3 — Quality | Adversarial review — constructs the strongest opposing case with evidence. 6-gate attack lenses. Produces a structured rebuttal, not a general critique | "red team this", "make the bear case", "argue against this", "steelman the opposition" |
@@ -145,7 +145,7 @@ Pipelines are multi-agent workflows composed of skills. They live in their own f
 | Pipeline | Folder | What It Produces | Mode Flags |
 |----------|--------|-----------------|-----------|
 | `ic-memo-pipeline` | `ic-memo-pipeline/` | Full 10-section IC memo: intake → market research → NTB diligence → driver tree → section drafts → 5 iteration passes → Pattern DOCX → QA | `NTB_MODE`: full/skip · `KPI_MODE`: full/skip |
-| `market-research-pipeline` | `market-research-pipeline/` | Standalone market research report: brief → L4→L3→L2 → themes → draft → iteration passes → Pattern DOCX | — |
+| `market-research-pipeline` | `market-research-pipeline/` | Standalone market research report: brief → L4→L3→L2 → gold-standard report architecture → iteration passes → Pattern DOCX | — |
 
 **ic-memo-pipeline agent files:**
 

@@ -64,7 +64,7 @@ Full PE/M&A/public equity deal workflow — sourcing through IC memo production.
 |---|---|---|
 | 0 — Sourcing context | `competitive-landscape-deliverable` | Landscape framing confirmed |
 | 1 — Intake & screen | `deal-master` · `mckinsey-consultant` · `analytical-operating-system` · `diligence-ddr` | Gates 1/2/3 scored; belief register initialized; DDR issued |
-| 2 — Market & competitive | `market-research` · `tam-sam-som-calculator` · `competitive-moat-assessment` · `boundability` | Gate 2 complete; moat verdict; NTB Alignment Check |
+| 2 — Market & competitive | `market-research` · `tam-sam-som-calculator` · `competitive-moat-assessment` · `boundability` | Gate 2 complete; gold-standard artifact plan; moat verdict; NTB Alignment Check |
 | 3 — Deep diligence | `ntb-diligence` · `driver-tree` · `deal-workbook-builder` · `financial-model-builder` · `gtm-metrics-analyzer` · `kpi-tree-builder` | Model built; deal workbook complete; GTM workbook complete; NTBs evidenced |
 | 4 — Draft IC memo | `ic-memo` · `writing-style` | 10-section draft; all claims tagged |
 | 5 — Quality passes | `claim-scrutinizer` · `red-team` · `pre-mortem` | All 🔴 CRITICAL resolved; KILL claims hardened |

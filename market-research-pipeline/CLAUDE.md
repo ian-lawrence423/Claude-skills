@@ -41,9 +41,12 @@ Runs a six-phase market research pipeline:
 | P1 — Brief | Sharpens your question, builds MECE hypothesis tree |
 | P2 — Research | Sequential L4→L3→L2→L1 pyramid research with web search |
 | P3 — Themes | Synthesizes 4–6 structural themes from all evidence |
-| P4 — Draft | Market context → theme sections + competitor profiles → exec summary |
-| P5 — Iteration | 4 sequential QA passes: writing style → claim scrutinizer → red team → doc quality |
+| P4 — Draft | Gold-standard report sections + decision-grade artifacts + exec summary |
+| P5 — Iteration | 3 sequential QA passes: writing style → claim scrutinizer → red team |
 | P6 — Output | Pattern-branded DOCX or PPTX |
+
+Full-mode reports must follow `market-research/references/gold-standard-report-template.md`.
+`doc-quality-checker` runs after the branded output is produced.
 
 Expected runtime: 25–45 minutes depending on market complexity and number of competitors.
 
@@ -69,7 +72,7 @@ market-research-pipeline/
     ├── pass1-writing-style.md
     ├── pass2-claim-scrutinizer.md
     ├── pass3-red-team.md
-    ├── pass4-doc-quality.md
+    ├── post-output-doc-quality.md
     ├── output-docx.md          ← split from remaining-agents.md before use
     └── output-pptx.md          ← split from remaining-agents.md before use
 ```
@@ -110,14 +113,15 @@ research/l3-customer.md           Customer insights
 research/l2-competitive.md        Competitive landscape
 research/l1-company.md            Company position
 themes.md                         4–6 structural themes
-draft/market-context.md           Draft: market context section
-draft/section-[N].md              Draft: one file per theme
+artifact-plan.md                   Gold-standard artifact plan
+draft/context-and-market-sizing.md Draft: context, scope, and market sizing
+draft/[section-slug].md            Draft: one file per gold-standard section
 draft/competitor-[name].md        Draft: one file per named competitor
 draft/exec-summary.md             Draft: executive summary
 iteration/pass1-writing-style.md  QA redline: writing style
 iteration/pass2-claim-scrutinizer.md  QA redline: claim scrutinizer
 iteration/pass3-red-team.md       QA redline: red team
-iteration/pass4-doc-quality.md    QA redline: doc quality
+iteration/post-output-doc-quality.md QA redline: post-output doc quality
 source-bibliography.md            All sources with CRAAP scores
 data-gaps.md                      All DATA GAP flags across all phases
 open-issues.md                    Unresolved issues after iteration loop

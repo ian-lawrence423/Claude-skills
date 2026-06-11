@@ -31,11 +31,11 @@ Phase 2   L4 → L3 → L2 → L1  (strictly sequential)
           ↓
 Phase 3   Theme synthesis agent
           ↓ Gate 2
-Phase 4   Market context → [Theme sections ∥ Competitor profiles] → Exec summary
+Phase 4   Context + market sizing → gold-standard sections ∥ competitor profiles → Exec summary
           ↓
-Phase 5   Pass 1 → Pass 2 → Pass 3 → Pass 4  (strictly sequential, each with revision loop)
+Phase 5   Pass 1 → Pass 2 → Pass 3  (strictly sequential, each with revision loop)
           ↓ Gate 3
-Phase 6   Output agent
+Phase 6   Output agent → doc-quality-checker
 ```
 
 ---
@@ -87,16 +87,17 @@ Create the following directory structure under WORK_DIR:
 │   ├── l2-competitive.md
 │   └── l1-company.md
 ├── themes.md
+├── artifact-plan.md
 ├── draft/
-│   ├── market-context.md
-│   ├── section-[1..N].md      ← one per theme
+│   ├── context-and-market-sizing.md
+│   ├── [section-slug].md      ← one per gold-standard section
 │   ├── competitor-[name].md   ← one per named competitor
 │   └── exec-summary.md
 ├── iteration/
 │   ├── pass1-writing-style.md
 │   ├── pass2-claim-scrutinizer.md
 │   ├── pass3-red-team.md
-│   └── pass4-doc-quality.md
+│   └── post-output-doc-quality.md
 ├── source-bibliography.md
 ├── data-gaps.md
 └── final-output.[docx|pptx]
@@ -197,19 +198,31 @@ Maximum 2 re-runs. If still failing, write `GATE_2_FAILED` to run-log and halt.
 
 ## Step 5 — Phase 4: Draft
 
-### 4a — Market context (first, sequential)
+Before drafting, load:
+
+```
+market-research/references/gold-standard-report-template.md
+```
+
+Create `{WORK_DIR}/artifact-plan.md` mapping each gold-standard section to the
+decision-grade artifact it will contain. Do not advance to output if any major
+section is prose-only.
+
+### 4a — Context and market sizing (first, sequential)
 Invoke: `prompts/draft-context.md`
 Reads: brief + l4-market + themes
-Writes: `{WORK_DIR}/draft/market-context.md`
-Constraint: condensed L4 findings only, 1–2 pages. Not a full analysis.
+Writes: `{WORK_DIR}/draft/context-and-market-sizing.md`
+Constraint: context/scope definition plus market-sizing frame reconciliation,
+source/scope table, and arithmetic checks.
 
-### 4b — Theme sections + Competitor profiles (parallel)
+### 4b — Gold-standard analytical sections + Competitor profiles (parallel)
 Read `{WORK_DIR}/themes.md` to determine theme count N.
 Read `{WORK_DIR}/research/l2-competitive.md` to extract named competitors.
 
 Dispatch in parallel:
-- For each theme 1..N: invoke `prompts/draft-section.md` with THEME_INDEX=N
-  Writes: `{WORK_DIR}/draft/section-[N].md`
+- For each gold-standard section after Market Sizing, invoke `prompts/draft-section.md`
+  with SECTION_NAME and the relevant themes/evidence.
+  Writes: `{WORK_DIR}/draft/[section-slug].md`
 - For each named competitor: invoke `prompts/draft-competitor.md` with COMPETITOR=[name]
   Writes: `{WORK_DIR}/draft/competitor-[name].md`
 
@@ -217,9 +230,9 @@ Wait for all parallel agents to complete before 4c.
 
 ### 4c — Exec summary (last — depends on all sections)
 Invoke: `prompts/draft-exec.md`
-Reads: market-context + all section files + all competitor files + themes
+Reads: context-and-market-sizing + all section files + all competitor files + themes
 Writes: `{WORK_DIR}/draft/exec-summary.md`
-Constraint: answer-first, 3–5 sentences, governing synthesis — never a topic preview.
+Constraint: two-page six-section executive summary via executive-summary-writer.
 
 ---
 
@@ -258,23 +271,14 @@ Invoke: `prompts/pass3-red-team.md`
 Reads: all draft files (post-Pass-2) + pass2 redline
 Writes: `{WORK_DIR}/iteration/pass3-red-team.md`
 
-Blocking issues (must resolve before Pass 4):
+Blocking issues (must resolve before output):
 - Any `KILL`-rated attack scenario with no counter-argument
 - Bear case that directly contradicts the governing thesis without acknowledgement
 
 Non-blocking: `WOUND` attacks where risk is acknowledged in text.
 
-### Pass 4 — Doc quality
-Invoke: `prompts/pass4-doc-quality.md`
-Reads: all draft files (post-Pass-3) + brand spec from pattern-docx/pattern-investment-pptx
-Writes: `{WORK_DIR}/iteration/pass4-doc-quality.md`
-
-Blocking issues: any `CRITICAL` severity flag.
-Non-blocking: `MAJOR` and `MINOR` — carry forward.
-
 **Gate 3 — check before Phase 6:**
 - [ ] Zero open KILL-rated claims or attacks
-- [ ] Zero CRITICAL doc quality issues
 - [ ] All thesis-critical DATA GAPs either resolved or explicitly flagged in exec summary
 - [ ] open-issues.md written (even if empty)
 
@@ -295,6 +299,12 @@ If `pptx`:
   Invoke: `prompts/output-pptx.md`
   Reads: all draft files + themes.md + open-issues.md
   Writes: `{WORK_DIR}/final-output.pptx`
+
+After output:
+  Invoke: `prompts/post-output-doc-quality.md`
+  Reads: final output file + relevant pattern output skill spec
+  Writes: `{WORK_DIR}/iteration/post-output-doc-quality.md`
+  Gate: zero CRITICAL doc-quality issues before release.
 
 Append `[PIPELINE COMPLETE]` + timestamp to run-log.
 

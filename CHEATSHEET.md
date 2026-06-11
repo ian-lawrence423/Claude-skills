@@ -11,7 +11,7 @@
 | Start or resume a deal workflow | `deal-master` |
 | Structure a problem / build issue tree | `mckinsey-consultant` |
 | Track evidence state / belief register for a deal | `analytical-operating-system` |
-| Market research — full project | `market-research` |
+| Market research — full project | `market-research` + `gold-standard-report-template.md` |
 | Size a market (TAM/SAM/SOM) | `tam-sam-som-calculator` |
 | Competitive landscape + moat verdict | `market-research` → `competitive-moat-assessment` |
 | Porter's Five Forces | `market-research` (L2 agent) |
@@ -65,7 +65,7 @@ Steps 5–7 are mandatory for IC memos and investment documents.
 | Pipeline | When to use | Mode flags |
 |----------|-------------|-----------|
 | `ic-memo-pipeline` | Full IC memo from intake to branded DOCX | `NTB_MODE`: full/skip · `KPI_MODE`: full/skip |
-| `market-research-pipeline` | Standalone market research report | — |
+| `market-research-pipeline` | Standalone gold-standard market research report | — |
 
 ---
 
@@ -134,4 +134,4 @@ C:\Users\IanLawrence\OneDrive - Pattern\Ian Productivity\Claude\artifacts\resear
 | Orange callouts | `#C55A11` |
 | Green callouts | `#375623` |
 | Word doc header | Pattern logo + gradient line — Python XML patch, NOT docx-js |
-| Canonical template | `Commerce_Market_Research_v9_2026-04-29.docx` |
+| Canonical template | `Commerce_Market_Research_v9_2026-04-29.docx` + `market-research/references/gold-standard-report-template.md` |
