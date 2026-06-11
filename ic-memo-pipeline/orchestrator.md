@@ -339,7 +339,7 @@ Writes: `{WORK_DIR}/draft/s10-recommendation.md`
 Invoke: `prompts/draft-s2-exec-summary.md`
 Reads: all draft sections
 Writes: `{WORK_DIR}/draft/s2-exec-summary.md`
-Constraint: answer-first, ~400 words, self-contained — passes cold read test.
+Constraint: two-page six-section executive summary, self-contained — passes cold read test.
 
 ---
 

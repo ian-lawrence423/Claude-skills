@@ -83,7 +83,7 @@ Gate before Phase 6: All 🔴 CRITICAL structure issues resolved; KILL-rated cla
 - Invoke `pattern-docx` or `pattern-investment-pptx` depending on deliverable type
 - Strip all draft artifact language before production
 - `doc-quality-checker` auto-runs — resolve all 🔴 CRITICAL issues before treating as IC-distribution ready
-- Invoke `executive-summary-writer` for the one-page distillation
+- Invoke `executive-summary-writer` for the two-page strategic summary
 
 `finance-metrics-quickref` is available inline at any phase for benchmark lookups.
 

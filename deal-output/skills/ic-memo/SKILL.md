@@ -233,13 +233,13 @@ Attach or paste any CIM, management deck, research, or prior memos.
 
 ## IC Memo Architecture
 
-A Pattern IC memo has nine sections in this exact order. Do not reorder or combine.
+A Pattern IC memo has 10 sections in this exact order. Do not reorder or combine.
 Section length calibrations assume a final memo of 8–12 pages for a standard buyout.
 Adjust proportionally for first-look (4–6 pages) vs. final IC (12–15 pages).
 
 ```
 1.  Cover Block
-2.  Executive Summary          (1 page)
+2.  Executive Summary          (2 pages)
 3.  Company Overview           (0.5–1 page)
 4.  Investment Thesis          (1–1.5 pages)
 5.  Market & Competitive       (1–1.5 pages)
@@ -378,7 +378,7 @@ CONFIDENTIAL — FOR AUTHORIZED RECIPIENTS ONLY    9pt, Bold, color C00000
 
 ---
 
-### Section 2: Executive Summary (1 page / ~400 words)
+### Section 2: Executive Summary (2 pages / canonical six-section summary)
 
 **This is the most important section.** IC members read this first and many read only
 this. If the executive summary is unclear or buried, the memo fails regardless of
@@ -386,19 +386,21 @@ the quality of subsequent sections.
 
 **Invoke executive-summary-writer skill for this section:**
 ```
-Read: /mnt/skills/user/executive-summary-writer/SKILL.md → Format A (One-Page Memo)
+Read: executive-summary-writer/SKILL.md -> Two-Page Executive Summary
 ```
 
-Structure (five blocks in order):
-1. **Governing thesis** (2 sentences) — conclusion first, specific and direct
-2. **Three supporting arguments** (1 paragraph each, ~60 words) — pillar → evidence → implication
-3. **Primary risk** (2 sentences) — named directly, not softened
-4. **Recommended action** (3–4 bullets) — owner, timeline, binary
-5. **Key assumption** (1 sentence) — the single premise the recommendation rests on
+Structure (six sections in order):
+1. **Company Overview** — what the company is, who it serves, current scale/status, why it matters
+2. **Product Offering** — platform/functionality/workflow role, buyer/user, differentiation classified as structural/transient/mixed/unproven
+3. **Market Dynamic** — market structure, demand drivers, competitive intensity, timing, tailwinds/headwinds
+4. **Business Model** — revenue model, pricing logic, revenue quality, unit economics, scalability
+5. **Thesis: What You Need To Believe** — 3–5 testable beliefs tied to evidence and falsification triggers
+6. **Open Questions** — 3–5 decision-changing diligence questions with evidence needed
 
 The executive summary must be self-contained. A reader who reads only this section
-must be able to answer: what is the conclusion, why is it correct, what is the biggest
-risk, and what happens next.
+must be able to answer: what the company does, what the product does, why the
+market timing matters, how the business model works, what must be true for the
+investment thesis to hold, and what open questions could change the answer.
 
 ---
 
@@ -577,8 +579,8 @@ Score = P × M (range 1–25)
 - Minimum 5 risks, maximum 8
 - At least one risk must score ≥15 (near-disqualifying)
 - Risks must be specific and testable — not categories ("market risk," "execution risk")
-- The primary risk from Section 2 (Executive Summary) must appear here with the
-  highest or second-highest score
+- The highest-impact Open Question or thesis risk from Section 2 (Executive
+  Summary) must appear here with the highest or second-highest score
 - Every risk scoring ≥9 must have a stated mitigant with adequacy assessment
 
 **Gate coverage:** Addresses Gate 6 (Adversarial Diligence).

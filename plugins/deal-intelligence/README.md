@@ -53,7 +53,7 @@ Full PE/M&A/public equity deal workflow — sourcing through IC memo production.
 |---|---|---|
 | `pattern-docx` | "create a Pattern memo / report / doc" | No |
 | `pattern-investment-pptx` | "create an investment deck / IC deck / deal deck" | No |
-| `executive-summary-writer` | "write the executive summary", "compress this into one page" | No |
+| `executive-summary-writer` | "write the executive summary", "draft the two-page summary" | No |
 | `doc-quality-checker` | *(auto)* | ✅ after every Pattern doc |
 
 ## Agent

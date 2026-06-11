@@ -231,7 +231,7 @@ Gate 3: Zero KILL-rated claims unaddressed | Zero cross-section numeric contradi
 ```
 Invoke: ic-memo-pipeline/output-docx.md (pattern-docx)
 Then: doc-quality-checker
-Then (optional): executive-summary-writer for one-page distillation
+Then (optional): executive-summary-writer for two-page strategic summary
 Gate 4: Zero CRITICAL QC issues | Senior sign-off required before IC distribution
 ```
 

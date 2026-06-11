@@ -328,7 +328,9 @@ Structured by themes, not pyramid levels. Produced via pattern-docx.
 
 ```
 1.  Cover
-2.  Executive Summary        — governing synthesis, 3–5 sentences, answer first
+2.  Executive Summary        — two-page six-section synthesis via executive-summary-writer:
+                                Company Overview, Product Offering, Market Dynamic,
+                                Business Model, Thesis, Open Questions
 3.  Market Context           — condensed L4 findings, 1–2 pages
 4.  [Theme 1 Section]        — 2–4 pages each
 5.  [Theme 2 Section]
