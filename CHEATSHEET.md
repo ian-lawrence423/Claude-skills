@@ -24,7 +24,7 @@
 | Adversarial bear case | `red-team` |
 | Redline claims / pressure-test doc | `claim-scrutinizer` |
 | Write / clean up any formal prose | `writing-style` (auto-runs) |
-| Executive summary (compress analysis) | `executive-summary-writer` |
+| Two-page executive summary | `executive-summary-writer` |
 | Executive briefing / one-pager | `executive-briefing` |
 | Build a financial model | `financial-model-builder` |
 | Generate a DDR | `diligence-ddr` |

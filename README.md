@@ -89,7 +89,7 @@ All 33 skills organized by group. Invoke the most specific skill first; fall bac
 | Skill | Layer | What It Does | Triggers |
 |---|---|---|---|
 | `executive-briefing` | L4 — Production | Executive-ready briefing documents: memos, one-pagers, board notes, C-suite briefings. Enforces BLUF structure and decision-oriented formatting | "memo", "board note", "one-pager", "C-suite briefing", "executive summary" |
-| `executive-summary-writer` | L2 — Research | Compresses completed analysis into publication-ready executive summary. Four format variants: one-page memo, deck slide, briefing paragraph, multi-section | "write an executive summary", "summarize for leadership", "condense this" |
+| `executive-summary-writer` | L2 — Research | Writes two-page executive summaries using the canonical Company Overview, Product Offering, Market Dynamic, Business Model, Thesis, and Open Questions spine | "write an executive summary", "summarize for leadership", "draft the two-page summary" |
 | `managing-up` | Interpersonal | Frameworks for executive relationship management, influencing leadership without authority, and navigating organizational dynamics | "how do I handle this with my boss", "managing up", "influencing leadership" |
 
 ### Communication & Deliverables

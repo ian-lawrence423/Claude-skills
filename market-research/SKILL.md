@@ -591,8 +591,9 @@ scaffolding. They do not appear as section headers in the final output.
 
 ```
 1.  Cover
-2.  Executive Summary       — governing synthesis: themes distilled to 3–5 sentences,
-                               answer first, then the evidence that earns it
+2.  Executive Summary       — two-page six-section synthesis via executive-summary-writer:
+                               Company Overview, Product Offering, Market Dynamic,
+                               Business Model, Thesis, Open Questions
 3.  Market Context          — condensed Level 4 findings: establishes the stage
                                (1–2 pages / 1–2 slides). Not the full analysis.
 4.  [Theme 1 Section]

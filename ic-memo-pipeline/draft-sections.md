@@ -197,13 +197,14 @@ Output: `{WORK_DIR}/draft/s2-exec-summary.md`
 
 Depends on: ALL other sections (read all draft files before writing this).
 
-Load executive-summary-writer SKILL.md → Format A (One-Page Memo).
+Load executive-summary-writer SKILL.md -> Two-Page Executive Summary.
 
-Structure (five blocks in order):
-1. Governing thesis (2 sentences) — conclusion first
-2. Three supporting arguments (1 paragraph each ~60 words)
-3. Primary risk (2 sentences) — named directly
-4. Recommended action (3–4 bullets) — owner, timeline, binary
-5. Key assumption (1 sentence)
+Structure (six sections in order):
+1. Company Overview
+2. Product Offering
+3. Market Dynamic
+4. Business Model
+5. Thesis: What You Need To Believe
+6. Open Questions
 
-~400 words. Self-contained — passes cold read test. No section cross-references.
+Two pages. Self-contained — passes cold read test. No section cross-references.
