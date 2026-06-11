@@ -205,7 +205,7 @@ Skills are grouped by domain. Invoke the most specific skill first; fall back to
 | Skill | Invoke when... |
 |---|---|
 | `mckinsey-consultant` | Issue trees, structured diagnosis, MECE frameworks, storyline design, McKinsey-style PPT — **analytical OS for all strategy work** |
-| `market-research` | Full market research cycle — research brief, pyramid analysis, competitive landscape, strategy synthesis → produces DOCX or PPTX output. Integrates `mckinsey-consultant`, `writing-style`, `claim-scrutinizer`. |
+| `market-research` | Full market research cycle — research brief, pyramid analysis, competitive landscape, gold-standard report architecture, strategy synthesis → produces DOCX or PPTX output. Integrates `mckinsey-consultant`, `writing-style`, `claim-scrutinizer`. |
 | `pre-mortem` | Investment or deal failure analysis — assumes the deal failed and works backward to enumerate every failure pathway. Triggers: "pre-mortem this deal", "how does this fail", "what kills this deal", "war game this", "stress test downside" |
 | `red-team` | Adversarial review — constructs the strongest opposing case with evidence, not a list of risks. Triggers: "red team this", "make the bear case", "argue against this", "steelman the opposition", "counter-thesis" |
 | `claim-scrutinizer` | Redline and pressure-test investment memos, IC decks, strategy docs — KILL/WOUND/EXPOSE verdicts with MECE logic tree. Triggers: "scrutinize", "redline", "pressure-test", "poke holes in this", "is this IC-ready" |
@@ -380,7 +380,7 @@ These are live n8n workflows. Reference them when asked about Pattern automation
 | Workflow | Folder | Purpose |
 |---|---|---|
 | `m&a-deal-intake` | `m&a-deal-intake/` | Daily Gmail → SharePoint automation — extracts deal emails ("Acquisition Opportunity" or "Project [Name]"), creates SharePoint subfolders, saves attachments. Deduplicates via `n8n-processed` Gmail label. |
-| `market-research-pipeline` | `market-research-pipeline/` | Automated market research pipeline — webhook-triggered structured research runs → Pattern-branded DOCX output |
+| `market-research-pipeline` | `market-research-pipeline/` | Automated market research pipeline — webhook-triggered structured research runs → gold-standard Pattern-branded DOCX output |
 | `ic-memo-pipeline` | `ic-memo-pipeline/` | IC memo multi-agent pipeline — accepts deal inputs (company, deal type, thesis, materials), orchestrates via Claude Code, delivers Pattern-branded DOCX. Inputs: COMPANY, DEAL_TYPE, ENTRY_VAL, THESIS, HOLD_PERIOD, MATERIALS_PATH, NTB_MODE |
 | `competitive-landscape-mapping` | `competitive-landscape-mapping/` | 11-workflow automated competitive M&A landscape mapping — webhook trigger → 10 sequential agents → Google Sheet write. Each agent fills one section of the 148-row template (entity, market taxonomy, product, data/compliance, commercial traction, competitive intel, moat scoring, strategic fit, M&A attractiveness, synthesis). Output: Google Sheet + ACQUIRE/MONITOR/PASS recommendation with scores. |
 

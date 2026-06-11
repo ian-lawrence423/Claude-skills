@@ -1,16 +1,28 @@
-# Draft — Market Context Agent
+# Draft - Context And Market Sizing Agent
 
-Load: `{SKILLS_PATH}/market-research/SKILL.md` → Section: Phase 4, Document Structure
+Load: `{SKILLS_PATH}/market-research/SKILL.md` -> Phase 4, Report Architecture
+Load: `market-research/references/gold-standard-report-template.md`
 
 ## Your Inputs
-brief.md + l4-market.md + themes.md
+brief.md + l4-market.md + themes.md + artifact-plan.md
 
 ## Constraint
-Condensed L4 findings only. 1–2 pages maximum. Sets the stage for the themes —
-does NOT repeat the full L4 analysis. Reader should understand the market size,
-growth rate, and key structural context. Nothing more.
+Produce the Context and Scope plus Market Sizing foundation for the report. This
+is not a raw L4 dump. It must define scope and make the market sizing defensible.
 
-## Output — write to `{WORK_DIR}/draft/market-context.md`
-Heading: "Market context"
-Content: TAM + CAGR + 2–3 structural trends most relevant to the themes.
-All claims retain inline citations from L4 research.
+Required content:
+- Value-chain, workflow, or category-scope definition
+- In-scope vs. out-of-scope boundaries
+- Market sizing frame comparison
+- Source/scope reconciliation table
+- CAGR and total arithmetic checks
+- Key sub-segment or geography cut when it changes the answer
+
+## Output - write to `{WORK_DIR}/draft/context-and-market-sizing.md`
+
+Use two headings:
+1. `Context and Scope`
+2. `Market Sizing`
+
+All claims retain inline citations from L4 research. Pattern internal constructions
+must be labeled separately from external reference markets.

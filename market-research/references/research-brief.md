@@ -225,19 +225,22 @@ Phase 2 │ THEME DEVELOPMENT
         │ Gate: themes reviewed and confirmed before drafting
         │
 Phase 3 │ DRAFT
-        │ Document structured by themes, not pyramid levels
-        │ Section anatomy applied to every theme section
+        │ Document structured by decision-grade sections, not pyramid levels
+        │ Gold-standard artifact plan applied to every major section
+        │ Section anatomy applied to every analytical section
         │ Competitor profile anatomy applied to every named competitor
         │
 Phase 4 │ ITERATION LOOP
         │ Pass 1: writing-style (prose, claim discipline, inductive chains)
         │ Pass 2: claim-scrutinizer (logic, evidence gaps, derivative integrity)
         │ Pass 3: red-team (adversarial stress-test, kill scenarios, bear case)
-        │ Pass 4: doc-quality-checker (brand, format, narrative flow)
         │ Harden after each pass before advancing
         │
 Phase 5 │ OUTPUT
         │ pattern-docx (long-form report) or pattern-investment-pptx (deck)
+        │
+Phase 6 │ QA GATE
+        │ doc-quality-checker after branded output (brand, format, narrative flow)
 ```
 
 **Timeline:**
@@ -324,26 +327,45 @@ Flag these upfront so research effort is prioritized correctly.
 ## 10. Deliverables
 
 ### Primary Output — Long-Form Research Report (DOCX)
-Structured by themes, not pyramid levels. Produced via pattern-docx.
+Structured by decision-grade sections, not pyramid levels. Produced via pattern-docx.
 
 ```
 1.  Cover
 2.  Executive Summary        — two-page six-section synthesis via executive-summary-writer:
                                 Company Overview, Product Offering, Market Dynamic,
                                 Business Model, Thesis, Open Questions
-3.  Market Context           — condensed L4 findings, 1–2 pages
-4.  [Theme 1 Section]        — 2–4 pages each
-5.  [Theme 2 Section]
-6.  [Theme 3 Section]
-7.  [Theme 4 Section]
-8.  [Theme 5–6 if warranted]
-9.  Strategic Implications   — tied directly to the decision in Section 1
-10. Appendix                 — sources, CRAAP scores, sizing methodology
+3.  Context and Scope        — value-chain/workflow map, in-scope vs. out-of-scope
+4.  Market Sizing            — frame comparison, source/scope reconciliation, arithmetic checks
+5.  Customer Segmentation    — buyer archetypes, JTBD, budgets, buying behavior
+6.  Competitive Landscape    — competitor tiers, substitutes, competitive forces
+7.  Pricing & Economics      — pricing archetypes, value capture, unit economics
+8.  Technology Trends        — quantified signals, disruption map, timing
+9.  Regulatory / Risk        — documented scope, implications, do-not-overclaim guardrails
+10. Competitive Moat         — moat types, replicability horizon, scorecard, verdicts
+11. Strategic Implications   — tied directly to the decision in Section 1
+12. Appendix                 — sources, CRAAP scores, sizing methodology, arithmetic corrections
 ```
+
+### Gold-Standard Artifact Plan
+Before drafting, identify which decision-grade artifact will appear in each major
+section. Use `gold-standard-report-template.md` as the default artifact menu.
+
+- [ ] KPI strip for cover
+- [ ] Value-chain, workflow, or category-scope map
+- [ ] Market sizing frame comparison table
+- [ ] Source/scope reconciliation table
+- [ ] Buyer archetype and JTBD table
+- [ ] Competitive map, substitute map, or Porter's Five Forces table
+- [ ] Pricing archetype and unit-economics benchmark table
+- [ ] Quantified trend signal table and disruption map
+- [ ] Regulatory/risk table with a "do not over-claim" column
+- [ ] Moat framework and company scorecard
+- [ ] Strategic implications / IC underwriting table
+- [ ] Arithmetic corrections and source-label appendix
 
 ### Alternate Output — Investment Deck (PPTX)
 If deliverable is a deck rather than a report, produced via pattern-investment-pptx.
-Same theme-driven structure; slides mirror the DOCX section map above.
+Same decision-grade structure; slides mirror the DOCX section map above.
 
 ### Supporting Files
 - [ ] `source-bibliography.md` — all sources with CRAAP scores and triangulation status
@@ -355,10 +377,12 @@ Same theme-driven structure; slides mirror the DOCX section map above.
 - [ ] All thesis-critical findings triangulated (2–3 independent sources)
 - [ ] All confidence levels labeled (H/M/L) on every material claim
 - [ ] All data gaps flagged explicitly — none papered over
-- [ ] 4–6 themes developed; each passes all five theme quality gates
-- [ ] Document organized by themes, not pyramid levels
+- [ ] Full-mode report uses the gold-standard report architecture or states why not
+- [ ] Every major section includes a decision-grade artifact
+- [ ] 4–6 governing insights developed; each passes all five theme quality gates
+- [ ] Document organized by decision-grade sections, not pyramid levels
 - [ ] Every section headline is a governing insight statement, not a label
-- [ ] Four iteration passes complete; zero open CRITICAL issues from doc-quality-checker
+- [ ] Three iteration passes complete; zero open CRITICAL issues from doc-quality-checker
 
 ---
 

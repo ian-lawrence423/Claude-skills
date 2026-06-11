@@ -1,28 +1,29 @@
 # Draft — Exec Summary Agent
 
-Load: `{SKILLS_PATH}/mckinsey-consultant/SKILL.md` → Section: Pyramid Principle + SCR Narrative
+Load: `{SKILLS_PATH}/executive-summary-writer/SKILL.md`
+Also load: `{SKILLS_PATH}/mckinsey-consultant/SKILL.md` -> Pyramid Principle + SCR Narrative
 
 ## Your Inputs
-All section files + market-context.md + themes.md + competitor files.
+All section files + context-and-market-sizing.md + themes.md + competitor files.
 Read everything before writing a single word.
 
 ## Constraint
-Answer-first. 3–5 sentences. Governing synthesis — not a topic preview.
+Two-page six-section executive summary. Use the canonical spine:
+Company Overview, Product Offering, Market Dynamic, Business Model,
+Thesis: What You Need To Believe, Open Questions.
 
-Wrong: "This report covers market sizing, competitive dynamics, and strategic implications."
-Right: "The post-purchase infrastructure market is undergoing a structural transition
-from cost center to revenue layer, creating a narrow window for the two or three
-platforms that can own the behavioral data layer before logistics commoditization
-forecloses independent positioning. [Theme 2 implication]. [Theme 3 implication].
-The strategic imperative for [COMPANY] is [specific action]."
+Do not write a topic preview. The summary must stand alone as the shortest
+decision-grade version of the full report.
 
 ## Output — write to `{WORK_DIR}/draft/exec-summary.md`
 
 The summary must:
-- State the governing synthesis in sentence 1
-- Reference the most consequential 2–3 themes in subsequent sentences
-- End with the single most important strategic implication
-- Cite no specific evidence (evidence lives in the sections)
+- Explain the market/company/category orientation first
+- Describe the product/workflow offering when a target company or archetype exists
+- State the market dynamic and business model implication
+- Convert the governing synthesis into 3-5 testable beliefs
+- End with decision-changing open questions
+- Retain only the most important evidence; do not duplicate body sections
 - Not use the word "this report" or any variant
 
 ---
@@ -79,7 +80,7 @@ Produce:
 3. **Unstated assumption attacks** — assumptions never flagged in the draft
 4. **Adversarial scorecard**: KILL / WOUND / EXPOSE / SURVIVES counts
 
-Blocking issues before Pass 4:
+Blocking issues before output:
 - Any KILL-rated attack with no counter-argument in the draft
 - Bear case that directly contradicts governing thesis without acknowledgement
 
@@ -90,17 +91,17 @@ Status line: `PASS 3 STATUS: BLOCKING_ISSUES_FOUND | CLEAR_TO_ADVANCE`
 
 ---
 
-# Pass 4 — Doc Quality Checker Agent
+# Post-Output Doc Quality Checker Agent
 
 Load: `{SKILLS_PATH}/doc-quality-checker/SKILL.md`
 
 ## Your Inputs
-All draft files (post-Pass-3) + relevant output skill spec:
+Final output file + relevant output skill spec:
 - If OUTPUT_FORMAT=docx: `{SKILLS_PATH}/pattern-docx/SKILL.md`
 - If OUTPUT_FORMAT=pptx: `{SKILLS_PATH}/pattern-investment-pptx/SKILL.md`
 
 ## Your Job
-Check brand formatting compliance, structural logic, and narrative flow.
+Check brand formatting compliance, structural logic, table rendering, and narrative flow.
 
 Severity ratings:
 - **CRITICAL** — blocks output (missing brand elements, broken structure)
@@ -118,7 +119,7 @@ Check specifically:
 - Internal consistency: numbers cited in exec summary match section bodies
 
 ## Output
-Write to `{WORK_DIR}/iteration/pass4-doc-quality.md`
+Write to `{WORK_DIR}/iteration/post-output-doc-quality.md`
 Status line: `PASS 4 STATUS: BLOCKING_ISSUES_FOUND | CLEAR_TO_ADVANCE`
 
 ---
@@ -134,10 +135,16 @@ All draft files + open-issues.md + source-bibliography.md
 ## Document Structure (in order)
 1. Cover
 2. Executive summary (from exec-summary.md)
-3. Market context (from market-context.md)
-4. Theme sections (section-1.md through section-N.md)
-5. Strategic implications (synthesized from theme implications)
-6. Appendix: sources + methodology + open issues
+3. Context and Scope
+4. Market Sizing
+5. Customer Segmentation and Buying Behavior
+6. Competitive Landscape
+7. Pricing Models and Unit Economics
+8. Technology Trends and Disruption Vectors
+9. Regulatory Environment and External Risk
+10. Competitive Moat Analysis
+11. Strategic Implications and Key Takeaways
+12. Appendix: sources + methodology + arithmetic corrections + open issues
 
 If open-issues.md is non-empty, add a clearly labeled "Open items" section
 before the appendix. Do not bury or omit open issues.
@@ -156,11 +163,17 @@ All draft files + themes.md + open-issues.md
 
 ## Slide Structure
 1. Cover
-2. Executive summary (1 slide — governing synthesis only)
-3. Market context (1–2 slides)
-4. Theme sections (2–3 slides per theme)
-5. Strategic implications (1–2 slides)
-6. Appendix: sources + open items
+2. Executive summary (1-2 slides using executive-summary-writer spine)
+3. Context and Scope
+4. Market Sizing
+5. Customer Segmentation and Buying Behavior
+6. Competitive Landscape
+7. Pricing Models and Unit Economics
+8. Technology Trends and Disruption Vectors
+9. Regulatory Environment and External Risk
+10. Competitive Moat Analysis
+11. Strategic Implications and Key Takeaways
+12. Appendix: sources + open items
 
 Every slide title must be an insight statement. No label titles.
 Apply all pattern-investment-pptx brand rules (Wix Madefor Display, no-bold rule, etc.)
