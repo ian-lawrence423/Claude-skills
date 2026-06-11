@@ -4,29 +4,27 @@ description: >-
   Convert load-bearing thesis drivers and diligence findings into underwriting actions,
   cases, protections, reprice logic, or pass decisions for single-asset deals.
 intent: >-
-  Decomposes investment theses into driver trees with T1–T4 evidence tiers, then converts
-  load-bearing drivers and material diligence findings into underwriting decisions through
-  a 6-module assessment. Use when Ian asks to "assess boundability," "bound this risk,"
-  "build a driver tree," "decompose this thesis," "score the drivers," "run underwriting
+  Consumes driver-tree, pre-mortem, claim-scrutinizer, NTB, and diligence inputs, then
+  converts load-bearing items into underwriting decisions through a 6-module assessment.
+  Use when Ian asks to "assess boundability," "bound this risk," "run underwriting
   analysis on [issue]," "what does this mean for our underwrite," "convert diligence to
   underwriting," "score this for IC," "price this risk," "what's the perimeter on X," "can
   we underwrite this?" "how confidently can we bound this driver," "what's load-bearing in
-  this thesis," or "run a cascade scenario." Produces a driver tree, structured issue
+  this thesis," or "run a cascade scenario." Produces an input register, structured issue
   objects, deal summary, and final deal view (proceed / proceed with protections / reprice
   / pass). Single-asset analysis only — does not perform portfolio construction or
-  position sizing. Distinct from pre-mortem (which enumerates failure pathways) and
-  claim-scrutinizer (which tests bull-case logic). Boundability decomposes the thesis,
-  isolates what is load-bearing, and converts identified risk into specific underwriting
-  action.
+  position sizing. Distinct from driver-tree (which owns thesis decomposition), pre-mortem
+  (which enumerates failure pathways), and claim-scrutinizer (which tests bull-case
+  logic). Boundability converts identified risk into specific underwriting action.
 type: workflow
 ---
 
-# Boundability — Driver Tree Decomposition + Diligence-to-Underwriting Framework
+# Boundability — Diligence-to-Underwriting Framework
 
-You are a private equity underwriting assistant. Your task is to (a) decompose
-the thesis into a driver tree and assign evidence tiers to identify what is
-load-bearing, then (b) convert load-bearing drivers and material diligence
-findings into underwriting decisions through a 6-module assessment.
+You are a private equity underwriting assistant. Your task is to consume
+authoritative driver, claim, NTB, and failure-mode inputs, identify what is
+load-bearing, then convert those inputs into underwriting decisions through a
+6-module assessment.
 
 You do not editorialize. You do not recommend whether to do the deal. You produce
 a structured, quantified assessment that an IC can use to make the underwriting
@@ -38,20 +36,22 @@ Read this entire file before beginning.
 
 ## Architecture
 
-The skill has two layers that run in sequence:
+The skill has two phases that run in sequence:
 
-**Layer 1 (Step 1): Driver tree + tier assignment.** Decompose the thesis into
-its mechanical drivers, assign each leaf node a tier (T1–T4) by evidence
-quality, and identify what is load-bearing.
+**Phase 0 (Step 1): Input ingestion.** Load completed driver, claim, NTB, and
+failure-mode inputs from the owning upstream skills. Preserve their IDs, tiers,
+base rates, vintages, and evidence states without re-scoring them.
 
-**Layer 2 (Steps 2–10): Six-module assessment.** For each load-bearing driver
-and each material diligence finding, normalize the risk statement, score on six
-modules, build three cases plus cascade scenarios, and recommend underwriting
-treatment.
+**Phase 1 (Steps 2-10): Six-module underwriting assessment.** For each
+load-bearing driver, material diligence finding, and failure mode, normalize the
+risk statement, score on six modules, build three cases plus cascade scenarios,
+and recommend underwriting treatment.
 
-The two layers are integrated. Tier assignment in Layer 1 informs which drivers
-warrant Layer 2 treatment. The 6-module assessment in Layer 2 inherits Layer 1's
-evidence work — it does not re-derive tiers, base rates, or vintages.
+Boundability does not construct driver trees, assign T1-T4 tiers, source base
+rates, or run vintage checks. Those are owned by `driver-tree`. If no
+driver-tree output exists and the assessment depends on thesis mechanics, run
+`driver-tree` first or produce a clearly labeled provisional input table and
+stop short of final underwriting treatment.
 
 ```
 boundability        ← YOU ARE HERE
@@ -69,19 +69,19 @@ boundability        ← YOU ARE HERE
 1. claim-scrutinizer  → Bull case logic redline (does the argument hold up?)
 2. ntb-diligence      → NTB registry (what has to be true?)  [optional]
 3. pre-mortem         → Failure mode inventory (how could it fail?)
-4. boundability       → Driver tree + underwriting actions (what is load-bearing,
-                        and how do we structure this?)
+4. boundability       → Underwriting actions for load-bearing inputs
+                        (how do we structure this?)
 5. ic-memo            → Final document architecture + formatting
 ```
 
 **Pre-mortem and boundability are complementary, not redundant.** Pre-mortem
 asks "how could this fail?" and produces a failure mode registry. Boundability
-asks "what is the thesis built on, and how do we underwrite it?" and produces a
-driver tree plus scored issue objects with underwriting actions. Each pre-mortem
+asks "which inputs are load-bearing, and how do we underwrite them?" and
+produces scored issue objects with underwriting actions. Each pre-mortem
 material failure mode typically becomes one or more boundability issue objects.
-Boundability also runs on items pre-mortem did not surface — load-bearing
-drivers identified through Layer 1 decomposition, plus positive findings that
-embed risk (e.g., a large customer win that creates concentration).
+Boundability also runs on items pre-mortem did not surface: driver-tree outputs,
+claim-scrutinizer findings, NTB registry items, and positive findings that embed
+risk (e.g., a large customer win that creates concentration).
 
 ---
 
@@ -89,7 +89,9 @@ embed risk (e.g., a large customer win that creates concentration).
 
 Loads before this skill:
 - `mckinsey-consultant` for thesis framing and MECE investment logic.
-- `driver-tree` when a separate structural decomposition already exists.
+- `driver-tree` when thesis mechanics, tiers, base rates, or cascade scenarios
+  are required. Its output is authoritative; boundability must not re-score
+  tiers or rebuild the decomposition.
 - `claim-scrutinizer` when bull-case logic weaknesses should inform issue objects.
 - `ntb-diligence` when an NTB registry exists.
 - `pre-mortem` when failure modes should be converted into underwriting action.
@@ -101,10 +103,13 @@ Loads after this skill:
 - `pattern-docx` or `pattern-investment-pptx` only when producing IC materials.
 
 Inputs required:
-- Investment thesis, driver tree or thesis mechanics, material diligence findings, failure modes if available, evidence tiers, base/upside/downside assumptions, and decision context.
+- Completed driver-tree output or explicit thesis mechanics input table,
+  material diligence findings, failure modes if available, evidence tiers,
+  base/upside/downside assumptions, and decision context.
 
 Outputs produced:
-- Driver tree, issue objects, six-module scores, underwriting treatment, case scenarios, cascade scenarios, and final deal view.
+- Input register, issue objects, six-module scores, underwriting treatment,
+  case scenarios, cascade scenarios, and final deal view.
 
 Do not load with:
 - Portfolio construction or position sizing tasks.
@@ -115,7 +120,7 @@ Do not load with:
 | Mode | Use When | Minimum Output |
 |---|---|---|
 | Quick | User asks whether a risk or driver can be underwritten | Boundability label, evidence gap, underwriting implication |
-| Standard | User wants issue-by-issue underwriting analysis | Driver tree, issue objects, scores, treatment, scenarios |
+| Standard | User wants issue-by-issue underwriting analysis | Input register, issue objects, scores, treatment, scenarios |
 | Full | User wants IC-ready underwriting structure | Six-module assessment, cascade scenarios, protections/reprice/pass logic, memo handoff |
 
 ---
@@ -134,213 +139,71 @@ Anti-pattern:
 - Do not treat a real advantage in one context as universal across all products, geographies, or customer segments.
 
 ---
-## Step 1: Driver Tree Decomposition + Tier Assignment
+## Step 1: Ingest Driver / Claim / Failure-Mode Inputs
 
-Before any risk statements are written, decompose the thesis into a driver tree
-and assign evidence tiers to every leaf node. This identifies what is
-load-bearing — which determines which drivers need full Layer 2 treatment.
+Boundability begins from completed inputs. It does not rebuild the driver tree,
+re-score evidence tiers, source base rates, or run vintage discipline. Those
+mechanics are owned by `driver-tree` and must be copied forward verbatim when
+available.
 
-### 1.1 Construct the driver tree
+### 1.1 Build the input register
 
-A driver tree decomposes an outcome (revenue, EBITDA, IRR, market share) into
-the underlying levers that mechanically produce it. Five construction rules:
+Create a single register that preserves upstream IDs and evidence states:
 
-**Rule 1: Decompose by mechanical identity, not by narrative.** Every parent
-node should equal the sum or product of its children by construction. If you
-cannot write the math that connects parent to children, the decomposition is
-wrong. "Growth comes from new markets and existing markets" is a narrative —
-"Revenue = Σ(country GMV × take rate)" is a tree.
+| Input ID | Source skill | Input type | Metric / issue | Tier / evidence state | Base rate / reference class | Vintage | Direction | Impact | Notes |
+|---|---|---|---|---|---|---|---|---|---|
+| D1 | driver-tree | Driver | [metric] | [T1-T4] | [class / rate] | [date] | [tailwind/headwind/etc.] | [$ / MOIC / EBITDA] | [correlation/cascade note] |
+| FM1 | pre-mortem | Failure mode | [issue] | [Known / Unknown / Partially known] | [if available] | [date] | [failure direction] | [$ / MOIC / EBITDA] | [threatened NTB] |
+| C1 | claim-scrutinizer | Claim gap | [claim] | [verdict / confidence] | [if available] | [source date] | [bull/bear implication] | [materiality] | [repair need] |
 
-**Rule 2: Decompose to the level where evidence exists.** Bottom out at the
-level where you can actually find data. Decomposing AOV further into "category
-mix × price-per-SKU × discount rate" is only useful if you have those three
-data points. Otherwise the deeper levels are imaginary precision.
+### 1.2 Source-specific ingestion rules
 
-**Rule 3: Choose the right top-level split.** For multi-segment businesses,
-split by reporting segment first — different segments have different drivers
-and competitive dynamics. For single-segment businesses, split by volume × price
-or, if subscription-based, ARR = (customers × price × retention).
+- If `driver-tree` exists, copy Driver ID, tier, base rate, vintage, direction,
+  variance/correlation notes, and cascade notes verbatim. Do not re-score.
+- If `pre-mortem` exists, copy FM ID, boundability label, threatened NTB,
+  affected driver, and MOIC / EBITDA / cash impact if quantified.
+- If `claim-scrutinizer` exists, copy weak, unsupported, overstated, or
+  contradicted load-bearing claims as issue candidates.
+- If `ntb-diligence` exists, copy NTB IDs and evidence states so issue objects
+  preserve the same numbering.
+- If only a raw thesis exists, run `driver-tree` first unless the user explicitly
+  requests a quick provisional read. Provisional outputs may identify likely
+  issue objects but must not include final reprice, pass, protection, or
+  underwriting-treatment recommendations.
 
-**Rule 4: Tag each driver with its directionality.** A driver is one of:
-*tailwind, headwind, contested, cyclical, binary, or optionality*. Mark every
-leaf node. If every driver in the tree is a tailwind, you have built a sales
-pitch, not an analysis.
+### 1.3 Input-quality gates
 
-- *Binary* — bimodal distribution; either works or breaks (long-running F2P
-  game franchises, regulatory licensing).
-- *Optionality* — asymmetric distribution where the downside is bounded
-  (typically by management's ability to stop investment) while the upside is
-  open-ended. Treating these as standard tailwinds understates upside; treating
-  as binary misses that the downside is the bounded option premium already
-  invested.
+Before Step 2, classify the input state:
 
-**Rule 5: Flag driver correlations explicitly.** A tree is technically MECE in
-a static accounting snapshot but causally not MECE if drivers share a common
-upstream cause. When two leaf nodes share an upstream cause (subsidy spend,
-marketing budget, ecosystem flywheel), mark them as correlated. Scenario flexes
-must move correlated drivers in the same direction.
+| Gate | Pass condition | If failed |
+|---|---|---|
+| Source ownership | Every tier/base-rate/vintage field comes from `driver-tree` or is marked "not available" | Run `driver-tree` or mark output provisional |
+| ID continuity | Upstream IDs preserved for each driver, FM, NTB, or claim | Rebuild the register before scoring |
+| Materiality | Each input has a stated economic impact or a reason materiality cannot yet be quantified | Create an evidence gap; do not over-score |
+| Decision relevance | Each input can plausibly affect model, price, leverage, docs, operations, monitoring, or pass logic | Drop from boundability scope |
 
-### 1.2 Apply the variance amplification rule
+Step 1 output:
 
-Multiplicative trees behave differently from additive trees. In multiplicative
-trees, the variance of the parent is dominated by the highest-variance child —
-which changes which driver actually matters for thesis risk.
+```text
+BOUNDABILITY INPUT REGISTER - [Deal name]
 
-For a multiplicative tree where Parent = X × Y × Z, the coefficient of variation
-of the parent (σ/μ) approximately equals the square root of the sum of squared
-CVs of the children. If X has CV 0.10 (T1), Y has CV 0.15 (T2), and Z has CV
-0.50 (T3), the parent's CV is approximately 0.53 — completely dominated by Z.
+Input state: Complete / Partial / Provisional
+Authoritative driver-tree loaded: Yes / No
+Pre-mortem loaded: Yes / No
+Claim-scrutinizer loaded: Yes / No
+NTB registry loaded: Yes / No
 
-For additive trees where Parent = A + B + C with shares of 60%, 30%, 10%, the
-CV of the parent is approximately the share-weighted CV of the children.
+Load-bearing inputs proceeding to Step 2:
+- [Input ID] - [short description] - [source skill] - [materiality]
 
-**Practical implication:** in multiplicative nodes, the load-bearing driver is
-the highest-variance child, not the child with the cleanest story. The thesis
-"rests on driver X" is rhetorically appealing only if X is genuinely the
-variance-dominant driver. Often it is not.
+Inputs excluded from Step 2:
+- [Input ID] - [reason excluded]
 
-### 1.3 Assign tiers via the 5-dimension rubric
-
-Score each leaf node against five evidence dimensions on a 0–2 scale:
-
-| Dimension | Score = 0 | Score = 1 | Score = 2 |
-|-----------|-----------|-----------|-----------|
-| **Source count** | No external source; internal management assertion only | One independent external source | Three or more independent external sources |
-| **Source quality** | Qualitative claim, expert opinion, or vendor data with conflict of interest | One rigorous source (audited filing, peer-reviewed study, primary research with sample size disclosed) | Multiple rigorous sources OR mechanical/contractual constraint defining the range |
-| **Triangulation** | Sources do not agree, or only one source exists | Sources directionally agree but ranges differ by >2x | Sources triangulate to within 25% of each other |
-| **Analog comparability** | No analog company, or analog is in a structurally different market | Analog exists but with material differences (geography, regulation, business mix) | Multiple analogs in comparable markets with similar dynamics |
-| **Track record** | Driver has never been observed in the company or comparable companies | Driver observed across <2 years or <2 cycles | Driver observed across multiple market cycles in this company or close peers |
-
-**Score-to-tier mapping:**
-
-| Total (0–10) | Tier | Interpretation |
-|--------------|------|----------------|
-| 8–10 | **T1 Bounded** | Multiple rigorous sources triangulate to a narrow range with track record. Load-bearing acceptable. |
-| 5–7 | **T2 Partially bounded** | Real evidence with gaps. Supports thesis but not single point of failure. |
-| 2–4 | **T3 Loosely bounded** | Some evidence but expert judgment dominates. Sensitivity, not base case. |
-| 0–1 | **T4 Unbounded** | Essentially a guess. Cannot be load-bearing in any scenario. |
-
-### 1.4 Apply gating rules
-
-Some rubric dimensions are gating, not additive. If a gating dimension scores
-zero, no amount of strength elsewhere produces a high tier:
-
-- **G1 — Source quality floor.** If Source Quality scores 0, maximum tier is T3.
-- **G2 — Track record floor.** If Track Record scores 0 AND the outcome depends
-  on relationship persistence (cyclical, behavioral, regulatory), maximum tier
-  is T3. A relationship never observed under stress cannot be tagged T1
-  regardless of point-in-time evidence quality.
-- **G3 — Triangulation floor.** If Triangulation scores 0 (sources disagree by
-  >2x or only one source exists), maximum tier is T2.
-- **G4 — Analog floor for novel situations.** If the driver involves a
-  structurally novel situation AND Analog Comparability scores 0, maximum tier
-  is T3.
-
-The gating rules exist because the additive rubric can produce false confidence
-when a structural weakness exists.
-
-### 1.5 Apply base-rate overlay for load-bearing drivers
-
-Every load-bearing driver (T1 or T2 in primary value-creation logic) carries an
-explicit reference class and the base rate for that class. The reference class
-must be specific enough to be meaningful — "consumer fintech in emerging
-markets" is too broad; "consumer credit books growing >50% annually in emerging
-markets without a full credit cycle on record" is the actual reference class.
-
-When tier and base rate diverge, the divergence is itself the analytical
-insight — a T1 driver in a 20% base-rate reference class is a thesis betting
-the company is in the top quintile, which must be argued explicitly. Base rates
-must be sourced (academic studies, industry consortium data, regulator-published
-statistics, structured analog analyses), not estimated.
-
-### 1.6 Apply vintage discipline
-
-Each driver carries a vintage — the date of the most recent supporting
-evidence. Evidence decays:
-
-- Vintage older than 24 months requires explicit re-validation
-- Vintage older than 36 months automatically reduces tier by one level until
-  re-validated
-- Fast-changing markets carry shorter lives (18 months for fintech regulation,
-  12 months for consumer behavior in markets undergoing platform transitions)
-
-Re-validation means actively seeking disconfirming evidence ("is there evidence
-that the relationship that produced this tier no longer holds?"), not just
-confirming old evidence still exists.
-
-### 1.7 Apply management quality modulation
-
-Management quality is a meta-driver that modulates every other driver's tier.
-Score five execution dimensions on an A (strong) / B (acceptable) / C
-(concerning) scale:
-
-- **Strategic clarity** — has management correctly identified the actual value
-  drivers and is allocating attention accordingly?
-- **Operational execution** — do stated initiatives translate into operational
-  results within stated timeframes?
-- **Capital discipline** — is capital deployed where it earns acceptable
-  returns and withdrawn where it does not?
-- **Crisis response** — has management demonstrated ability to handle adverse
-  developments without compounding damage?
-- **Stakeholder alignment** — are management incentives aligned with long-term
-  value creation?
-
-**Aggregate grade and modulation effect:**
-
-| Aggregate grade | When it applies | Modulation |
-|-----------------|-----------------|------------|
-| **A** | 4 or 5 dimensions scored A, none scored C | Tiers stand as scored |
-| **B** | Mixed A/B/C with no more than 2 C scores | T1 drivers behave as T2 in stress; cascades use degraded tiers |
-| **C** | 3 or more C scores, or a C on Crisis Response | All tiers degrade by one level for thesis purposes |
-| **D** | Severe governance flags (fraud history, related-party self-dealing, sustained covenant breaches) | Framework does not apply; thesis must be evaluated on different criteria |
-
-D is reserved for situations where management quality concerns are severe
-enough that no amount of structural mitigation makes the deal underwritable
-through this framework.
-
-### 1.8 Identify load-bearing drivers and apply thesis-quality gates
-
-After tier assignment, identify which drivers are load-bearing — those whose
-movement materially changes thesis outcome. Apply the thesis-quality gates:
-
-| Gate | Trigger | Required action |
-|------|---------|-----------------|
-| Minimum bounded foundation | Thesis has zero T1 drivers in primary value-creation logic | Reject: thesis is built entirely on judgment. Not IC-ready. |
-| Bounded foundation strength | >50% of growth contribution comes from T3+T4 drivers | Thesis is structurally weak; cannot anchor an investment recommendation. Either narrow the thesis to its bounded core, or reject. |
-| Single-driver risk | Any single T4 driver is load-bearing (thesis fails if it lands wrong) | Reject: thesis depends on an unbounded variable. Restructure or pass. |
-
-**Load-bearing drivers (T1 and T2 with material thesis weight) and material
-T3/T4 risks proceed to Layer 2.** T4 drivers that are not load-bearing should
-be flagged but do not require full 6-module treatment — there is nothing to
-underwrite if there is no evidence to underwrite against.
-
-These are *thesis-level* gates that test the structural quality of the
-investment case. Step 5 introduces *item-level* disqualification gates that
-test individual issue assessments. They are distinct.
-
-### 1.9 Meta-framework check — does the tree fit this business?
-
-Some businesses are poorly served by mechanical decomposition because the value
-creation logic is itself non-mechanical. At thesis kickoff, ask: "Is this a
-business that decomposes mechanically into financial drivers, or is its value
-creation logic something else?"
-
-| Business type | Why driver trees underperform | Better mode |
-|---------------|------------------------------|-------------|
-| Reflexive markets | Value creation depends on market beliefs about value | Reflexivity analysis; sentiment-driven scenarios |
-| Network effects in formation | Value emerges discontinuously past a threshold | S-curve modeling; threshold analysis |
-| Brand businesses | Brand value is non-mechanical and partially psychological | Consumer perception research; brand-equity tracker |
-| Regulatory arbitrage | Existence depends on a specific regulatory configuration | Regulatory pathway analysis |
-| Founder-driven pre-scale | Outcomes depend on a single individual's judgment | Founder evaluation framework |
-| Pure two-sided platforms | Value depends on simultaneous coordination of two markets | Two-sided market models |
-
-If the business is partially or wholly in one of these categories, document
-this at the start of the assessment. Driver trees may still apply to mechanical
-layers but must be supplemented with the appropriate complementary mode for
-non-mechanical layers.
+Unresolved input gaps:
+- [Gap] - [owning skill or diligence source needed]
+```
 
 ---
-
 ## Step 2: Normalize the Risk Statement
 
 For each load-bearing driver and each material diligence finding identified in
@@ -378,10 +241,10 @@ If the item cannot be expressed as a risk statement in this form, it is not
 yet a diligence finding — it is a concern. Return it to diligence and request
 specificity before running the rest of the assessment.
 
-**Step 1 inheritance.** Every Layer 2 issue object carries forward its Step 1
-driver tier (T1–T4), directional tag, base rate, vintage, and management
-modulation grade. These are reference inputs to the 6-module scoring — they
-are not re-derived.
+**Input inheritance.** Every issue object carries forward its source input ID,
+source skill, upstream tier or evidence state, directional tag, base rate,
+vintage, and management modulation grade when available. These are reference
+inputs to the 6-module scoring — they are not re-derived.
 
 ---
 
@@ -472,9 +335,9 @@ A claim that rests only on what management said — without supporting
 third-party evidence or reconciled data — scores ≤2 regardless of how
 plausible the assertion is. This rule is non-negotiable.
 
-**Step 1 inheritance:** A driver tagged T1 in Step 1 typically scores 4–5 on
-Module 3. A T4 driver typically scores 1–2. If Layer 1 tier and Module 3 score
-diverge by more than 1 point, investigate — one is mis-scored.
+**Input inheritance:** A driver tagged T1 by `driver-tree` typically scores
+4-5 on Module 3. A T4 driver typically scores 1-2. If upstream evidence tier
+and Module 3 score diverge by more than 1 point, investigate before shipping.
 
 ### Module 4: Outcome Range
 
@@ -513,10 +376,10 @@ with specific references.
 **Score 1:** No internal precedent, no relevant comparable, no contractual
 anchor, no leading indicator — the risk is novel and unmonitorable.
 
-**Step 1 inheritance:** Step 1.5's base-rate overlay informs Module 5. A
-driver with a strong base rate in a specific reference class typically scores
-4–5 on Module 5. A driver with no defensible reference class typically scores
-1–2.
+**Input inheritance:** The `driver-tree` base-rate overlay informs Module 5
+when available. A driver with a strong base rate in a specific reference class
+typically scores 4-5 on Module 5. A driver with no defensible reference class
+typically scores 1-2.
 
 ### Module 6: Mitigants / Control Levers
 
@@ -607,9 +470,9 @@ align to that — but never drop the distinction.
 ## Step 5: Apply Item-Level Disqualification Gates
 
 These are *item-level* gates that override the overall score. They are
-distinct from Step 1.8's *thesis-level* gates: 1.8 tests whether the overall
-investment case has bounded foundations; Step 5 tests whether each individual
-issue assessment is sound.
+distinct from `driver-tree` thesis-quality gates: driver-tree tests whether
+the overall investment case has bounded foundations; Step 5 tests whether each
+individual issue assessment is sound.
 
 **Never classify an issue as Boundable if any of the following are true,
 regardless of the overall score:**
@@ -624,9 +487,8 @@ regardless of the overall score:**
 5. **The issue cannot be translated into revenue, EBITDA, cash, and timing** —
    qualitative risks that do not hit the P&L or balance sheet through a named
    path are not Boundable
-6. **The driver was identified as load-bearing T4 in Step 1.8** — even if
-   Layer 2 scores are high, an unbounded driver cannot be load-bearing in any
-   thesis
+6. **The input register shows a load-bearing T4 driver** — even if module
+   scores are high, an unbounded driver cannot be load-bearing in any thesis
 
 When any gate is tripped, classify as **Partially Boundable** (if some modules
 are strong and the failing module(s) are named with remediation path) or
@@ -855,10 +717,10 @@ Specific data items that would sharpen the assessment:
 - Name what changes in the assessment if the data comes back one way vs.
   another
 
-For T3/T4 drivers identified in Step 1, data requests should specifically
-name what evidence would move the driver to a higher tier and whether that
-evidence is gettable through primary research / waiting / management
-disclosure / industry data.
+For T3/T4 drivers inherited from `driver-tree`, data requests should
+specifically name what evidence would move the driver to a higher tier and
+whether that evidence is gettable through primary research / waiting /
+management disclosure / industry data.
 
 ### Kill Trigger
 
@@ -883,43 +745,30 @@ the Unboundable component to resolve first.
 
 ## Step 9: Output Format
 
-Produce a driver tree with tiers (from Step 1), one issue object per material
-risk (from Steps 2–8), a deal summary across all issues, and a final
-deal view.
+Produce an input register (from Step 1), one issue object per material risk
+(from Steps 2-8), a deal summary across all issues, and a final deal view.
 
-### Driver Tree Output (Step 1 deliverable)
+### Input Register Output (Step 1 deliverable)
 
-The driver tree precedes the issue objects:
+The input register precedes the issue objects:
 
 ```
-DRIVER TREE — [Deal name]
+BOUNDABILITY INPUT REGISTER — [Deal name]
 
-Outcome modeled: [specific quantity, e.g., "FY28 EBITDA"]
-Decomposition basis: [mechanical identity, e.g., "Segment sum × take rate × volume"]
-Time horizon: [forecast period]
-Meta-framework fit: [good fit / partial fit / poor fit + rationale]
-Management quality grade: [A / B / C / D + brief]
+Input state: Complete / Partial / Provisional
+Authoritative driver-tree loaded: Yes / No
+Pre-mortem loaded: Yes / No
+Claim-scrutinizer loaded: Yes / No
+NTB registry loaded: Yes / No
 
-Top-level structure: [additive | multiplicative]
+| Input ID | Source | Type | Tier / evidence state | Materiality | Proceed? |
+|---|---|---|---|---|---|
+| D1 | driver-tree | Driver | T2 | $X EBITDA / Y bps MOIC | Yes |
+| FM1 | pre-mortem | Failure mode | Partially known | $X downside | Yes |
+| C1 | claim-scrutinizer | Claim gap | Unsupported | Load-bearing claim | Yes |
 
-  ├── [Segment 1]: [point estimate], [share of growth]
-  │   ├── [Driver A]: [point estimate]
-  │   │   - Tier: [T1-T4] (rubric score: X/10)
-  │   │   - Direction: [tailwind/headwind/contested/cyclical/binary/optionality]
-  │   │   - Reference class: [specific], Base rate: [X%]
-  │   │   - Vintage: [date], Decay risk: [low/medium/high]
-  │   │   - Correlated leaves (per Rule 5): [other drivers in tree sharing upstream cause]
-  │   ├── [Driver B]: ...
-  ...
-
-Thesis-quality gate check:
-  - Minimum bounded foundation (≥1 T1 in primary logic):  [PASS / FAIL]
-  - Bounded foundation strength (T3+T4 < 50% of growth):  [PASS / FAIL]
-  - No load-bearing T4:                                   [PASS / FAIL]
-
-Load-bearing drivers (proceed to Layer 2): [list]
-Material T3/T4 risks (proceed to Layer 2): [list]
-Non-material T4 drivers (flagged but no Layer 2): [list]
+Unresolved input gaps:
+  - [Gap] — [owning skill or diligence source needed]
 ```
 
 ### Per-Issue Object (JSON)
@@ -932,7 +781,7 @@ Non-material T4 drivers (flagged but no Layer 2): [list]
   "risk_statement": "There is a risk that Monee seasoned-vintage NPL reaches 2.5–3.0% causes EBITDA compression of $1.0B annually within Q3 2026 – Q4 2027, driven by 2022–2023 origination cohorts deteriorating as they complete seasoning.",
   "materiality": "high",
 
-  "step_1_inheritance": {
+  "input_inheritance": {
     "driver_id": "Monee.C2",
     "tier": "T3",
     "rubric_score": "5/10 (gating rule G2 applied)",
@@ -970,8 +819,8 @@ Non-material T4 drivers (flagged but no Layer 2): [list]
 }
 ```
 
-The Step 1 inheritance block is mandatory for every issue object. Without it,
-Layer 1 work is invisible to downstream readers.
+The input-inheritance block is mandatory for every issue object. Without it,
+upstream work is invisible to downstream readers.
 
 ### Per-Issue Markdown Format (for IC memo inclusion)
 
@@ -987,7 +836,7 @@ differs.
 **Classification:** Partially Boundable (score 16/30)
 **Deal type variant:** Public equity long
 
-**Step 1 inheritance:**
+**Input inheritance:**
 - Driver: Monee.C2 (cohort seasoning losses)
 - Tier: T3 (rubric 5/10, gating rule G2 applied — track record floor)
 - Direction: Headwind / binary tail
@@ -1021,16 +870,16 @@ the output will be pasted directly into an IC memo or reviewed as prose.
 ```
 DEAL SUMMARY
 
-Driver tree summary:
-  Load-bearing drivers identified: [N]
+Input register summary:
+  Load-bearing inputs identified: [N]
     T1: [N] (specify: which drivers)
     T2: [N]
     T3: [N]
   Non-load-bearing T4 drivers flagged: [N]
-  Thesis-quality gates passed: [X / 3]
+  Driver-tree thesis-quality gates passed: [X / 3 or not available]
   Variance-dominant driver(s): [list]
 
-Total issues assessed (Layer 2): [N]
+Total issues assessed (six-module assessment): [N]
   Boundable: [N] (score ≥25)
   Partially Boundable: [N] (score 18–24)
   Unboundable: [N] (score <18 or disqualification gate tripped)
@@ -1062,10 +911,10 @@ Residual unboundable exposure: $[X]M Severe case across all unboundable items
 
 | Verdict | Criteria |
 |---------|----------|
-| **Proceed** | Step 1 thesis-quality gates all pass; all material issues Boundable; no item-level disqualification gates tripped; Severe case aggregate ≤ acceptable loss threshold |
-| **Proceed with protections** | Step 1 gates substantially pass; most issues Boundable; Partially Boundable items have named structural/financing/operational mitigants reducing residual to acceptable |
+| **Proceed** | Driver-tree thesis-quality gates all pass when available; all material issues Boundable; no item-level disqualification gates tripped; Severe case aggregate ≤ acceptable loss threshold |
+| **Proceed with protections** | Driver-tree gates substantially pass when available; most issues Boundable; Partially Boundable items have named structural/financing/operational mitigants reducing residual to acceptable |
 | **Reprice** | Multiple issues Partially Boundable; mitigants insufficient; need price concession to offset residual risk (state concession magnitude) |
-| **Pass** | Any of: (a) Step 1 minimum bounded foundation gate failed, (b) Step 1 single-driver risk gate failed (load-bearing T4), (c) ≥2 material issues Unboundable, (d) cannot construct acceptable underwriting treatment for a material issue |
+| **Pass** | Any of: (a) driver-tree minimum bounded foundation gate failed, (b) driver-tree single-driver risk gate failed (load-bearing T4), (c) ≥2 material issues Unboundable, (d) cannot construct acceptable underwriting treatment for a material issue |
 
 The verdict must be supported by the specific findings above. If "Reprice,"
 state the required concession in dollars or percent. If "Pass," state which
@@ -1078,24 +927,25 @@ gate(s) and/or item(s) drove the decision.
 These rules apply across the entire skill. They are constraints on output, not
 a sequential step.
 
-**Layer 1 first, Layer 2 second.** Do not begin 6-module scoring without a
-completed driver tree and tier assignments. The tree decomposition surfaces
-load-bearing drivers; the 6 modules assess them. Skipping Layer 1 produces
-6-module assessments on whatever risks an analyst happened to think of, which
-is the failure mode the integrated framework is designed to prevent.
+**Input register first, module scoring second.** Do not begin 6-module scoring
+without a completed input register. Driver-tree surfaces load-bearing drivers;
+pre-mortem surfaces failure modes; claim-scrutinizer surfaces weak claims; the
+6 modules assess those inputs. Skipping the register produces assessments on
+whatever risks an analyst happened to think of.
 
-**Two distinct gate layers.** Step 1.8 thesis-quality gates test whether the
-overall investment case has bounded foundations. Step 5 item-level gates test
-whether each individual issue assessment is sound. Both must pass. Failure at
-either level disqualifies a Boundable classification.
+**Two distinct gate layers.** Driver-tree thesis-quality gates test whether
+the overall investment case has bounded foundations. Step 5 item-level gates
+test whether each individual issue assessment is sound. Both must pass when
+driver-tree gates are available. Failure at either level disqualifies a
+Boundable classification.
 
 **The two-definition test.** Every load-bearing driver must be internally
-consistent across Layer 1 and Layer 2: a T1 driver should produce Boundable in
-Layer 2 (with possible exceptions for Module 6 / mitigant gaps); a T4 driver
-should produce Unboundable. If they don't agree, one is wrong — investigate
-before shipping.
+consistent across `driver-tree` and boundability: a T1 driver should usually
+produce Boundable (with possible exceptions for Module 6 / mitigant gaps); a
+T4 driver should produce Unboundable. If they do not agree, investigate before
+shipping.
 
-**The six-condition definition is the spec.** Every Layer 2 rule, every score,
+**The six-condition definition is the spec.** Every six-module rule, every score,
 every classification traces back to whether the six conditions hold. Do not
 add heuristics that bypass the definition — if an item feels underwritable
 but fails three modules, it is not boundable.
@@ -1108,27 +958,24 @@ Boundable classification that papers over uncertainty.
 to action in one of the five buckets has not done its job. An issue labeled
 Boundable with no underwriting action is a contradiction.
 
-**Every score has a named basis.** Tier, rubric dimension, or module score —
-do not assign without stating what evidence or gap drove the score. Tier
-assignments specifically must carry the rubric breakdown (0–10 across five
-dimensions) and any gating rules applied.
+**Every score has a named basis.** Evidence state or module score must state
+what evidence or gap drove the score. Tier assignments are inherited from
+`driver-tree`; do not create or alter them inside boundability.
 
-**Inter-rater reliability discipline.** Tier assignment in Step 1 and module
-scoring in Step 3 must be calibrated across analysts. Quarterly calibration
-exercises pick five drivers from active deals; three or more analysts score
-them independently; disagreements are categorized and the rubric refined.
-Tier-level agreement should reach 80%+. If agreement falls below this, the
-rubric needs revision — not the analysts.
+**Inter-rater reliability discipline.** Module scoring in Step 3 must be
+calibrated across analysts. Quarterly calibration exercises pick five active
+issue objects; three or more analysts score them independently; disagreements
+are categorized and the rubric refined.
 
 **Cascade scenarios are required for material issues.** Independent driver
 flexes hide cascade risk. Any issue where the driver is load-bearing or where
 cross-segment transmission is plausible must include a cascade scenario per
 Step 6.2.
 
-**Reconcile with pre-mortem.** If pre-mortem already ran and labeled an item
-Boundable, the Layer 2 assessment should produce a score ≥25 and the
-underlying driver should be T1 or T2. If it produces <25 or the driver is
-T3/T4, one of the assessments is wrong.
+**Reconcile with pre-mortem.** If pre-mortem already ran and marked a failure
+mode as boundable, boundability should normally produce a score ≥25 unless the
+input register exposes a missing driver, claim, evidence, or mitigant gap. If
+the two assessments disagree, resolve the gap before shipping IC materials.
 
 **Separate the assessment from the decision.** This skill produces structured
 boundability output. It does not recommend whether to do the deal. The IC
@@ -1148,28 +995,27 @@ that take this skill's output as input.
 If pre-mortem has already run on this deal:
   → Load the failure mode registry and use the same NTB numbering
   → Each material failure mode typically becomes one or more issue objects here
-  → /mnt/skills/user/pre-mortem/SKILL.md
+  → {SKILL_DIR}/../pre-mortem/SKILL.md
 
 If claim-scrutinizer has already run:
   → Use its flagged claims as diligence items; they may become issue objects
   → Bull-case claims that map to T4 drivers cannot be load-bearing
-  → /mnt/skills/user/claim-scrutinizer/SKILL.md
+  → {SKILL_DIR}/../claim-scrutinizer/SKILL.md
 
 If ntb-diligence has already run:
   → Cross-reference NTB registry; each NTB typically generates ≥1 boundability
-    item AND maps to one or more drivers in the Step 1 tree
-  → /mnt/skills/user/ntb-diligence/SKILL.md
+    item AND maps to one or more source inputs in the register
+  → {SKILL_DIR}/../ntb-diligence/SKILL.md
 
 If a deal model exists:
   → Use its authoritative entry equity, exit multiple, hold period, and base
     case projections as the reconciliation anchor for every case's quantification
-  → Use the model's revenue/EBITDA structure as the starting point for the
-    Step 1 driver tree (do not build a parallel decomposition that contradicts
-    the model)
+  → Use the model's revenue/EBITDA structure as a source input in the register
+    and reconcile to `driver-tree` rather than building a parallel decomposition
   → Do not substitute round numbers or generic assumptions
 
 If writing-style runs downstream:
   → Every fact in the output must cite source; every inference must be labeled;
     every assumption must be marked [F]/[E]/[H]
-  → /mnt/skills/user/writing-style/SKILL.md
+  → {SKILL_DIR}/../writing-style/SKILL.md
 ```

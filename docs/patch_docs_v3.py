@@ -1,6 +1,15 @@
 """
 patch_docs_v3.py
 ================
+Legacy one-off XML patch retained for audit history.
+
+Do not use this for current documentation updates. Use:
+
+    python docs/generate_claude_docs.py
+
+That generator rebuilds the current README, cheat sheet, finance library, and
+gold-standard guide DOCX files from the current skill architecture.
+
 Updates both docs to reflect skills added since April 29, 2026:
 
 CheatSheet_v2.docx  (currently "31 skills"):

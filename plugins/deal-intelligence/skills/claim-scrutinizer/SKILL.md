@@ -89,7 +89,7 @@ Before analyzing, classify the document:
 board deck for an acquisition): Apply the Six Screening Questions as the primary analytical
 lens. Load:
 ```
-Read: {SKILL_DIR}/references/investment-evaluation-framework.md
+Read: {SKILL_DIR}/../mckinsey-consultant/references/investment-evaluation-framework.md
 ```
 
 **Type B — Strategy or operational document** (strategy memo, board deck, market analysis,
@@ -560,102 +560,60 @@ If no corroborating evidence:
 
 ---
 
-## Step 9: Kill Triggers and Risk Register
+## Step 9: Handoff Map to Red-Team / Pre-Mortem / Boundability
 
-### Kill Triggers
+This skill does not produce a final risk register, mitigant plan, underwriting
+treatment, reprice recommendation, or investment decision verdict. It produces a
+claim-integrity posture and routes unresolved issues to the skill that owns the
+next analytical move.
 
-State the conditions that, if confirmed true, would cause a no-vote. These are not
-hypothetical risks — they are specific factual questions whose adverse resolution is
-disqualifying.
+### Claim Repair Backlog
 
-```
-KILL TRIGGER [N]
-Condition: [The specific finding that would be disqualifying]
-Currently: [Known / Unknown / Partially known]
-Where to find the answer: [Specific diligence action or data source]
-```
+```text
+CLAIM REPAIR BACKLOG
 
-### Risk Register
-
-For every material risk identified across all prior steps, rate on two independent
-dimensions and compute a risk score.
-
-**Probability (how likely to materialize):**
-- 1 = Very unlikely (<10%)
-- 2 = Unlikely (10–25%)
-- 3 = Possible (25–50%)
-- 4 = Likely (50–75%)
-- 5 = Very likely (>75%)
-
-**Magnitude (impact if it does materialize):**
-- 1 = Negligible — minor friction, easily managed
-- 2 = Moderate — impairs one supporting pillar, return impact <10%
-- 3 = Material — impairs a major pillar, return impact 10–30%
-- 4 = Severe — impairs the governing thesis, return impact >30%
-- 5 = Disqualifying — thesis fails entirely
-
-**Risk Score = Probability × Magnitude (range 1–25)**
-
-```
-RISK REGISTER
-
-| # | Risk | Probability | Magnitude | Score | Category |
-|---|------|-------------|-----------|-------|----------|
-| 1 | [description] | [1-5] | [1-5] | [P×M] | Thesis-critical / Supporting |
-
-Scores >= 15: Near-disqualifying — require resolution before IC
-Scores 9–14: Material — require mitigation plan or price adjustment
-Scores <= 8: Monitor — acceptable with standard protections
+| Claim ID | Current verdict | Repair action | Evidence required | Owner skill / source |
+|---|---|---|---|---|
+| C1 | UNSUPPORTED | Qualify, remove, or source | [specific source/data] | claim-scrutinizer / research |
+| C2 | LOGIC GAP | Add missing causal step | [specific proof] | mckinsey-consultant |
 ```
 
-### Mitigants
+### Downstream Handoff
 
-For every risk scoring >= 9:
+```text
+RED-TEAM HANDOFF
+- Claims to attack: [unsupported / overstated / contradicted load-bearing claims]
+- Attack surface: [pillar, assumption, projection, base-rate gap]
+- Defeat condition already known: [yes/no]
 
+PRE-MORTEM HANDOFF
+- Failure pathways implied by weak claims: [claim ID -> failure mode candidate]
+- Information state: [Known / Unknown / Partially known]
+- Data that would change the picture: [specific item]
+
+BOUNDABILITY HANDOFF
+- Quantified uncertain drivers needing underwriting treatment: [claim ID -> driver / issue]
+- Evidence state to preserve: [verdict, confidence, base-rate note]
+- Candidate lever for downstream evaluation: [model / price / leverage / docs / operations / monitoring / IC open item]
 ```
-MITIGANT — Risk [N]: [Risk description]
-Risk score: [P x M = score]
 
-Available mitigants:
-  - Contractual: [specific rep/warranty, escrow, price adjustment]
-  - Operational: [specific post-close action that reduces the risk]
-  - Structural: [deal structure element that limits exposure]
+### Final Claim-Integrity Posture
 
-Mitigant adequacy: Adequate / Partial / Insufficient
-Rationale: [Does the mitigant transfer or reduce the risk, or merely provide
-            financial recourse after the fact?]
+```text
+FINAL CLAIM-INTEGRITY POSTURE
 
-Residual risk: Probability [adjusted] x Magnitude [adjusted] = [residual score]
-```
+Argument quality: Strong / Adequate / Weak
+Evidence posture: High confidence / Mixed / Low confidence
+IC readiness: Ready / Repair first / Not IC-ready
 
-### Final Probabilistic Verdict (Type A)
+Reason: [One sentence grounded in claim verdict distribution, load-bearing gaps,
+and unresolved evidence needs. Do not state proceed / reprice / pass.]
 
-```
-FINAL VERDICT
-
-Thesis integrity: [Strong / Adequate / Weak]
-[One sentence on overall argument quality]
-
-Top 3 risks by score:
-  1. [Risk] — Score [X] — Mitigant: [Adequate / Partial / Insufficient]
-  2. [Risk] — Score [X] — Mitigant: [Adequate / Partial / Insufficient]
-  3. [Risk] — Score [X] — Mitigant: [Adequate / Partial / Insufficient]
-
-Kill triggers status:
-  [Each kill trigger: Resolved / Open / Unresolvable before decision point]
-
-Probability-weighted assessment:
-  [Direct statement: High confidence / Moderate confidence / Low confidence /
-   Do not proceed — with one sentence of specific rationale grounded in the
-   risk scores and mitigant adequacy above]
-
-Minimum conditions before proceeding:
-  [Specific list of open items — not "conduct further diligence" but the exact
-   questions whose answers are required before a yes-vote is defensible]
+Minimum repair conditions:
+- [Specific claim or evidence gap that must be fixed before the document can be relied on]
 ```
 
 ---
-
 ## Quality Standards
 
 - [ ] Logic tree stress-tested — load-bearing vs. non-load-bearing pillars identified
@@ -671,10 +629,9 @@ Minimum conditions before proceeding:
 - [ ] Triangulation status stated for every thesis-critical evidence line (Converged/Partial/Single)
 - [ ] No verdict uses weasel language — all findings are direct and specific
 - [ ] Gap resolution notes include at least one named source with full confidence rating and a rewritten claim draft
-- [ ] Kill triggers stated as binary resolution conditions, not as vague risks
-- [ ] Every material risk has probability, magnitude, and score
-- [ ] Every risk scoring >= 9 has a mitigant with adequacy assessment and residual score
-- [ ] Final verdict states a direct probabilistic assessment — not a hedge
+- [ ] Handoff map routes weak claims to red-team, pre-mortem, or boundability without duplicating their work
+- [ ] Claim repair backlog names specific evidence required, not generic "more diligence"
+- [ ] Final claim-integrity posture states IC readiness without making the investment decision
 
 ---
 
@@ -682,10 +639,10 @@ Minimum conditions before proceeding:
 
 Six Screening Questions (for Type A investment documents):
 ```
-Read: {SKILL_DIR}/references/investment-evaluation-framework.md
+Read: {SKILL_DIR}/../mckinsey-consultant/references/investment-evaluation-framework.md
 ```
 
 CRAAP scoring, triangulation matrix, source tier hierarchy, and confidence escalation rules:
 ```
-Read: /mnt/skills/user/mckinsey-consultant/references/VALIDATION_FRAMEWORKS.md
+Read: {SKILL_DIR}/../mckinsey-consultant/references/VALIDATION_FRAMEWORKS.md
 ```

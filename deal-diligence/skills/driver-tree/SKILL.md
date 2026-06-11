@@ -594,14 +594,14 @@ If pre-mortem has already run on this deal:
   → Failure modes that are tree-mappable should appear as T3/T4 drivers in
     the tree
   → Out-of-tree structural risks remain pre-mortem's territory
-  → /mnt/skills/user/pre-mortem/SKILL.md
+  → {SKILL_DIR}/../pre-mortem/SKILL.md
 
 If claim-scrutinizer has already run:
   → Bull-case claims that map to T4 drivers cannot be load-bearing in the
     underwritten path
   → Drivers tagged T1 in this tree should correspond to claim-scrutinizer
     "supported" verdicts
-  → /mnt/skills/user/claim-scrutinizer/SKILL.md
+  → {SKILL_DIR}/../claim-scrutinizer/SKILL.md
 
 If a deal model exists:
   → Use the model's revenue/EBITDA structure as the starting point for the
@@ -611,14 +611,15 @@ If a deal model exists:
     case projections for any cascade quantification
 
 If the analysis will hand off to boundability:
-  → Driver tree + tier assignments become Step 1 of boundability
+  → Driver IDs, tier assignments, base rates, vintages, and cascade notes become
+    authoritative inputs in boundability's input register
   → Load-bearing T1/T2 drivers and material T3/T4 risks proceed to
-    boundability's Layer 2 6-module assessment
-  → /mnt/skills/user/boundability/SKILL.md
+    boundability's 6-module assessment
+  → {SKILL_DIR}/../boundability/SKILL.md
 
 Worked example:
   → A complete worked example using Sea Ltd (NYSE: SE) is available in
-    references/sea_ltd_worked_example.md. Load when the analyst wants to see
+    {SKILL_DIR}/sea_ltd_worked_example.md. Load when the analyst wants to see
     a fully populated tree-and-tables output, especially for understanding
     how Rule 5 correlations and variance amplification show up in practice.
 ```

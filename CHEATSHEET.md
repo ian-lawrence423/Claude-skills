@@ -11,7 +11,7 @@
 | Start or resume a deal workflow | `deal-master` |
 | Structure a problem / build issue tree | `mckinsey-consultant` |
 | Track evidence state / belief register for a deal | `analytical-operating-system` |
-| Market research — full project | `market-research` + `gold-standard-report-template.md` |
+| Market research — full project | `market-research` + `docs/market-research-gold-standard-guide.md` + `gold-standard-report-template.md` |
 | Size a market (TAM/SAM/SOM) | `tam-sam-som-calculator` |
 | Competitive landscape + moat verdict | `market-research` → `competitive-moat-assessment` |
 | Porter's Five Forces | `market-research` (L2 agent) |
@@ -69,13 +69,36 @@ Steps 5–7 are mandatory for IC memos and investment documents.
 
 ---
 
+## Full market research report minimum spine
+
+Use this when the user asks for a full standalone market research report, board-ready market study, or IC-supporting market analysis.
+
+| Section | Required artifact |
+|---------|-------------------|
+| Cover and KPI strip | 4-6 category-framing metrics |
+| Context and scope | Scope table or value-chain map |
+| Executive Summary | Two-page six-section summary |
+| Market Sizing | Frame comparison + source/scope + arithmetic checks |
+| Customer Segmentation | Buyer archetype + JTBD table |
+| Competitive Landscape | Competitor map + substitute workflow table |
+| Pricing and Unit Economics | Pricing archetype + economics benchmark table |
+| Technology Trends | Trend signal + disruption map |
+| Regulatory/Risk | Regulation table with "do not over-claim" column |
+| Moat Analysis | Moat scorecard + replicability horizon |
+| Strategic Implications | Underwriting/action table |
+| Appendix | Methodology, source labels, arithmetic corrections, open questions |
+
+Reference docs: `docs/market-research-gold-standard-guide.md` and `market-research/references/gold-standard-report-template.md`.
+
+---
+
 ## Skills that always pair
 
 | If you invoke... | Also load... |
 |-----------------|-------------|
 | `deal-master` | `mckinsey-consultant`, `analytical-operating-system` |
 | `ic-memo-pipeline` | `mckinsey-consultant`, `analytical-operating-system` |
-| `market-research` | `mckinsey-consultant`, `competitive-moat-assessment` (post-L2) |
+| `market-research` | `mckinsey-consultant`, `competitive-moat-assessment` (post-L2), `writing-style` before production |
 | `ic-memo` | `ntb-diligence` (if NTB_MODE=full), `driver-tree`, `executive-summary-writer` (S2) |
 | `driver-tree` | `boundability` (use load-bearing nodes as boundability units) |
 | `pre-mortem` | `boundability` (pass 4c converts failure modes to underwriting actions) |
@@ -135,3 +158,20 @@ C:\Users\IanLawrence\OneDrive - Pattern\Ian Productivity\Claude\artifacts\resear
 | Green callouts | `#375623` |
 | Word doc header | Pattern logo + gradient line — Python XML patch, NOT docx-js |
 | Canonical template | `Commerce_Market_Research_v9_2026-04-29.docx` + `market-research/references/gold-standard-report-template.md` |
+
+---
+
+## Generated reference docs
+
+| File | Purpose |
+|------|---------|
+| `docs/Claude_Skills_README.docx` | Word version of the skill library overview |
+| `docs/Claude_Skills_CheatSheet_v2.docx` | Quick-reference task map and layer checklist |
+| `docs/Claude_Skill_Library_External (Finance)_v6.docx` | Finance and investment workflow reference |
+| `docs/Market_Research_Gold_Standard_Guide.docx` | Standalone guide for the most thorough market research report |
+| `docs/IC_Memo_Gold_Standard_Guide.docx` | Standalone guide for the most thorough IC memo |
+| `docs/Competitive_Assessment_Gold_Standard_Guide.docx` | Standalone guide for competitive assessment and moat analysis |
+| `docs/Executive_Summary_Gold_Standard_Guide.docx` | Standalone guide for a two-page executive summary |
+| `docs/Strategic_Diligence_Gold_Standard_Guide.docx` | Standalone guide for NTB diligence and underwriting handoff |
+
+Regenerate with `docs/generate_claude_docs.py` after source Markdown changes.

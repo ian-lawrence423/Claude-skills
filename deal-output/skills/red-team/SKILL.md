@@ -13,10 +13,10 @@ intent: >-
   the other side", "how would someone refute this", "kill this thesis", "what's wrong with
   this logic." Works on investment memos / IC docs, strategy memos, and market research
   reports. Produces a hybrid output: adversarial attack vectors organized by thesis
-  pillar, plus a claim-level verdict for each assertion. Verdict labels map to
-  claim-scrutinizer taxonomy AND carry an independent attack severity rating. This is not
-  a quality review — it is an adversarial simulation whose goal is to disprove the
-  document's conclusions.
+  pillar, plus attack severity for each assertion. It can carry forward prior
+  claim-scrutinizer verdicts, but does not recreate claim-support verdicts. This is
+  not a quality review — it is an adversarial simulation whose goal is to disprove
+  the document's conclusions.
 type: workflow
 ---
 
@@ -81,7 +81,8 @@ Inputs required:
 - Target document, governing thesis, intended audience, decision context, known source pack, and any prior claim-scrutinizer findings.
 
 Outputs produced:
-- Attack map, thesis kill conditions, attack vectors by pillar, claim-level adversarial verdicts, and prioritized hardening requirements.
+- Attack map, thesis kill conditions, attack vectors by pillar, claim-level
+  attack severity, and prioritized hardening requirements.
 
 Do not load with:
 - No thesis or target argument. This skill attacks a position; it does not create the initial argument.
@@ -199,47 +200,34 @@ Probability this is reality: [X%] — [One sentence rationale]
 
 ---
 
-## Step 4: Claim-Level Adversarial Verdicts
+## Step 4: Claim-Level Attack Mapping
 
-Extract every material claim. For each, render an adversarial verdict. Your operating
-assumption is that the claim is wrong or overstated — the burden of proof is on the author.
+Extract every material claim. For each, map the strongest adversarial attack.
+Your operating assumption is that the claim is wrong or overstated — the burden
+of proof is on the author.
 
-### Verdict Labels
+If `claim-scrutinizer` has already run, carry forward its verdict as **Prior
+Claim Verdict**. If it has not run, set Prior Claim Verdict to `Not run`. Do not
+recreate claim-support verdicts inside red-team.
 
-Each claim receives **two ratings**:
+### Attack Severity
 
-**Scrutinizer Verdict** (maps to claim-scrutinizer taxonomy for cross-referencing):
-
-| Label | Meaning |
-|-------|---------|
-| `SUPPORTED` | Passes adversarial review — the attack finds no viable line of attack |
-| `OVERSTATED` | Directionally correct but stronger than the evidence supports |
-| `NEEDS EVIDENCE` | Plausible but carries no cited evidence — treated as unproven |
-| `LOGIC GAP` | The causal or inferential chain has a step missing or inverted |
-| `CHERRY-PICKED` | Selectively cites favorable evidence while omitting contradicting data |
-| `CIRCULAR` | The support offered is a restatement of the claim |
-| `PROJECTION UNSUPPORTED` | Forward-looking claim assumes conditions that haven't been established |
-| `BELOW BASE RATE` | Requires above-historical performance with no mechanism to explain the deviation |
-| `UNSUPPORTED` | Definitive claim, no evidence, adversarially exploitable |
-| `ASSUMPTION-KILL` | Claim depends on an unstated assumption that is probably false |
-| `FACT-REVERSAL` | Counter-evidence directly contradicts this claim |
-| `OMISSION MATERIAL` | The claim is incomplete — its absence of a known contradicting fact is itself an argument |
-
-**Attack Severity** (adversarial impact rating):
+Each claim receives one red-team rating:
 
 | Rating | Meaning |
 |--------|---------|
-| 🔴 `KILL` | This claim is wrong or unprovable — if attacked, it collapses its pillar |
-| 🟠 `WOUND` | This claim is weakened significantly but doesn't alone collapse the thesis |
-| 🟡 `EXPOSE` | This claim is exploitable — an opponent can use it to cast doubt on the author's credibility |
-| 🟢 `SURVIVES` | This claim withstands adversarial review with no viable attack found |
+| `KILL` | This claim is wrong or unprovable; if attacked, it collapses its pillar |
+| `WOUND` | This claim is weakened significantly but does not alone collapse the thesis |
+| `EXPOSE` | This claim is exploitable and can damage credibility |
+| `SURVIVES` | This claim withstands adversarial review with no viable attack found |
 
-### Format per claim:
+### Format per claim
 
-```
-[SCRUTINIZER VERDICT] [ATTACK SEVERITY] "[Exact claim or close paraphrase]"
+```text
+[ATTACK SEVERITY] "[Exact claim or close paraphrase]"
+-> Prior claim verdict: [claim-scrutinizer verdict / Not run]
 -> Attack: [The adversarial counter-claim, stated as a direct assertion]
--> Attack type: [From taxonomy]
+-> Attack type: [From red-team attack taxonomy]
 -> Evidence basis for attack: [Specific data, named analogues, cited base rates,
                                or structural logic — not hypothetical]
 -> Defeat condition: [What would have to be true for the author to survive this attack?]
@@ -247,13 +235,14 @@ Each claim receives **two ratings**:
 ```
 
 For claims that survive:
-```
-SUPPORTED 🟢 SURVIVES "[Claim]"
+
+```text
+SURVIVES "[Claim]"
+-> Prior claim verdict: [claim-scrutinizer verdict / Not run]
 -> No viable attack found: [Why the attack fails — what makes this claim robust]
 ```
 
 ---
-
 ## Step 5: Unstated Assumption Attacks
 
 Surface every significant premise the document relies on but never argues for. These are
@@ -265,8 +254,8 @@ ASSUMPTION ATTACK [N]
 Assumption: [The premise the author treats as given]
 Required by: [Which claim / pillar depends on this]
 Why it's probably wrong: [The affirmative case against this assumption]
-Attack type: [From taxonomy]
-Severity: 🔴 KILL / 🟠 WOUND / 🟡 EXPOSE
+Attack type: [From red-team attack taxonomy]
+Severity: KILL / WOUND / EXPOSE
 ```
 
 ---
@@ -295,7 +284,7 @@ Argument:
 then supporting arguments in order of strength. Each paragraph maps to a killed or wounded
 pillar. No hedging. No "on the other hand." This is the opponent's closing argument.]
 
-Verdict: [Direct statement — e.g., "This thesis fails because X and Y are both wrong,
+    Verdict: [Direct statement — e.g., "This thesis fails because X and Y are both wrong,
            and even if Z holds, the returns don't justify the risk at this price."]
 ```
 
@@ -308,16 +297,16 @@ Summary table of all verdicts for rapid reference.
 ```
 ADVERSARIAL SCORECARD
 
-| Claim (short form) | Scrutinizer Verdict | Attack Severity | Pillar | Load-Bearing |
+| Claim (short form) | Prior Claim Verdict | Attack Severity | Pillar | Load-Bearing |
 |--------------------|---------------------|-----------------|--------|--------------|
-| [Claim 1]          | UNSUPPORTED         | 🔴 KILL         | 1      | Yes          |
-| [Claim 2]          | OVERSTATED          | 🟠 WOUND        | 2      | No           |
+| [Claim 1]          | UNSUPPORTED / Not run | KILL          | 1      | Yes          |
+| [Claim 2]          | OVERSTATED / Not run  | WOUND         | 2      | No           |
 | ...                | ...                 | ...             | ...    | ...          |
 
-KILL count: [N]     (🔴)
-WOUND count: [N]    (🟠)
-EXPOSE count: [N]   (🟡)
-SURVIVES count: [N] (🟢)
+KILL count: [N]
+WOUND count: [N]
+EXPOSE count: [N]
+SURVIVES count: [N]
 
 Load-bearing KILLs: [N] — [List pillar names]
 Thesis survivability: FAILS / WEAKENED / SURVIVES UNDER ATTACK
@@ -334,7 +323,7 @@ Thesis survivability: FAILS / WEAKENED / SURVIVES UNDER ATTACK
 - [ ] Every attack vector has a substantiation basis — not hypothetical objections
 - [ ] Every attack has a Defeat Condition — the author must know what they'd need to prove
 - [ ] Top 3 Kill Scenarios identified with probability estimates
-- [ ] Every material claim has both a Scrutinizer Verdict and an Attack Severity rating
+- [ ] Every material claim has attack severity and a prior claim verdict reference (`Not run` if claim-scrutinizer was not used)
 - [ ] Bear Case is internally coherent, not a list — structured as an argument
 - [ ] Bear Case concludes with a direct counter-verdict — no hedging
 - [ ] Adversarial Scorecard complete — thesis survivability stated explicitly
@@ -350,12 +339,12 @@ For investment documents (Type A), load attack lenses:
 Read: {SKILL_DIR}/references/red-team-investment-attacks.md
 ```
 
-For claim-scrutinizer verdict cross-referencing and CRAAP evidence standards:
+For prior claim verdict interpretation and CRAAP evidence standards:
 ```
-Read: /mnt/skills/user/claim-scrutinizer/SKILL.md (Step 4 verdict labels and Test 1)
+Read: {SKILL_DIR}/../claim-scrutinizer/SKILL.md
 ```
 
 For Six Screening Questions (Type A investment documents):
 ```
-Read: /mnt/skills/user/mckinsey-consultant/references/investment-evaluation-framework.md
+Read: {SKILL_DIR}/../mckinsey-consultant/references/investment-evaluation-framework.md
 ```

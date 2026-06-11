@@ -364,28 +364,29 @@ Failure spectrum:   [SINGLE combined paragraph — NOT Low/Base/High bullets. De
                      The derivation sentence is mandatory. Reader should be able to
                      reconstruct every number from the base table.]
 
-Mitigants:          [Bulleted list of actions that would reduce exposure. Label each
-                     with the executor ("Pattern-side" for buy-side / position-sizing
-                     actions; "Company-side" for operational execution; "Market-side"
-                     for macro/monitoring). Include cost and timeline where known.]
+Mitigation considerations:
+                    [Bulleted list of possible exposure reducers that a downstream
+                     skill should evaluate. Label each with the executor ("Pattern-side"
+                     for buy-side monitoring or sizing considerations; "Company-side"
+                     for operational execution; "Market-side" for macro/monitoring).
+                     Do not recommend an underwriting action here.]
 
-Underwriting treatment (public equity long) or (PE control):
-                    [Explicit modification to the investment thesis if this FM is
-                     weighted as material. For public equity: entry-price discipline,
-                     position-sizing adjustment, scenario probability shift. For PE
-                     control: purchase price concession, rep & warranty, escrow,
-                     earn-out, covenant structure. Cite the authoritative base entry
-                     price from the Base Assumptions Table.]
+Underwriting handoff:
+                    [Explicit downstream implication if this FM is weighted as material.
+                     Do not recommend price, position, docs, leverage, or operations
+                     action here. State the candidate lever boundability should evaluate:
+                     model, price, leverage, docs, operations, monitoring, or IC open
+                     item. Cite the authoritative base entry price from the Base
+                     Assumptions Table if relevant.]
 
-Kill trigger:       [Specific, observable event or data point that — if it occurs —
-                     changes the underwriting decision. Format: "If [specific
-                     observable], then [specific action: exit position / trim 30% /
-                     escalate to full position review]." The trigger must be both
-                     falsifiable and actionable. If the failure mode has an
-                     Unboundable component, the kill trigger should be tied to the
-                     Boundable component (e.g., a data request completing, an
-                     observable metric crossing a threshold) rather than to an
-                     observation that would require the Unboundable component to
+Decision trigger / handoff:
+                    [Specific, observable event or data point that changes the
+                     information state and should trigger downstream review. Format:
+                     "If [specific observable], then [handoff: rerun boundability /
+                     escalate IC review / mark NTB unresolved]." The trigger must be
+                     falsifiable and observable. If the failure mode has an Unboundable
+                     component, tie the trigger to the Boundable component rather than
+                     to an observation that would require the Unboundable component to
                      resolve first.]
 ```
 
@@ -889,8 +890,8 @@ the diligence → underwriting chain.
 
 ```
 If claim-scrutinizer has already run on this deal:
-  → Cross-reference its risk register to avoid duplication and extend coverage
-  → /mnt/skills/user/claim-scrutinizer/SKILL.md
+  → Cross-reference its claim redline output to avoid duplication and extend coverage
+  → {SKILL_DIR}/../claim-scrutinizer/SKILL.md
 
 If ntb-diligence has already run on this deal:
   → The NTB registry from its output is the authoritative source
@@ -898,7 +899,7 @@ If ntb-diligence has already run on this deal:
   → Use its Boundable/Partially Boundable/Unboundable terminology (this skill uses the same)
   → Map every failure mode to the NTB(s) it threatens using ntb-diligence's numbering
   → Produce Step 4f NTB Gap Prioritisation addendum
-  → /mnt/skills/user/ntb-diligence/SKILL.md
+  → {SKILL_DIR}/../ntb-diligence/SKILL.md
 
 If NTB registry exists but ntb-diligence has not run:
   → Use the NTB registry from the IC memo (produced inline by mckinsey-consultant)
@@ -927,5 +928,5 @@ Downstream — boundability (convert failure modes to underwriting action):
   → Boundability produces the underwriting treatment (model / price / leverage / docs /
     operations) that this skill deliberately does NOT produce; pre-mortem surfaces
     failure modes, boundability converts them to action
-  → /mnt/skills/user/boundability/SKILL.md
+  → {SKILL_DIR}/../boundability/SKILL.md
 ```
