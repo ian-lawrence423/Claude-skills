@@ -31,6 +31,18 @@ proof that a specific structural advantage exists, is measurable, produces above
 returns, and will persist for the investment horizon. The burden of proof is high —
 every moat claim must survive the adversarial standard in `red-team-investment-attacks.md`.
 
+Evidence floor:
+- A moat claim must name the mechanism, metric, source, replicability horizon, and
+  erosion vector.
+- Product breadth, UX quality, execution quality, and current growth are not moats
+  unless they create measurable resistance to displacement.
+- Management, CIM, and vendor claims can describe the asserted advantage, but they
+  cannot independently prove moat existence.
+- If mechanism, metric, or durability evidence is missing, downgrade the verdict or
+  mark the claim `[GAP]`.
+- Remove generic superiority language. Include only what is required to validate the
+  moat claim.
+
 ---
 
 ## The Core Problem With Moat Claims
@@ -348,7 +360,7 @@ vector to the verdict produced in Step 5. A moat verdict that does not survive
 adversarial review must be downgraded before it appears in an IC memo.
 
 ```
-Read: /mnt/skills/user/red-team/references/red-team-investment-attacks.md
+Read: {SKILL_DIR}/../red-team/references/red-team-investment-attacks.md
 → Section: Competitive Moat Attacks
 ```
 
@@ -372,7 +384,7 @@ the specific metric, mechanism, or comparison.
 require that alternative mechanisms have been explicitly considered and ruled out.
 
 ```
-Read: /mnt/skills/user/writing-style/SKILL.md → Steps 1–3
+Read: {SKILL_DIR}/../writing-style/SKILL.md → Steps 1–3
 ```
 
 ---

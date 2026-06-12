@@ -2,10 +2,12 @@
 name: deal-master
 description: >-
   Orchestrate Pattern deal workflows across market research, diligence, IC memos, outputs,
-  QA, dependency handoffs, and package routing.
+  full deal packs, QA, dependency handoffs, and package routing.
 intent: >-
   Orchestrates end-to-end deal intelligence by inventorying existing work, loading core
-  frameworks, initializing the belief register, and routing to the next phase.
+  frameworks, initializing the belief register, and routing to the next phase. Use the
+  new-deal-pipeline when Ian needs a comprehensive package with gold-standard market
+  research, competitive assessment, and IC memo outputs from one shared evidence base.
 type: workflow
 ---
 
@@ -55,10 +57,15 @@ Anti-pattern:
 COMPANY:         [company name]
 DEAL_TYPE:       [strategic acquisition | PE buyout | minority investment | public equity long]
 THESIS:          [one sentence — rough is fine; will be sharpened in Phase 1]
+GEOGRAPHY:       [market scope]
 MATERIALS_PATH:  [path to deal folder — e.g. C:\...\Pattern Strategic M&A\{Company}\]
-WORK_DIR:        [path for IC memo output — e.g. MATERIALS_PATH\ic-memo\]
+WORK_DIR:        [path for output — e.g. MATERIALS_PATH\analysis\]
 ENTRY_VAL:       [entry valuation + implied multiple, or "TBD"]
 HOLD_PERIOD:     [hold period + target return, or "TBD"]
+WORKFLOW_MODE:   [full_deal_pack | ic_memo_only | resume]
+MARKET_MODE:     [full | skip_existing | skip]
+COMPETITIVE_MODE:[full | skip_existing | skip]
+IC_MODE:         [full | skip_existing | skip]
 NTB_MODE:        [full | skip]
 KPI_MODE:        [full | skip]
 ```
@@ -94,6 +101,17 @@ Map files to phases using this table:
 | `ic-memo/iteration/pass*.md` | Phase 5 complete | Resume from Phase 6 |
 | `ic-memo/final-output.docx` | Phase 6 complete | Quality check only |
 
+### New Deal Gold Standard Pack Outputs
+| File | Phase Covered | Action |
+|------|--------------|--------|
+| `shared/evidence-register.md` | Shared evidence spine | Load; do not recreate unless stale |
+| `shared/belief-register.md` | Shared belief register | Load and update |
+| `market-research/final-output.docx` | Market report complete | Use if current; otherwise refresh Phase 2 |
+| `competitive-assessment/final-output.docx` | Competitive assessment complete | Use if current; otherwise refresh Phase 3 |
+| `diligence/driver-tree.md` | Strategic diligence bridge | Use as IC memo input |
+| `ic-memo/final-output.docx` | IC memo complete | Run pack-level QA only |
+| `deal-pack-summary.md` | Cross-output QA complete | Review release posture |
+
 ### Materials Folder (manually added)
 Any files in `materials/` are source documents (CIM, management deck,
 financial model, expert call transcripts). Load all as MATERIALS for Phase 1.
@@ -105,7 +123,8 @@ financial model, expert call transcripts). Load all as MATERIALS for Phase 1.
 Based on the inventory, determine the current state:
 
 **State A — No pipeline files, no prior IC run**
-→ Fresh start. Run full pipeline from Phase 1.
+→ Fresh start. If `WORKFLOW_MODE=full_deal_pack`, run `new-deal-pipeline`.
+→ Otherwise run IC memo pipeline from Phase 1.
 → Skip Phase 2 only if materials folder has CIM or market research.
 
 **State B — N8N pipeline files exist, no IC memo run started**
@@ -113,6 +132,13 @@ Based on the inventory, determine the current state:
 → Load briefing.md + all research/*.md as MATERIALS for intake.
 → Pre-IC thesis validation files are context, not final — they ran on the
   competitive landscape thesis, not the IC memo draft.
+
+**State B2 — Market research or competitive assessment exists, no IC memo run started**
+→ If both are current, route to `new-deal-pipeline` Phase 4/5 for diligence bridge
+  and IC memo.
+→ If either is stale or missing, route to `new-deal-pipeline` at the missing phase.
+→ Do not collapse a standalone market report into IC memo evidence without updating
+  the shared evidence register.
 
 **State C — IC memo in progress (intake.md exists, no final-output.docx)**
 → Determine last completed phase from file inventory.
@@ -178,6 +204,30 @@ Load first: mckinsey-consultant/SKILL.md, then analytical-operating-system/SKILL
 Pass: COMPANY, DEAL_TYPE, ENTRY_VAL, THESIS, HOLD_PERIOD, all MATERIALS
 Gate 1: Company description confirmed | Thesis has ≥1 pillar | ≥1 known risk | Six Screening Questions mapped
 ```
+
+### Full Deal Pack — New Deal Gold Standard Workflow
+Use this route when the user asks for a new deal, full diligence package,
+complete market research + competitive assessment + IC memo, or gold-standard
+deal pack.
+
+```
+Invoke: new-deal-pipeline/orchestrator.md
+Load first: mckinsey-consultant/SKILL.md, then analytical-operating-system/SKILL.md
+Pass: COMPANY, DEAL_TYPE, THESIS, GEOGRAPHY, ENTRY_VAL, HOLD_PERIOD,
+      MATERIALS_PATH, WORK_DIR, MARKET_MODE, COMPETITIVE_MODE, IC_MODE,
+      NTB_MODE, KPI_MODE
+Outputs:
+  1. market-research/final-output.docx
+  2. competitive-assessment/final-output.docx
+  3. ic-memo/final-output.docx
+  4. shared/evidence-register.md
+  5. deal-pack-summary.md
+Gate: cross-output QA passes; no unsupported thesis-critical claims; no conflicting numbers
+```
+
+The new-deal pipeline is stricter than the IC memo pipeline. It must produce
+separate market and competitive deliverables before the IC memo unless the user
+explicitly skips them or current prior outputs already exist.
 
 ### Phase 2 — Market & Competitive Research (skip if n8n files exist)
 If n8n research files found → SKIP with note: "Phases 0-2 covered by

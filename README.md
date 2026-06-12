@@ -2,7 +2,7 @@
 
 Pattern's modular skill architecture for Claude. Each skill is a folder containing a `SKILL.md` file that instructs Claude on methodology, output format, and quality standards for a specific domain. Skills are loaded on-demand — Claude reads the relevant `SKILL.md` before executing any task in its domain.
 
-**33 skills across 8 groups, one orchestration entry point, 5 functional layers, 2 multi-agent pipelines, and 8 generated reference documents.** Every formal output runs through at least two layers — usually three or four. Layers are not optional — skipping a layer produces a draft, not a deliverable.
+**33 skills across 8 groups, one orchestration entry point, 5 functional layers, 3 multi-agent pipelines, and 8 generated reference documents.** Every formal output runs through at least two layers — usually three or four. Layers are not optional — skipping a layer produces a draft, not a deliverable.
 
 > **Source of truth:** Root skill folders in this repo are the canonical authoring source. Packaged copies under grouped plugin folders must be synced from root before publishing. Update this README whenever skills are added, removed, repackaged, or promoted as workflow entry points.
 
@@ -26,6 +26,8 @@ The skill library has one orchestration entry point and five functional layers. 
 9. **doc-quality-checker** → auto-runs after file delivery
 
 > **Critical:** Never trigger a document production skill without running the quality layer first. A file produced without `writing-style` and `claim-scrutinizer` will fail the `doc-quality-checker` pass and require a full rebuild.
+
+> **Full deal-pack quality contract:** When the task is a new deal requiring market research, competitive assessment, and an IC memo, route through `deal-master` -> `new-deal-pipeline/orchestrator.md`. The pipeline applies `new-deal-pipeline/quality-contract.md`: thoroughness over speed, source-tagged claims, explicit arithmetic, MECE issue trees, no unsupported hyperbole, and visible `GAP` handling instead of plausible filler.
 
 | Layer | Skills | What It Owns | When It Runs |
 |---|---|---|---|
@@ -146,8 +148,17 @@ Pipelines are multi-agent workflows composed of skills. They live in their own f
 
 | Pipeline | Folder | What It Produces | Mode Flags |
 |----------|--------|-----------------|-----------|
+| `new-deal-pipeline` | `new-deal-pipeline/` | Full new-deal pack: shared evidence spine -> gold-standard market research -> competitive assessment -> strategic diligence bridge -> IC memo -> cross-output QA | `MARKET_MODE`, `COMPETITIVE_MODE`, `IC_MODE`: full/skip_existing/skip; `SOURCE_STRICTNESS`: standard/strict |
 | `ic-memo-pipeline` | `ic-memo-pipeline/` | Full 10-section IC memo: intake → market research → NTB diligence → driver tree → section drafts → 5 iteration passes → Pattern DOCX → QA | `NTB_MODE`: full/skip · `KPI_MODE`: full/skip |
 | `market-research-pipeline` | `market-research-pipeline/` | Standalone market research report: brief → L4→L3→L2 → gold-standard guide/template → iteration passes → Pattern DOCX | — |
+
+**new-deal-pipeline files:**
+
+| File | Phase | Role |
+|------|-------|------|
+| `orchestrator.md` | all | Routes the full deal pack and enforces cross-output consistency |
+| `quality-contract.md` | all | Mandatory source, MECE, arithmetic, anti-hyperbole, and claim-economy gate |
+| `competitive-assessment.md` | 3 | Standalone competitive assessment agent with moat proof and displacement paths |
 
 **ic-memo-pipeline agent files:**
 
@@ -205,6 +216,7 @@ Follow this checklist to add a new skill without breaking conventions:
 | `agents.md` | Repo root / OneDrive sync | Always-on operating layer — default mode, work-mode templates, full skill directory, file output rules |
 | `README.md` | Repo root | Source of truth for deployed skills — skill index, invocation guide, architecture overview |
 | `CHEATSHEET.md` | Repo root | Quick-reference: task→skill map, layer sequence, pipeline phase map, brand constants |
+| `new-deal-pipeline/quality-contract.md` | Repo root | Mandatory evidence, MECE, arithmetic, anti-hyperbole, and claim-economy gate for full deal packs |
 | `Claude_Skills_README.docx` | `docs/` | Generated Pattern-branded Word version of this README |
 | `Claude_Skills_CheatSheet_v2.docx` | `docs/` / OneDrive | Generated quick-reference card for common tasks, mandatory layers, pairings, and brand constants |
 | `Claude_Skill_Library_External (Finance)_v6.docx` | `docs/` / OneDrive | Generated finance/investment reference: skill architecture, inventory, IC memo workflow, finance handoff rules |

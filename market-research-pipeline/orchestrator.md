@@ -100,6 +100,7 @@ Create the following directory structure under WORK_DIR:
 │   └── post-output-doc-quality.md
 ├── source-bibliography.md
 ├── data-gaps.md
+├── open-issues.md
 └── final-output.[docx|pptx]
 ```
 
@@ -112,7 +113,7 @@ Append a run log entry to `{WORK_DIR}/run-log.md` at the start of every phase:
 
 ## Step 2 — Phase 1: Brief
 
-Invoke: `prompts/brief.md`
+Invoke: `brief.md`
 
 Pass in:
 - COMPANY, QUESTION
@@ -128,7 +129,7 @@ Write output to: `{WORK_DIR}/brief.md`
 - [ ] Each hypothesis has a stated evidence need and named source tier
 - [ ] Success criteria are measurable outcomes, not activity completions
 
-If any gate fails: re-invoke `prompts/brief.md` with the specific failure reason.
+If any gate fails: re-invoke `brief.md` with the specific failure reason.
 Maximum 2 re-runs. If still failing after 2, write `GATE_1_FAILED` to run-log and halt.
 
 ---
@@ -138,7 +139,7 @@ Maximum 2 re-runs. If still failing after 2, write `GATE_1_FAILED` to run-log an
 Run strictly sequentially. Each level reads the prior level's output before starting.
 
 ### L4 — Market & Segment Analysis
-Invoke: `prompts/l4-market.md`
+Invoke: `l4-market.md`
 Reads: `{WORK_DIR}/brief.md` + DOMAIN_TEMPLATE_PATH (if set)
 Writes: `{WORK_DIR}/research/l4-market.md`
 Also appends any DATA GAP flags to: `{WORK_DIR}/data-gaps.md`
@@ -148,7 +149,7 @@ web search to verify and update figures dated >6 months; focus new research on
 template's OPEN questions and any figures marked [E].
 
 ### L3 — Customer Insights
-Invoke: `prompts/l3-customer.md`
+Invoke: `l3-customer.md`
 Reads: `{WORK_DIR}/brief.md` + `{WORK_DIR}/research/l4-market.md` + DOMAIN_TEMPLATE_PATH
 Writes: `{WORK_DIR}/research/l3-customer.md`
 Appends gaps + sources as above.
@@ -156,7 +157,7 @@ Domain template instruction: use template's buyer archetypes and segment data as
 baseline; focus research on gaps and updating stale figures.
 
 ### L2 — Competitive Landscape
-Invoke: `prompts/l2-competitive.md`
+Invoke: `l2-competitive.md`
 Reads: brief + l4 + l3 + DOMAIN_TEMPLATE_PATH
 Writes: `{WORK_DIR}/research/l2-competitive.md`
 Appends gaps + sources as above.
@@ -165,7 +166,7 @@ pricing architecture as the starting competitive map; web search for material ch
 (funding, acquisitions, product launches, pricing changes) since template date.
 
 ### L1 — Company / Client Position
-Invoke: `prompts/l1-company.md`
+Invoke: `l1-company.md`
 Reads: brief + l4 + l3 + l2 + DOMAIN_TEMPLATE_PATH
 Writes: `{WORK_DIR}/research/l1-company.md`
 Appends gaps + sources as above.
@@ -179,7 +180,7 @@ Proceed to Phase 3 once L1 is written.
 
 ## Step 4 — Phase 3: Theme Development
 
-Invoke: `prompts/theme-synthesis.md`
+Invoke: `theme-synthesis.md`
 
 Reads: brief + all four research files
 Writes: `{WORK_DIR}/themes.md`
@@ -191,7 +192,7 @@ Writes: `{WORK_DIR}/themes.md`
 - [ ] Each theme has a specific strategic implication (concrete "so what")
 - [ ] Themes are mutually exclusive — no overlap between them
 
-If any gate fails: re-invoke `prompts/theme-synthesis.md` with specific failures.
+If any gate fails: re-invoke `theme-synthesis.md` with specific failures.
 Maximum 2 re-runs. If still failing, write `GATE_2_FAILED` to run-log and halt.
 
 ---
@@ -209,7 +210,7 @@ decision-grade artifact it will contain. Do not advance to output if any major
 section is prose-only.
 
 ### 4a — Context and market sizing (first, sequential)
-Invoke: `prompts/draft-context.md`
+Invoke: `draft-context.md`
 Reads: brief + l4-market + themes
 Writes: `{WORK_DIR}/draft/context-and-market-sizing.md`
 Constraint: context/scope definition plus market-sizing frame reconciliation,
@@ -220,16 +221,16 @@ Read `{WORK_DIR}/themes.md` to determine theme count N.
 Read `{WORK_DIR}/research/l2-competitive.md` to extract named competitors.
 
 Dispatch in parallel:
-- For each gold-standard section after Market Sizing, invoke `prompts/draft-section.md`
+- For each gold-standard section after Market Sizing, invoke `draft-section.md`
   with SECTION_NAME and the relevant themes/evidence.
   Writes: `{WORK_DIR}/draft/[section-slug].md`
-- For each named competitor: invoke `prompts/draft-competitor.md` with COMPETITOR=[name]
+- For each named competitor: invoke `draft-competitor.md` with COMPETITOR=[name]
   Writes: `{WORK_DIR}/draft/competitor-[name].md`
 
 Wait for all parallel agents to complete before 4c.
 
 ### 4c — Exec summary (last — depends on all sections)
-Invoke: `prompts/draft-exec.md`
+Invoke: `draft-exec.md`
 Reads: context-and-market-sizing + all section files + all competitor files + themes
 Writes: `{WORK_DIR}/draft/exec-summary.md`
 Constraint: two-page six-section executive summary via executive-summary-writer.
@@ -246,7 +247,7 @@ and carry unresolved issues as explicit flags in the output file — do not loop
 indefinitely. Write any unresolved issues to `{WORK_DIR}/open-issues.md`.
 
 ### Pass 1 — Writing style
-Invoke: `prompts/pass1-writing-style.md`
+Invoke: `pass1-writing-style.md`
 Reads: all draft files
 Writes: `{WORK_DIR}/iteration/pass1-writing-style.md` (redline) +
         updates draft files with hardened prose
@@ -255,7 +256,7 @@ Blocking issue: any claim missing [F/E/H] tag on a thesis-critical assertion.
 Non-blocking: style suggestions, word choice.
 
 ### Pass 2 — Claim scrutinizer
-Invoke: `prompts/pass2-claim-scrutinizer.md`
+Invoke: `pass2-claim-scrutinizer.md`
 Reads: all draft files (post-Pass-1) + source-bibliography + data-gaps
 Writes: `{WORK_DIR}/iteration/pass2-claim-scrutinizer.md`
 
@@ -267,7 +268,7 @@ Blocking issues (must resolve before Pass 3):
 Non-blocking: `WOUND`, `EXPOSE` — carry forward as flags.
 
 ### Pass 3 — Red team
-Invoke: `prompts/pass3-red-team.md`
+Invoke: `pass3-red-team.md`
 Reads: all draft files (post-Pass-2) + pass2 redline
 Writes: `{WORK_DIR}/iteration/pass3-red-team.md`
 
@@ -291,17 +292,17 @@ If Gate 3 fails: write `GATE_3_FAILED` + issue list to run-log and halt.
 Read OUTPUT_FORMAT from inputs.
 
 If `docx`:
-  Invoke: `prompts/output-docx.md`
+  Invoke: `output-docx.md`
   Reads: all draft files + open-issues.md + source-bibliography.md
   Writes: `{WORK_DIR}/final-output.docx`
 
 If `pptx`:
-  Invoke: `prompts/output-pptx.md`
+  Invoke: `output-pptx.md`
   Reads: all draft files + themes.md + open-issues.md
   Writes: `{WORK_DIR}/final-output.pptx`
 
 After output:
-  Invoke: `prompts/post-output-doc-quality.md`
+  Invoke: `post-output-doc-quality.md`
   Reads: final output file + relevant pattern output skill spec
   Writes: `{WORK_DIR}/iteration/post-output-doc-quality.md`
   Gate: zero CRITICAL doc-quality issues before release.
