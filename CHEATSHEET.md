@@ -8,6 +8,7 @@
 
 | Task | Skill(s) to invoke |
 |------|--------------------|
+| Full new deal package: market research + competitive assessment + IC memo | `deal-master` -> `new-deal-pipeline` |
 | Start or resume a deal workflow | `deal-master` |
 | Structure a problem / build issue tree | `mckinsey-consultant` |
 | Track evidence state / belief register for a deal | `analytical-operating-system` |
@@ -57,6 +58,7 @@
 Not every output requires the full sequence. Step 0 applies to full deal workflows. Steps 4 and 9 are always mandatory when a formal file is produced.
 Step 2 is mandatory for deal-master, IC memo, diligence, and investment thesis workflows.
 Steps 5–7 are mandatory for IC memos and investment documents.
+For a full new-deal package, load `new-deal-pipeline/quality-contract.md` before research starts and keep `SOURCE_STRICTNESS=strict` unless the user explicitly relaxes it.
 
 ---
 
@@ -64,6 +66,7 @@ Steps 5–7 are mandatory for IC memos and investment documents.
 
 | Pipeline | When to use | Mode flags |
 |----------|-------------|-----------|
+| `new-deal-pipeline` | Full new deal pack: market research, competitive assessment, IC memo, and cross-output QA | `MARKET_MODE`, `COMPETITIVE_MODE`, `IC_MODE`: full/skip_existing/skip |
 | `ic-memo-pipeline` | Full IC memo from intake to branded DOCX | `NTB_MODE`: full/skip · `KPI_MODE`: full/skip |
 | `market-research-pipeline` | Standalone gold-standard market research report | — |
 
@@ -97,6 +100,7 @@ Reference docs: `docs/market-research-gold-standard-guide.md` and `market-resear
 | If you invoke... | Also load... |
 |-----------------|-------------|
 | `deal-master` | `mckinsey-consultant`, `analytical-operating-system` |
+| `new-deal-pipeline` | `mckinsey-consultant`, `analytical-operating-system`, `new-deal-pipeline/quality-contract.md` |
 | `ic-memo-pipeline` | `mckinsey-consultant`, `analytical-operating-system` |
 | `market-research` | `mckinsey-consultant`, `competitive-moat-assessment` (post-L2), `writing-style` before production |
 | `ic-memo` | `ntb-diligence` (if NTB_MODE=full), `driver-tree`, `executive-summary-writer` (S2) |
@@ -115,6 +119,23 @@ Reference docs: `docs/market-research-gold-standard-guide.md` and `market-resear
 | `kpi-tree-builder` | Inside ic-memo-pipeline (pre-close) | Post-close only — don't build a KPI tree on pre-diligence assumptions |
 | `market-research` L1 (company position) | IC memo mode | ic-memo intake + CIM already covers L1 — running it duplicates work |
 | `writing-style` | Never skip | Always runs on formal output — skipping produces a draft, not a deliverable |
+
+---
+
+## new-deal-pipeline — phase map
+
+```
+Phase -1  Load mckinsey-consultant + analytical-operating-system + quality contract
+Phase 0   Inventory materials and prior outputs
+Phase 1   Shared evidence spine: source bibliography, evidence register, belief register, number register
+Phase 2   Gold-standard market research report
+Phase 3   Gold-standard competitive assessment
+Phase 4   Strategic diligence bridge: NTB, driver tree, boundability
+Phase 5   IC memo consuming Phase 2-4 evidence
+Phase 6   Cross-output QA: same market definition, competitor set, numbers, moat verdict, open questions
+```
+
+Gate rule: thesis-critical unsupported claims, conflicting recurring numbers, vendor/management-only proof, missing arithmetic, or unsupported superlatives return `HALT`, not a polished draft.
 
 ---
 

@@ -235,10 +235,19 @@ Skills are grouped by domain. Invoke the most specific skill first; fall back to
 
 *Use for: valuation, diligence, operating models, SaaS metrics, portfolio analytics*
 
+> **FULL NEW-DEAL PACKAGE ROUTE**: When the user asks for a new deal workflow, full
+> deal pack, complete market research + competitive assessment + IC memo, or a
+> gold-standard diligence package, start with `deal-master` and set
+> `WORKFLOW_MODE=full_deal_pack`. Route to `new-deal-pipeline/orchestrator.md`.
+> Load `new-deal-pipeline/quality-contract.md` before research starts. The quality
+> contract controls thoroughness, source tags, visible arithmetic, MECE structure,
+> cross-output consistency, and anti-hyperbole.
+
 > ⚠️ **FOUNDATIONAL RULE**: Always read `financial-model-builder` **first** before invoking any other skill in this group. It defines the canonical operating model structure — P&L, Balance Sheet, assumptions, and output tabs — that all downstream finance work builds on. Do not run metrics, attribution, or reporting skills until the foundational model is loaded or confirmed to exist.
 
 | Skill | Invoke when... |
 |---|---|
+| `deal-master` | Entry point for deal workflows. Inventories existing work, loads `mckinsey-consultant` and `analytical-operating-system`, initializes the belief register, and routes to IC memo or full new-deal package workflow. |
 | `financial-model-builder` | **[READ FIRST — FOUNDATIONAL]** Build the canonical 3-tab operating model (Input Page, Financial Model Template, Output Tab) from a source P&L/BS — triggers on "build financial model", "3-tab model", "6+6 analysis", "turn this P&L into a model", "model this out", "create a financial template", "build the pattern template model" — all other finance skills depend on this structure |
 | `ic-memo` | Pattern-standard IC (Investment Committee) memo — three-gate structure (company quality → sector timing → investment attractiveness), kill criteria, scenario analysis, Pattern-branded DOCX output. Triggers: "IC memo", "investment committee memo", "write up this deal", "deal memo" |
 | `diligence-ddr` | Generate or customize a Due Diligence Request List (DDR) for PE buyout or M&A sell-side — triggers on "DDR", "due diligence request list", "data room requests", "diligence checklist", "customize this request list" |

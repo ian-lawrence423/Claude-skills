@@ -58,30 +58,27 @@ Expected runtime: 25–45 minutes depending on market complexity and number of c
 market-research-pipeline/
 ├── CLAUDE.md                   ← you are here (Claude Code reads this first)
 ├── orchestrator.md             ← main agent — reads this to run the pipeline
-└── prompts/
-    ├── brief.md
-    ├── l4-market.md
-    ├── l3-customer.md
-    ├── l2-competitive.md
-    ├── l1-company.md
-    ├── theme-synthesis.md
-    ├── draft-context.md
-    ├── draft-section.md
-    ├── draft-competitor.md
-    ├── draft-exec.md
-    ├── pass1-writing-style.md
-    ├── pass2-claim-scrutinizer.md
-    ├── pass3-red-team.md
-    ├── post-output-doc-quality.md
-    ├── output-docx.md          ← split from remaining-agents.md before use
-    └── output-pptx.md          ← split from remaining-agents.md before use
+├── brief.md
+├── l4-market.md
+├── l3-customer.md
+├── l2-competitive.md
+├── l1-company.md
+├── theme-synthesis.md
+├── draft-context.md
+├── draft-section.md
+├── draft-competitor.md
+├── draft-exec.md
+├── pass1-writing-style.md
+├── pass2-claim-scrutinizer.md
+├── pass3-red-team.md
+├── post-output-doc-quality.md
+├── output-docx.md
+└── output-pptx.md
 ```
 
-**Note:** `remaining-agents.md` contains the prompts for draft-exec, all four
-iteration passes, and both output agents in a single file for convenience.
-Before first run, split each `---` section into its own file with the filename
-matching the header (e.g. `pass1-writing-style.md`, `output-docx.md`, etc.)
-OR reference the combined file from orchestrator.md and parse by header.
+**Note:** The pipeline uses flat agent files beside `orchestrator.md`. The legacy
+`remaining-agents.md` file is retained only as historical source material; do not
+dispatch agents from it.
 
 ---
 

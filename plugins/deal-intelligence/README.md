@@ -3,7 +3,7 @@
 **Author:** Pattern  
 **Version:** 0.1.0
 
-Full PE/M&A/public equity deal workflow — sourcing through IC memo production. Sequences 25 skills across 7 phases. Each phase gates on a verifiable output before proceeding.
+Full PE/M&A/public equity deal workflow — sourcing through gold-standard market research, competitive assessment, IC memo production, and deal-pack QA. Sequences 25 skills and 3 pipelines across 7 phases. Each phase gates on a verifiable output before proceeding.
 
 ## Skills (25)
 
@@ -58,17 +58,20 @@ Full PE/M&A/public equity deal workflow — sourcing through IC memo production.
 
 ## Agent
 
-**`deal-intelligence`** — Orchestrates the full 7-phase workflow.
+**`deal-intelligence`** — Orchestrates the full 7-phase workflow. For a new deal that needs market research, competitive assessment, and IC memo output from one evidence base, route through `new-deal-pipeline/orchestrator.md` before producing files.
 
 | Phase | Skills | Gate |
 |---|---|---|
 | 0 — Sourcing context | `competitive-landscape-deliverable` | Landscape framing confirmed |
+| 0b — Full new-deal pack | `deal-master` · `new-deal-pipeline` · `quality-contract` | Shared evidence spine initialized; market research, competitive assessment, and IC memo routed from one source of truth |
 | 1 — Intake & screen | `deal-master` · `mckinsey-consultant` · `analytical-operating-system` · `diligence-ddr` | Gates 1/2/3 scored; belief register initialized; DDR issued |
 | 2 — Market & competitive | `market-research` · `tam-sam-som-calculator` · `competitive-moat-assessment` · `boundability` | Gate 2 complete; gold-standard artifact plan; moat verdict; NTB Alignment Check |
 | 3 — Deep diligence | `ntb-diligence` · `driver-tree` · `deal-workbook-builder` · `financial-model-builder` · `gtm-metrics-analyzer` · `kpi-tree-builder` | Model built; deal workbook complete; GTM workbook complete; NTBs evidenced |
 | 4 — Draft IC memo | `ic-memo` · `writing-style` | 10-section draft; all claims tagged |
 | 5 — Quality passes | `claim-scrutinizer` · `red-team` · `pre-mortem` | All 🔴 CRITICAL resolved; KILL claims hardened |
 | 6 — Output | `pattern-docx` / `pattern-investment-pptx` · `doc-quality-checker` · `executive-summary-writer` | Zero 🔴 CRITICAL QC issues |
+
+Full deal-pack quality gate: `new-deal-pipeline/quality-contract.md` controls source tags, arithmetic, MECE structure, cross-output consistency, and anti-hyperbole. Thesis-critical unsupported claims return `HALT`, not a polished draft.
 
 ## Loading policy
 
