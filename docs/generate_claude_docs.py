@@ -301,6 +301,7 @@ def save(doc: Document, path: Path) -> None:
 
 
 COMMON_TASKS = [
+    ["Full new deal pack", "deal-master -> new-deal-pipeline"],
     ["Start or resume a deal workflow", "deal-master"],
     ["Structure a problem or build issue tree", "mckinsey-consultant"],
     ["Track evidence state / belief register", "analytical-operating-system"],
@@ -330,6 +331,7 @@ LAYERS = [
 ]
 
 FINANCE_SKILLS = [
+    ["new-deal-pipeline", "Workflow", "Runs gold-standard market research, competitive assessment, diligence bridge, IC memo, and cross-output QA.", "Best for new deals requiring a full evidence-backed deal pack."],
     ["financial-model-builder", "Foundation", "Builds canonical Input Page, Financial Model Template, and Output Tab from source P&L/BS.", "Load first before downstream finance skills."],
     ["ic-memo", "Investment memo", "Creates three-gate IC memo structure with company quality, sector timing, investment attractiveness, kill criteria.", "Use for standalone memo; pipeline for full workflow."],
     ["ic-memo-pipeline", "Workflow", "Runs intake, market research, diligence, draft, quality passes, DOCX output, and QA.", "Best for full deal write-up."],
@@ -416,7 +418,7 @@ DILIGENCE_ARCH = [
 def build_readme_doc() -> None:
     doc = setup_doc(
         "Claude Skills Library",
-        f"{SKILL_COUNT} across 8 groups | 1 orchestration entry point | 5 functional layers | 2 pipelines | {DATE_LABEL}",
+        f"{SKILL_COUNT} across 8 groups | 1 orchestration entry point | 5 functional layers | 3 pipelines | {DATE_LABEL}",
     )
     add_callout(
         doc,
@@ -442,6 +444,7 @@ def build_readme_doc() -> None:
         ["Workflow", "When to use", "Output"],
         [
             ["deal-master", "Start/resume full deal intelligence workflow.", "Routed phase plan and evidence register."],
+            ["new-deal-pipeline", "Full new deal pack requiring market research, competitive assessment, and IC memo.", "Three DOCX outputs, shared evidence registers, cross-output QA."],
             ["ic-memo-pipeline", "Full IC memo from intake to branded DOCX.", "10-section IC memo, quality passes, DOCX QA."],
             ["market-research-pipeline", "Standalone gold-standard market research report.", "Pattern DOCX market research report."],
         ],
@@ -470,6 +473,7 @@ def build_readme_doc() -> None:
             ["docs/strategic-diligence-gold-standard-guide.md", "Standalone source guide for NTB diligence and underwriting handoff."],
             ["market-research/references/gold-standard-report-template.md", "Skill reference loaded during Full-mode market research."],
             ["docs/generate_claude_docs.py", "Regenerates the Word reference artifacts."],
+            ["new-deal-pipeline/quality-contract.md", "Mandatory evidence, MECE, source, arithmetic, and anti-hyperbole gate for full deal packs."],
         ],
         [4200, 6600],
     )
@@ -479,7 +483,7 @@ def build_readme_doc() -> None:
 def build_cheatsheet_doc() -> None:
     doc = setup_doc(
         "Claude Skills - Quick Reference",
-        f"{SKILL_COUNT} | 2 pipelines | Pattern Investment Team | {DATE_LABEL}",
+        f"{SKILL_COUNT} | 3 pipelines | Pattern Investment Team | {DATE_LABEL}",
     )
     add_h1(doc, "What To Invoke")
     add_table(doc, ["Task", "Skill(s) to invoke"], COMMON_TASKS, [4300, 6500])
@@ -509,6 +513,7 @@ def build_cheatsheet_doc() -> None:
         ["If you invoke", "Also load"],
         [
             ["deal-master", "mckinsey-consultant, analytical-operating-system"],
+            ["new-deal-pipeline", "mckinsey-consultant, analytical-operating-system, quality-contract"],
             ["ic-memo-pipeline", "mckinsey-consultant, analytical-operating-system"],
             ["market-research", "mckinsey-consultant, competitive-moat-assessment, writing-style"],
             ["ic-memo", "ntb-diligence if NTB_MODE=full, driver-tree, executive-summary-writer"],
@@ -645,6 +650,7 @@ def build_finance_doc() -> None:
         ["Need", "Recommended chain"],
         [
             ["Full IC memo", "deal-master -> ic-memo-pipeline -> pattern-docx -> doc-quality-checker"],
+            ["Full new deal pack", "deal-master -> new-deal-pipeline -> market-research report + competitive assessment + IC memo -> cross-output QA"],
             ["Standalone finance model", "financial-model-builder -> model checks -> output workbook"],
             ["GTM diagnostic", "financial-model-builder if available -> gtm-metrics-analyzer -> workbook QA"],
             ["Market-led investment thesis", "market-research -> moat assessment -> executive-summary-writer -> ic-memo"],

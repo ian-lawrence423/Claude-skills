@@ -33,6 +33,18 @@ It does NOT govern: analytical methodology (mckinsey-consultant), prose and clai
 or file formatting (pattern-docx / pattern-investment-pptx). Defer to those skills for
 their respective responsibilities. Do not duplicate their logic here.
 
+Quality floor for every non-quick run:
+- Thoroughness outranks brevity. Cover the full decision question and name any
+  material branch not researched.
+- Every material claim must be tagged `[F]`, `[E]`, `[H]`, `[VENDOR]`, `[MGMT]`,
+  or `[GAP]` and tied to a source, formula, or falsification test.
+- Vendor and management claims can orient the work, but they cannot independently
+  validate a thesis-critical conclusion.
+- Do not use unsupported superlatives or generic adjectives. Include only what is
+  required to validate the point.
+- For full deal-pack work, `new-deal-pipeline/quality-contract.md` overrides this
+  file where standards conflict.
+
 ---
 
 ## Skill Architecture
@@ -78,6 +90,7 @@ Consumed by (downstream):
 Loads before this skill:
 - `mckinsey-consultant` for problem framing, MECE hypothesis tree, analytical lenses, and Pyramid Principle.
 - `analytical-operating-system` when research is part of an active deal, IC memo, diligence, or investment thesis workflow.
+- `new-deal-pipeline/quality-contract.md` when the output is part of a full new-deal package.
 
 Loads after this skill:
 - `competitive-moat-assessment` when competitor durability, moat depth, or displacement path matters.
@@ -184,7 +197,7 @@ require re-gathering.
 
 ```
 IC memo domain templates (investment memo context):
-  Path: /mnt/skills/user/ic-memo/references/domain-templates/
+  Path: {SKILL_DIR}/../ic-memo/references/domain-templates/
 
   sea-ltd-sea-brazil.md
   Triggers: Sea Limited, NYSE: SE, Shopee, Monee, SPayLater, SPX Express, Garena,
@@ -192,7 +205,7 @@ IC memo domain templates (investment memo context):
             MELI vs Sea, SEA platform investment thesis, Sea Ltd IC memo
 
 Market research domain templates (sector research context):
-  Path: /mnt/skills/user/market-research/references/domain-templates/
+  Path: {SKILL_DIR}/references/domain-templates/
 
   marketplace-operator-sea-brazil.md
   Triggers: Shopee market research, SEA e-commerce market, Southeast Asia marketplace,
@@ -409,7 +422,7 @@ optionally — use it when the research question depends on relative defensibili
 named competitors, skip it when the focus is market sizing or customer research.
 
 ```
-Downstream load: /mnt/skills/user/competitive-moat-assessment/SKILL.md
+Downstream load: {SKILL_DIR}/../competitive-moat-assessment/SKILL.md
 ```
 
 #### Competitor Profile Anatomy — apply to every named competitor
@@ -799,7 +812,7 @@ Relevance, Authority, Accuracy, and Purpose — lives in `mckinsey-consultant`. 
 before rating any source:
 
 ```
-Read: /mnt/skills/user/mckinsey-consultant/references/VALIDATION_FRAMEWORKS.md
+Read: {SKILL_DIR}/../mckinsey-consultant/references/VALIDATION_FRAMEWORKS.md
 ```
 
 The tier structure here tells you which sources are acceptable; CRAAP tells you how to
@@ -877,7 +890,7 @@ before treating as confirmed.
 Apply CRAAP scoring to all sources. Minimum score of 18/25 required for Tier 1
 evidence use. Load full scoring rubric:
 ```
-Read: /mnt/skills/user/mckinsey-consultant/references/VALIDATION_FRAMEWORKS.md
+Read: {SKILL_DIR}/../mckinsey-consultant/references/VALIDATION_FRAMEWORKS.md
 ```
 
 | Criterion | Score 1–5 | Key question |
@@ -967,5 +980,5 @@ Read: {SKILL_DIR}/references/FREE_SOURCES_GUIDE.md
 
 **CRAAP scoring rubric and triangulation matrix (full):**
 ```
-Read: /mnt/skills/user/mckinsey-consultant/references/VALIDATION_FRAMEWORKS.md
+Read: {SKILL_DIR}/../mckinsey-consultant/references/VALIDATION_FRAMEWORKS.md
 ```

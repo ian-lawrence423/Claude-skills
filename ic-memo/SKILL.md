@@ -29,6 +29,17 @@ investors who will challenge every assertion. The governing discipline is precis
 pressure — every claim must survive a hostile question from an IC member who has read
 the same CIM and talked to the same management team.
 
+Quality floor:
+- The memo must be fact-oriented, sourced, MECE, and low-hype.
+- Every thesis-critical assertion needs an evidence tag, source, period, scope,
+  and decision implication.
+- Estimates must show arithmetic. Management forecasts and vendor claims are not
+  independent proof.
+- Open questions must stay visible in the executive summary, risk section, and
+  recommendation; do not convert unresolved evidence gaps into generic caveats.
+- For full deal-pack work, `new-deal-pipeline/quality-contract.md` overrides this
+  file where standards conflict.
+
 ---
 
 ## Skill Architecture
@@ -37,7 +48,7 @@ the same CIM and talked to the same management team.
 ic-memo              ← YOU ARE HERE — document architecture, section structure, formatting
       │
       ├── investment-evaluation-framework.md  ← Six Screening Questions as gate structure
-      │   Read: /mnt/skills/user/mckinsey-consultant/references/investment-evaluation-framework.md
+      │   Read: {SKILL_DIR}/../mckinsey-consultant/references/investment-evaluation-framework.md
       │
       ├── mckinsey-consultant          ← analytical methodology, pyramid principle, SCR
       │
@@ -45,7 +56,7 @@ ic-memo              ← YOU ARE HERE — document architecture, section structu
       │   Run FIRST when the deal warrants structured NTB analysis.
       │   Produces NTB registry + diligence plan + stress test that feed Sections 4, 7, 9.
       │   When ntb-diligence has run, do NOT re-derive NTBs inline — consume its output.
-      │   Read: /mnt/skills/user/ntb-diligence/SKILL.md
+      │   Read: {SKILL_DIR}/../ntb-diligence/SKILL.md
       │
       ├── market-research              ← evidence gathering for Sections 4, 5, 6
       │   Runs in IC memo mode: no standalone intake, no standalone output
@@ -100,6 +111,7 @@ Loads before this skill:
 - `deal-master` for full deal workflows that need existing-work inventory and phase routing.
 - `mckinsey-consultant` plus `investment-evaluation-framework.md` for analytical method and Six Screening Questions.
 - `analytical-operating-system` for belief register, evidence states, thesis-change log, and decision posture.
+- `new-deal-pipeline/quality-contract.md` when the memo is part of a full market research + competitive assessment + IC memo package.
 - `ntb-diligence` when a standalone NTB registry already exists or the thesis has 4+ load-bearing assumptions.
 - `market-research` when market, customer, competitive, or sector evidence is missing.
 
@@ -149,11 +161,11 @@ Anti-pattern:
 
 **Load the investment evaluation framework:**
 ```
-Read: /mnt/skills/user/mckinsey-consultant/references/investment-evaluation-framework.md
+Read: {SKILL_DIR}/../mckinsey-consultant/references/investment-evaluation-framework.md
 ```
 
 **Check for a matching domain template:**
-Scan the company or topic against `/mnt/skills/user/ic-memo/references/domain-templates/`
+Scan the company or topic against `{SKILL_DIR}/references/domain-templates/`
 for any file whose trigger list matches. If a match is found, load it immediately — it
 pre-loads confirmed data, prior NTB diligence output, Gate 2 scorecards, pre-mortem
 failure modes, and open questions that would otherwise require re-gathering.
@@ -260,7 +272,7 @@ Without this phase, those sections will rely on CIM-sourced claims that have not
 independently triangulated — which will fail claim-scrutinizer Pass 2.
 
 ```
-Read: /mnt/skills/user/market-research/SKILL.md → IC Memo Mode (below)
+Read: {SKILL_DIR}/../market-research/SKILL.md → IC Memo Mode (below)
 ```
 
 ### IC Memo Mode — How market-research Runs Within an IC Memo
@@ -470,7 +482,7 @@ L4 and L2 findings into the memo's length constraints.
 
 **For competitive position — invoke competitive-moat-assessment using L2 findings:**
 ```
-Read: /mnt/skills/user/competitive-moat-assessment/SKILL.md
+Read: {SKILL_DIR}/../competitive-moat-assessment/SKILL.md
 ```
 competitive-moat-assessment receives the L2 competitor profiles as inputs and produces
 the moat verdict. This verdict — not the competitor profiles themselves — is the
@@ -628,7 +640,7 @@ financial analysis. Pass 1 also catches Group E draft artifact language — no "
 labels on cover, no "(NEW)" tags in section headers, no "pre-mortem addition:"
 prefixes in body text, no FM codes in body text.
 ```
-Read: /mnt/skills/user/writing-style/SKILL.md
+Read: {SKILL_DIR}/../writing-style/SKILL.md
 ```
 
 **Pass 2 — claim-scrutinizer redline**
@@ -638,14 +650,14 @@ Full seven-part test on every material claim. Mandatory focus areas:
 - Section 7: financial projections pass projection scrutiny and base rate check
 - Section 10: walk-away conditions are binary, not risk categories
 ```
-Read: /mnt/skills/user/claim-scrutinizer/SKILL.md
+Read: {SKILL_DIR}/../claim-scrutinizer/SKILL.md
 ```
 
 **Pass 3 — red-team adversarial pass**
 Load Type A investment attack lenses. Attack load-bearing pillars first.
 ```
-Read: /mnt/skills/user/red-team/SKILL.md
-Read: /mnt/skills/user/red-team/references/red-team-investment-attacks.md
+Read: {SKILL_DIR}/../red-team/SKILL.md
+Read: {SKILL_DIR}/../red-team/references/red-team-investment-attacks.md
 ```
 
 **Pass 4 — pre-mortem (failure mode inventory)**
@@ -658,7 +670,7 @@ leading indicators, boundability assessments, and compound failure paths.
   the inline registry for NTB mapping
 - Output feeds Section 9 risks and may trigger updates to Section 10 open items
 ```
-Read: /mnt/skills/user/pre-mortem/SKILL.md
+Read: {SKILL_DIR}/../pre-mortem/SKILL.md
 ```
 
 **Pass 4b — Numeric Consistency Reconciliation (mandatory after pre-mortem)**
@@ -720,7 +732,7 @@ and Docs buckets collapse; Price becomes "entry discipline" and Operations becom
 "monitoring cadence." For PE control buyouts, all five buckets are fully active.
 
 ```
-Read: /mnt/skills/user/boundability/SKILL.md
+Read: {SKILL_DIR}/../boundability/SKILL.md
 ```
 
 **Pass 5 — doc-quality-checker**
@@ -729,7 +741,7 @@ Group E draft artifact language that survived Pass 1 (version labels, changelog
 subtitles, "pre-mortem addition:" prefixes, FM codes in body text) — all rated at
 🔴 CRITICAL.
 ```
-Read: /mnt/skills/user/doc-quality-checker/SKILL.md
+Read: {SKILL_DIR}/../doc-quality-checker/SKILL.md
 ```
 
 ---
@@ -738,7 +750,7 @@ Read: /mnt/skills/user/doc-quality-checker/SKILL.md
 
 Before generating any code:
 ```
-Read: /mnt/skills/user/pattern-docx/SKILL.md
+Read: {SKILL_DIR}/../pattern-docx/SKILL.md
 ```
 
 **DDR-specific formatting notes:**
@@ -787,20 +799,20 @@ The memo is ready for IC only when all items below pass.
 ## References
 
 ```
-Read: /mnt/skills/user/mckinsey-consultant/references/investment-evaluation-framework.md
-Read: /mnt/skills/user/ntb-diligence/SKILL.md                    (optional upstream)
-Read: /mnt/skills/user/competitive-moat-assessment/SKILL.md
-Read: /mnt/skills/user/executive-summary-writer/SKILL.md
-Read: /mnt/skills/user/writing-style/SKILL.md
-Read: /mnt/skills/user/claim-scrutinizer/SKILL.md
-Read: /mnt/skills/user/red-team/SKILL.md
-Read: /mnt/skills/user/red-team/references/red-team-investment-attacks.md
-Read: /mnt/skills/user/pre-mortem/SKILL.md
-Read: /mnt/skills/user/pattern-docx/SKILL.md
-Read: /mnt/skills/user/doc-quality-checker/SKILL.md
+Read: {SKILL_DIR}/../mckinsey-consultant/references/investment-evaluation-framework.md
+Read: {SKILL_DIR}/../ntb-diligence/SKILL.md                    (optional upstream)
+Read: {SKILL_DIR}/../competitive-moat-assessment/SKILL.md
+Read: {SKILL_DIR}/../executive-summary-writer/SKILL.md
+Read: {SKILL_DIR}/../writing-style/SKILL.md
+Read: {SKILL_DIR}/../claim-scrutinizer/SKILL.md
+Read: {SKILL_DIR}/../red-team/SKILL.md
+Read: {SKILL_DIR}/../red-team/references/red-team-investment-attacks.md
+Read: {SKILL_DIR}/../pre-mortem/SKILL.md
+Read: {SKILL_DIR}/../pattern-docx/SKILL.md
+Read: {SKILL_DIR}/../doc-quality-checker/SKILL.md
 ```
 
 **Domain templates (auto-load on matching trigger):**
 ```
-/mnt/skills/user/ic-memo/references/domain-templates/sea-ltd-sea-brazil.md
+{SKILL_DIR}/references/domain-templates/sea-ltd-sea-brazil.md
 ```

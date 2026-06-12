@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "deal-master",
-      "description": "Deal workflow entry point: inventories existing work, loads the analytical and evidence-control layers, initializes the belief register, and routes the next phase.",
+      "description": "Deal workflow entry point: inventories existing work, loads analytical and evidence-control layers, initializes the belief register, and routes IC memo or full new-deal package workflows.",
       "category": "deal-intelligence",
       "source": "./deal-master",
       "author": {
@@ -27,7 +27,7 @@
     },
     {
       "name": "deal-research",
-      "description": "Phase 2 research tools: market sizing, competitive landscape, moat assessment, TAM/SAM/SOM, DDR generation, and structured screening.",
+      "description": "Phase 2 research tools: market sizing, competitive landscape, moat assessment, TAM/SAM/SOM, DDR generation, structured screening, and gold-standard research support.",
       "category": "deal-intelligence",
       "source": "./deal-research",
       "author": {
@@ -45,7 +45,7 @@
     },
     {
       "name": "deal-output",
-      "description": "Phase 4-6 drafting and production: IC memo, quality passes (claim scrutinizer, red team, pre-mortem), Pattern-branded DOCX/PPTX output, and executive summary.",
+      "description": "Phase 4-6 drafting and production: IC memo, quality passes (claim scrutinizer, red team, pre-mortem), Pattern-branded DOCX/PPTX output, executive summary, and final QA.",
       "category": "deal-intelligence",
       "source": "./deal-output",
       "author": {

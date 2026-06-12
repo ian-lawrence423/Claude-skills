@@ -201,7 +201,7 @@ Append a run log entry to `{WORK_DIR}/run-log.md` at the start of every phase:
 
 ## Step 2 — Phase 1: Intake
 
-Invoke: `prompts/intake.md`
+Invoke: `intake.md`
 
 Pass in:
 - COMPANY, DEAL_TYPE, ENTRY_VAL, THESIS, HOLD_PERIOD, MATERIALS_PATH
@@ -217,7 +217,7 @@ Writes: `{WORK_DIR}/intake.md`
 - [ ] Known risks or IC concerns documented (minimum one)
 - [ ] All Six Screening Questions mapped — state which have strong vs. thin evidence
 
-If gate fails: re-invoke `prompts/intake.md` with specific gap.
+If gate fails: re-invoke `intake.md` with specific gap.
 Maximum 2 re-runs. If still failing: write `GATE_1_FAILED` to run-log and halt.
 
 ---
@@ -230,26 +230,26 @@ Market research runs in IC memo mode — no standalone intake, no standalone
 deliverable. Outputs are evidence summaries that feed memo sections directly.
 
 ### L4 — Market & Segment Analysis
-Invoke: `prompts/l4-market.md`
+Invoke: `l4-market.md`
 Reads: `{WORK_DIR}/intake.md` + DOMAIN_TEMPLATE_PATH
 Writes: `{WORK_DIR}/research/l4-market.md`
 Appends sources → `{WORK_DIR}/source-bibliography.md`
 Appends gaps → `{WORK_DIR}/data-gaps.md`
 
 ### L3 — Customer Insights
-Invoke: `prompts/l3-customer.md`
+Invoke: `l3-customer.md`
 Reads: intake + l4-market + DOMAIN_TEMPLATE_PATH
 Writes: `{WORK_DIR}/research/l3-customer.md`
 Appends sources + gaps as above.
 
 ### L2 — Competitive Landscape
-Invoke: `prompts/l2-competitive.md`
+Invoke: `l2-competitive.md`
 Reads: intake + l4 + l3 + DOMAIN_TEMPLATE_PATH
 Writes: `{WORK_DIR}/research/l2-competitive.md`
 Appends sources + gaps as above.
 
 ### Moat Assessment
-Invoke: `prompts/moat-assessment.md`
+Invoke: `moat-assessment.md`
 Reads: intake + l2-competitive + DOMAIN_TEMPLATE_PATH
 Writes: `{WORK_DIR}/research/moat-assessment.md`
 
@@ -265,7 +265,7 @@ Maximum 2 re-runs per level. If still failing: write `GATE_2_FAILED` to run-log 
 
 ## Step 4 — Phase 3: NTB Diligence (if NTB_MODE=full)
 
-Invoke: `prompts/ntb-diligence.md`
+Invoke: `ntb-diligence.md`
 
 Reads: intake + all research files + DOMAIN_TEMPLATE_PATH
 Writes: `{WORK_DIR}/ntb-registry.md`
@@ -278,7 +278,7 @@ If `NTB_MODE=skip`:
 
 ## Step 4b — Phase 3b: Driver Tree
 
-Invoke: `prompts/driver-tree.md`
+Invoke: `driver-tree.md`
 
 Reads: intake + ntb-registry (if exists) + all research files
 Writes: `{WORK_DIR}/research/driver-tree.md`
@@ -310,33 +310,33 @@ All section agents receive:
 - Path to `{SKILLS_PATH}/ic-memo/SKILL.md`
 
 ### 4a — Cover (first, sequential)
-Invoke: `prompts/draft-s1-cover.md`
+Invoke: `draft-sections.md` with `SECTION_INDEX=1`
 Writes: `{WORK_DIR}/draft/s1-cover.md`
 
 ### 4b — Core sections (parallel — wait for 4a to complete, then dispatch all simultaneously)
 
 Dispatch in parallel:
-- `prompts/draft-s3-overview.md`  → `{WORK_DIR}/draft/s3-overview.md`
-- `prompts/draft-s4-thesis.md`    → `{WORK_DIR}/draft/s4-thesis.md`
-- `prompts/draft-s5-market.md`    → `{WORK_DIR}/draft/s5-market-competitive.md`
-- `prompts/draft-s6-business.md`  → `{WORK_DIR}/draft/s6-business-quality.md`
-- `prompts/draft-s7-financials.md`→ `{WORK_DIR}/draft/s7-financials.md`
-- `prompts/draft-s8-deal.md`      → `{WORK_DIR}/draft/s8-deal-structure.md`
+- `draft-sections.md` with `SECTION_INDEX=3` → `{WORK_DIR}/draft/s3-overview.md`
+- `draft-sections.md` with `SECTION_INDEX=4` → `{WORK_DIR}/draft/s4-thesis.md`
+- `draft-sections.md` with `SECTION_INDEX=5` → `{WORK_DIR}/draft/s5-market-competitive.md`
+- `draft-sections.md` with `SECTION_INDEX=6` → `{WORK_DIR}/draft/s6-business-quality.md`
+- `draft-sections.md` with `SECTION_INDEX=7` → `{WORK_DIR}/draft/s7-financials.md`
+- `draft-sections.md` with `SECTION_INDEX=8` → `{WORK_DIR}/draft/s8-deal-structure.md`
 
 Wait for all 4b agents to complete before proceeding to 4c.
 
 ### 4c — Risks (depends on all 4b sections)
-Invoke: `prompts/draft-s9-risks.md`
+Invoke: `draft-sections.md` with `SECTION_INDEX=9`
 Reads: all draft sections from 4a + 4b
 Writes: `{WORK_DIR}/draft/s9-risks.md`
 
 ### 4d — Recommendation (depends on S9)
-Invoke: `prompts/draft-s10-recommendation.md`
+Invoke: `draft-sections.md` with `SECTION_INDEX=10`
 Reads: all draft sections + s9-risks
 Writes: `{WORK_DIR}/draft/s10-recommendation.md`
 
 ### 4e — Executive Summary (last — synthesizes all)
-Invoke: `prompts/draft-s2-exec-summary.md`
+Invoke: `draft-sections.md` with `SECTION_INDEX=2`
 Reads: all draft sections
 Writes: `{WORK_DIR}/draft/s2-exec-summary.md`
 Constraint: two-page six-section executive summary, self-contained — passes cold read test.
@@ -352,7 +352,7 @@ run one revision cycle if needed, then advance.
 unresolved issues to `{WORK_DIR}/open-issues.md`.
 
 ### Pass 1 — Writing Style
-Invoke: `prompts/pass1-writing-style.md`
+Invoke: `pass1-writing-style.md`
 Reads: all draft files
 Writes: `{WORK_DIR}/iteration/pass1-writing-style.md` (redline)
 Updates: draft files with hardened prose
@@ -362,7 +362,7 @@ Group E draft artifact language (version labels, "pre-mortem addition:" prefixes
 "(NEW)" tags, FM codes).
 
 ### Pass 2 — Claim Scrutinizer
-Invoke: `prompts/pass2-claim-scrutinizer.md`
+Invoke: `pass2-claim-scrutinizer.md`
 Reads: all draft files (post-Pass 1) + source-bibliography + data-gaps
 Writes: `{WORK_DIR}/iteration/pass2-claim-scrutinizer.md`
 
@@ -374,7 +374,7 @@ Blocking (must resolve before Pass 3):
 Non-blocking: `WOUND`, `EXPOSE` — carry forward as flags.
 
 ### Pass 3 — Red Team
-Invoke: `prompts/pass3-red-team.md`
+Invoke: `pass3-red-team.md`
 Reads: all draft files (post-Pass 2) + pass2 redline
 Writes: `{WORK_DIR}/iteration/pass3-red-team.md`
 
@@ -385,7 +385,7 @@ Blocking (must resolve before Pass 4):
 Non-blocking: `WOUND` attacks where risk is acknowledged in text.
 
 ### Pass 4 — Pre-Mortem
-Invoke: `prompts/pass4-pre-mortem.md`
+Invoke: `pass4-pre-mortem.md`
 Reads: all draft files (post-Pass 3) + ntb-registry (if exists)
 Writes: `{WORK_DIR}/iteration/pass4-pre-mortem.md`
 Updates: s9-risks.md (adds failure modes) + s10-recommendation.md (adds open items)
@@ -394,7 +394,7 @@ Blocking: any failure mode whose Severe scenario exceeds Bear case in s7 without
 acknowledgement in s9.
 
 ### Pass 4b — Numeric Reconciliation
-Invoke: `prompts/pass4b-numeric-reconciliation.md`
+Invoke: `pass4b-numeric-reconciliation.md`
 Reads: all draft files + pass4 output
 Writes: `{WORK_DIR}/iteration/pass4b-numeric-reconciliation.md`
 Updates: any sections with reconciled figures
@@ -403,7 +403,7 @@ Blocking: any cross-section numeric contradiction (e.g., a figure that appears
 with different values in s4-thesis and s7-financials).
 
 ### Pass 4c — Boundability
-Invoke: `prompts/pass4c-boundability.md`
+Invoke: `pass4c-boundability.md`
 Reads: research/driver-tree.md + ntb-registry (if exists) + pass4 output +
        s7-financials + s9-risks + s10-recommendation
 Writes: `{WORK_DIR}/iteration/pass4c-boundability.md`
@@ -425,7 +425,7 @@ If Gate 3 fails: write `GATE_3_FAILED` + issue list to run-log and halt.
 
 ## Step 7 — Phase 6: Output
 
-Invoke: `prompts/output-docx.md`
+Invoke: `output-docx.md`
 Reads: all draft files + open-issues.md + source-bibliography.md
 Writes: `{WORK_DIR}/final-output.docx`
 
@@ -433,7 +433,7 @@ Writes: `{WORK_DIR}/final-output.docx`
 
 ## Step 8 — Phase 7: QA Gate
 
-Invoke: `prompts/pass5-doc-quality.md`
+Invoke: `pass5-doc-quality.md`
 Reads: `{WORK_DIR}/final-output.docx`
 Writes: `{WORK_DIR}/iteration/pass5-doc-quality.md`
 
@@ -443,14 +443,14 @@ Writes: `{WORK_DIR}/iteration/pass5-doc-quality.md`
 - [ ] Header/footer present and correct
 - [ ] Brand colors and typography verified
 
-If Gate 4 fails: re-invoke `prompts/output-docx.md` with specific failures.
+If Gate 4 fails: re-invoke `output-docx.md` with specific failures.
 Maximum 1 re-run. If still failing: write `GATE_4_FAILED` to run-log and report to user.
 
 ---
 
 ## Step 9 — Phase 8: KPI Tree (if KPI_MODE=full)
 
-Invoke: `prompts/kpi-tree.md`
+Invoke: `kpi-tree.md`
 
 Reads:
 - `{WORK_DIR}/intake.md`
