@@ -323,15 +323,41 @@ verdict-color discipline for Pattern documents built with this skill.
 
 ### Sourcing mechanics
 
-- Use footnotes for thesis-critical sourcing. Do not crowd body prose with inline
-  source tags. Each thesis-critical claim should carry a page-foot source note in
-  `[type / confidence] Source, date. Note.` form, numbered sequentially in order
-  of appearance across the whole document.
+- Use true Word footnotes for thesis-critical sourcing. Do not simulate footnotes
+  with manually typed footer text, end-of-document source lists, or page-bottom
+  caption lines.
+- Insert the body citation as a superscript Word footnote reference immediately
+  after the sourced claim. In OOXML, this is a run with
+  `w:rStyle w:val="FootnoteReference"` and `w:footnoteReference w:id="N"`.
+- Store source text in `word/footnotes.xml`, not in `word/document.xml`. Each
+  note must start with the evidence tag in `[type · confidence]` form, followed
+  by the source, date, and a short corroboration note or caveat.
+- Evidence tag types: `[F]` = fact, `[E]` = estimate, `[H]` = hypothesis.
+  Confidence labels: `H` = high, `M` = medium, `L` = low. Example:
+  `[F · H] ResearchAndMarkets, European Social Commerce Market Report, May 2025.
+  Corroborated by eMarketer 2025 and Statista Social Commerce Outlook 2025.`
+- Number footnotes sequentially in order of appearance across the whole document.
 - Use inline bracket tags only as compact in-table shorthand when a full footnote
   would make the table unreadable.
 - Validate footnote hygiene before delivery: separator lines must not contain
   footnote-reference glyphs, every reference must resolve, and numbering must be
   gapless.
+
+### True footnote OOXML checklist
+
+- `word/document.xml` contains one `w:footnoteReference w:id="N"` for each cited
+  claim.
+- `word/footnotes.xml` contains required separator entries:
+  `w:type="separator" w:id="-1"` and `w:type="continuationSeparator" w:id="0"`.
+- `word/footnotes.xml` contains one `w:footnote w:id="N"` for every body
+  reference. The note should include a `w:footnoteRef` run followed by the
+  source text run.
+- `word/_rels/document.xml.rels` contains a footnotes relationship targeting
+  `footnotes.xml`.
+- `[Content_Types].xml` contains the footnotes override:
+  `application/vnd.openxmlformats-officedocument.wordprocessingml.footnotes+xml`.
+- Render and inspect page images or PDF output to confirm the references appear
+  as superscripts and the notes appear at the bottom of the relevant page.
 
 ### Contents page
 
@@ -796,8 +822,10 @@ Section pages (H1 starts each)
   ├── Body paragraphs / bullets
   └── Tables as needed
 
-Footnote line (last element on last page)
-  └── Paragraph with top border BBBBBB, caption text, italic
+True Word footnotes
+  - Body claim carries a superscript footnote reference.
+  - Source text appears through word/footnotes.xml at the relevant page bottom.
+  - No manual "footnote line" should be appended as a body paragraph.
 ```
 
 ### Cover title block

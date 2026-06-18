@@ -187,12 +187,12 @@ source confidence. Type and confidence are orthogonal and must not be collapsed.
 | Type | `[F]`, `[E]`, `[H]` | Fact, estimate, or hypothesis |
 | Confidence | `H`, `M`, `L` | High, medium, or low source confidence |
 
-Write the combined tag as `[type / confidence]`.
+Write the combined tag as `[type · confidence]`.
 
 Examples:
-- `[F / L]` = observable claim, but single-sourced or self-reported.
-- `[E / M]` = estimate with stated arithmetic and partially convergent sources.
-- `[H / L]` = plausible thesis point with limited validation.
+- `[F · L]` = observable claim, but single-sourced or self-reported.
+- `[E · M]` = estimate with stated arithmetic and partially convergent sources.
+- `[H · L]` = plausible thesis point with limited validation.
 
 **Self-reported flag:** When the source is the subject of the claim, state that
 explicitly. A vendor-reported customer count, management-reported churn figure, or
@@ -380,7 +380,7 @@ pre-selecting a winner.
 This gate fails if any of the following are asymmetric across the compared set:
 
 1. **Self-reported data treated unevenly.** If one entity's self-reported figure is
-   tagged `[F / L]` and flagged as self-reported, every equivalent figure must be
+   tagged `[F · L]` and flagged as self-reported, every equivalent figure must be
    tagged and flagged the same way.
 2. **Missing parallel key unknowns.** Each compared entity must carry its own
    data-gaps / key-unknowns line. Silent gaps make one option look cleaner than it is.

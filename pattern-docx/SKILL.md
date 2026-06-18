@@ -245,6 +245,7 @@ template choice, critical rules, and QA gates.
 10. **Footer tab stop** — use `<w:tab w:val="right" w:pos="10800"/>` in pPr tabs + `<w:tab/>` run element; do NOT use `<w:ptab>` (unreliable across renderers)
 11. **Page margins are 0.5 inch (720 DXA)** — not the docx-js default of 1 inch
 12. **characterSpacing: 40** on H1 text runs — this is the slight tracking on section headers
+13. **Thesis-critical sourcing uses true Word footnotes** — insert real `w:footnoteReference` runs and `word/footnotes.xml` entries per `references/production-spec.md`; do not emulate footnotes with footer text or manual page-bottom paragraphs.
 
 ---
 
