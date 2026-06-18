@@ -406,13 +406,16 @@ Structure (six sections in order):
 2. **Product Offering** — platform/functionality/workflow role, buyer/user, differentiation classified as structural/transient/mixed/unproven
 3. **Market Dynamic** — market structure, demand drivers, competitive intensity, timing, tailwinds/headwinds
 4. **Business Model** — revenue model, pricing logic, revenue quality, unit economics, scalability
-5. **Thesis: What You Need To Believe** — 3–5 testable beliefs tied to evidence and falsification triggers
-6. **Open Questions** — 3–5 decision-changing diligence questions with evidence needed
+5. **Thesis: What You Need To Believe** — 3–5 testable beliefs tied to evidence,
+   driver IDs / tiers when available, and falsification triggers
+6. **Open Questions** — 3–5 decision-changing diligence questions with evidence needed,
+   including any T3/T4 drivers that remain unresolved
 
 The executive summary must be self-contained. A reader who reads only this section
 must be able to answer: what the company does, what the product does, why the
 market timing matters, how the business model works, what must be true for the
-investment thesis to hold, and what open questions could change the answer.
+investment thesis to hold, which load-bearing assumptions are bounded versus
+unbounded, and what open questions could change the answer.
 
 ---
 
@@ -649,8 +652,39 @@ Full seven-part test on every material claim. Mandatory focus areas:
 - Section 6: management track record claims pass the circular reasoning check
 - Section 7: financial projections pass projection scrutiny and base rate check
 - Section 10: walk-away conditions are binary, not risk categories
+- If `driver-tree` output exists, every thesis-critical claim maps to a driver
+  ID, tier, and treatment; claims mapped to T4 drivers cannot be load-bearing
 ```
 Read: {SKILL_DIR}/../claim-scrutinizer/SKILL.md
+```
+
+**Pass 2b — driver-tree gate integration**
+Run when `diligence/driver-tree.md` exists or when the recommendation depends
+on operating performance. This pass does not rebuild the tree; it carries its
+decision controls into the memo.
+
+Required memo inclusions:
+- Value-creation bridge: value buckets sum to 100%, and any bucket above 50%
+  names the supporting driver(s)
+- Thesis-quality gate result: PASS / PASS_WITH_GAPS / HALT with required action
+- Top load-bearing drivers: driver ID, tier, value impact, treatment, and
+  falsification trigger
+- Top unresolved T3/T4 drivers: what would bound each, whether evidence is
+  gettable, and whether the driver is Base, Scenario-only, or Exclude
+- Monitoring / re-underwrite triggers for every High or Very High value-impact
+  driver
+
+Hard rules:
+- If driver-tree status is HALT, the memo cannot present an IC-ready Proceed,
+  Proceed with protections, or Reprice recommendation until the thesis is
+  reframed and gates are rerun.
+- A T4 driver cannot appear as a base-case load-bearing assumption.
+- A high-value base-case driver without a falsification trigger is an open
+  issue, not a completed thesis pillar.
+
+```
+Read: {SKILL_DIR}/../driver-tree/SKILL.md
+Read: {SKILL_DIR}/../boundability/SKILL.md
 ```
 
 **Pass 3 — red-team adversarial pass**
@@ -714,6 +748,12 @@ Run after Pass 4 (pre-mortem) and Pass 4b (numeric reconciliation). Boundability
 takes the failure mode registry produced by pre-mortem and converts each material
 diligence item into specific underwriting actions across five buckets (model, price,
 leverage, docs, operations) plus a deal-level verdict.
+
+If Pass 2b produced a driver-tree HALT, boundability may document issue objects,
+data requests, and possible treatment paths, but the memo cannot use it to support
+Proceed, Proceed with protections, or Reprice language. The required memo posture is
+reframe thesis, move weak drivers out of the base case, or stop before IC-ready
+recommendation.
 
 The unit of assessment in boundability is typically the NTB, not the individual
 failure mode — this keeps the output organized around the thesis claims the IC will
@@ -786,6 +826,8 @@ The memo is ready for IC only when all items below pass.
 **Iteration loop**
 - [ ] Pass 1 complete — all writing-style flags hardened, Group E draft artifacts cleared
 - [ ] Pass 2 complete — all claim-scrutinizer flags addressed
+- [ ] Pass 2b complete — driver-tree gate status, value bridge, load-bearing
+      drivers, T3/T4 unresolved drivers, and monitoring triggers reflected in memo
 - [ ] Pass 3 complete — all red-team KILL and WOUND ratings addressed
 - [ ] Pass 4 complete — pre-mortem failure modes incorporated into Section 9 risks;
       open items updated in Section 10 if new gaps surfaced; NTB mapping applied if
@@ -804,6 +846,7 @@ Read: {SKILL_DIR}/../ntb-diligence/SKILL.md                    (optional upstrea
 Read: {SKILL_DIR}/../competitive-moat-assessment/SKILL.md
 Read: {SKILL_DIR}/../executive-summary-writer/SKILL.md
 Read: {SKILL_DIR}/../writing-style/SKILL.md
+Read: {SKILL_DIR}/../driver-tree/SKILL.md
 Read: {SKILL_DIR}/../claim-scrutinizer/SKILL.md
 Read: {SKILL_DIR}/../red-team/SKILL.md
 Read: {SKILL_DIR}/../red-team/references/red-team-investment-attacks.md

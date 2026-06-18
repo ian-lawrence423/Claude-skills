@@ -73,19 +73,26 @@ Run `new-deal-pipeline/orchestrator.md`.
 Required outputs:
 1. market-research/final-output.docx
 2. competitive-assessment/final-output.docx
-3. ic-memo/final-output.docx
-4. shared/source-bibliography.md
-5. shared/evidence-register.md
-6. shared/belief-register.md
-7. shared/number-register.md
-8. shared/open-issues.md
-9. deal-pack-summary.md
+3. diligence/ntb-registry.md
+4. diligence/driver-tree.md
+5. diligence/boundability.md
+6. ic-memo/final-output.docx
+7. shared/source-bibliography.md
+8. shared/evidence-register.md
+9. shared/belief-register.md
+10. shared/number-register.md
+11. shared/open-issues.md
+12. deal-pack-summary.md
 
 Hard rules:
 - Every material claim must be tagged [F], [E], [H], [VENDOR], [MGMT], or [GAP].
 - Vendor and management claims can orient the work but cannot independently prove thesis-critical conclusions.
 - Estimates must show arithmetic and assumptions.
 - Market, competitive, and IC memo outputs must use the same evidence spine.
+- Market research must produce a driver-evidence handoff when any finding can
+  change the driver tree, NTB registry, or IC recommendation.
+- Strategic diligence must produce a value-creation bridge, leaf-node register,
+  thesis-quality gate result, and downside/upside cascades.
 - Do not use unsupported superlatives or promotional language.
 - Do not hide evidence gaps in polished prose.
 - Return HALT if a thesis-critical claim lacks support, arithmetic is missing, or outputs conflict.
@@ -161,6 +168,7 @@ Use:
 
 Produce:
 - market-research/final-output.docx
+- market-research/driver-evidence-handoff.md
 - supporting markdown research files
 - updated shared/source-bibliography.md
 - updated shared/evidence-register.md
@@ -174,10 +182,14 @@ Minimum standard:
 - Segment customers with JTBD, budget owner, buying trigger, and switching friction.
 - Name direct competitors, substitutes, and platform threats.
 - Address pricing, unit economics, regulatory risk, technology risk, and adoption risk.
+- Map load-bearing market, customer, competitive, pricing, regulatory, and technology
+  unknowns to driver-tree or boundability treatment.
 
 Hard rules:
 - No unsupported market-size or growth claims.
 - No vendor claim can independently validate a thesis-critical point.
+- Every thesis-relevant [GAP] must state what would bound it and whether the
+  evidence is gettable.
 - Every paragraph must validate a point, show evidence, explain implication, or name a gap.
 
 Return market research status: PASS, PASS_WITH_GAPS, or HALT.
@@ -243,17 +255,30 @@ Produce:
 - diligence/ntb-registry.md
 - diligence/driver-tree.md
 - diligence/boundability.md
+- diligence/value-creation-bridge.md
+- diligence/leaf-node-register.md
+- diligence/thesis-quality-gates.md
+- diligence/cascade-scenarios.md
 - updated shared/belief-register.md
 - updated shared/open-issues.md
 
 Required standard:
 - Create 4 to 7 Need-to-Believe statements.
 - Every NTB must map to evidence, source, decision impact, kill trigger, and diligence owner.
+- Driver tree must begin with a value-creation bridge whose buckets sum to 100%.
 - Driver tree must decompose the thesis into causal drivers with evidence tiers.
+- Leaf-node register must include value impact, direction, tier, rubric score, control,
+  monitorability, falsification trigger, treatment, and correlated drivers.
+- Thesis-quality gates must report PASS, PASS_WITH_GAPS, or HALT.
+- Downside and upside cascades must be built around T3/T4 trigger drivers and include
+  mechanical vs. behavioral legs plus lag assumptions.
 - Boundability must test where the thesis holds versus degrades by geography, segment, product, customer type, and operating condition.
 
 Hard rules:
 - Stop if a base-case thesis depends on a T4 unsupported driver.
+- Stop if driver-tree thesis-quality gates return HALT.
+- Do not allow `boundability` to override a failed driver-tree gate with generic
+  "proceed with protections" language.
 - Do not convert weak evidence into softened prose.
 - Carry unresolved diligence items into open-issues.md.
 
@@ -287,6 +312,9 @@ Required memo behavior:
 - Treat market research and competitive assessment as upstream evidence, not optional background.
 - Do not re-research Phase 2 or Phase 3 unless source staleness or gaps require it.
 - Retain evidence tags and sources for reused claims.
+- Include the strategic diligence spine: value-creation bridge, thesis-quality gate
+  result, top load-bearing drivers, top T3/T4 drivers, and monitoring / re-underwrite
+  triggers.
 - Use the executive summary spine: Company Overview, Product Offering, Market Dynamic, Business Model, Thesis, Open Questions.
 - Keep unresolved gaps visible in the executive summary, risk section, and recommendation.
 
@@ -294,6 +322,7 @@ Hard rules:
 - Zero unaddressed KILL claims.
 - Zero conflicting recurring numbers.
 - Zero thesis-critical claims without evidence tag and source.
+- Zero load-bearing T4 drivers in the base case.
 - Do not convert open questions into generic risk language.
 
 Return IC memo status: PASS, PASS_WITH_GAPS, or HALT.
@@ -321,6 +350,10 @@ Check:
 - Same source and value for repeated market size, growth, valuation, retention, and margin figures.
 - Same moat verdict or explicit explanation for changed confidence.
 - Same open questions carried into the IC memo.
+- Same driver-tree thesis-quality gate status carried into boundability and IC memo.
+- No load-bearing T4 driver appears in the base case.
+- Every High / Very High value-impact driver has a falsification trigger and
+  monitoring cadence.
 - No unsupported superlatives or promotional language.
 - No thesis-critical vendor or management claim used as independent proof.
 
@@ -383,4 +416,3 @@ Do not accept:
 - conflicting numbers across outputs,
 - unsupported superlatives,
 - polished narrative that hides gaps.
-

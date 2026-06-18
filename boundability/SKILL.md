@@ -146,6 +146,11 @@ re-score evidence tiers, source base rates, or run vintage discipline. Those
 mechanics are owned by `driver-tree` and must be copied forward verbatim when
 available.
 
+If authoritative `driver-tree` output exists, copy the thesis-quality gate
+status forward before scoring any issue object. A driver-tree HALT is not an
+underwriting problem to be laundered into "proceed with protections"; it means
+the thesis must be reframed before final boundability treatment.
+
 ### 1.1 Build the input register
 
 Create a single register that preserves upstream IDs and evidence states:
@@ -178,6 +183,7 @@ Before Step 2, classify the input state:
 | Gate | Pass condition | If failed |
 |---|---|---|
 | Source ownership | Every tier/base-rate/vintage field comes from `driver-tree` or is marked "not available" | Run `driver-tree` or mark output provisional |
+| Thesis gate inheritance | Driver-tree thesis-quality status is copied as PASS / PASS_WITH_GAPS / HALT when available | Stop final treatment if HALT; mark output provisional until thesis is reframed |
 | ID continuity | Upstream IDs preserved for each driver, FM, NTB, or claim | Rebuild the register before scoring |
 | Materiality | Each input has a stated economic impact or a reason materiality cannot yet be quantified | Create an evidence gap; do not over-score |
 | Decision relevance | Each input can plausibly affect model, price, leverage, docs, operations, monitoring, or pass logic | Drop from boundability scope |
@@ -189,6 +195,7 @@ BOUNDABILITY INPUT REGISTER - [Deal name]
 
 Input state: Complete / Partial / Provisional
 Authoritative driver-tree loaded: Yes / No
+Driver-tree thesis-quality status: PASS / PASS_WITH_GAPS / HALT / Not available
 Pre-mortem loaded: Yes / No
 Claim-scrutinizer loaded: Yes / No
 NTB registry loaded: Yes / No
@@ -489,6 +496,10 @@ regardless of the overall score:**
    path are not Boundable
 6. **The input register shows a load-bearing T4 driver** — even if module
    scores are high, an unbounded driver cannot be load-bearing in any thesis
+7. **Driver-tree thesis-quality status is HALT** — the overall thesis lacks
+   bounded foundations; boundability can document issues but cannot classify
+   the deal as Proceed, Proceed with protections, or Reprice until the thesis
+   is reframed and gates are rerun
 
 When any gate is tripped, classify as **Partially Boundable** (if some modules
 are strong and the failing module(s) are named with remediation path) or
@@ -757,6 +768,7 @@ BOUNDABILITY INPUT REGISTER — [Deal name]
 
 Input state: Complete / Partial / Provisional
 Authoritative driver-tree loaded: Yes / No
+Driver-tree thesis-quality status: PASS / PASS_WITH_GAPS / HALT / Not available
 Pre-mortem loaded: Yes / No
 Claim-scrutinizer loaded: Yes / No
 NTB registry loaded: Yes / No
@@ -876,7 +888,8 @@ Input register summary:
     T2: [N]
     T3: [N]
   Non-load-bearing T4 drivers flagged: [N]
-  Driver-tree thesis-quality gates passed: [X / 3 or not available]
+  Driver-tree thesis-quality gates passed: [X / 6 or not available]
+  Driver-tree thesis-quality status: PASS / PASS_WITH_GAPS / HALT / Not available
   Variance-dominant driver(s): [list]
 
 Total issues assessed (six-module assessment): [N]
@@ -913,7 +926,7 @@ Residual unboundable exposure: $[X]M Severe case across all unboundable items
 |---------|----------|
 | **Proceed** | Driver-tree thesis-quality gates all pass when available; all material issues Boundable; no item-level disqualification gates tripped; Severe case aggregate ≤ acceptable loss threshold |
 | **Proceed with protections** | Driver-tree gates substantially pass when available; most issues Boundable; Partially Boundable items have named structural/financing/operational mitigants reducing residual to acceptable |
-| **Reprice** | Multiple issues Partially Boundable; mitigants insufficient; need price concession to offset residual risk (state concession magnitude) |
+| **Reprice** | Driver-tree status is not HALT; multiple issues are Partially Boundable; mitigants are insufficient; price concession can offset residual risk (state concession magnitude) |
 | **Pass** | Any of: (a) driver-tree minimum bounded foundation gate failed, (b) driver-tree single-driver risk gate failed (load-bearing T4), (c) ≥2 material issues Unboundable, (d) cannot construct acceptable underwriting treatment for a material issue |
 
 The verdict must be supported by the specific findings above. If "Reprice,"
@@ -938,6 +951,12 @@ the overall investment case has bounded foundations. Step 5 item-level gates
 test whether each individual issue assessment is sound. Both must pass when
 driver-tree gates are available. Failure at either level disqualifies a
 Boundable classification.
+
+**Do not override driver-tree HALT.** If the authoritative driver-tree output
+returns HALT, boundability may still document issue objects, data requests,
+and possible treatments, but the final deal view cannot be Proceed, Proceed
+with protections, or Reprice. The required action is to reframe the thesis,
+move weak drivers out of the base case, or stop before IC-ready underwriting.
 
 **The two-definition test.** Every load-bearing driver must be internally
 consistent across `driver-tree` and boundability: a T1 driver should usually

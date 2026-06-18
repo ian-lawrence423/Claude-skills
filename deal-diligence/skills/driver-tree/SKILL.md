@@ -11,9 +11,10 @@ intent: >-
   overlay," "check the vintage on this evidence," "run a cascade scenario," "what's the
   variance-dominant driver," or "do a structural assessment of [company]." Single-asset
   methodology only. Produces a driver tree with tiers and directionality, segment driver
-  tables with historical/today/path/tier/impact/boundability columns, base-rate overlay
-  for load-bearing drivers, vintage check on supporting evidence, variance amplification
-  analysis, downside and upside cascade scenarios, and a framework self-audit. Output is a
+  tables with historical/today/path/tier/impact/boundability columns, a leaf-node
+  register, base-rate overlay for load-bearing drivers, vintage check on supporting
+  evidence, variance amplification analysis, thesis-quality gates, downside and upside
+  cascade scenarios, monitoring triggers, and a framework self-audit. Output is a
   methodology document — does not produce underwriting actions, deal verdicts, or position
   sizing. Distinct from boundability (which converts driver work into underwriting
   structure), pre-mortem (which enumerates failure pathways), and claim-scrutinizer (which
@@ -43,21 +44,24 @@ The skill runs in a fixed sequence. Each step produces an output that feeds
 the next:
 
 ```
-1. Construct driver tree            (Section 1)
+1. Build value-creation bridge and construct driver tree (Section 1)
 2. Apply variance amplification     (Section 2)
 3. Assign tiers via 5-dim rubric    (Section 3)
 4. Apply gating rules               (Section 4)
 5. Apply base-rate overlay          (Section 5)
 6. Apply vintage discipline         (Section 6)
-7. Build segment driver tables      (Section 7)
-8. Build cascade scenarios          (Section 8)
-9. Carry-forward + self-audit       (Section 9)
+7. Build segment tables and leaf-node register (Section 7)
+8. Apply thesis-quality gates       (Section 8)
+9. Build cascade scenarios          (Section 9)
+10. Carry-forward + self-audit      (Section 10)
 ```
 
-The skill produces five deliverables: the driver tree itself, segment driver
-tables, a base-rate overlay table, a vintage check table, and downside +
-upside cascade scenarios. It does NOT produce underwriting actions, deal
-verdicts, or position sizing — that is `boundability`'s job, downstream.
+The skill produces a structured package: the value-creation bridge, the driver
+tree itself, segment driver tables, a leaf-node register, a base-rate overlay
+table, a vintage check table, thesis-quality gate results, downside + upside
+cascade scenarios, carry-forward evidence asks, monitoring triggers, and a
+framework self-audit. It does NOT produce underwriting actions, deal verdicts,
+or position sizing — that is `boundability`'s job, downstream.
 
 ---
 
@@ -79,7 +83,7 @@ construction, position sizing, or cross-position aggregation. It also does not
 assess structural risks that sit outside the driver tree (regulatory action,
 capital-market shocks, platform-policy changes, macro tail events) — those
 require a separate `pre-mortem` pass. This is by design and is documented in
-the framework self-audit (Section 9).
+the framework self-audit (Section 10).
 
 ---
 
@@ -103,7 +107,10 @@ Inputs required:
 - Company or asset, governing thesis, target outcome, segment definitions, historical metrics, model assumptions, evidence base, and time horizon.
 
 Outputs produced:
-- MECE driver tree, segment driver tables, evidence tiers, base-rate overlay, vintage check, variance amplification assessment, cascade scenarios, and self-audit.
+- Value-creation bridge, MECE driver tree, segment driver tables, leaf-node
+  register, evidence tiers, base-rate overlay, vintage check, variance
+  amplification assessment, thesis-quality gates, cascade scenarios, monitoring
+  dashboard, and self-audit.
 
 Do not load with:
 - Portfolio construction, position sizing, or cross-asset allocation tasks.
@@ -115,7 +122,7 @@ Do not load with:
 |---|---|---|
 | Quick | User wants to see what drives a thesis or metric | Top-level driver tree, load-bearing drivers, evidence gaps |
 | Standard | User wants diligence-ready decomposition | Full tree, segment tables, tiers, base-rate overlay, vintage check |
-| Full | User wants IC/workbook handoff | Standard output plus cascade scenarios, self-audit, and downstream handoff notes |
+| Full | User wants IC/workbook handoff | Standard output plus thesis-quality gates, cascade scenarios, monitoring dashboard, self-audit, and downstream handoff notes |
 
 ---
 
@@ -133,12 +140,35 @@ Anti-pattern:
 - Do not turn the driver tree into a final deal verdict, valuation answer, or generic KPI list.
 
 ---
-## Step 1 — Construct the driver tree
+## Step 1 — Build value-creation bridge and construct the driver tree
 
 A driver tree decomposes an outcome (revenue, EBITDA, IRR, market share) into
 the underlying levers that mechanically produce it. The point is not the
 picture. The point is to force specificity about which lever is doing the
 work.
+
+### Start with the value-creation bridge
+
+Before drawing the tree, show where the underwritten value is expected to
+come from. The bridge identifies the true load-bearing assumptions before the
+tree decomposes operations.
+
+| Bucket | % of value creation | Evidence / source | Load-bearing driver(s) |
+|--------|---------------------|-------------------|------------------------|
+| EBITDA or earnings growth | [0-100%] | [source] | [driver IDs] |
+| Margin expansion | [0-100%] | [source] | [driver IDs] |
+| Multiple change | [0-100%] | [source] | [driver IDs] |
+| Deleveraging / cash conversion | [0-100%] | [source] | [driver IDs] |
+| Other: dilution, buybacks, asset sales, one-time items | [0-100%] | [source] | [driver IDs] |
+
+Bridge rules:
+- Buckets must sum to 100%.
+- If any bucket exceeds 50% of value creation, name the one or two drivers
+  supporting it before constructing the tree.
+- If a bucket cannot be quantified, mark the bridge provisional and state the
+  exact model, source, or assumption needed to quantify it.
+- The load-bearing drivers named here must reappear in the leaf-node register
+  and thesis-quality gates.
 
 ### Five construction rules
 
@@ -179,6 +209,7 @@ must move correlated drivers in the same direction.
 
 The tree must include:
 - The outcome being modeled (specific quantity, e.g., "FY28 revenue")
+- The value-creation bridge that explains why this outcome matters
 - The decomposition basis (the math: A × B, A + B, etc.)
 - Every leaf node tagged for directionality
 - Correlation flags between leaf nodes that share upstream causes
@@ -370,7 +401,7 @@ Produce a vintage check table:
 
 ---
 
-## Step 7 — Build segment driver tables
+## Step 7 — Build segment driver tables and leaf-node register
 
 For each top-level segment, build a complete driver table using this format:
 
@@ -398,9 +429,58 @@ If the segment has structural quirks worth flagging (funding constraints,
 binary-tail risks, cross-segment dependencies), include a single note
 paragraph after the reading paragraph.
 
+### Leaf-node register
+
+After segment tables, produce one consolidated register across all leaf nodes.
+This is the handoff object for claim-scrutinizer, pre-mortem, boundability,
+and IC memo drafting.
+
+| Driver | Point estimate / range | Value impact | Direction | Tier | Rubric score | Control | Monitorability | Falsification trigger | Treatment | Correlated drivers |
+|--------|------------------------|--------------|-----------|------|--------------|---------|----------------|-----------------------|-----------|--------------------|
+
+Field rules:
+- **Value impact:** Low / Medium / High / Very High. This is valuation impact,
+  not growth contribution.
+- **Control:** Controllable / Influenceable / Exogenous.
+- **Monitorability:** Monitorable / Partial / Irreducible.
+- **Falsification trigger:** a concrete observable that invalidates the current
+  assumption; broad phrases like "competition worsens" are not sufficient.
+- **Treatment:** Base / Scenario-only / Exclude. T3 drivers default to
+  Scenario-only unless the thesis-quality gates explicitly support base-case
+  inclusion. T4 drivers cannot be Base.
+
 ---
 
-## Step 8 — Build cascade scenarios
+## Step 8 — Apply thesis-quality gates
+
+These gates test whether the overall thesis has bounded foundations. They are
+not underwriting actions and they do not produce a deal verdict. They decide
+whether the driver-tree output can feed downstream `boundability` as final or
+must be reframed first.
+
+| Gate | Pass condition | If failed |
+|------|----------------|-----------|
+| **G1 Minimum bounded foundation** | At least one T1 driver exists in the primary value-creation logic | HALT: thesis is built entirely on judgment; reframe or reject as not IC-ready |
+| **G2 Bounded foundation strength** | T3 + T4 drivers account for less than 50% of base-case value impact | HALT or reframe: narrow the thesis to bounded drivers or move weak drivers to scenarios |
+| **G3 Single-driver risk** | No single T4 driver is load-bearing | HALT: a thesis dependent on an unbounded variable is structurally unsound |
+| **G4 High-impact bounded anchor** | At least one High or Very High value-impact Base driver is T1 or T2 | PASS_WITH_GAPS: memo lacks a bounded value anchor until this is fixed |
+| **G5 Falsification discipline** | Every Base driver has a falsification trigger | PASS_WITH_GAPS: add triggers before IC memo drafting |
+| **G6 Monitoring discipline** | Every High or Very High value-impact driver has a monitoring cadence | PASS_WITH_GAPS: add monitoring before boundability handoff |
+
+Output a thesis-quality gate table:
+
+| Gate | Result | Evidence | Required action |
+|------|--------|----------|-----------------|
+
+Gate status:
+- **PASS:** all gates pass.
+- **PASS_WITH_GAPS:** no HALT gate fails, but G4-G6 need repair before IC.
+- **HALT:** G1, G2, or G3 fails. Do not soften this into prose; reframe the
+  thesis or stop before final underwriting treatment.
+
+---
+
+## Step 9 — Build cascade scenarios
 
 Independent driver flexes hide cascade risk. A cascade scenario captures
 driver interactions across the tree — the case where one driver moving
@@ -463,11 +543,11 @@ Type column values: trigger / mechanical / behavioral.
 
 ---
 
-## Step 9 — Carry-forward + framework self-audit
+## Step 10 — Carry-forward + monitoring + framework self-audit
 
 The driver tree is not the end of the analysis. It is a structured input for
 adversarial review and downstream skills (boundability, pre-mortem). This
-step produces two outputs.
+step produces three outputs.
 
 ### Carry-forward — what would resolve the unbounded drivers
 
@@ -481,6 +561,25 @@ whether that evidence is gettable.
 The "Gettable?" column should be: Yes (primary research), Partial (some data
 available, full data requires waiting), Hard (company has not historically
 disclosed), No (genuinely unforecastable — accept and price accordingly).
+
+### Monitoring and change-of-view dashboard
+
+Every High or Very High value-impact driver requires a monitoring line. This
+prevents the tree from becoming a static appendix that never changes the view.
+
+| Driver | Current tier | Next evidence expected | Cadence | Upgrade trigger | Downgrade trigger | Re-underwrite trigger |
+|--------|--------------|------------------------|---------|-----------------|-------------------|----------------------|
+
+Rules:
+- Every T3/T4 driver must state what evidence would improve the view and
+  whether that evidence is gettable through reporting, primary research,
+  management disclosure, industry data, or simply waiting.
+- Re-underwrite immediately if any Very High value driver breaches its
+  falsification trigger.
+- Re-underwrite if two or more Base drivers downgrade in the same review
+  period.
+- Re-underwrite if a new High or Very High value driver emerges that was not
+  part of the original tree.
 
 ### Framework self-audit
 
@@ -518,18 +617,24 @@ The skill produces a single methodology document with these sections in
 order:
 
 1. **Cover page** — outcome modeled, decomposition basis, time horizon
-2. **Driver tree** — full tree with directionality tags and correlation flags
-3. **Variance amplification** — additive vs. multiplicative classification per
+2. **Value-creation bridge** — value buckets summing to 100%, evidence/source,
+   and load-bearing driver IDs
+3. **Driver tree** — full tree with directionality tags and correlation flags
+4. **Variance amplification** — additive vs. multiplicative classification per
    parent node; variance-dominant child for each multiplicative node
-4. **Per-segment driver tables** — one table per segment with the seven
+5. **Per-segment driver tables** — one table per segment with the seven
    columns (driver / historical / today / path / tier / impact / boundability)
-5. **Base-rate overlay** — load-bearing drivers with reference classes and
+6. **Leaf-node register** — all leaf nodes with value impact, control,
+   monitorability, falsification trigger, treatment, and correlations
+7. **Base-rate overlay** — load-bearing drivers with reference classes and
    base rates
-6. **Vintage check** — drivers with vintage age and decay risk
-7. **Downside cascade** — trigger, leg map, optional quantification
-8. **Upside cascade** — trigger, leg map, optional quantification
-9. **Carry-forward** — what would resolve unbounded drivers
-10. **Framework self-audit** — explicit acknowledgment of framework limits
+8. **Vintage check** — drivers with vintage age and decay risk
+9. **Thesis-quality gates** — PASS / PASS_WITH_GAPS / HALT and required action
+10. **Downside cascade** — trigger, leg map, optional quantification
+11. **Upside cascade** — trigger, leg map, optional quantification
+12. **Carry-forward** — what would resolve unbounded drivers
+13. **Monitoring dashboard** — change-of-view and re-underwrite triggers
+14. **Framework self-audit** — explicit acknowledgment of framework limits
 
 The document should be 15–25 pages depending on segment count and tree depth.
 Use Pattern docx formatting (`pattern-docx` skill) when delivering as a Word
@@ -542,11 +647,18 @@ The output must reconcile across sections:
 
 - Tier assignments in the driver tables must match the rubric scores in the
   base-rate overlay and vintage check
+- Value-creation bridge load-bearing drivers must appear in the leaf-node
+  register and thesis-quality gates
 - Variance-dominant drivers identified in Section 3 must reappear in the
   cascade triggers (the variance-dominant driver is usually the right cascade
   trigger)
 - Correlation flags from Rule 5 must be respected in cascade construction —
   correlated drivers move together, not independently
+- Every Base treatment driver in the leaf-node register must have a
+  falsification trigger; every High / Very High value-impact driver must have
+  a monitoring cadence
+- Any T3/T4 driver left in the base case must appear in carry-forward and
+  open diligence items with "what would bound it" and "gettable?" stated
 
 If the reconciliations don't hold, fix the underlying analysis before
 delivering.

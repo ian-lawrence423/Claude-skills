@@ -662,6 +662,7 @@ plan answers: which decision-grade modules are required, which are omitted, and 
 | Bottom-up TAM / ICP build | A narrow buyer population matters more than broad TAM | Assumption-driven buyer population and spend model |
 | Regulatory / data sensitivity | AI, privacy, IP, transaction, payment, or operational data is involved | Regulation table and data sensitivity tiering table |
 | Moat scorecard | Durable advantage, replicability, or displacement risk is load-bearing | Moat scorecard with mechanism, score, replicability horizon, and erosion vector |
+| Driver evidence handoff | Research will feed diligence, IC memo, driver-tree, or boundability work | Load-bearing unknowns table with driver, evidence state, what would bound it, gettable status, and open issue ID |
 | JTBD / WTP | Adoption, budget, or price ceiling is uncertain | Buyer segment table with JTBD, pain, alternative cost, and WTP signal |
 | Technology disruption map | Open-source, platform, AI, or infrastructure shifts can change economics | Trend/disruption table with quantified signal, trajectory, impact, and response |
 | Unit economics model | Margin, contribution, payback, or scale economics drives the recommendation | Scenario table with volume cases, cost lines, assumptions, and breakeven logic |
@@ -676,6 +677,9 @@ a quality failure; adding an irrelevant module is filler and violates claim econ
                                format (evidence-tagged, gap-flagged, source-cited)
                                This section feeds the NTB registry directly — it is not
                                a narrative summary of the research
+12. Driver Evidence Handoff — load-bearing market, customer, competitive, pricing,
+                              regulatory, and technology unknowns mapped to driver-tree
+                              or boundability treatment
 ```
 
 **Calibration:**
@@ -683,6 +687,7 @@ a quality failure; adding an irrelevant module is filler and violates claim econ
 - Each analytical section: 2–4 pages (DOCX) / 2–3 slides (PPTX)
 - Strategic implications: 1–2 pages
 - NTB Evidence Summary (if applicable): 1 page per NTB
+- Driver Evidence Handoff (if applicable): 1 page
 - Appendix: as needed
 
 ### Gold-standard artifact rule
@@ -696,6 +701,28 @@ arithmetic correction logs.
 
 If the artifact is not relevant to the specific market, state why and substitute a
 decision-equivalent artifact. Do not silently omit artifacts.
+
+### Driver Evidence Handoff
+
+When research feeds a deal workflow, strategic diligence bridge, IC memo,
+driver-tree, or boundability output, close the research with a driver evidence
+handoff. This section converts market facts into underwriting inputs and keeps
+open questions visible.
+
+| Driver / unknown | Research finding | Evidence state | Decision impact | What would bound it | Gettable? | Open issue ID |
+|------------------|------------------|----------------|-----------------|---------------------|-----------|---------------|
+
+Field rules:
+- **Driver / unknown:** name the market, customer, competitive, pricing,
+  regulatory, or technology variable that would move the thesis.
+- **Evidence state:** [F] fact, [E] estimate, [H] hypothesis, [GAP] missing.
+- **Decision impact:** explain which recommendation, NTB, driver-tree node, or
+  IC memo section changes if the evidence lands differently.
+- **What would bound it:** name the specific data, primary research, disclosure,
+  source, or waiting period that would narrow the range.
+- **Gettable?:** Yes / Partial / Hard / No, using the same meaning as
+  `driver-tree` carry-forward.
+- Every [GAP] or Hard/No row must be carried into `shared/open-issues.md`.
 
 ### Section Anatomy — apply to every analytical section
 

@@ -476,13 +476,37 @@ then contextual.
 -> Problem: [One sentence — direct, no hedging]
 -> What's needed: [Exact corrective action]
 -> Materiality: Thesis-critical / Supporting / Contextual
+-> Driver-tier mapping: [Driver ID / tier / treatment if driver-tree exists]
 ```
 
 **Format per passing claim:**
 ```
 SUPPORTED "[Claim]"
 -> Evidence basis: [What makes this well-supported]
+-> Driver-tier mapping: [Driver ID / tier / treatment if driver-tree exists]
 ```
+
+### Section 3b: Driver-Tier Redline
+
+When `driver-tree` output exists, map every thesis-critical claim to a driver
+ID, tier, and treatment before finalizing the redline. The claim verdict and
+the driver treatment must agree.
+
+| Driver tier | Redline treatment |
+|-------------|-------------------|
+| T1 / T2 | Claim can be thesis-supporting if the claim itself is SUPPORTED and the source evidence matches the driver evidence |
+| T3 | Claim can support a scenario or sensitivity, but cannot be written as a settled base-case conclusion without explicit qualification |
+| T4 | Claim cannot be load-bearing; mark as UNSUPPORTED or PROJECTION UNSUPPORTED unless removed from the base case |
+| No driver mapping | Thesis-critical claim is incomplete; route to `driver-tree` before IC-ready release |
+
+Rules:
+- A SUPPORTED claim mapped to a T4 driver is still not usable as a base-case
+  thesis claim. The evidence may support the fact, but the driver remains too
+  unbounded to carry valuation or recommendation weight.
+- Any claim tied to a High or Very High value-impact driver must preserve the
+  driver ID, tier, falsification trigger, and treatment in the handoff map.
+- If the claim and driver disagree, fix the memo or rerun driver-tree; do not
+  average the two assessments.
 
 ### Verdict Labels
 
@@ -638,9 +662,10 @@ PRE-MORTEM HANDOFF
 - Data that would change the picture: [specific item]
 
 BOUNDABILITY HANDOFF
-- Quantified uncertain drivers needing underwriting treatment: [claim ID -> driver / issue]
-- Evidence state to preserve: [verdict, confidence, base-rate note]
+- Quantified uncertain drivers needing underwriting treatment: [claim ID -> driver ID / issue / tier / treatment]
+- Evidence state to preserve: [verdict, confidence, base-rate note, falsification trigger if available]
 - Candidate lever for downstream evaluation: [model / price / leverage / docs / operations / monitoring / IC open item]
+- Claims mapped to T4 drivers: [claim ID -> required removal, scenario-only treatment, or thesis reframe]
 ```
 
 ### Final Claim-Integrity Posture
