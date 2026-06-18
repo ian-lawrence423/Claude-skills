@@ -203,11 +203,40 @@ Before drafting, load:
 
 ```
 market-research/references/gold-standard-report-template.md
+docs/market-research-gold-standard-guide.md
 ```
 
 Create `{WORK_DIR}/artifact-plan.md` mapping each gold-standard section to the
 decision-grade artifact it will contain. Do not advance to output if any major
 section is prose-only.
+
+Create `{WORK_DIR}/strategic-analysis-plan.md` before any draft agent runs. Use it
+to decide whether the Strategic Analysis Variant from the gold-standard template is
+required. It is required when QUESTION or the evidence base depends on pricing,
+usage-based monetization, rev-rec/accounting, product economics, unit economics,
+regulatory/data design, launch strategy, moat durability, disruption, or strategic
+underwriting.
+
+The plan must include:
+
+| Module | Include? | Reason | Artifact | Source inputs |
+|---|---|---|---|---|
+| Benchmark comparables | Yes / No | [decision relevance] | [table/map/model] | [research files/sources] |
+| Rule / policy analysis | Yes / No | | | |
+| Design implications | Yes / No | | | |
+| Pre-mortem | Yes / No | | | |
+| Boundability | Yes / No | | | |
+| Porter's Five Forces | Yes / No | | | |
+| Bottom-up TAM / ICP build | Yes / No | | | |
+| Regulatory / data sensitivity | Yes / No | | | |
+| Moat scorecard | Yes / No | | | |
+| JTBD / WTP | Yes / No | | | |
+| Technology disruption map | Yes / No | | | |
+| Unit economics model | Yes / No | | | |
+
+Gate: at least one strategic module must be marked `Yes` for pricing, business-model,
+or product-economics questions. For broad market maps, modules can be omitted only
+with a written reason.
 
 ### 4a — Context and market sizing (first, sequential)
 Invoke: `draft-context.md`
@@ -219,11 +248,17 @@ source/scope table, and arithmetic checks.
 ### 4b — Gold-standard analytical sections + Competitor profiles (parallel)
 Read `{WORK_DIR}/themes.md` to determine theme count N.
 Read `{WORK_DIR}/research/l2-competitive.md` to extract named competitors.
+Read `{WORK_DIR}/strategic-analysis-plan.md` to determine which strategic modules
+become additional `draft-section.md` assignments.
 
 Dispatch in parallel:
 - For each gold-standard section after Market Sizing, invoke `draft-section.md`
   with SECTION_NAME and the relevant themes/evidence.
   Writes: `{WORK_DIR}/draft/[section-slug].md`
+- For each strategic module marked `Yes`, invoke `draft-section.md` with
+  SECTION_NAME equal to the module name and SECTION_ARTIFACT from
+  `strategic-analysis-plan.md`.
+  Writes: `{WORK_DIR}/draft/[module-slug].md`
 - For each named competitor: invoke `draft-competitor.md` with COMPETITOR=[name]
   Writes: `{WORK_DIR}/draft/competitor-[name].md`
 
@@ -281,6 +316,7 @@ Non-blocking: `WOUND` attacks where risk is acknowledged in text.
 **Gate 3 — check before Phase 6:**
 - [ ] Zero open KILL-rated claims or attacks
 - [ ] All thesis-critical DATA GAPs either resolved or explicitly flagged in exec summary
+- [ ] Strategic-analysis-plan modules marked `Yes` have corresponding draft sections
 - [ ] open-issues.md written (even if empty)
 
 If Gate 3 fails: write `GATE_3_FAILED` + issue list to run-log and halt.

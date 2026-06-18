@@ -187,6 +187,11 @@ Additional instructions:
 - Apply the quality contract's claim economy rule: no paragraph should survive
   unless it validates a point, shows evidence, explains implication, or names a
   gap.
+- If the deal question depends on pricing, usage-based monetization, product
+  economics, regulatory/data design, launch strategy, moat durability, technology
+  disruption, or strategic underwriting, require `strategic-analysis-plan.md` and
+  include the relevant Strategic Analysis Variant modules from the market-research
+  gold-standard template.
 
 Market research gate:
 
@@ -249,6 +254,9 @@ Required standards:
 - Every NTB maps to evidence, source, decision impact, and kill trigger.
 - Driver tree decomposes the thesis into causal drivers with T1-T4 evidence tiers.
 - Boundability consumes the driver tree and failure modes; it must not rebuild them.
+- Market and competitive strategic-analysis modules must map to at least one NTB,
+  model assumption, failure mode, or open diligence item. If a module maps to none,
+  it is context and should not be carried into the IC memo as evidence.
 
 HALT if a load-bearing T4 driver is required for the base thesis.
 

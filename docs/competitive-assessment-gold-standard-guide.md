@@ -66,6 +66,10 @@ buyer’s alternatives.
 | Adjacent platforms | Which larger systems could absorb the workflow? |
 | Non-consumption | When does the customer choose to do nothing? |
 
+The arena map must be MECE. Direct vendors, substitutes, adjacent platforms, and
+non-consumption are different answer paths for the same customer job; do not mix
+them in one competitor list.
+
 ### 2. Map Customer Choice
 
 The assessment must explain buying behavior:
@@ -80,11 +84,22 @@ The assessment must explain buying behavior:
 
 Required table:
 
-| Competitor | Segment | Buyer | Core workflow | Pricing model | Advantage | Weakness | Threat level |
-|---|---|---|---|---|---|---|---|
+| Competitor | Segment | Buyer | Core workflow | Pricing model | Evidence of traction | Advantage | Weakness | Threat level |
+|---|---|---|---|---|---|---|---|---|
 
 Use named companies. Avoid generic categories unless the market is too early to
 name clear players.
+
+Traction evidence must be independent where possible: revenue, customer count,
+usage, public filing, credible case study, marketplace signal, analyst coverage,
+or funding/customer announcement. Vendor websites can describe product claims,
+but they cannot prove traction, retention, differentiation, pricing power, or moat.
+
+Add a substitute/platform table when any buyer can solve the same job without the
+named vendor category:
+
+| Substitute / platform | Workflow replaced | Buyer appeal | Evidence of adoption | Threat mechanism | Strategic response |
+|---|---|---|---|---|---|
 
 ### 4. Prove Or Disprove The Moat
 
@@ -99,8 +114,12 @@ For every claimed moat, ask:
 
 Required moat table:
 
-| Moat claim | Type | Evidence | Strength 1-5 | Replicability horizon | Erosion vector | Verdict |
-|---|---|---|---|---|---|---|
+| Moat claim | Type | Mechanism | Metric | Evidence | Strength 1-5 | Replicability horizon | Erosion vector | Verdict |
+|---|---|---|---|---|---|---|---|---|
+
+If the mechanism, metric, evidence, or replicability horizon is missing, downgrade
+the verdict to CONDITIONAL or UNPROVEN. Do not call product breadth, UI quality,
+or current execution a moat unless it creates measurable resistance to displacement.
 
 ### 5. Test Durability
 
@@ -159,6 +178,8 @@ Use market-research for competitor evidence and competitive-moat-assessment for
 the moat proof. Include direct competitors, substitutes, platform threats,
 customer buying criteria, competitor map, moat type classification, evidence
 scorecard, durability and erosion risk, displacement paths, and strategic
-implications. Label facts, estimates, hypotheses, vendor claims, and gaps. Run
-writing-style and claim-scrutinizer before final DOCX output.
+implications. Include independent traction evidence where available and downgrade
+any moat claim missing mechanism, metric, evidence, or replicability horizon. Label
+facts, estimates, hypotheses, vendor claims, and gaps. Run writing-style and
+claim-scrutinizer before final DOCX output.
 ```

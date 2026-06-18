@@ -63,11 +63,25 @@ Core question
 ## Scope boundaries
 [What is explicitly out of scope]
 
+## Report variant
+[Broad market research / Strategic analysis variant / IC memo input]
+
+If Strategic analysis variant, state which triggers apply:
+- Pricing / monetization
+- Business model / product economics
+- Rev-rec / accounting / policy
+- Regulatory / data sensitivity
+- Launch strategy
+- Moat / competitive durability
+- Technology disruption
+- Unit economics / underwriting
+
 ## Quality gate self-check
 - [ ] Question tied to a specific decision
 - [ ] Hypothesis tree is MECE
 - [ ] Each hypothesis has stated evidence need + named source tier
 - [ ] Success criteria are measurable
+- [ ] Report variant selected and justified
 ```
 
 If the question as given is too vague to meet SMART criteria, restate it to the

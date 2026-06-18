@@ -3,9 +3,13 @@
 Use this reference for every Full-mode market research report unless Ian explicitly
 asks for a lighter output or a different structure.
 
-Source standard: `Commerce_Market_Research_v9.docx` from the Pattern research
-artifact library. Treat that document as the benchmark for depth, structure,
-artifact density, and Pattern DOCX presentation.
+Source standards:
+- `Commerce_Market_Research_v9.docx` from the Pattern research artifact library.
+  Treat this document as the benchmark for broad market-research depth, structure,
+  artifact density, and Pattern DOCX presentation.
+- `Pattern_PAYG_Token_Pricing_Analysis_5.docx` from the Pattern research artifact
+  library. Treat this document as the benchmark for strategic business-model,
+  pricing, product-economics, regulatory, risk, and underwriting analysis.
 
 ## Purpose
 
@@ -40,6 +44,52 @@ Use this top-level structure for Full-mode DOCX reports:
 
 Do not organize the report as a raw L4/L3/L2/L1 pyramid. Use the pyramid to
 research. Use the architecture above to communicate.
+
+## Strategic Analysis Variant
+
+Use this variant when the question is not just "what does the market look like?"
+but whether Pattern, an operator, an investor, or a product team should launch,
+price, underwrite, or redesign a strategic model. Common triggers:
+
+- Pricing, usage-based pricing, credit packs, consumption models, monetization,
+  rev-rec, or unit economics.
+- Product strategy where compliance, data sensitivity, technology disruption, or
+  buyer willingness-to-pay changes the launch decision.
+- Competitive strategy where the answer depends on substitutes, platform threats,
+  moat durability, and displacement paths.
+- Diligence work where pre-mortem, boundability, or IC underwriting implications
+  are expected before the IC memo exists.
+
+Strategic analysis uses the canonical market report architecture as the base, then
+adds the modules below when decision-relevant. Do not add all modules by default;
+select the modules that change the decision and state why omitted modules do not.
+
+| Module | Use when | Required artifact | Quality gate |
+|---|---|---|---|
+| Benchmark comparables | The decision depends on market norms, pricing models, contract terms, or vendor behavior | Benchmark summary table with source, model type, price/term, implication | Every benchmark row has a source type and an implication; no vendor claim is treated as proof |
+| Rule / accounting / policy analysis | Rev-rec, legal, regulatory, compliance, or marketplace rules shape design | Rule interpretation table and recommended defensible structure | Distinguish rule text, interpretation, and Pattern recommendation |
+| Design implications | The output should guide a product, pricing, GTM, or finance design choice | Numbered implication list with evidence basis and owner | Each implication is action-oriented and traceable to a prior finding |
+| Pre-mortem | The strategy could fail through market, competitive, model, customer, technology, or execution pathways | Failure mode registry across MECE categories plus compound failure paths | Failure modes state mechanism, boundability, and data that would sharpen the assessment |
+| Boundability assessment | The team must know what is known, gettable, or structurally unknowable | Boundability table: issue, boundability state, what we know, what would sharpen it | Do not assign false precision to unboundable items |
+| Porter's Five Forces | Industry attractiveness, rivalry, supplier power, or substitution affects the answer | Five Forces table with ratings, drivers, and strategic implication | Every force names specific companies, workflows, or structural features |
+| Bottom-up TAM / ICP build | A narrow addressable segment matters more than broad TAM | Buyer-population build with assumptions, conversion, and addressable spend | Inputs, formulas, and confidence labels are visible |
+| Regulatory and data sensitivity | Regulation, privacy, IP, data, AI rules, or platform policy changes product design | Regulation table and data sensitivity tiering table | State jurisdiction, effective date, scope, implication, and do-not-overclaim guardrail |
+| Moat scorecard | Durable advantage or displacement risk is load-bearing | Moat scorecard with mechanism, score, replicability horizon, and erosion vector | Product quality or execution is not called a moat without resistance-to-displacement evidence |
+| JTBD / willingness-to-pay | Buyer adoption, budget, or price ceiling is uncertain | Buyer JTBD and WTP table by segment | WTP is tied to alternative cost, pain, budget owner, and quality threshold |
+| Technology disruption map | Open-source, AI, platform, or infrastructure shifts could compress price or advantage | Disruption map with trend, trajectory, economic impact, response | Separate quantified signals from hypotheses |
+| Unit economics model | Margin, contribution, payback, or scale economics drives the decision | Scenario table across volume or adoption cases | Show formulas, assumptions, variable cost lines, and breakeven logic |
+
+Strategic analysis front matter should include:
+- A title and subtitle that state the decision domain.
+- A Key Findings at a Glance KPI strip with 4-6 figures or structural conclusions.
+- A table of contents.
+- An executive summary with 4-6 governing structural themes, each evidence-tagged
+  `[F]`, `[E]`, `[H]`, `[VENDOR]`, `[MGMT]`, or `[GAP]`.
+
+Strategic analysis closing sections should include:
+- Specific design, underwriting, launch, or diligence implications.
+- Open questions or data gaps that would change the recommendation.
+- A source/methodology appendix with arithmetic checks and source labels.
 
 ## Required Analytical Artifacts
 

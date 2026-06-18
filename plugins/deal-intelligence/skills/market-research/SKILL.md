@@ -614,6 +614,15 @@ standard for thoughtful Pattern research: fixed report architecture, required
 analytical artifacts, market-sizing arithmetic checks, evidence labels, and final QA
 gates.
 
+**Strategic-analysis variant:** When the research question is about pricing,
+business model design, product economics, rev-rec/accounting treatment, regulatory
+design constraints, launch strategy, or strategic underwriting, also apply the
+Strategic Analysis Variant in the gold-standard template. That variant is calibrated
+to `Pattern_PAYG_Token_Pricing_Analysis_5.docx`, which is the benchmark for
+benchmark comparables, design implications, pre-mortem, boundability, Porter's,
+bottom-up TAM, regulatory/data sensitivity, moat, JTBD/WTP, technology disruption,
+and unit-economics sections.
+
 ### Document Structure
 
 ```
@@ -636,6 +645,29 @@ gates.
 12. Appendix                — source labels, methodology, arithmetic corrections,
                                detailed sizing model, CRAAP scores
 ```
+
+### Strategic-analysis module selection
+
+For Full-mode strategic analysis, create a module plan before drafting. The module
+plan answers: which decision-grade modules are required, which are omitted, and why.
+
+| Module | Trigger | Minimum output |
+|---|---|---|
+| Benchmark comparables | Market norms, pricing, terms, or vendor behavior drive the answer | Table of named benchmarks with model type, price/term, source type, and implication |
+| Rule / policy analysis | Accounting, legal, regulatory, marketplace, or platform policy shapes design | Rule table separating documented rule, interpretation, and recommendation |
+| Design implications | The output should change product, pricing, GTM, finance, or diligence actions | Numbered implications tied to evidence and owner |
+| Pre-mortem | Failure pathways matter before launch or investment | Failure mode registry with mechanisms, boundability state, and compound paths |
+| Boundability | The team must separate known, gettable, and unknowable evidence | Boundability table with issue, what we know, what would sharpen it, and action signal |
+| Porter's Five Forces | Industry attractiveness, rivalry, supplier power, or substitution is material | Rated force table with specific drivers and strategic implication |
+| Bottom-up TAM / ICP build | A narrow buyer population matters more than broad TAM | Assumption-driven buyer population and spend model |
+| Regulatory / data sensitivity | AI, privacy, IP, transaction, payment, or operational data is involved | Regulation table and data sensitivity tiering table |
+| Moat scorecard | Durable advantage, replicability, or displacement risk is load-bearing | Moat scorecard with mechanism, score, replicability horizon, and erosion vector |
+| JTBD / WTP | Adoption, budget, or price ceiling is uncertain | Buyer segment table with JTBD, pain, alternative cost, and WTP signal |
+| Technology disruption map | Open-source, platform, AI, or infrastructure shifts can change economics | Trend/disruption table with quantified signal, trajectory, impact, and response |
+| Unit economics model | Margin, contribution, payback, or scale economics drives the recommendation | Scenario table with volume cases, cost lines, assumptions, and breakeven logic |
+
+Do not force every module into every report. Missing a decision-relevant module is
+a quality failure; adding an irrelevant module is filler and violates claim economy.
 
 **When feeding an IC memo:** Add a section after Strategic Implications:
 
@@ -927,6 +959,7 @@ A deliverable is ready for output only when every item below passes.
 
 **Draft architecture**
 - [ ] Full-mode report uses the gold-standard report architecture or documents why not
+- [ ] Strategic-analysis variant considered; if applicable, module plan created and every selected module drafted
 - [ ] Document organized by decision-grade sections, not pyramid levels
 - [ ] Every analytical section includes at least one decision-grade artifact
 - [ ] Every analytical section follows the four-element Section Anatomy

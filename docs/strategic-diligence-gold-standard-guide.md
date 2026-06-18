@@ -39,6 +39,28 @@ It is not a risk list. It is an evidence operating system for the deal.
 9. IC Memo Handoff
 10. Open Questions and Next Actions
 
+## Strategic Analysis Evidence Modules
+
+When a diligence package includes market, competitive, pricing, product, or business-model
+analysis, add the modules below before the IC memo handoff. The reference standard is
+`Pattern_PAYG_Token_Pricing_Analysis_5.docx`.
+
+| Module | What it answers | Required artifact | Handoff |
+|---|---|---|---|
+| Benchmark comparables | What market norms constrain the thesis? | Benchmark table with source type, price/term/model, implication | NTB evidence and model assumptions |
+| Rule / policy constraints | What accounting, legal, regulatory, or platform rule changes the design? | Rule table with documented scope, interpretation, design implication | Risk section and open diligence |
+| Design implications | What should be built, priced, monitored, or governed differently? | Numbered implication list with owner/action | Operating plan and IC recommendation |
+| Pre-mortem | How does the strategy fail? | Failure mode registry and compound failure paths | Risk section and kill triggers |
+| Boundability | Which risks are known, gettable, or structurally unknowable? | Boundability table: issue, what we know, what would sharpen it | Diligence plan and underwriting treatment |
+| Bottom-up TAM / ICP build | Is the actionable buyer population large enough? | Assumption-driven buyer and spend model | Market NTB and revenue model |
+| Moat / competitive durability | Which advantage persists and which decays? | Moat scorecard with replicability horizon and erosion vector | Competitive position and exit rationale |
+| JTBD / willingness-to-pay | Why would buyers adopt and what can they pay? | Segment table with JTBD, pain, alternative cost, WTP signal | Pricing and revenue assumptions |
+| Technology disruption | What could compress price, quality advantage, or supplier cost? | Disruption map with quantified signal and response | Downside case and monitoring plan |
+| Unit economics | Does the model work at realistic adoption levels? | Scenario table with cost lines, breakeven, and contribution | Financial model handoff |
+
+Every module must map to at least one NTB, failure mode, model assumption, or open
+diligence item. If it maps to none, remove it from the package.
+
 ## Workflow
 
 ### 1. State The Thesis
@@ -133,6 +155,9 @@ Use ntb-diligence in Full mode with mckinsey-consultant and
 analytical-operating-system loaded. Build a 4-7 item NTB registry, assign
 evidence states, create a diligence plan, stress-test every NTB, define kill
 triggers, map compound risks, and hand off findings to IC memo sections and
-financial model assumptions. Run writing-style and claim-scrutinizer before any
-formal DOCX output.
+financial model assumptions. When the thesis depends on market, competitive,
+pricing, product-economics, regulatory, moat, or technology assumptions, add the
+relevant strategic analysis evidence modules and map each module to an NTB, model
+assumption, failure mode, or open diligence item. Run writing-style and
+claim-scrutinizer before any formal DOCX output.
 ```

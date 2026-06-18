@@ -52,6 +52,34 @@ Use this structure for the most thorough standalone report:
 Do not organize the report as raw research notes. Use the research pyramid to
 investigate. Use the report architecture to communicate.
 
+## Strategic Analysis Variant
+
+Use this variant when the deliverable is closer to a pricing, product-economics,
+business-model, regulatory, or strategic-design analysis than a broad market map.
+The reference standard is `Pattern_PAYG_Token_Pricing_Analysis_5.docx`.
+
+Add a `strategic-analysis-plan.md` before drafting. It must select the modules that
+change the decision and explain omissions. Required modules by trigger:
+
+| Trigger | Module | Required artifact |
+|---|---|---|
+| Pricing, credit packs, PAYG, usage-based monetization | Benchmark comparables | Benchmark table: company, product, model type, minimum purchase, rack rate, term/expiry, implication |
+| Accounting, rev-rec, legal, platform, or policy constraints | Rule / policy analysis | Rule table separating documented rule, interpretation, and recommended design |
+| Product, GTM, finance, or launch design decision | Design implications | Numbered implications tied to evidence, owner, and action |
+| Strategy could fail through market, model, customer, execution, or technology pathways | Pre-mortem | Failure mode registry plus compound failure paths |
+| Evidence precision matters to underwriting | Boundability | Issue table: boundability state, what we know, what would sharpen it, action signal |
+| Industry attractiveness or substitution matters | Porter's Five Forces | Rated force table with named drivers and strategic implication |
+| Narrow ICP matters more than broad TAM | Bottom-up TAM / ICP build | Buyer population and spend model with assumptions and formulas |
+| AI, privacy, IP, payment, transaction, or operational data is involved | Regulatory and data sensitivity | Regulation table and data sensitivity tiering table |
+| Durable advantage is load-bearing | Moat scorecard | Scorecard with mechanism, metric, replicability horizon, erosion vector |
+| Adoption or price ceiling is uncertain | JTBD / willingness-to-pay | Buyer segment table with job, pain, alternative cost, WTP signal |
+| Open-source, AI, platform, or infrastructure shifts could compress economics | Technology disruption map | Trend table with quantified signal, trajectory, impact, response |
+| Margin, contribution, payback, or breakeven drives the decision | Unit economics model | Scenario table across adoption/volume cases with cost lines and assumptions |
+
+Do not append these modules as filler. A module earns its place only if it changes
+the recommendation, launch design, underwriting assumption, diligence request, or
+monitoring metric.
+
 ## Workflow
 
 ### 1. Define The Decision
@@ -200,7 +228,10 @@ scope, executive summary, market sizing, customer segmentation, competitive
 landscape, pricing/economics, technology trends, regulatory/risk, moat analysis,
 strategic implications, and appendix. Label claims as fact, estimate, hypothesis,
 vendor claim, or Pattern analytic. Show market-sizing arithmetic and include
-decision-grade artifacts in every major section. Run writing-style,
+decision-grade artifacts in every major section. If the question involves pricing,
+usage-based monetization, product economics, regulation, launch design, moat durability,
+or strategic underwriting, create a strategic-analysis-plan and include the relevant
+PAYG-style modules. Run writing-style,
 claim-scrutinizer, red-team, pattern-docx, and doc-quality-checker before final
 delivery.
 ```

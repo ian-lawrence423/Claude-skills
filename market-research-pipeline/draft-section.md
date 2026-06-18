@@ -8,6 +8,7 @@ Load: `market-research/references/gold-standard-report-template.md`
 ```
 SECTION_NAME: [Customer Segmentation and Buying Behavior / Competitive Landscape / Pricing Models and Unit Economics / Technology Trends and Disruption Vectors / Regulatory Environment and External Risk / Competitive Moat Analysis / Strategic Implications and Key Takeaways]
 SECTION_ARTIFACT: [artifact assigned in artifact-plan.md]
+STRATEGIC_MODULE: [optional; one module from strategic-analysis-plan.md]
 THEMES:       {WORK_DIR}/themes.md
 RESEARCH:     all four research files
 COMPETITORS:  competitor files when relevant
@@ -28,6 +29,9 @@ Apply the four-element section anatomy exactly:
 3. **Decision-grade artifact** - use the assigned artifact from `artifact-plan.md`
    - Examples: buyer archetype table, substitute map, pricing archetype table,
      disruption map, regulatory scope table, moat scorecard, IC underwriting table
+   - Strategic-analysis examples: benchmark comparables table, rule/policy table,
+     failure mode registry, boundability table, bottom-up ICP build, data sensitivity
+     tiering, JTBD/WTP table, technology disruption map, unit economics scenario model
    - The artifact must be interpreted in prose; do not leave a naked table
 
 4. **Evidence blocks and synthesis** - 2-4 evidence blocks plus a so-what close
@@ -38,3 +42,9 @@ Apply the four-element section anatomy exactly:
 ## Output - write to `{WORK_DIR}/draft/[section-slug].md`
 
 Target length: 2-4 pages (DOCX) / 2-3 slides (PPTX).
+
+If STRATEGIC_MODULE is present, use the artifact and quality gate from
+`strategic-analysis-plan.md` and `market-research/references/gold-standard-report-template.md`.
+The section must end with an action implication: design choice, underwriting item,
+launch requirement, diligence request, monitoring metric, or explicit reason no action
+is warranted. A module that ends with only market context is incomplete.

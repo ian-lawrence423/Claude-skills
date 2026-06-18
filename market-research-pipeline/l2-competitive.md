@@ -30,10 +30,33 @@ missing any element is incomplete and will fail the doc-quality check.
 Positioning map: choose two axes that reveal the market's most meaningful trade-off.
 White space: where no incumbent is strongly positioned, and why it hasn't been filled.
 
+Strategic-analysis depth requirements:
+- Define the competitive arena before listing vendors: direct competitors, substitutes,
+  adjacent platforms, and non-consumption.
+- Explain customer choice: buyer, user, economic decision-maker, trigger event,
+  ranked buying criteria, switching threshold, procurement burden, and price/value metric.
+- Include substitute workflows and platform-native threats even when they are not
+  standalone vendors. Buyers compare outcomes, not vendor taxonomies.
+- For traction, use independent evidence where available: revenue, customer count,
+  usage, funding, app-store/marketplace signal, public case study, analyst data,
+  filing, or credible third-party coverage. Vendor websites can describe product
+  claims but cannot prove traction, differentiation, retention, pricing power, or moat.
+- For every moat claim, state mechanism, observable metric, evidence, replicability
+  horizon, and erosion vector. Product breadth, UI quality, or current execution is
+  not a moat unless it creates measurable resistance to displacement.
+
 Apply inline citations and DATA GAP flags throughout.
 Append to `{WORK_DIR}/data-gaps.md` and `{WORK_DIR}/source-bibliography.md`.
 
 ## Output — write to `{WORK_DIR}/research/l2-competitive.md`
+
+The output must include these sections in addition to the existing competitor
+profile skeleton:
+- Competitive arena map: arena branch / definition / named examples / why customers choose it.
+- Customer choice model: buyer / user / economic decision-maker / trigger / buying criteria / switching threshold / price-value metric.
+- Competitor evidence table: competitor / segment / buyer / workflow / pricing model / traction evidence / advantage / weakness / threat level.
+- Substitute workflows and platform threats: substitute or platform / workflow replaced / buyer appeal / adoption evidence / threat mechanism / response.
+- Moat proof and durability: moat claim / type / mechanism / metric / evidence / strength 1-5 / replicability horizon / erosion vector / verdict.
 
 ```markdown
 # L2 — Competitive Landscape — [COMPANY]

@@ -10,6 +10,7 @@ Read:
 - `{WORK_DIR}/open-issues.md`
 - `{WORK_DIR}/source-bibliography.md`
 - `{WORK_DIR}/data-gaps.md`
+- `{WORK_DIR}/strategic-analysis-plan.md` if present
 
 ## Document Structure
 
@@ -26,14 +27,19 @@ Build a Pattern-branded Word document in this order:
 9. Regulatory Environment and External Risk
 10. Competitive Moat Analysis
 11. Strategic Implications and Key Takeaways
-12. Open Items, if any
-13. Appendix: sources, methodology, arithmetic checks, and data gaps
+12. Strategic-analysis modules marked `Yes`, in the order listed in
+    `strategic-analysis-plan.md`, if any were produced
+13. Open Items, if any
+14. Appendix: sources, methodology, arithmetic checks, and data gaps
 
 ## Output Rules
 
 - Preserve source labels and evidence tags.
 - Do not convert hypotheses into facts.
 - Include market-sizing arithmetic in the body or appendix.
+- Include all produced strategic-analysis module sections; do not collapse them into
+  Strategic Implications unless the strategic-analysis-plan explicitly says the module
+  is summary-only.
 - If `open-issues.md` is non-empty, include a clearly labeled Open Items section
   before the appendix.
 - Do not use unsupported promotional language.

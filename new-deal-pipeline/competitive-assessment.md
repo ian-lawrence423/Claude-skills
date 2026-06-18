@@ -76,6 +76,12 @@ Do not use vendor websites as proof of traction or differentiation. They can
 describe product claims, but traction, retention, displacement, pricing power,
 or customer adoption needs independent evidence or a visible `[GAP]` tag.
 
+Add a substitute/platform table when any buyer can solve the same job without the
+named vendor category:
+
+| Substitute / platform | Workflow replaced | Buyer appeal | Evidence of adoption | Threat mechanism | Strategic response |
+|---|---|---|---|---|---|
+
 ### 4. Prove or Disprove Moat Claims
 
 Run `competitive-moat-assessment` for each material moat claim.
@@ -110,6 +116,20 @@ Write:
 - `{WORK_DIR}/competitive-assessment/source-map.md`
 - `{WORK_DIR}/competitive-assessment/open-issues.md`
 - `{WORK_DIR}/competitive-assessment/final-output.docx` when DOCX production is requested
+
+The markdown deliverable must use this architecture:
+
+1. Executive verdict.
+2. Category boundary and competitive arena.
+3. Customer choice and buying criteria.
+4. Competitor evidence table and segmentation.
+5. Substitute workflows and platform threats.
+6. Moat type classification.
+7. Moat evidence and strength score.
+8. Durability, erosion risk, and replicability horizon.
+9. Displacement paths and strategic response.
+10. Implications for investment, product, GTM, or M&A.
+11. Appendix: competitor profiles, source map, open issues.
 
 ## Quality Gate
 

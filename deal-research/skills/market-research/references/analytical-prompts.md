@@ -484,3 +484,57 @@ that earn it, then the implications for the decision at hand.
 5. **Key assumption to monitor**:
    The single assumption that, if proven wrong, most changes the strategic implications.
    State what would falsify it and what the monitoring mechanism is.
+
+---
+
+## Strategic Pricing, Policy, and Business-Model Addendum
+*Load for: strategic-analysis-plan modules covering benchmark comparables, rule / policy
+analysis, design implications, and unit economics.*
+
+### Benchmark Comparable Set
+
+For strategic pricing or business-model work, build the benchmark table before
+writing recommendations:
+
+- Which 5-8 companies are the closest analogs by buyer, workflow, pricing motion,
+  and cost structure?
+- For each analog, what is the model type: pure PAYG, subscription-plus-overage,
+  credit pack, seat-based, take-rate, per-transaction, or hybrid?
+- What is the minimum purchase, rack rate, overage rate, expiry/term, refund rule,
+  and usage unit?
+- Which facts are sourced from official pricing pages, filings, service terms, or
+  independent research? Which are vendor claims?
+- What does each benchmark imply for the subject company: pricing floor, premium,
+  cannibalization guardrail, customer experience trade-off, revenue recognition, or
+  support burden?
+
+Required artifact:
+
+| Company | Product | Model type | Min purchase | Rack rate / unit | Term / expiry | Source type | Strategic implication |
+|---|---|---|---|---|---|---|---|
+
+### Rule / Policy Interpretation
+
+For accounting, marketplace, platform, privacy, AI, payments, or contractual rules,
+separate the documented rule from the strategic recommendation:
+
+| Rule / policy | Jurisdiction or owner | Effective date / term | Documented scope | Interpretation | Design implication | Do-not-overclaim |
+|---|---|---|---|---|---|---|
+
+Do not present interpretation as fact. If the answer depends on legal, accounting,
+or tax advice, state the interpretation as `[E]` and name the professional review
+required before launch.
+
+### Business Model Design Implications
+
+Translate pricing, rules, and economics findings into a design decision. Each
+implication must state:
+
+- The recommended design choice.
+- The evidence that supports it.
+- The failure mode it prevents.
+- The owner or function that must implement it.
+- The metric that proves it is working.
+
+Avoid recommendations that only restate a benchmark. A benchmark becomes useful only
+when it changes the design, launch, finance policy, or monitoring plan.
