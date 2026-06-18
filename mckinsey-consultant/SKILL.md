@@ -382,6 +382,50 @@ Always provide both methods and reconcile if they diverge significantly.
 - Assess which steps have high vs. low margins
 - Identify where the subject company plays and where it could expand
 
+### Advantage Durability
+
+Use this to extend any moat or competitive-advantage assessment. Naming a moat type
+is necessary but insufficient. A moat named without a time horizon is a static label,
+not an investment conclusion.
+
+Every advantage assessment must answer:
+
+1. **Durability verdict with explicit time horizon.** State whether the advantage is
+   structural short-term, conditional long-term, or likely to erode within the hold
+   period. Name the condition that extends or shortens durability.
+2. **Prior-category analogue.** Identify a comparable category that has already
+   matured and use its trajectory as the base rate. If no analogue exists, state that
+   the durability claim is lower-confidence.
+3. **Erosion-risk register.** State likelihood and impact qualitatively. Do not use
+   invented numeric products such as probability x magnitude scores unless the inputs
+   are actually measured.
+
+Output format:
+
+| Advantage | Mechanism | Time horizon | Prior-category analogue | Erosion vector | Verdict |
+|---|---|---|---|---|---|
+
+### Substrate Disintermediation Test
+
+Competitive analysis that only examines rival firms can miss the larger structural
+threat: the platform, channel, supplier, or technology layer beneath the category
+moving into the value layer.
+
+Require this chain:
+
+```text
+proximate driver -> gating constraint -> what resolves the constraint -> layer displaced vs. layer defended
+```
+
+Use this test when the category depends on an underlying platform, protocol, channel,
+marketplace, operating system, model layer, logistics network, cloud provider, payment
+rail, or supplier base.
+
+Output format:
+
+| Substrate threat | Proximate driver | Gating constraint | Constraint resolver | Displaced layer | Defended layer | Implication |
+|---|---|---|---|---|---|---|
+
 ---
 
 ## Investment Evaluation Mode

@@ -316,6 +316,53 @@ font: 'Wix Madefor Display SemiBold', color: 'C00000'
 
 ---
 
+## Sourcing, Contents, and Scoring Standard
+
+This standard governs footnoting, contents page construction, table scoring, and
+verdict-color discipline for Pattern documents built with this skill.
+
+### Sourcing mechanics
+
+- Use footnotes for thesis-critical sourcing. Do not crowd body prose with inline
+  source tags. Each thesis-critical claim should carry a page-foot source note in
+  `[type / confidence] Source, date. Note.` form, numbered sequentially in order
+  of appearance across the whole document.
+- Use inline bracket tags only as compact in-table shorthand when a full footnote
+  would make the table unreadable.
+- Validate footnote hygiene before delivery: separator lines must not contain
+  footnote-reference glyphs, every reference must resolve, and numbering must be
+  gapless.
+
+### Contents page
+
+- For long-form research reports, include a single-page contents page after the
+  cover: eyebrow kicker, large title, one-line orienting sentence, and a
+  three-column table: `No. | Section and subsections | Page`.
+- Style the contents table with a navy header rule, generous row height, section
+  numbers in the accent color, subsection names in muted grey beneath the
+  section title, and right-aligned page numbers.
+- Verify page numbers against the rendered PDF or page images. Do not hand-enter
+  unverified page numbers.
+
+### Tables and scoring
+
+- Prefer qualitative ratings such as `Strong`, `Moderate`, and `Weak` over
+  pseudo-precision. Do not use `X/10`, `X/20`, or probability-by-magnitude
+  products unless the inputs are measured and the model is explicitly defined.
+- Comparison `overall` columns must carry descriptive profiles, not superlative
+  verdicts.
+- Risk registers should use `Likelihood` and `Impact` in words, with the
+  specific evidence and mitigation beside each risk.
+
+### Verdict color discipline
+
+- Do not color-code one option green and another orange in a parallel comparison;
+  that embeds a recommendation before the evidence is read.
+- Use a single neutral accent for parallel verdicts. Reserve red for genuine
+  category-level warnings, not for ranking one entity below another.
+
+---
+
 ## Step 7: Fallback-Only Python Patch Script
 
 Use this script only when no canonical Pattern template is available. The canonical-template

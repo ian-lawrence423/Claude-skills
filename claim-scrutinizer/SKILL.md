@@ -179,6 +179,26 @@ For each claim, assign:
 - **Predictive** — asserts what will happen in the future
 - **Comparative** — asserts superiority, leadership, or differentiation vs. others
 
+**Two-axis evidence tag:** For every load-bearing claim, show both claim type and
+source confidence. Type and confidence are orthogonal and must not be collapsed.
+
+| Axis | Labels | Meaning |
+|---|---|---|
+| Type | `[F]`, `[E]`, `[H]` | Fact, estimate, or hypothesis |
+| Confidence | `H`, `M`, `L` | High, medium, or low source confidence |
+
+Write the combined tag as `[type / confidence]`.
+
+Examples:
+- `[F / L]` = observable claim, but single-sourced or self-reported.
+- `[E / M]` = estimate with stated arithmetic and partially convergent sources.
+- `[H / L]` = plausible thesis point with limited validation.
+
+**Self-reported flag:** When the source is the subject of the claim, state that
+explicitly. A vendor-reported customer count, management-reported churn figure, or
+company-reported performance lift is not independently verified just because it is
+numerical.
+
 ---
 
 ## Step 4b: Derivative Integrity Check
@@ -347,6 +367,32 @@ Verdict: Plausible / Stretched / Requires specific justification
 
 If the claim requires top-quartile historical performance, flag it and state what specific
 factors would justify above-base-rate results.
+
+---
+
+## Step 6a: Symmetric-Scrutiny Gate
+
+Whenever the document compares multiple entities, including competitors, acquisition
+candidates, vendors, markets, or strategic options, apply the same evidentiary standard to every
+entity. Asymmetric scrutiny is how a document can appear objective while quietly
+pre-selecting a winner.
+
+This gate fails if any of the following are asymmetric across the compared set:
+
+1. **Self-reported data treated unevenly.** If one entity's self-reported figure is
+   tagged `[F / L]` and flagged as self-reported, every equivalent figure must be
+   tagged and flagged the same way.
+2. **Missing parallel key unknowns.** Each compared entity must carry its own
+   data-gaps / key-unknowns line. Silent gaps make one option look cleaner than it is.
+3. **Superlative verdicts in comparison cells.** Replace "strongest," "clear leader,"
+   and "obvious choice" with descriptive profiles that state which dimension the
+   entity leads on.
+4. **Uneven visual emphasis.** Do not use green for one option and orange/red for
+   another unless the categories are objective and applied identically.
+
+**Redline output:** For each asymmetry, name the entities, the element treated
+unevenly, and the exact correction required to bring all entities to the same
+standard.
 
 ---
 

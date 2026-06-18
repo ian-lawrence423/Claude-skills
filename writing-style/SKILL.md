@@ -362,6 +362,33 @@ before delivery.
 
 ---
 
+### Step 6: Stance Discipline
+
+Apply this whenever the output is meant to help a reader form a decision, especially
+market research, competitive assessments, acquisition screens, and option comparisons.
+
+**Test:** Can a reader who disagrees with the implied conclusion still use the document?
+If framing, section order, emphasis, and language all point toward one outcome, the
+output is advocacy, not analysis.
+
+Flag and repair these patterns:
+
+- **Directive framing:** "Pattern should acquire X" / "the right move is Y" before
+  the evidence is shown. Replace with evidence-led framing and trade-offs.
+- **Pre-selected winner language:** "strongest candidate," "clear choice," "stands
+  out." Replace with descriptive leads: who leads on which dimension and what remains
+  unverified.
+- **Asymmetric data-gap treatment:** Calling out unknowns for non-favored options
+  while presenting favored options' self-reported data as settled fact.
+- **Loaded section titles:** "Why X Is the Right Fit" or "The Case for Acquisition."
+  Replace with neutral titles such as "Acquisition Candidate Assessment" or "Build
+  vs. Buy Trade-offs."
+- **Numeric scoring of non-numeric attributes:** Do not assign "strategic fit: 8/10"
+  or "risk score: 14/20" unless the scoring inputs are defined and measured. Use
+  qualitative descriptors and state the basis.
+
+---
+
 ## Integration with Other Skills
 
 This skill runs after the primary drafting skill completes. It does not replace analytical
@@ -408,6 +435,13 @@ Run this before every formal output is delivered. Every item must be checked —
 
 **Data quality**
 - [ ] Every data gap flagged inline with a data note where required
+
+**Stance discipline**
+- [ ] No directive recommendation appears before the evidence supports it
+- [ ] No pre-selected winner language remains in comparisons
+- [ ] Equivalent data gaps are treated symmetrically across compared entities
+- [ ] Section titles are neutral where the document is meant to support a decision
+- [ ] Non-measured attributes are not presented as precise numeric scores
 - [ ] No claim papering over a thin or conflicting data source without disclosure
 
 **Structure and prose**
