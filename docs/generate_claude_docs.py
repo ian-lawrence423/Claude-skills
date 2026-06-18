@@ -302,6 +302,7 @@ def save(doc: Document, path: Path) -> None:
 
 COMMON_TASKS = [
     ["Full new deal pack", "deal-master -> new-deal-pipeline"],
+    ["Repeatable full-deal prompt sequence", "docs/new-deal-gold-standard-prompt-sequence.md"],
     ["Start or resume a deal workflow", "deal-master"],
     ["Structure a problem or build issue tree", "mckinsey-consultant"],
     ["Track evidence state / belief register", "analytical-operating-system"],
@@ -316,6 +317,7 @@ COMMON_TASKS = [
     ["SaaS metric lookup", "finance-metrics-quickref"],
     ["Two-page executive summary", "executive-summary-writer"],
     ["Pattern Word document", "pattern-docx"],
+    ["Source footnotes and evidence tags", "pattern-docx + claim-scrutinizer"],
     ["Pattern investment deck", "pattern-investment-pptx"],
     ["QA a Pattern document", "doc-quality-checker"],
 ]
@@ -325,8 +327,8 @@ LAYERS = [
     ["1 - Analytical Method", "mckinsey-consultant", "Owns problem framing, MECE issue trees, Pyramid Principle, and analytical method."],
     ["1b - Evidence Control", "analytical-operating-system", "Owns evidence states, belief registers, Bayesian updates, kill triggers, decision posture."],
     ["2 - Research", "market-research, ic-memo, competitive-moat-assessment, tam-sam-som, GTM, finance quickref", "Gathers evidence and creates research or memo deliverable architecture."],
-    ["3 - Quality", "writing-style, claim-scrutinizer, red-team, pre-mortem, boundability", "Hardens prose, claims, adverse cases, and failure modes before production."],
-    ["4 - Production", "pattern-docx, pattern-investment-pptx, financial-model-builder, diligence-ddr", "Produces branded output files only after quality layers are complete."],
+    ["3 - Quality", "writing-style, claim-scrutinizer, red-team, pre-mortem, boundability", "Hardens prose, claims, evidence tags, adverse cases, and failure modes before production."],
+    ["4 - Production", "pattern-docx, pattern-investment-pptx, financial-model-builder, diligence-ddr", "Produces branded output files only after quality layers are complete; Pattern DOCX uses true Word footnotes for thesis-critical sources."],
     ["4b - QA", "doc-quality-checker", "Checks brand compliance, formatting, consistency, and remaining draft language."],
 ]
 
@@ -425,6 +427,11 @@ def build_readme_doc() -> None:
         "Source of truth",
         "Root skill folders in this repo are canonical. Packaged plugin copies must be synced from root before publishing.",
     )
+    add_callout(
+        doc,
+        "Deal-pack execution standard",
+        "For checkpointed full-deal work, use docs/new-deal-gold-standard-prompt-sequence.md with new-deal-pipeline/quality-contract.md loaded before research starts.",
+    )
     add_h1(doc, "How Skills Fit Together")
     add_para(doc, "Use deal-master for full deal workflows. Use the most specific skill directly for standalone tasks.")
     add_table(doc, ["Layer", "Skills", "What it owns"], LAYERS, [1800, 3300, 5700])
@@ -456,6 +463,17 @@ def build_readme_doc() -> None:
         "Full-mode market research must use the standalone gold-standard guide and the skill reference template. The report must include decision artifacts, source labels, market-sizing arithmetic, competitive substitute logic, moat durability, and strategic implications.",
     )
     add_table(doc, ["Report section", "Minimum standard"], MARKET_ARCH, [3300, 7500])
+    add_h1(doc, "Evidence and Footnote Standard")
+    add_table(
+        doc,
+        ["Standard", "Rule"],
+        [
+            ["Evidence tags", "Use [F · H]-style tags for thesis-critical evidence: type = fact / estimate / hypothesis; confidence = high / medium / low."],
+            ["True Word footnotes", "Pattern DOCX reports use real w:footnoteReference runs mapped to word/footnotes.xml. Do not emulate footnotes with manual page-bottom text."],
+            ["Strict source gate", "If a thesis-critical claim lacks support, recurring numbers conflict, arithmetic is missing, or superlatives are unsupported, return HALT instead of a polished draft."],
+        ],
+        [3200, 7600],
+    )
     add_h1(doc, "Pivotal Gold-Standard Guides")
     add_table(doc, ["Guide", "DOCX", "Use"], PIVOTAL_GUIDES, [3000, 4000, 3800])
     add_h1(doc, "Related Files")
@@ -474,6 +492,8 @@ def build_readme_doc() -> None:
             ["market-research/references/gold-standard-report-template.md", "Skill reference loaded during Full-mode market research."],
             ["docs/generate_claude_docs.py", "Regenerates the Word reference artifacts."],
             ["new-deal-pipeline/quality-contract.md", "Mandatory evidence, MECE, source, arithmetic, and anti-hyperbole gate for full deal packs."],
+            ["docs/new-deal-gold-standard-prompt-sequence.md", "Repeatable prompt sequence for full market research, competitive assessment, IC memo, and cross-output QA."],
+            ["pattern-docx/references/production-spec.md", "Pattern DOCX implementation spec, including true Word footnotes and source-tag format."],
         ],
         [4200, 6600],
     )
@@ -502,6 +522,18 @@ def build_cheatsheet_doc() -> None:
             ["7", "doc-quality-checker", "Auto-run the final document QA gate."],
         ],
         [900, 3500, 6400],
+    )
+    add_h1(doc, "Evidence and Footnote Standard")
+    add_table(
+        doc,
+        ["Topic", "Rule"],
+        [
+            ["Evidence tags", "Use [F · H], [F · M], [E · L], etc. Type = fact / estimate / hypothesis; confidence = high / medium / low."],
+            ["Thesis-critical sources", "Use true Word footnotes in Pattern DOCX: w:footnoteReference in the body, source text in word/footnotes.xml."],
+            ["Full deal gate", "Keep SOURCE_STRICTNESS=strict. Unsupported thesis-critical claims, conflicting numbers, missing arithmetic, and unsupported superlatives return HALT."],
+            ["Repeatable prompt", "Use docs/new-deal-gold-standard-prompt-sequence.md for checkpointed full-deal execution."],
+        ],
+        [3200, 7600],
     )
     add_h1(doc, "Market Research Full-Mode Checklist")
     add_table(doc, ["Section", "Required artifact"], MARKET_ARCH, [3300, 7500])
@@ -533,6 +565,7 @@ def build_cheatsheet_doc() -> None:
             ["Table headers", "#0F4761 fill + #FFFFFF text"],
             ["Body", "#000000"],
             ["Canonical market research guide", "docs/market-research-gold-standard-guide.md and market-research/references/gold-standard-report-template.md"],
+            ["Source footnotes", "True Word footnotes with [F · H]-style source tags"],
         ],
         [3300, 7500],
     )
@@ -562,7 +595,8 @@ def build_finance_doc() -> None:
             ["6", "Market Research Handoff To Finance"],
             ["7", "Workflow Chains"],
             ["8", "Trigger Phrases"],
-            ["9", "Common Mistakes"],
+            ["9", "Evidence And Footnote Standard"],
+            ["10", "Common Mistakes"],
         ],
         [900, 9900],
     )
@@ -580,7 +614,7 @@ def build_finance_doc() -> None:
             ["ic-memo", "market-research, executive-summary-writer", "Market evidence and two-page summary spine are inputs to an IC-ready memo."],
             ["ntb-diligence", "driver-tree, boundability", "NTBs need to map to value drivers and be tested for durability boundaries."],
             ["gtm-metrics-analyzer", "financial-model-builder when a model exists", "Revenue, GP, S&M, and operating metrics should tie to the model instead of being re-entered."],
-            ["pattern-docx", "writing-style, claim-scrutinizer, doc-quality-checker", "Formal files require prose hardening, claim integrity, and final QA."],
+            ["pattern-docx", "writing-style, claim-scrutinizer, doc-quality-checker", "Formal files require prose hardening, claim integrity, true Word footnotes, and final QA."],
         ],
         [2400, 3600, 4800],
     )
@@ -594,7 +628,7 @@ def build_finance_doc() -> None:
             ["3 - Deep diligence", "ntb-diligence, driver-tree, financial-model-builder, GTM, KPI tree", "NTB registry, driver tree, model, GTM workbook, operating KPI plan as needed."],
             ["4 - Draft memo", "ic-memo", "10-section investment memo with executive summary last."],
             ["5 - Quality passes", "writing-style, claim-scrutinizer, red-team, pre-mortem, boundability", "Hardened thesis, risks, assumptions, and underwriting actions."],
-            ["6 - Production and QA", "pattern-docx, doc-quality-checker", "Pattern DOCX with zero critical QA issues."],
+            ["6 - Production and QA", "pattern-docx, doc-quality-checker", "Pattern DOCX with true Word footnotes and zero critical QA issues."],
         ],
         [2100, 3100, 5600],
     )
@@ -610,7 +644,7 @@ def build_finance_doc() -> None:
             ["4 - Model", "Build or audit the financial model from the source P&L/BS.", "Input Page, FMT, Output Tab, variance/margin view."],
             ["5 - Draft", "Draft the 10-section IC memo using the evidence base and model outputs.", "Complete memo draft with executive summary written last."],
             ["6 - Harden", "Run writing-style, claim-scrutinizer, red-team, pre-mortem, and boundability.", "Redlined, hardened memo with kill criteria and open issues."],
-            ["7 - Produce", "Generate Pattern DOCX and run doc-quality-checker.", "Final branded IC memo with QA gate cleared."],
+            ["7 - Produce", "Generate Pattern DOCX with true Word footnotes and run doc-quality-checker.", "Final branded IC memo with QA gate cleared."],
         ],
         [1600, 5200, 4000],
     )
@@ -674,6 +708,19 @@ def build_finance_doc() -> None:
         ],
         [5200, 5600],
     )
+    add_h1(doc, "Evidence And Footnote Standard")
+    add_table(
+        doc,
+        ["Standard", "Rule"],
+        [
+            ["Full deal quality gate", "Load new-deal-pipeline/quality-contract.md before research starts. Use SOURCE_STRICTNESS=strict unless explicitly relaxed."],
+            ["Evidence tags", "Use [F · H]-style tags for thesis-critical evidence. Type = fact / estimate / hypothesis. Confidence = high / medium / low."],
+            ["True Word footnotes", "Pattern DOCX outputs must use body w:footnoteReference runs mapped to word/footnotes.xml for thesis-critical sources."],
+            ["HALT rule", "Do not polish unsupported thesis-critical claims. Return HALT when support, arithmetic, source quality, or recurring numbers fail the gate."],
+            ["Prompt sequence", "Use docs/new-deal-gold-standard-prompt-sequence.md for checkpointed market research, competitive assessment, IC memo, and cross-output QA."],
+        ],
+        [3300, 7500],
+    )
     add_h1(doc, "Common Mistakes")
     add_bullets(
         doc,
@@ -683,6 +730,7 @@ def build_finance_doc() -> None:
             "Treating vendor ROI claims as independent proof of customer economics.",
             "Skipping claim-scrutinizer before producing an IC memo document.",
             "Building post-close KPI trees from pre-diligence assumptions without labeling uncertainty.",
+            "Using manual page-bottom source text instead of true Word footnotes in Pattern DOCX outputs.",
         ],
     )
     add_h1(doc, "Reference Files")
@@ -695,6 +743,8 @@ def build_finance_doc() -> None:
             ["docs/market-research-gold-standard-guide.md", "Human-readable guide for the most thorough market research document."],
             ["mckinsey-consultant/references/investment-evaluation-framework.md", "Investment evaluation gates and diligence questions."],
             ["mckinsey-consultant/references/VALIDATION_FRAMEWORKS.md", "Source validation, CRAAP scoring, and triangulation."],
+            ["docs/new-deal-gold-standard-prompt-sequence.md", "Repeatable checkpointed prompt sequence for full deal execution."],
+            ["pattern-docx/references/production-spec.md", "True Word footnote implementation standard and Pattern DOCX production details."],
         ],
         [5000, 5800],
     )

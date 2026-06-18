@@ -29,6 +29,10 @@ The skill library has one orchestration entry point and five functional layers. 
 
 > **Full deal-pack quality contract:** When the task is a new deal requiring market research, competitive assessment, and an IC memo, route through `deal-master` -> `new-deal-pipeline/orchestrator.md`. The pipeline applies `new-deal-pipeline/quality-contract.md`: thoroughness over speed, source-tagged claims, explicit arithmetic, MECE issue trees, no unsupported hyperbole, and visible `GAP` handling instead of plausible filler.
 
+> **Repeatable deal prompt:** For checkpointed execution, use `docs/new-deal-gold-standard-prompt-sequence.md`. It is the operator prompt sequence for complete market research, competitive assessment, IC memo, and cross-output QA.
+
+> **Source footnote standard:** Pattern DOCX outputs use true Word footnotes for thesis-critical sourcing: body `w:footnoteReference` runs mapped to `word/footnotes.xml`. Source notes start with `[F · H]`-style tags where type = fact / estimate / hypothesis and confidence = high / medium / low.
+
 | Layer | Skills | What It Owns | When It Runs |
 |---|---|---|---|
 | **0 — Deal Orchestration** | `deal-master` | Existing-work inventory, deal state assessment, phase routing, belief-register initialization | Default entry point for full deal workflows |
@@ -217,6 +221,8 @@ Follow this checklist to add a new skill without breaking conventions:
 | `README.md` | Repo root | Source of truth for deployed skills — skill index, invocation guide, architecture overview |
 | `CHEATSHEET.md` | Repo root | Quick-reference: task→skill map, layer sequence, pipeline phase map, brand constants |
 | `new-deal-pipeline/quality-contract.md` | Repo root | Mandatory evidence, MECE, arithmetic, anti-hyperbole, and claim-economy gate for full deal packs |
+| `docs/new-deal-gold-standard-prompt-sequence.md` | `docs/` | Repeatable prompt sequence for full market research, competitive assessment, IC memo, and cross-output QA |
+| `pattern-docx/references/production-spec.md` | Repo root | Pattern DOCX implementation spec, including true Word footnotes and source-tag format |
 | `Claude_Skills_README.docx` | `docs/` | Generated Pattern-branded Word version of this README |
 | `Claude_Skills_CheatSheet_v2.docx` | `docs/` / OneDrive | Generated quick-reference card for common tasks, mandatory layers, pairings, and brand constants |
 | `Claude_Skill_Library_External (Finance)_v6.docx` | `docs/` / OneDrive | Generated finance/investment reference: skill architecture, inventory, IC memo workflow, finance handoff rules |

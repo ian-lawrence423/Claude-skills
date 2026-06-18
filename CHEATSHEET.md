@@ -9,6 +9,7 @@
 | Task | Skill(s) to invoke |
 |------|--------------------|
 | Full new deal package: market research + competitive assessment + IC memo | `deal-master` -> `new-deal-pipeline` |
+| Repeatable full-deal prompt sequence | `docs/new-deal-gold-standard-prompt-sequence.md` |
 | Start or resume a deal workflow | `deal-master` |
 | Structure a problem / build issue tree | `mckinsey-consultant` |
 | Track evidence state / belief register for a deal | `analytical-operating-system` |
@@ -24,6 +25,7 @@
 | Pre-mortem on a deal | `pre-mortem` |
 | Adversarial bear case | `red-team` |
 | Redline claims / pressure-test doc | `claim-scrutinizer` |
+| Apply source footnotes and evidence tags | `pattern-docx` + `claim-scrutinizer` |
 | Write / clean up any formal prose | `writing-style` (auto-runs) |
 | Two-page executive summary | `executive-summary-writer` |
 | Executive briefing / one-pager | `executive-briefing` |
@@ -60,6 +62,8 @@ Step 2 is mandatory for deal-master, IC memo, diligence, and investment thesis w
 Steps 5–7 are mandatory for IC memos and investment documents.
 For a full new-deal package, load `new-deal-pipeline/quality-contract.md` before research starts and keep `SOURCE_STRICTNESS=strict` unless the user explicitly relaxes it.
 
+Evidence notation standard: thesis-critical claims should use `[F · H]`, `[F · M]`, `[E · L]`, etc. Type = fact / estimate / hypothesis. Confidence = high / medium / low.
+
 ---
 
 ## Pipelines (multi-agent workflows)
@@ -92,6 +96,8 @@ Use this when the user asks for a full standalone market research report, board-
 | Appendix | Methodology, source labels, arithmetic corrections, open questions |
 
 Reference docs: `docs/market-research-gold-standard-guide.md` and `market-research/references/gold-standard-report-template.md`.
+
+Source standard: final Pattern DOCX reports should use true Word footnotes for thesis-critical sourcing. Do not emulate footnotes with page-bottom manual text.
 
 ---
 
@@ -179,6 +185,7 @@ C:\Users\IanLawrence\OneDrive - Pattern\Ian Productivity\Claude\artifacts\resear
 | Green callouts | `#375623` |
 | Word doc header | Pattern logo + gradient line — Python XML patch, NOT docx-js |
 | Canonical template | `Commerce_Market_Research_v9_2026-04-29.docx` + `market-research/references/gold-standard-report-template.md` |
+| Source footnotes | True Word footnotes: `w:footnoteReference` + `word/footnotes.xml`; source text starts with `[F · H]` style tag |
 
 ---
 
@@ -189,6 +196,7 @@ C:\Users\IanLawrence\OneDrive - Pattern\Ian Productivity\Claude\artifacts\resear
 | `docs/Claude_Skills_README.docx` | Word version of the skill library overview |
 | `docs/Claude_Skills_CheatSheet_v2.docx` | Quick-reference task map and layer checklist |
 | `docs/Claude_Skill_Library_External (Finance)_v6.docx` | Finance and investment workflow reference |
+| `docs/new-deal-gold-standard-prompt-sequence.md` | Repeatable prompt sequence for full market research + competitive assessment + IC memo |
 | `docs/Market_Research_Gold_Standard_Guide.docx` | Standalone guide for the most thorough market research report |
 | `docs/IC_Memo_Gold_Standard_Guide.docx` | Standalone guide for the most thorough IC memo |
 | `docs/Competitive_Assessment_Gold_Standard_Guide.docx` | Standalone guide for competitive assessment and moat analysis |
