@@ -40,7 +40,7 @@ SOURCE_STRICTNESS:    [standard | strict; default strict]
 
 ```
 Phase -1  Load governing frameworks and quality contract
-Pre-data-room Phase 0   n8n intake, overnight research, competitive pre-fetch, dispatch readiness
+Pre-data-room Phase 0   n8n intake, mandatory intake materials review, overnight research, competitive pre-fetch, dispatch readiness
 Pre-data-room Phase 1   Shared deal brief, source bibliography, evidence register, belief register
 Pre-data-room Phase 2   Gold-standard market research report
 Pre-data-room Phase 3   Gold-standard competitive assessment
@@ -95,9 +95,9 @@ Confirm the full-chain n8n state before any synthesis:
 
 | Component | Required Evidence |
 |---|---|
-| Deal intake / materials | Materials folder exists or missing materials are logged |
+| Deal intake / materials | Materials folder exists, `shared/materials-index.md` is created, and `shared/intake-materials-review.md` synthesizes the actual materials before overnight research |
 | Gold Standard Queue | Columns A:M captured in `shared/queue-contract-check.md` |
-| Market Research Gold Standard Overnight | Column K `complete`, column L valid `CompetitiveIntel` JSON, column M Website populated |
+| Market Research Gold Standard Overnight | `shared/intake-materials-review.md` existed before the run; column K `complete`, column L valid `CompetitiveIntel` JSON, column M Website populated |
 | Competitive pre-fetch / landscape mapping | Run ID or sheet column, score rationale, source map, review flag |
 | Deal Intelligence Orchestrator | Dispatch packet created, WorkDir set, row marked `in_progress`, required deliverables listed |
 
@@ -119,6 +119,7 @@ Create:
 │   ├── run-log.md
 │   ├── quality-contract.md
 │   ├── materials-index.md
+│   ├── intake-materials-review.md
 │   ├── deal-brief.md
 │   ├── source-bibliography.md
 │   ├── evidence-register.md
@@ -132,11 +133,16 @@ Create:
 └── ic-memo/
 ```
 
+Mandatory intake review:
+- Before overnight research is accepted as Phase 0 evidence, write `{WORK_DIR}/shared/intake-materials-review.md`.
+- The review must contain: company facts, source hierarchy, [MGMT]/[VENDOR] claims, product and customer terminology, suggested market boundary, competitors, customer segments, open questions, and the research hypotheses the overnight workflow should test.
+- HALT or force-log a blocker if raw materials exist but have not been read. Do not start from scratch when intake materials are available.
+
 Process tracker gate:
 - PASS only if `shared/process-tracker.md` exists and names every required
   workflow, skill/plugin, input, output, integrity gate, status, owner/next
   action, and artifact.
-- PASS also requires the Gold Standard Queue row to be copied into the Queue Row
+- PASS also requires `shared/intake-materials-review.md` to exist before overnight evidence is accepted, and the Gold Standard Queue row to be copied into the Queue Row
   Tracker and every professional deliverable to appear in the Document Readiness
   Tracker with an owner/next action.
 - HALT if no tracker exists, if a phase status is ambiguous, or if the next
@@ -152,7 +158,7 @@ Inventory table:
 | `shared/source-bibliography.md` | Prior source log | Append; do not replace |
 | `shared/evidence-register.md` | Prior claim register | Load before any phase |
 | `shared/number-register.md` | Prior numeric register | Use as authority unless stale or contradicted |
-| CIM / management deck / model | Source materials | Catalog and tag as `[MGMT]` unless independently verified |
+| CIM / management deck / model | Source materials | Catalog, synthesize in `shared/intake-materials-review.md`, and tag claims as `[MGMT]` unless independently verified |
 
 Staleness rule:
 - Market size, growth, pricing, competitor funding, product launches, market share,
@@ -227,6 +233,7 @@ RESEARCH_MODE: gold_standard_end_to_end
 Additional instructions:
 - Load `docs/market-research-gold-standard-guide.md`.
 - Load `market-research/references/gold-standard-report-template.md`.
+- Load `shared/intake-materials-review.md` first; use it to define starting facts, management assertions, competitor/customer cues, and explicit research questions.
 - Load `shared/overnight-output-index.md` and `market-research/overnight-reconciliation.md` if an overnight pack exists.
 - Use `shared/source-bibliography.md`, `shared/evidence-register.md`,
   `shared/number-register.md`, and `shared/open-issues.md`.

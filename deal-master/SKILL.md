@@ -107,6 +107,7 @@ Map files to phases using this table:
 | `shared/evidence-register.md` | Shared evidence spine | Load; do not recreate unless stale |
 | `shared/belief-register.md` | Shared belief register | Load and update |
 | `shared/process-tracker.md` | Workflow control tower | Load and update; create from `C:\Users\IanLawrence\github\n8n-workflows\investment-process\process-tracker-template.md` if missing |
+| `shared/intake-materials-review.md` | Intake synthesis | Required before overnight research is accepted; captures reviewed teaser/CIM/banker/management material facts, [MGMT]/[VENDOR] claims, gaps, competitors, customer cues, and research questions |
 | `market-research/final-output.docx` | Market report complete | Use if current; otherwise refresh Phase 2 |
 | `competitive-assessment/final-output.docx` | Competitive assessment complete | Use if current; otherwise refresh Phase 3 |
 | `diligence/ntb-registry.md` | NTB diligence | Use as IC memo and boundability input |
@@ -124,6 +125,9 @@ Map files to phases using this table:
 ### Materials Folder (manually added)
 Any files in `materials/` are source documents (CIM, management deck,
 financial model, expert call transcripts). Load all as MATERIALS for Phase 1.
+Before accepting overnight market research as evidence, actually review these
+materials and write `shared/intake-materials-review.md`; do not treat the
+materials folder as a mere inventory.
 
 ---
 
@@ -183,7 +187,10 @@ The tracker must show:
 6. Open blockers and GAP items.
 
 Do not route to analysis, diligence, memo drafting, or output production until
-the tracker exists and the next phase is explicit.
+the tracker exists and the next phase is explicit. Before using Market Research
+Gold Standard Overnight output, also confirm `shared/intake-materials-review.md`
+exists and has been used to shape the research brief; if it is missing, create
+it from MATERIALS_PATH first and log the gap.
 
 ### Belief Register
 
@@ -247,21 +254,22 @@ Pass: COMPANY, DEAL_TYPE, THESIS, GEOGRAPHY, ENTRY_VAL, HOLD_PERIOD,
       MATERIALS_PATH, WORK_DIR, RESEARCH_MODE=gold_standard_end_to_end,
       RESUME_EXCEPTION, NTB_MODE=full, KPI_MODE
 Outputs:
-  1. market-research/final-output.docx
-  2. competitive-assessment/final-output.docx
-  3. diligence/ntb-registry.md
-  4. diligence/driver-tree.md
-  5. diligence/data-room-request-list.md
-  6. shared/data-room-index.md
-  7. diligence/data-room-validation.md
-  8. diligence/deal-workbook.xlsx
-  9. diligence/gtm-metrics-diagnostic.xlsx
-  10. diligence/kpi-tree.md
-  11. diligence/boundability.md
-  12. ic-memo/final-output.docx
-  13. shared/evidence-register.md
-  14. shared/process-tracker.md
-  15. deal-pack-summary.md
+  1. shared/intake-materials-review.md
+  2. market-research/final-output.docx
+  3. competitive-assessment/final-output.docx
+  4. diligence/ntb-registry.md
+  5. diligence/driver-tree.md
+  6. diligence/data-room-request-list.md
+  7. shared/data-room-index.md
+  8. diligence/data-room-validation.md
+  9. diligence/deal-workbook.xlsx
+  10. diligence/gtm-metrics-diagnostic.xlsx
+  11. diligence/kpi-tree.md
+  12. diligence/boundability.md
+  13. ic-memo/final-output.docx
+  14. shared/evidence-register.md
+  15. shared/process-tracker.md
+  16. deal-pack-summary.md
 Gate: cross-output QA passes; no unsupported thesis-critical claims; no conflicting numbers
 ```
 
@@ -272,7 +280,7 @@ research, competitive assessment, data-room validation, post-data-room
 workstreams, or memo QA.
 
 Data-room split:
-- Pre-data-room work produces outside-in market research, competitive assessment,
+- Pre-data-room work starts with reviewed intake materials, then produces outside-in market research, competitive assessment,
   preliminary NTB registry, preliminary driver tree, and the exact data-room request list.
 - Post-data-room work starts only after `shared/data-room-index.md` exists. It
   validates outside-in claims against company-specific evidence, then builds the
