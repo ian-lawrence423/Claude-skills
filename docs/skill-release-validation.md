@@ -17,18 +17,16 @@ Validate that the skill-system cleanup work is publishable after the governance,
 | Root skill descriptions are <= 200 characters | Pass |
 | Marketplace JSON parses | Pass |
 | Plugin manifests parse | Pass |
-| Marketplace source paths exist | Pass: 5 entries |
+| Marketplace source paths exist | Pass: active plugin entries resolve |
 | Packaged skill copies match root sources where root counterparts exist | Pass: 114 checked files |
-| Pattern DOCX/PPTX reference files are packaged with `deal-output` and `deal-intelligence` | Pass |
+| Pattern DOCX/PPTX reference files are packaged with `deal-intelligence` | Pass |
 
 ## Publication Surfaces Reviewed
 
 - `.claude-plugin/marketplace.json`
 - `deal-master/.claude-plugin/plugin.json`
 - `analytical-operating-system/.claude-plugin/plugin.json`
-- `deal-research/.claude-plugin/plugin.json`
 - `deal-diligence/.claude-plugin/plugin.json`
-- `deal-output/.claude-plugin/plugin.json`
 - `plugins/deal-intelligence/.claude-plugin/plugin.json`
 - `README.md`
 - `CHEATSHEET.md`
@@ -48,6 +46,8 @@ This release stabilizes the Claude-skills deal-intelligence system:
 - Adds examples, anti-patterns, and smoke tests for core workflows.
 - Moves detailed Pattern DOCX/PPTX production specs into reference files while preserving production behavior.
 - Verifies packaged plugin copies are synced from root sources.
+- Retires unused standalone research/output phase slices in favor of the grouped
+  `deal-intelligence` plugin.
 
 ## Remaining Follow-Up
 

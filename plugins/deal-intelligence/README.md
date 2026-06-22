@@ -111,6 +111,9 @@ publishing or installing this grouped plugin.
 
 ## Cleanup Notes
 
-Do not delete skills from this plugin until references are checked. The main stale candidates are the old standalone plugin slices at repo root: `deal-research/`, `deal-diligence/`, and `deal-output/`. They overlap with this bundled plugin, but current release-validation docs still list them as publication surfaces.
+Do not delete skills from this plugin until references are checked. The old standalone
+research and output phase slices have been retired; this grouped plugin is the active
+packaged install surface for those workflows. `deal-diligence/` still overlaps with this
+bundle and should only remain if modular diligence installs are still useful.
 
 `deal-workbook-builder` is currently plugin-only while root `driver-tree`, root `boundability`, and the docs generator already reference it. Preferred cleanup is to promote it to a root canonical skill; retirement requires updating those references first.

@@ -41,8 +41,6 @@ The reference files own implementation detail that should be loaded only when ge
 ## Package Sync
 
 Matching reference folders were synced into:
-- `deal-output/skills/pattern-docx/references/`
-- `deal-output/skills/pattern-investment-pptx/references/`
 - `plugins/deal-intelligence/skills/pattern-docx/references/`
 - `plugins/deal-intelligence/skills/pattern-investment-pptx/references/`
 

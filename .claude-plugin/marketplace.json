@@ -18,18 +18,9 @@
     },
     {
       "name": "analytical-operating-system",
-      "description": "Evidence-control layer for deal work: F/E/H claim tagging, belief registers, Bayesian updates, kill triggers, and PROCEED / REPRICE / PASS / RESOLVE FIRST posture.",
+      "description": "Evidence-control layer for analysis and recommendations: F/E/H claim tagging, belief registers, Bayesian updates, kill triggers, and PROCEED / ADJUST / PASS / RESOLVE FIRST posture.",
       "category": "deal-intelligence",
       "source": "./analytical-operating-system",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
-      "name": "deal-research",
-      "description": "Phase 2 research tools: market sizing, competitive landscape, moat assessment, TAM/SAM/SOM, DDR generation, structured screening, and gold-standard research support.",
-      "category": "deal-intelligence",
-      "source": "./deal-research",
       "author": {
         "name": "Ian Lawrence"
       }
@@ -44,10 +35,10 @@
       }
     },
     {
-      "name": "deal-output",
-      "description": "Phase 4-6 drafting and production: IC memo, quality passes (claim scrutinizer, red team, pre-mortem), Pattern-branded DOCX/PPTX output, executive summary, and final QA.",
+      "name": "deal-intelligence",
+      "description": "Grouped deal-intelligence plugin with market research, diligence, IC memo, QA, and Pattern DOCX/PPTX production skills.",
       "category": "deal-intelligence",
-      "source": "./deal-output",
+      "source": "./plugins/deal-intelligence",
       "author": {
         "name": "Ian Lawrence"
       }

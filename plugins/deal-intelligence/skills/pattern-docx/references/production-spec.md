@@ -50,7 +50,7 @@ Use these exact type specs:
 |---------|------|------|-------|----------------|
 | Body / Normal | Wix Madefor Display | 18 half-pts (9pt) | `000000` | after 120 |
 | Body bold lead | Wix Madefor Display + `<w:b/>` | 18 half-pts (9pt) | `000000` | after 120 |
-| Section label | Wix Madefor Display + `<w:b/>` | 22 half-pts (11pt) | `4280F4` | pageBreakBefore, bottom border `BBBBBB`, before 160, after 100, tracking 40 |
+| Section label | Wix Madefor Display + `<w:b/>` | 22 half-pts (11pt) | `4280F4` | no page break; bottom border `BBBBBB`, before 480, after 120, tracking 40, keepNext |
 | Sub-heading | Wix Madefor Display SemiBold | 18 half-pts (9pt) | `3A00FD` | before 200, after 80 |
 | Header doc title | Wix Madefor Display SemiBold | 22 half-pts (11pt) | `000000` | update text only |
 | Footer page number | Wix Madefor Display SemiBold | 16 half-pts (8pt) | template default | right aligned |
@@ -72,7 +72,7 @@ where practical. Avoid broad regex edits for final structural changes.
 Required paragraph property order:
 
 ```text
-pageBreakBefore -> pBdr -> spacing -> ind -> jc -> rPr
+keepNext -> pBdr -> spacing -> ind -> jc -> rPr
 ```
 
 When replacing `word/document.xml`, preserve the canonical `<w:sectPr>` exactly. It carries
@@ -88,8 +88,8 @@ Every paragraph in a Pattern document maps to one of these types. Use the exact 
 ### H1 — Section Header
 ```javascript
 new Paragraph({
-  spacing: { before: 160, after: 100 },
-  pageBreakBefore: true,           // Always starts a new page (except first H1)
+  spacing: { before: 480, after: 120 }, // 24pt before = clear section gap, no page break
+  keepNext: true,                  // keep the heading with the first line of its body
   border: {
     bottom: { style: BorderStyle.SINGLE, size: 4, color: 'BBBBBB', space: 2 }
   },
@@ -103,7 +103,7 @@ new Paragraph({
   })]
 })
 ```
-**First H1 only**: set `pageBreakBefore: false` — it sits at the top of page 1.
+**Sections do not force a page break.** Each H1 flows continuously after the prior section, separated by the 24pt space-before (and its bottom rule) rather than a hard page break. `keepNext` prevents an H1 from being stranded as the last line on a page. If a deliberate page break is ever wanted (e.g. before a major part divider), insert an explicit page-break paragraph — do not bake it into the H1 style.
 
 ### H2 — Subheader
 ```javascript
@@ -332,16 +332,57 @@ verdict-color discipline for Pattern documents built with this skill.
 - Store source text in `word/footnotes.xml`, not in `word/document.xml`. Each
   note must start with the evidence tag in `[type · confidence]` form, followed
   by the source, date, and a short corroboration note or caveat.
+- Footnote run typography follows Critical Rule #2: never emit a `<w:b/>` bold
+  toggle. Weight comes only from the font face. Set the `[type · confidence]` tag
+  run in `Wix Madefor Display SemiBold` (no `<w:b/>`) and the source/caveat text in
+  `Wix Madefor Display` regular, both at `sz=16`, color `666666`. Emphasis inside a
+  note is achieved by switching to the SemiBold face, not by a bold property.
 - Evidence tag types: `[F]` = fact, `[E]` = estimate, `[H]` = hypothesis.
-  Confidence labels: `H` = high, `M` = medium, `L` = low. Example:
-  `[F · H] ResearchAndMarkets, European Social Commerce Market Report, May 2025.
+  Confidence labels: `H` = 3+ independent sources, `M` = 2 sources, `L` = single
+  source or derived. Type and confidence are orthogonal and must never be collapsed:
+  a fact from one self-interested source is `[F . L]`, not `[F . H]`. The divergent
+  combinations are the ones that protect the reader.
+- Self-reported flag (mandatory): when the source IS the subject of the claim — a
+  company citing its own metric, a platform reporting its own product's lift — the
+  note must say so explicitly, regardless of type. Self-reported is not verified.
+- Examples spanning the matrix:
+  `[F . H] ResearchAndMarkets, European Social Commerce Market Report, May 2025.
   Corroborated by eMarketer 2025 and Statista Social Commerce Outlook 2025.`
+  `[F . L] Vendor investor page, 2026. Self-reported merchant count; not independently
+  audited.`
+  `[E . M] Two third-party market sizings with differing methodologies; midpoint used.`
+  `[H . L] Directional; rests on current adoption-curve assumptions, not yet validated.`
 - Number footnotes sequentially in order of appearance across the whole document.
 - Use inline bracket tags only as compact in-table shorthand when a full footnote
   would make the table unreadable.
 - Validate footnote hygiene before delivery: separator lines must not contain
   footnote-reference glyphs, every reference must resolve, and numbering must be
   gapless.
+- KNOWN BUG — the stray "1" on every footnoted page. The docx (docx-js) library and
+  some OOXML scaffolds inject a `w:footnoteRef` run into the separator (`w:id="-1"`)
+  and continuationSeparator (`w:id="0"`) definitions. That glyph renders as a spurious
+  superscript "1" immediately above the separator rule on every page that carries a
+  footnote. The separator definitions must contain ONLY `w:separator` /
+  `w:continuationSeparator` — never `w:footnoteRef`. Strip it from `footnotes.xml`
+  before repacking:
+
+```python
+import re
+fn = open('word/footnotes.xml', encoding='utf-8').read()
+def strip_ref(m):
+    block = m.group(0)
+    # remove the run that holds <w:footnoteRef/> inside a separator definition
+    return re.sub(r'<w:r>(?:(?!</w:r>).)*?<w:footnoteRef/>(?:(?!</w:r>).)*?</w:r>',
+                  '', block, flags=re.DOTALL)
+fn = re.sub(r'<w:footnote w:type="separator"[^>]*>.*?</w:footnote>',
+            strip_ref, fn, flags=re.DOTALL)
+fn = re.sub(r'<w:footnote w:type="continuationSeparator"[^>]*>.*?</w:footnote>',
+            strip_ref, fn, flags=re.DOTALL)
+open('word/footnotes.xml', 'w', encoding='utf-8').write(fn)
+# verify: no separator definition still contains a footnoteRef
+for m in re.findall(r'<w:footnote w:type="(?:continuation)?[Ss]eparator"[^>]*>.*?</w:footnote>', fn, re.DOTALL):
+    assert '<w:footnoteRef/>' not in m, 'separator still carries footnoteRef'
+```
 
 ### True footnote OOXML checklist
 
@@ -349,6 +390,9 @@ verdict-color discipline for Pattern documents built with this skill.
   claim.
 - `word/footnotes.xml` contains required separator entries:
   `w:type="separator" w:id="-1"` and `w:type="continuationSeparator" w:id="0"`.
+  These separator entries must contain ONLY a `w:separator` / `w:continuationSeparator`
+  run — never a `w:footnoteRef` run (see the stray-"1" bug above). The `w:footnoteRef`
+  run belongs only in the numbered note entries (`w:id="N"`, N >= 1), not the separators.
 - `word/footnotes.xml` contains one `w:footnote w:id="N"` for every body
   reference. The note should include a `w:footnoteRef` run followed by the
   source text run.
@@ -815,8 +859,8 @@ Cover page (no H1, no page break before)
   ├── Metrics table (optional)
   └── Summary table (optional)
 
-Section pages (H1 starts each)
-  ├── H1 — Section title (page break before, bottom rule)
+Section flow (continuous; H1 separated by space-before + rule)
+  ├── H1 — Section title (24pt space before, bottom rule, no page break)
   ├── Lead paragraph (body bold, after=120)
   ├── H2 — Subsection
   ├── Body paragraphs / bullets

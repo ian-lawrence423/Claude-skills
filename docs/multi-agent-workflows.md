@@ -67,19 +67,20 @@ Is this deal-related?
 | `new-deal-pipeline/` | Primary | Full deal-pack workflow. Creates one evidence spine for market research, competitive assessment, and IC memo. | Keep as primary route |
 | `ic-memo-pipeline/` | Specialized | IC memo workflow when the memo is the main output and upstream research is already scoped. | Keep, but document as memo-only |
 | `market-research-pipeline/` | Specialized | Standalone market research report workflow. | Keep, but do not use for IC memo production unless feeding a memo |
-| `deal-research/` | Archive candidate | Standalone plugin slice for research. Overlaps with `plugins/deal-intelligence/`, but is still listed as a publication surface in `docs/skill-release-validation.md`. | Archive only after marketplace/install references are removed |
-| `deal-diligence/` | Archive candidate | Standalone plugin slice for diligence. Overlaps with `plugins/deal-intelligence/`, but is still listed as a publication surface in `docs/skill-release-validation.md`. | Archive only after marketplace/install references are removed |
-| `deal-output/` | Archive candidate | Standalone plugin slice for output. Overlaps with `plugins/deal-intelligence/`, but is still listed as a publication surface and package family. | Archive only after marketplace/install references are removed |
+| Standalone research phase slice | Removed | Superseded by `plugins/deal-intelligence/` and root canonical skills. | Use `deal-intelligence` grouped plugin |
+| `deal-diligence/` | Archive candidate | Standalone plugin slice for diligence. Overlaps with `plugins/deal-intelligence/`, but still exists for modular installs. | Keep only if you intentionally use modular diligence installs |
+| Standalone output phase slice | Removed | Superseded by `plugins/deal-intelligence/` and root canonical skills. | Use `deal-intelligence` grouped plugin |
 
 ## Delete / Archive Recommendations
 
-Do not delete source folders in this pass. The safe cleanup is:
+Confirmed-unused standalone slices have been removed after marketplace and workflow references
+were redirected to `plugins/deal-intelligence/`. Current cleanup state:
 
 | Candidate | Why It Looks Stale | Recommended Action |
 |---|---|---|
-| `deal-research/` | Standalone plugin slice overlaps with packaged `deal-intelligence` bundle, but is still referenced by release validation docs | Keep for now; archive only after marketplace/source paths are updated |
-| `deal-diligence/` | Same overlap; still referenced by release validation docs | Keep for now; archive only after marketplace/source paths are updated |
-| `deal-output/` | Same overlap; still referenced by release validation and metadata audit docs | Keep for now; archive only after marketplace/source paths are updated |
+| Standalone research phase slice | Superseded by packaged `deal-intelligence` bundle and unused by Ian | Removed |
+| `deal-diligence/` | Standalone diligence slice overlaps with packaged `deal-intelligence` bundle | Keep for now unless Ian confirms it is unused |
+| Standalone output phase slice | Superseded by packaged `deal-intelligence` bundle and unused by Ian | Removed |
 | `analytical-operating-system.plugin` | Generated package artifact, not source | Move to `dist/` or regenerate on demand |
 | `plugins/deal-intelligence.plugin` | Generated package artifact, not source | Move to `dist/` or regenerate on demand |
 | `market-research-pipeline/remaining-agents.md` | Explicitly retained as historical source material in `market-research-pipeline/CLAUDE.md`; agents should not dispatch from it | Keep or move to `archive/notes/` only after updating `CLAUDE.md` |

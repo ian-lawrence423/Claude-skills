@@ -185,7 +185,7 @@ When multiple skills could apply, use this tie-breaking order:
 
 | Need | Start Here | Use This Pipeline | Do Not Use |
 |---|---|---|---|
-| Full deal package from research through IC memo | `deal-master` | `new-deal-pipeline/orchestrator.md` | Standalone `deal-research/`, `deal-diligence/`, or `deal-output/` plugin slices unless you intentionally want modular installs |
+| Full deal package from research through IC memo | `deal-master` | `new-deal-pipeline/orchestrator.md` | Standalone phase-slice plugins unless you intentionally want modular installs; use `deal-intelligence` for the grouped package |
 | IC memo only, with research already in hand or tightly scoped | `ic-memo` or `deal-master` | `ic-memo-pipeline/orchestrator.md` | `new-deal-pipeline/` if you do not need market + competitive + IC outputs from one evidence spine |
 | Market research report only | `market-research` | `market-research-pipeline/orchestrator.md` | `ic-memo-pipeline/` unless the report is feeding an IC memo |
 
