@@ -7,6 +7,8 @@ package:
 2. Gold-standard competitive assessment.
 3. Pattern IC memo.
 4. Shared evidence registers and cross-output QA.
+5. A live process tracker that controls workflow order, required skills/plugins,
+   required documents, gates, blockers, and next actions.
 
 The default mode is strict. Thoroughness, source quality, arithmetic, MECE
 structure, and visible gaps matter more than speed or polished prose.
@@ -67,6 +69,7 @@ Load in this order:
 1. mckinsey-consultant
 2. analytical-operating-system
 3. new-deal-pipeline/quality-contract.md
+4. new-deal-pipeline/process-tracker-template.md
 
 Run `new-deal-pipeline/orchestrator.md`.
 
@@ -78,17 +81,19 @@ Required outputs:
 5. diligence/boundability.md
 6. ic-memo/final-output.docx
 7. shared/source-bibliography.md
-8. shared/evidence-register.md
-9. shared/belief-register.md
-10. shared/number-register.md
-11. shared/open-issues.md
-12. deal-pack-summary.md
+8. shared/process-tracker.md
+9. shared/evidence-register.md
+10. shared/belief-register.md
+11. shared/number-register.md
+12. shared/open-issues.md
+13. deal-pack-summary.md
 
 Hard rules:
 - Every material claim must be tagged [F], [E], [H], [VENDOR], [MGMT], or [GAP].
 - Vendor and management claims can orient the work but cannot independently prove thesis-critical conclusions.
 - Estimates must show arithmetic and assumptions.
 - Market, competitive, and IC memo outputs must use the same evidence spine.
+- Every phase must update shared/process-tracker.md before advancing.
 - Market research must produce a driver-evidence handoff when any finding can
   change the driver tree, NTB registry, or IC recommendation.
 - Strategic diligence must produce a value-creation bridge, leaf-node register,
@@ -134,8 +139,10 @@ Load:
 1. mckinsey-consultant
 2. analytical-operating-system
 3. new-deal-pipeline/quality-contract.md
+4. new-deal-pipeline/process-tracker-template.md
 
 Create:
+- shared/process-tracker.md
 - shared/materials-index.md
 - shared/deal-brief.md
 - shared/source-bibliography.md
@@ -148,6 +155,8 @@ Do not draft market research, competitive assessment, or IC memo yet.
 
 Gate:
 - PASS only if the decision, MECE issue tree, source inventory, and belief register exist.
+- PASS also requires shared/process-tracker.md with phase status, required
+  skills/plugins, required docs, integrity gates, blockers, and next action.
 - HALT if there are no usable source materials or the thesis has no decision context.
 ```
 
@@ -171,6 +180,7 @@ Produce:
 - market-research/driver-evidence-handoff.md
 - supporting markdown research files
 - updated shared/source-bibliography.md
+- updated shared/process-tracker.md
 - updated shared/evidence-register.md
 - updated shared/number-register.md
 - updated shared/open-issues.md
@@ -215,6 +225,7 @@ Produce:
 - competitive-assessment/open-issues.md
 - competitive-assessment/final-output.docx
 - updated shared/evidence-register.md
+- updated shared/process-tracker.md
 - updated shared/number-register.md
 - updated shared/open-issues.md
 
@@ -260,6 +271,7 @@ Produce:
 - diligence/thesis-quality-gates.md
 - diligence/cascade-scenarios.md
 - updated shared/belief-register.md
+- updated shared/process-tracker.md
 - updated shared/open-issues.md
 
 Required standard:
@@ -306,6 +318,7 @@ Produce:
 - ic-memo/final-output.docx
 - ic-memo supporting markdown files
 - updated shared/claim-ledger.md
+- updated shared/process-tracker.md
 - updated shared/open-issues.md
 
 Required memo behavior:
@@ -340,9 +353,11 @@ Compare:
 - shared/evidence-register.md
 - shared/number-register.md
 - shared/open-issues.md
+- shared/process-tracker.md
 
 Create:
 - deal-pack-summary.md
+- final shared/process-tracker.md update
 
 Check:
 - Same market definition across all outputs.
@@ -351,6 +366,8 @@ Check:
 - Same moat verdict or explicit explanation for changed confidence.
 - Same open questions carried into the IC memo.
 - Same driver-tree thesis-quality gate status carried into boundability and IC memo.
+- shared/process-tracker.md shows every phase as PASS, PASS_WITH_GAPS,
+  SKIPPED with reason, or HALT with blocker.
 - No load-bearing T4 driver appears in the base case.
 - Every High / Very High value-impact driver has a falsification trigger and
   monitoring cadence.
@@ -383,8 +400,10 @@ Load:
 2. mckinsey-consultant
 3. analytical-operating-system
 4. new-deal-pipeline/quality-contract.md
+5. new-deal-pipeline/process-tracker-template.md
 
 Inventory all existing outputs and classify the current state.
+Load or create shared/process-tracker.md before choosing the next phase.
 
 Do not rerun completed phases unless:
 - sources are stale,
@@ -397,6 +416,7 @@ Print:
 - skipped phases with reason,
 - next phase,
 - blocking gaps,
+- process tracker status,
 - current release posture.
 ```
 
@@ -406,6 +426,8 @@ Print:
 
 The work is not complete until all requested outputs exist and the cross-output
 QA gate has run.
+The process tracker must be current; if `shared/process-tracker.md` is stale,
+the deal process is stale.
 
 Do not accept:
 - unsupported thesis-critical claims,

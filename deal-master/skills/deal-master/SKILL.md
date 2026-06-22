@@ -45,10 +45,11 @@ Example prompt:
 Expected use:
 - Inventory the deal folder and classify current pipeline state.
 - Load `mckinsey-consultant` and `analytical-operating-system` before routing.
+- Create or update `shared/process-tracker.md` before any analysis or drafting.
 - Route to the next incomplete phase without redoing completed work.
 
 Anti-pattern:
-- Do not run the analysis yourself, skip inventory, or regenerate outputs that already exist.
+- Do not run the analysis yourself, skip inventory, skip the process tracker, or regenerate outputs that already exist.
 
 ---
 ## Your Inputs
@@ -106,6 +107,7 @@ Map files to phases using this table:
 |------|--------------|--------|
 | `shared/evidence-register.md` | Shared evidence spine | Load; do not recreate unless stale |
 | `shared/belief-register.md` | Shared belief register | Load and update |
+| `shared/process-tracker.md` | Workflow control tower | Load and update; create from `new-deal-pipeline/process-tracker-template.md` if missing |
 | `market-research/final-output.docx` | Market report complete | Use if current; otherwise refresh Phase 2 |
 | `competitive-assessment/final-output.docx` | Competitive assessment complete | Use if current; otherwise refresh Phase 3 |
 | `diligence/driver-tree.md` | Strategic diligence bridge | Use as IC memo input |
@@ -156,6 +158,26 @@ Based on the inventory, determine the current state:
 ---
 
 ## Step 3 — Belief Register Initialization
+
+### Mandatory Process Tracker
+
+Before initializing the belief register, create or update
+`{WORK_DIR}/shared/process-tracker.md`. Use
+`new-deal-pipeline/process-tracker-template.md` as the template when the tracker
+does not exist.
+
+The tracker must show:
+1. Every required workflow, skill/plugin, and document.
+2. Current status for every phase.
+3. Required inputs and outputs.
+4. Integrity gate for each phase.
+5. Owner or next action.
+6. Open blockers and GAP items.
+
+Do not route to analysis, diligence, memo drafting, or output production until
+the tracker exists and the next phase is explicit.
+
+### Belief Register
 
 Before routing to any phase, initialize the belief register from all
 available evidence. This is the Bayesian foundation that every subsequent
@@ -221,7 +243,8 @@ Outputs:
   2. competitive-assessment/final-output.docx
   3. ic-memo/final-output.docx
   4. shared/evidence-register.md
-  5. deal-pack-summary.md
+  5. shared/process-tracker.md
+  6. deal-pack-summary.md
 Gate: cross-output QA passes; no unsupported thesis-critical claims; no conflicting numbers
 ```
 
@@ -297,6 +320,7 @@ DEAL MASTER — PHASE [N] COMPLETE
 Company: [name]
 Phase completed: [name]
 Files written: [list]
+Process tracker: [path/status]
 Belief register updates:
   [assertion] Prior: X% → Posterior: Y% ([CONFIRMED/WEAKENED/KILLED]) — [evidence]
 

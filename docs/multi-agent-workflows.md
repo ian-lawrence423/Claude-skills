@@ -52,7 +52,7 @@ Rule: a pipeline is an operator workflow, not a source skill.
 Is this deal-related?
   No -> invoke the most specific root skill.
   Yes -> Is the required output a full deal pack?
-    Yes -> deal-master -> new-deal-pipeline/orchestrator.md
+    Yes -> deal-master -> create shared/process-tracker.md -> new-deal-pipeline/orchestrator.md
     No -> Is the required output only an IC memo?
       Yes -> deal-master or ic-memo -> ic-memo-pipeline/orchestrator.md
       No -> Is the required output only market research?
@@ -99,6 +99,7 @@ Choose one of two actions:
 
 | Gate | Required Before Moving On |
 |---|---|
+| Process tracker gate | `shared/process-tracker.md` exists, names every workflow/skill/doc, and has phase statuses plus next action |
 | Intake gate | Company, deal context, output target, current evidence, and open questions are known |
 | Evidence gate | Claims are tagged fact / estimate / hypothesis and unsupported claims are marked `GAP` |
 | Arithmetic gate | Model, market sizing, and bridge math tie out or exceptions are explicit |
@@ -108,4 +109,4 @@ Choose one of two actions:
 
 ## So What?
 
-The order is: canonical skill first, deal plugin second, pipeline third. Use pipelines to orchestrate work, not as source files. Archive old standalone plugin slices only after confirming nothing installs or invokes them.
+The order is: canonical skill first, process tracker second, deal plugin/workflow execution third. Use pipelines to orchestrate work, not as source files. Archive old standalone plugin slices only after confirming nothing installs or invokes them.

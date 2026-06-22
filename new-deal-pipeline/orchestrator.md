@@ -9,7 +9,8 @@ three-deliverable deal pack:
 2. Gold-standard competitive assessment.
 3. Pattern IC memo.
 
-Read this entire file and `quality-contract.md` before doing anything else.
+Read this entire file, `quality-contract.md`, and `process-tracker-template.md`
+before doing anything else.
 
 ---
 
@@ -40,7 +41,7 @@ SOURCE_STRICTNESS:    [standard | strict; default strict]
 
 ```
 Phase -1  Load governing frameworks and quality contract
-Phase 0   Inventory materials and prior outputs
+Phase 0   Create process tracker; inventory materials and prior outputs
 Phase 1   Shared deal brief, source bibliography, evidence register, belief register
 Phase 2   Gold-standard market research report
 Phase 3   Gold-standard competitive assessment
@@ -62,11 +63,12 @@ Load in this order:
 1. `{SKILLS_PATH}/mckinsey-consultant/SKILL.md`
 2. `{SKILLS_PATH}/analytical-operating-system/SKILL.md`
 3. `new-deal-pipeline/quality-contract.md`
+4. `new-deal-pipeline/process-tracker-template.md`
 
 Log:
 
 ```text
-[FRAMEWORKS LOADED] mckinsey-consultant + analytical-operating-system + quality-contract
+[FRAMEWORKS LOADED] mckinsey-consultant + analytical-operating-system + quality-contract + process-tracker-template
 ```
 
 The quality contract controls all downstream work. If another skill encourages
@@ -81,6 +83,12 @@ and carried into `shared/open-issues.md`. A thesis-critical gap returns `HALT`.
 ## Phase 0 - Inventory
 
 Scan `MATERIALS_PATH` and `WORK_DIR` recursively.
+
+First create `{WORK_DIR}/shared/process-tracker.md` by copying
+`new-deal-pipeline/process-tracker-template.md`. Populate the metadata,
+workflow modes, current phase statuses, required artifacts, and first next
+action before any analysis starts. Update the tracker at every phase start and
+phase completion.
 
 Create:
 
@@ -102,6 +110,13 @@ Create:
 ├── diligence/
 └── ic-memo/
 ```
+
+Process tracker gate:
+- PASS only if `shared/process-tracker.md` exists and names every required
+  workflow, skill/plugin, input, output, integrity gate, status, owner/next
+  action, and artifact.
+- HALT if no tracker exists, if a phase status is ambiguous, or if the next
+  action is not explicit.
 
 Inventory table:
 
@@ -162,6 +177,8 @@ Initialize:
 
 Gate 1:
 - PASS only if the decision, issue tree, source inventory, and belief register exist.
+- PASS also requires `shared/process-tracker.md` updated through Phase 1 with
+  artifact statuses and open next action.
 - HALT if the thesis has no decision context or no source materials are available.
 
 ---
@@ -328,6 +345,8 @@ Cross-output gate:
 - Same source and value for repeated market size, growth, valuation, retention, and margin figures.
 - Same moat verdict or explicit explanation for changed confidence.
 - Same open questions carried into the IC memo.
+- `shared/process-tracker.md` shows every phase as PASS, PASS_WITH_GAPS,
+  SKIPPED with reason, or HALT with blocker.
 
 HALT if final outputs disagree on a thesis-critical fact or number.
 
@@ -344,6 +363,7 @@ Market research: [path/status]
 Competitive assessment: [path/status]
 IC memo: [path/status]
 Shared registers: [path]
+Process tracker: [path/status]
 Open issues: [count and top 3]
 Release posture: CLEAR_TO_RELEASE / RELEASE_WITH_GAPS / HALTED
 ```

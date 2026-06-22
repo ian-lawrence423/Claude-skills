@@ -30,6 +30,11 @@ If you are unsure what to run, use this order:
 4. Single artifact or analysis task: invoke the most specific root skill directly.
 5. File output: run quality first, then `pattern-docx` or `pattern-investment-pptx`, then `doc-quality-checker`.
 
+For every new deal, create `{WORK_DIR}/shared/process-tracker.md` from
+`new-deal-pipeline/process-tracker-template.md` before research, diligence, or
+memo drafting. The tracker is the control tower for phase order, required
+skills/plugins, required docs, integrity gates, and next action.
+
 Deletion rule: do not delete a folder just because it is not the primary route. First classify it as canonical skill, packaged copy, pipeline, generated artifact, or archive candidate.
 
 For the full workflow map, stale-flow recommendations, and delete/archive candidates, see `docs/multi-agent-workflows.md`.
@@ -54,6 +59,8 @@ The skill library has one orchestration entry point and five functional layers. 
 > **Critical:** Never trigger a document production skill without running the quality layer first. A file produced without `writing-style` and `claim-scrutinizer` will fail the `doc-quality-checker` pass and require a full rebuild.
 
 > **Full deal-pack quality contract:** When the task is a new deal requiring market research, competitive assessment, and an IC memo, route through `deal-master` -> `new-deal-pipeline/orchestrator.md`. The pipeline applies `new-deal-pipeline/quality-contract.md`: thoroughness over speed, source-tagged claims, explicit arithmetic, MECE issue trees, no unsupported hyperbole, and visible `GAP` handling instead of plausible filler.
+
+> **Process tracker standard:** Every full deal run must maintain `shared/process-tracker.md` from `new-deal-pipeline/process-tracker-template.md`. If the tracker is stale, the deal process is stale.
 
 > **Repeatable deal prompt:** For checkpointed execution, use `docs/new-deal-gold-standard-prompt-sequence.md`. It is the operator prompt sequence for complete market research, competitive assessment, IC memo, and cross-output QA.
 
@@ -198,6 +205,7 @@ Pipelines are multi-agent workflows composed of skills. They live in their own f
 |------|-------|------|
 | `orchestrator.md` | all | Routes the full deal pack and enforces cross-output consistency |
 | `quality-contract.md` | all | Mandatory source, MECE, arithmetic, anti-hyperbole, and claim-economy gate |
+| `process-tracker-template.md` | all | Mandatory phase tracker for workflows, skills/plugins, docs, gates, blockers, and next actions |
 | `competitive-assessment.md` | 3 | Standalone competitive assessment agent with moat proof and displacement paths |
 
 **ic-memo-pipeline agent files:**
@@ -258,6 +266,7 @@ Follow this checklist to add a new skill without breaking conventions:
 | `README.md` | Repo root | Source of truth for deployed skills — skill index, invocation guide, architecture overview |
 | `CHEATSHEET.md` | Repo root | Quick-reference: task→skill map, layer sequence, pipeline phase map, brand constants |
 | `new-deal-pipeline/quality-contract.md` | Repo root | Mandatory evidence, MECE, arithmetic, anti-hyperbole, and claim-economy gate for full deal packs |
+| `new-deal-pipeline/process-tracker-template.md` | Repo root | Copy to `shared/process-tracker.md` for every new deal before analysis starts |
 | `docs/new-deal-gold-standard-prompt-sequence.md` | `docs/` | Repeatable prompt sequence for full market research, competitive assessment, IC memo, and cross-output QA |
 | `pattern-docx/references/production-spec.md` | Repo root | Pattern DOCX implementation spec, including true Word footnotes and source-tag format |
 | `Claude_Skills_README.docx` | `docs/` | Generated Pattern-branded Word version of this README |

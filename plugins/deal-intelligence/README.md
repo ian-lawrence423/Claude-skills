@@ -24,7 +24,7 @@ This plugin is the packaged deal-intelligence bundle. It is not the canonical au
 | Market research only | `market-research` | `market-research-pipeline/orchestrator.md` |
 | Narrow analysis task | Most specific skill | Only add broader methodology if needed |
 
-Default deal sequence: `deal-master` -> `mckinsey-consultant` -> `analytical-operating-system` -> research/diligence skills -> `ic-memo` -> `writing-style` -> `claim-scrutinizer` / `red-team` / `pre-mortem` -> `pattern-docx` or `pattern-investment-pptx` -> `doc-quality-checker`.
+Default deal sequence: `deal-master` -> `mckinsey-consultant` -> `analytical-operating-system` -> create `shared/process-tracker.md` -> research/diligence skills -> `ic-memo` -> `writing-style` -> `claim-scrutinizer` / `red-team` / `pre-mortem` -> `pattern-docx` or `pattern-investment-pptx` -> `doc-quality-checker`.
 
 ## Skills (25)
 
@@ -93,6 +93,8 @@ Default deal sequence: `deal-master` -> `mckinsey-consultant` -> `analytical-ope
 | 6 — Output | `pattern-docx` / `pattern-investment-pptx` · `doc-quality-checker` · `executive-summary-writer` | Zero 🔴 CRITICAL QC issues |
 
 Full deal-pack quality gate: `new-deal-pipeline/quality-contract.md` controls source tags, arithmetic, MECE structure, cross-output consistency, and anti-hyperbole. Thesis-critical unsupported claims return `HALT`, not a polished draft.
+
+Process tracker gate: every new deal must maintain `shared/process-tracker.md` from `new-deal-pipeline/process-tracker-template.md`. It must show required workflows, skills/plugins, documents, integrity gates, blockers, phase statuses, and next actions before drafting starts.
 
 ## Loading policy
 
