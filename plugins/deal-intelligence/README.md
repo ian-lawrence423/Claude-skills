@@ -5,6 +5,27 @@
 
 Full PE/M&A/public equity deal workflow — sourcing through gold-standard market research, competitive assessment, IC memo production, and deal-pack QA. Sequences 25 skills and 3 pipelines across 7 phases. Each phase gates on a verifiable output before proceeding.
 
+## What This Plugin Is
+
+This plugin is the packaged deal-intelligence bundle. It is not the canonical authoring layer for most skills.
+
+| Layer | Location | Role |
+|---|---|---|
+| Canonical skills | Repo root, for example `market-research/` | Edit behavior here first |
+| Packaged deal skills | `plugins/deal-intelligence/skills/` | Distribution copy for grouped install |
+| Pipelines | `new-deal-pipeline/`, `ic-memo-pipeline/`, `market-research-pipeline/` | Multi-agent workflow instructions |
+
+## Recommended Order
+
+| Situation | Start Here | Then Run |
+|---|---|---|
+| Full new deal package | `deal-master` | `new-deal-pipeline/orchestrator.md` |
+| IC memo only | `deal-master` or `ic-memo` | `ic-memo-pipeline/orchestrator.md` |
+| Market research only | `market-research` | `market-research-pipeline/orchestrator.md` |
+| Narrow analysis task | Most specific skill | Only add broader methodology if needed |
+
+Default deal sequence: `deal-master` -> `mckinsey-consultant` -> `analytical-operating-system` -> research/diligence skills -> `ic-memo` -> `writing-style` -> `claim-scrutinizer` / `red-team` / `pre-mortem` -> `pattern-docx` or `pattern-investment-pptx` -> `doc-quality-checker`.
+
 ## Skills (25)
 
 ### Orchestration
@@ -85,3 +106,9 @@ This plugin is **opt-in only**. It is not auto-loaded. Reference it explicitly:
 Root skill folders in `ian-lawrence423/Claude-skills` are the canonical authoring source.
 Packaged copies under `plugins/deal-intelligence/skills/` must be synced from root before
 publishing or installing this grouped plugin.
+
+## Cleanup Notes
+
+Do not delete skills from this plugin until references are checked. The main stale candidates are the old standalone plugin slices at repo root: `deal-research/`, `deal-diligence/`, and `deal-output/`. They overlap with this bundled plugin, but current release-validation docs still list them as publication surfaces.
+
+`deal-workbook-builder` is currently plugin-only while root `driver-tree`, root `boundability`, and the docs generator already reference it. Preferred cleanup is to promote it to a root canonical skill; retirement requires updating those references first.

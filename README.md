@@ -6,7 +6,33 @@ Pattern's modular skill architecture for Claude. Each skill is a folder containi
 
 > **Source of truth:** Root skill folders in this repo are the canonical authoring source. Packaged copies under grouped plugin folders must be synced from root before publishing. Update this README whenever skills are added, removed, repackaged, or promoted as workflow entry points.
 
+> **Current inventory note:** The current repo has 34 canonical root skills, 25 packaged deal-intelligence skills, 3 multi-agent pipeline folders, and 8 generated reference documents. The top summary should be treated as stale if these counts diverge.
+
 > **Reference docs:** Generated Word reference files in `docs/` are rebuilt from this repo with `docs/generate_claude_docs.py`. Do not hand-edit the DOCX files without also updating the Markdown/source generator.
+
+---
+
+## Start Here: Canonical Order
+
+This repo has three different surfaces. They are not interchangeable:
+
+| Surface | What It Is | Use It For | Source-of-Truth Rule |
+|---|---|---|---|
+| Root skill folders, for example `market-research/` | Canonical authoring copy for individual skills | Editing skill behavior and local skill loading | Edit here first |
+| `plugins/deal-intelligence/skills/` | Packaged grouped plugin copy | Installing/running the full deal-intelligence bundle | Sync from root before publishing |
+| Pipeline folders, for example `new-deal-pipeline/` | Multi-agent workflow instructions | Running a sequenced workflow across multiple skills | Orchestrators consume skills; they are not skills themselves |
+
+If you are unsure what to run, use this order:
+
+1. Full deal package: `deal-master` -> `new-deal-pipeline/orchestrator.md`.
+2. IC memo only: `deal-master` -> `ic-memo-pipeline/orchestrator.md`.
+3. Market research only: `market-research` or `market-research-pipeline/orchestrator.md`.
+4. Single artifact or analysis task: invoke the most specific root skill directly.
+5. File output: run quality first, then `pattern-docx` or `pattern-investment-pptx`, then `doc-quality-checker`.
+
+Deletion rule: do not delete a folder just because it is not the primary route. First classify it as canonical skill, packaged copy, pipeline, generated artifact, or archive candidate.
+
+For the full workflow map, stale-flow recommendations, and delete/archive candidates, see `docs/multi-agent-workflows.md`.
 
 ---
 
@@ -60,7 +86,7 @@ All other skills are invoked by name when the task matches their trigger criteri
 
 ## 3. Complete Skill Index
 
-All 33 skills organized by group. Invoke the most specific skill first; fall back to broader skills if needed.
+All 34 root skills organized by group. Invoke the most specific skill first; fall back to broader skills if needed.
 
 ### Strategy & Problem Solving
 
@@ -148,6 +174,16 @@ When multiple skills could apply, use this tie-breaking order:
 
 ## 5. Pipelines
 
+**Primary order:**
+
+| Need | Start Here | Use This Pipeline | Do Not Use |
+|---|---|---|---|
+| Full deal package from research through IC memo | `deal-master` | `new-deal-pipeline/orchestrator.md` | Standalone `deal-research/`, `deal-diligence/`, or `deal-output/` plugin slices unless you intentionally want modular installs |
+| IC memo only, with research already in hand or tightly scoped | `ic-memo` or `deal-master` | `ic-memo-pipeline/orchestrator.md` | `new-deal-pipeline/` if you do not need market + competitive + IC outputs from one evidence spine |
+| Market research report only | `market-research` | `market-research-pipeline/orchestrator.md` | `ic-memo-pipeline/` unless the report is feeding an IC memo |
+
+If two routes could work, use the broader route only when it produces an output you actually need.
+
 Pipelines are multi-agent workflows composed of skills. They live in their own folders at the repo root alongside the skill folders. Unlike skills, pipelines are not loaded as a single `SKILL.md` — they are orchestrated by an `orchestrator.md` file that dispatches specialist agents in sequence.
 
 | Pipeline | Folder | What It Produces | Mode Flags |
@@ -217,6 +253,7 @@ Follow this checklist to add a new skill without breaking conventions:
 
 | File | Location | Purpose |
 |---|---|---|
+| `multi-agent-workflows.md` | `docs/` | Operator map for the three pipeline folders, when to use each, and stale-flow/archive candidates |
 | `agents.md` | Repo root / OneDrive sync | Always-on operating layer — default mode, work-mode templates, full skill directory, file output rules |
 | `README.md` | Repo root | Source of truth for deployed skills — skill index, invocation guide, architecture overview |
 | `CHEATSHEET.md` | Repo root | Quick-reference: task→skill map, layer sequence, pipeline phase map, brand constants |
