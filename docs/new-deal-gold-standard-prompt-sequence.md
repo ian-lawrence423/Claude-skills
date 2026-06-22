@@ -67,7 +67,7 @@ Load in this order:
 1. mckinsey-consultant
 2. analytical-operating-system
 3. new-deal-pipeline/quality-contract.md
-4. new-deal-pipeline/process-tracker-template.md
+4. C:\Users\IanLawrence\github\n8n-workflows\investment-process\process-tracker-template.md
 
 Run `new-deal-pipeline/orchestrator.md`.
 
@@ -136,7 +136,7 @@ Load:
 1. mckinsey-consultant
 2. analytical-operating-system
 3. new-deal-pipeline/quality-contract.md
-4. new-deal-pipeline/process-tracker-template.md
+4. C:\Users\IanLawrence\github\n8n-workflows\investment-process\process-tracker-template.md
 
 Create:
 - shared/process-tracker.md
@@ -465,7 +465,7 @@ Load:
 2. mckinsey-consultant
 3. analytical-operating-system
 4. new-deal-pipeline/quality-contract.md
-5. new-deal-pipeline/process-tracker-template.md
+5. C:\Users\IanLawrence\github\n8n-workflows\investment-process\process-tracker-template.md
 
 Inventory all existing outputs and classify the current state.
 Load or create shared/process-tracker.md before choosing the next phase.

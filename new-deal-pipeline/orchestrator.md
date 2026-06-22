@@ -70,7 +70,7 @@ Load in this order:
 1. `{SKILLS_PATH}/mckinsey-consultant/SKILL.md`
 2. `{SKILLS_PATH}/analytical-operating-system/SKILL.md`
 3. `new-deal-pipeline/quality-contract.md`
-4. `new-deal-pipeline/process-tracker-template.md`
+4. `C:\Users\IanLawrence\github\n8n-workflows\investment-process\process-tracker-template.md`
 
 Log:
 
@@ -105,8 +105,8 @@ If any component is missing, log `repair_failed_phase`; do not switch into a
 lighter research mode.
 
 First create `{WORK_DIR}/shared/process-tracker.md` by copying
-`new-deal-pipeline/process-tracker-template.md`. Populate the metadata,
-workflow mode, Gold Standard Queue Row Tracker, Detailed Step Tracker,
+`C:\Users\IanLawrence\github\n8n-workflows\investment-process\process-tracker-template.md`. Populate the metadata,
+workflow mode, Gold Standard Queue Row Tracker, Stage-Specific Step Trackers,
 Professional Document Readiness Tracker, current phase statuses, required
 artifacts, and first next action before any analysis starts. Update the tracker
 at every phase start and phase completion.

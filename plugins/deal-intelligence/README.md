@@ -101,7 +101,7 @@ Default deal sequence: `deal-master` -> `mckinsey-consultant` -> `analytical-ope
 
 Full deal-pack quality gate: `new-deal-pipeline/quality-contract.md` controls source tags, arithmetic, MECE structure, cross-output consistency, and anti-hyperbole. Thesis-critical unsupported claims return `HALT`, not a polished draft.
 
-Process tracker gate: every new deal must maintain `shared/process-tracker.md` from `new-deal-pipeline/process-tracker-template.md`. It must show required workflows, skills/plugins, documents, integrity gates, blockers, phase statuses, and next actions before drafting starts.
+Process tracker gate: every new deal must maintain `shared/process-tracker.md` from `C:\Users\IanLawrence\github\n8n-workflows\investment-process\process-tracker-template.md`. It must show required workflows, skills/plugins, documents, integrity gates, blockers, phase statuses, and next actions before drafting starts.
 
 ## Loading policy
 

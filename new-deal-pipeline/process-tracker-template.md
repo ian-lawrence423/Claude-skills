@@ -156,7 +156,7 @@ Copy the active queue row into this tracker before starting synthesis. Update it
 | CompetitiveIntel JSON | TBD | Valid JSON, archived, reconciled | Column L; copied or summarized in `shared/dispatch-packet.md` | NOT_STARTED |
 | Website | TBD | Present and canonical | Column M; used for overnight and competitive research | NOT_STARTED |
 
-## Detailed Step Tracker
+## Stage-Specific Step Trackers
 
 Use these tables as the operating checklist. A step is not complete because a file exists; it is complete only when the required gate passes and the status is updated here.
 

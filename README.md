@@ -31,7 +31,7 @@ If you are unsure what to run, use this order:
 5. File output: run quality first, then `pattern-docx` or `pattern-investment-pptx`, then `doc-quality-checker`.
 
 For every new deal, create `{WORK_DIR}/shared/process-tracker.md` from
-`new-deal-pipeline/process-tracker-template.md` before research, diligence, or
+`C:\Users\IanLawrence\github\n8n-workflows\investment-process\process-tracker-template.md` before research, diligence, or
 memo drafting. The tracker is the control tower for phase order, required
 skills/plugins, required docs, integrity gates, and next action.
 
@@ -60,7 +60,7 @@ The skill library has one orchestration entry point and five functional layers. 
 
 > **Full deal-pack quality contract:** When the task is a new deal requiring market research, competitive assessment, and an IC memo, route through `deal-master` -> `new-deal-pipeline/orchestrator.md`. The pipeline applies `new-deal-pipeline/quality-contract.md`: thoroughness over speed, source-tagged claims, explicit arithmetic, MECE issue trees, no unsupported hyperbole, and visible `GAP` handling instead of plausible filler.
 
-> **Process tracker standard:** Every full deal run must maintain `shared/process-tracker.md` from `new-deal-pipeline/process-tracker-template.md`. If the tracker is stale, the deal process is stale.
+> **Process tracker standard:** Every full deal run must maintain `shared/process-tracker.md` from `C:\Users\IanLawrence\github\n8n-workflows\investment-process\process-tracker-template.md`. If the tracker is stale, the deal process is stale.
 
 > **Repeatable deal prompt:** For checkpointed execution, use `docs/new-deal-gold-standard-prompt-sequence.md`. It is the operator prompt sequence for complete market research, competitive assessment, IC memo, and cross-output QA.
 
@@ -267,7 +267,7 @@ Follow this checklist to add a new skill without breaking conventions:
 | `README.md` | Repo root | Source of truth for deployed skills — skill index, invocation guide, architecture overview |
 | `CHEATSHEET.md` | Repo root | Quick-reference: task→skill map, layer sequence, pipeline phase map, brand constants |
 | `new-deal-pipeline/quality-contract.md` | Repo root | Mandatory evidence, MECE, arithmetic, anti-hyperbole, and claim-economy gate for full deal packs |
-| `new-deal-pipeline/process-tracker-template.md` | Repo root | Copy to `shared/process-tracker.md` for every new deal before analysis starts |
+| `investment-process/process-tracker-template.md` | `n8n-workflows` repo | Canonical template to copy to `shared/process-tracker.md` for every new deal before analysis starts |
 | `docs/new-deal-gold-standard-prompt-sequence.md` | `docs/` | Repeatable prompt sequence for full market research, competitive assessment, IC memo, and cross-output QA |
 | `pattern-docx/references/production-spec.md` | Repo root | Pattern DOCX implementation spec, including true Word footnotes and source-tag format |
 | `Claude_Skills_README.docx` | `docs/` | Generated Pattern-branded Word version of this README |

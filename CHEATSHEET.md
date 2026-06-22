@@ -136,7 +136,10 @@ Phase 0   Inventory materials and prior outputs
 Phase 1   Shared evidence spine: source bibliography, evidence register, belief register, number register
 Phase 2   Gold-standard market research report
 Phase 3   Gold-standard competitive assessment
-Phase 4   Strategic diligence bridge: NTB, driver tree, boundability
+Phase 4A  Pre-data-room diligence: NTB, driver tree, data-room request list
+DR        Data-room gate: access log, data-room index, validation plan
+Phase 4B  Post-data-room validation: reconcile outside-in claims to data-room evidence
+Phase 4C  Post-data-room underwriting: workbook, GTM diagnostic, KPI tree, boundability
 Phase 5   IC memo consuming Phase 2-4 evidence
 Phase 6   Cross-output QA: same market definition, competitor set, numbers, moat verdict, open questions
 ```

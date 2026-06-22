@@ -106,7 +106,7 @@ Map files to phases using this table:
 |------|--------------|--------|
 | `shared/evidence-register.md` | Shared evidence spine | Load; do not recreate unless stale |
 | `shared/belief-register.md` | Shared belief register | Load and update |
-| `shared/process-tracker.md` | Workflow control tower | Load and update; create from `new-deal-pipeline/process-tracker-template.md` if missing |
+| `shared/process-tracker.md` | Workflow control tower | Load and update; create from `C:\Users\IanLawrence\github\n8n-workflows\investment-process\process-tracker-template.md` if missing |
 | `market-research/final-output.docx` | Market report complete | Use if current; otherwise refresh Phase 2 |
 | `competitive-assessment/final-output.docx` | Competitive assessment complete | Use if current; otherwise refresh Phase 3 |
 | `diligence/ntb-registry.md` | NTB diligence | Use as IC memo and boundability input |
@@ -171,7 +171,7 @@ Based on the inventory, determine the current state:
 
 Before initializing the belief register, create or update
 `{WORK_DIR}/shared/process-tracker.md`. Use
-`new-deal-pipeline/process-tracker-template.md` as the template when the tracker
+`C:\Users\IanLawrence\github\n8n-workflows\investment-process\process-tracker-template.md` as the template when the tracker
 does not exist.
 
 The tracker must show:
