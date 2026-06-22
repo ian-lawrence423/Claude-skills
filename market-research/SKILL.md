@@ -737,10 +737,10 @@ decision-equivalent artifact. Do not silently omit artifacts.
 
 ### Driver Evidence Handoff
 
-When research feeds a deal workflow, strategic diligence bridge, IC memo,
-driver-tree, or boundability output, close the research with a driver evidence
-handoff. This section converts market facts into underwriting inputs and keeps
-open questions visible.
+When research feeds a deal workflow, pre-data-room driver-tree,
+post-data-room validation/workbook/GTM/KPI/boundability, or IC memo output,
+close the research with a driver evidence handoff. This section converts market
+facts into underwriting inputs and keeps open questions visible.
 
 | Driver / unknown | Research finding | Evidence state | Decision impact | What would bound it | Gettable? | Open issue ID |
 |------------------|------------------|----------------|-----------------|---------------------|-----------|---------------|

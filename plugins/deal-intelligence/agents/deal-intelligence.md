@@ -48,15 +48,17 @@ Gate before Phase 2: Gates 1/2/3 scored; DDR issued; research brief confirmed.
 
 Gate before Phase 3: Gate 2 sector data complete (all 12 criteria); moat verdict issued; NTB Alignment Check shows 6+ evidence bullets per NTB.
 
-### Phase 3 — Deep diligence
-- `ntb-diligence` — 4-phase NTB quality check; MOIC sum tolerance ±15%
-- `driver-tree` — thesis → MECE causal driver tree mapped to NTBs and MOIC
-- `deal-workbook-builder` - formula-based deal workbook with driver tree, KPI tree, NTB registry, and MOIC bridge tabs
-- `financial-model-builder` — 3-tab operating model from source P&L; returns foundation for IC memo
-- `gtm-metrics-analyzer` — 48 GTM metrics across 6 families from uploaded source files
-- `kpi-tree-builder` (diligence mode) — audit management budget credibility
+### Phase 3 — Data-room-separated diligence workstreams
+- 3A pre-data-room `ntb-diligence` — outside-in NTB registry and exact data-room requests
+- 3B pre-data-room `driver-tree` — MECE causal driver tree with provisional nodes and company-evidence asks
+- DR gate — data-room access log, data-room index, and source inventory before post-data-room work
+- 3C post-data-room validation — reconcile outside-in claims against data-room evidence
+- 3D post-data-room `financial-model-builder` + `deal-workbook-builder` — formula-linked model bridge with driver tree, NTB registry, KPI tree, and MOIC bridge tabs
+- 3E post-data-room `gtm-metrics-analyzer` — standalone GTM diagnostic workbook across ARR funnel, retention, pipeline, efficiency, productivity, and missing fields
+- 3F post-data-room `kpi-tree-builder` — turns driver/workbook/GTM outputs into KPI definitions, formulas, sources, owners, cadences, thresholds, and actions
+- 3G post-data-room `boundability` — converts the validated NTB, driver, workbook, GTM, and KPI evidence into underwriting treatments
 
-Gate before Phase 4: NTB Alignment Check complete; model built; GTM workbook complete; management plan credibility assessed.
+Gate before Phase 4: data-room validation complete; workbook/model bridge complete or data blocker logged; GTM diagnostic complete or GTM data blocker logged; KPI tree complete or explicit blocker logged; boundability complete.
 
 ### Phase 4 — Draft IC memo
 Invoke `ic-memo`:

@@ -109,7 +109,15 @@ Map files to phases using this table:
 | `shared/process-tracker.md` | Workflow control tower | Load and update; create from `new-deal-pipeline/process-tracker-template.md` if missing |
 | `market-research/final-output.docx` | Market report complete | Use if current; otherwise refresh Phase 2 |
 | `competitive-assessment/final-output.docx` | Competitive assessment complete | Use if current; otherwise refresh Phase 3 |
-| `diligence/driver-tree.md` | Strategic diligence bridge | Use as IC memo input |
+| `diligence/ntb-registry.md` | NTB diligence | Use as IC memo and boundability input |
+| `diligence/driver-tree.md` | Driver tree | Use as IC memo, workbook, KPI, and boundability input |
+| `diligence/data-room-request-list.md` | Pre-data-room diligence ask | Use to request company-specific evidence before post-data-room work |
+| `shared/data-room-index.md` | Data-room gate | Required before post-data-room work is marked PASS |
+| `diligence/data-room-validation.md` | Post-data-room validation | Reconciles outside-in claims against company-specific evidence |
+| `diligence/deal-workbook.xlsx` | Deal workbook / model bridge | Use as model and MOIC source of truth when financial data is available |
+| `diligence/gtm-metrics-diagnostic.xlsx` | GTM metrics diagnostic | Use for ARR funnel, retention, pipeline, sales efficiency, and productivity evidence |
+| `diligence/kpi-tree.md` | KPI tree | Use as operating metric architecture and post-close monitoring input |
+| `diligence/boundability.md` | Boundability | Use as underwriting action input |
 | `ic-memo/final-output.docx` | IC memo complete | Run pack-level QA only |
 | `deal-pack-summary.md` | Cross-output QA complete | Review release posture |
 
@@ -135,8 +143,9 @@ Based on the inventory, determine the current state:
   competitive landscape thesis, not the IC memo draft.
 
 **State B2 — Market research or competitive assessment exists, no IC memo run started**
-→ If both are current, route to `new-deal-pipeline` Phase 4/5 for diligence bridge
-  and IC memo.
+→ If both are current, route to `new-deal-pipeline` at the next required stage:
+  pre-data-room NTB/driver/request-list work, data-room gate, post-data-room
+  validation/workbook/GTM/KPI/boundability, then IC memo.
 → If either is stale or missing, route to `new-deal-pipeline` at the missing phase.
 → Do not collapse a standalone market report into IC memo evidence without updating
   the shared evidence register.
@@ -240,17 +249,34 @@ Pass: COMPANY, DEAL_TYPE, THESIS, GEOGRAPHY, ENTRY_VAL, HOLD_PERIOD,
 Outputs:
   1. market-research/final-output.docx
   2. competitive-assessment/final-output.docx
-  3. ic-memo/final-output.docx
-  4. shared/evidence-register.md
-  5. shared/process-tracker.md
-  6. deal-pack-summary.md
+  3. diligence/ntb-registry.md
+  4. diligence/driver-tree.md
+  5. diligence/data-room-request-list.md
+  6. shared/data-room-index.md
+  7. diligence/data-room-validation.md
+  8. diligence/deal-workbook.xlsx
+  9. diligence/gtm-metrics-diagnostic.xlsx
+  10. diligence/kpi-tree.md
+  11. diligence/boundability.md
+  12. ic-memo/final-output.docx
+  13. shared/evidence-register.md
+  14. shared/process-tracker.md
+  15. deal-pack-summary.md
 Gate: cross-output QA passes; no unsupported thesis-critical claims; no conflicting numbers
 ```
 
 The new-deal pipeline is stricter than the IC memo pipeline. It must produce
 separate market and competitive deliverables before the IC memo. Existing n8n
 outputs accelerate evidence collection, but they do not replace final market
-research, competitive assessment, diligence bridge, or memo QA.
+research, competitive assessment, data-room validation, post-data-room
+workstreams, or memo QA.
+
+Data-room split:
+- Pre-data-room work produces outside-in market research, competitive assessment,
+  preliminary NTB registry, preliminary driver tree, and the exact data-room request list.
+- Post-data-room work starts only after `shared/data-room-index.md` exists. It
+  validates outside-in claims against company-specific evidence, then builds the
+  model/workbook, GTM diagnostic, KPI tree, boundability, and final IC memo.
 
 ### Phase 2 — Market & Competitive Research (one comprehensive mode)
 If n8n research files are found, reconcile them into the full evidence spine and
@@ -278,12 +304,71 @@ Output: MECE causal tree decomposing thesis → MOIC | Load-bearing nodes identi
 Update belief register: map each assertion to its driver tree node
 ```
 
+### Data-Room Gate - Access, Index, and Validation
+```
+Before final workbook, GTM, KPI tree, boundability, or IC memo work:
+1. Confirm data-room access status.
+2. Create shared/data-room-index.md.
+3. Reconcile pre-data-room claims into diligence/data-room-validation.md.
+4. Update shared evidence, number, claim, belief, and open-issue registers.
+```
+
+If data-room access is unavailable, keep post-data-room steps BLOCKED or
+DEFERRED_WITH_BLOCKER. Do not mark them PASS from outside-in evidence.
+
+### Phase 3c - Post-Data-Room Deal Workbook / Model Bridge
+```
+Invoke: financial-model-builder when a source model or sufficient financial statements exist
+Then invoke: deal-workbook-builder
+Reads: source model, P&L, KPI exports, ntb-registry, driver-tree, data-room-validation
+Output: diligence/deal-workbook.xlsx + diligence/workbook-quality-check.md
+Gate: formula chain links to source model or documented inputs | no hardcoded model-chain cells | zero formula errors / broken links
+```
+
+If financial data is not available, do not fabricate the workbook. Add the
+missing source model, P&L, KPI export, or data-room file to `shared/open-issues.md`
+with owner, decision impact, and what changes when it arrives.
+
+### Phase 3d - Post-Data-Room GTM Metrics Diagnostic
+```
+Invoke: gtm-metrics-analyzer
+Reads: CRM exports, ARR/MRR waterfall, bookings, pipeline, retention, S&M spend, headcount, driver-tree, deal-workbook
+Output: diligence/gtm-metrics-diagnostic.xlsx + diligence/gtm-metrics-summary.md
+Gate: uploaded inputs separated from derived calculations | ARR funnel, retention, pipeline health, sales efficiency, and productivity calculated or logged as missing
+```
+
+Run this whenever the company is SaaS, sales-led, ARR/MRR-based, pipeline-led,
+or the thesis depends on retention, sales efficiency, expansion, productivity,
+or forecast conversion. If GTM data is missing, log exact required uploads
+instead of substituting narrative claims.
+
+### Phase 3e - Post-Data-Room KPI Tree
+```
+Invoke: kpi-tree-builder
+Reads: driver-tree, deal-workbook, gtm-metrics-diagnostic, operating metric exports, open issues
+Output: diligence/kpi-tree.md
+Gate: each thesis-critical driver maps to KPI definition, formula, source, owner, cadence, threshold, and action
+```
+
+### Phase 3f - Post-Data-Room Boundability
+```
+Invoke: boundability
+Reads: ntb-registry, driver-tree, deal-workbook, gtm-metrics-diagnostic, kpi-tree, pre-mortem / failure modes
+Output: diligence/boundability.md
+Gate: underwriting actions map to model, price, leverage, docs/structure, and operating plan; driver-tree HALT cannot be overridden
+```
+
 ### Phase 4 — IC Memo Draft
 ```
 Invoke: ic-memo-pipeline/orchestrator.md
 Pass: all context accumulated above as MATERIALS_PATH
 NTB_MODE, KPI_MODE as specified
 ```
+
+The IC memo is post-data-room by default. It consumes data-room validation,
+NTB registry, driver tree, deal workbook, GTM diagnostic, KPI tree, and
+boundability as required inputs. Do not bury these inside a generic diligence
+bridge note; each must have its own tracker status, artifact, and gate result.
 
 ### Phase 5 — Quality Passes (on MEMO DRAFT — not the pre-IC thesis)
 Run strictly in sequence. Do not compress.
@@ -336,7 +421,8 @@ Remaining: [phases still to run]
 **Never treat n8n output as deal completion.**
 If n8n research files exist, load them, reconcile them, and cite them. Do not
 replace the final market research DOCX, competitive assessment DOCX, NTB
-registry, driver tree, boundability, IC memo, or memo-level QA with raw
+registry, driver tree, deal workbook, GTM metrics diagnostic, KPI tree,
+boundability, IC memo, or memo-level QA with raw
 automation markdown.
 
 **Pre-IC thesis-validation ≠ IC memo quality passes.**

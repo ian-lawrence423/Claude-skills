@@ -26,7 +26,7 @@ These skills have the most inbound references from other root skills and should 
 | `pattern-docx` | 12 | Core Word production dependency |
 | `writing-style` | 9 | Core prose and attribution quality layer |
 | `market-research` | 8 | Primary evidence-gathering workflow |
-| `ntb-diligence` | 8 | Core investment diligence bridge |
+| `ntb-diligence` | 8 | Standalone NTB registry, diligence plan, stress tests, and kill triggers |
 | `pre-mortem` | 8 | Core adversarial investment quality pass |
 | `pattern-investment-pptx` | 7 | Core deck production dependency |
 | `boundability` | 6 | Core moat/NTB boundary stress test |

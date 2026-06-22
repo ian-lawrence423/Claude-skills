@@ -333,7 +333,7 @@ LAYERS = [
 ]
 
 FINANCE_SKILLS = [
-    ["new-deal-pipeline", "Workflow", "Runs gold-standard market research, competitive assessment, diligence bridge, IC memo, and cross-output QA.", "Best for new deals requiring a full evidence-backed deal pack."],
+    ["new-deal-pipeline", "Workflow", "Splits the deal pack into pre-data-room outside-in work, data-room gate, post-data-room validation, workbook/GTM/KPI/boundability, IC memo, and QA.", "Best for new deals requiring a full evidence-backed deal pack."],
     ["financial-model-builder", "Foundation", "Builds canonical Input Page, Financial Model Template, and Output Tab from source P&L/BS.", "Load first before downstream finance skills."],
     ["ic-memo", "Investment memo", "Creates three-gate IC memo structure with company quality, sector timing, investment attractiveness, kill criteria.", "Use for standalone memo; pipeline for full workflow."],
     ["ic-memo-pipeline", "Workflow", "Runs intake, market research, diligence, draft, quality passes, DOCX output, and QA.", "Best for full deal write-up."],
@@ -638,7 +638,14 @@ def build_finance_doc() -> None:
         [
             ["1 - Intake", "ic-memo / ic-memo-pipeline", "Decision context, thesis, materials inventory, known concerns."],
             ["2 - Market work", "market-research", "Market, customer, competitive, moat, and Gate 2 evidence base."],
-            ["3 - Deep diligence", "ntb-diligence, driver-tree, financial-model-builder, GTM, KPI tree", "NTB registry, driver tree, model, GTM workbook, operating KPI plan as needed."],
+            ["3A - Pre-data-room NTB registry", "ntb-diligence", "Outside-in NTBs with evidence state, decision impact, kill trigger, and exact data-room requests."],
+            ["3B - Pre-data-room driver tree", "driver-tree", "MECE causal drivers with provisional nodes and required company evidence."],
+            ["DR - Data-room gate", "deal-master / diligence-ddr", "Access log, source inventory, and data-room index before post-data-room work is marked PASS."],
+            ["3C - Post-data-room validation", "ntb-diligence, driver-tree", "Data-room evidence confirms, weakens, contradicts, or leaves GAP for each outside-in claim."],
+            ["3D - Post-data-room workbook / model bridge", "financial-model-builder, deal-workbook-builder", "Formula-linked workbook with no hardcoded model-chain cells, formula errors, or broken source links."],
+            ["3E - Post-data-room GTM metrics diagnostic", "gtm-metrics-analyzer", "ARR funnel, retention, pipeline health, sales efficiency, productivity, and missing-input register when GTM data is available."],
+            ["3F - Post-data-room KPI tree", "kpi-tree-builder", "KPI definitions, formulas, sources, owners, cadences, thresholds, and actions for thesis-critical drivers."],
+            ["3G - Post-data-room boundability", "boundability", "Underwriting actions mapped to model, price, leverage, docs/structure, and operating plan."],
             ["4 - Draft memo", "ic-memo", "10-section investment memo with executive summary last."],
             ["5 - Quality passes", "writing-style, claim-scrutinizer, red-team, pre-mortem, boundability", "Hardened thesis, risks, assumptions, and underwriting actions."],
             ["6 - Production and QA", "pattern-docx, doc-quality-checker", "Pattern DOCX with true Word footnotes and zero critical QA issues."],

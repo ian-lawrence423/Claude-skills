@@ -87,8 +87,15 @@ Default deal sequence: `deal-master` -> `mckinsey-consultant` -> `analytical-ope
 | 0b — Full new-deal pack | `deal-master` · `new-deal-pipeline` · `quality-contract` | Shared evidence spine initialized; market research, competitive assessment, and IC memo routed from one source of truth |
 | 1 — Intake & screen | `deal-master` · `mckinsey-consultant` · `analytical-operating-system` · `diligence-ddr` | Gates 1/2/3 scored; belief register initialized; DDR issued |
 | 2 — Market & competitive | `market-research` · `tam-sam-som-calculator` · `competitive-moat-assessment` · `boundability` | Gate 2 complete; gold-standard artifact plan; moat verdict; NTB Alignment Check |
-| 3 — Deep diligence | `ntb-diligence` · `driver-tree` · `deal-workbook-builder` · `financial-model-builder` · `gtm-metrics-analyzer` · `kpi-tree-builder` | Model built; deal workbook complete; GTM workbook complete; NTBs evidenced |
-| 4 — Draft IC memo | `ic-memo` · `writing-style` | 10-section draft; all claims tagged |
+| 3A - Pre-data-room NTB registry | `ntb-diligence` | 4-7 outside-in NTBs; each maps to evidence state, decision impact, kill trigger, and exact data-room request |
+| 3B - Pre-data-room driver tree | `driver-tree` | Thesis decomposed into MECE causal drivers; provisional nodes and required company evidence are explicit |
+| DR - Data-room gate | `deal-master` · `diligence-ddr` | Access log and data-room index exist before post-data-room work is marked PASS |
+| 3C - Post-data-room validation | `ntb-diligence` · `driver-tree` | Data-room evidence confirms, weakens, contradicts, or leaves GAP for each outside-in thesis-critical claim |
+| 3D - Post-data-room workbook / model bridge | `financial-model-builder` · `deal-workbook-builder` | Formula-linked workbook complete; no hardcoded model-chain cells, formula errors, or broken source links |
+| 3E - Post-data-room GTM metrics diagnostic | `gtm-metrics-analyzer` | ARR funnel, retention, pipeline health, sales efficiency, productivity, and missing-input register complete when GTM data is available |
+| 3F - Post-data-room KPI tree | `kpi-tree-builder` | Each thesis-critical driver maps to KPI definition, formula, source, owner, cadence, threshold, and action |
+| 3G - Post-data-room boundability | `boundability` | Underwriting actions map to model, price, leverage, docs/structure, and operating plan; driver-tree HALT cannot be overridden |
+| 4 — Draft IC memo | `ic-memo` · `writing-style` | Post-data-room 10-section draft; data-room validation and all claims tagged |
 | 5 — Quality passes | `claim-scrutinizer` · `red-team` · `pre-mortem` | All 🔴 CRITICAL resolved; KILL claims hardened |
 | 6 — Output | `pattern-docx` / `pattern-investment-pptx` · `doc-quality-checker` · `executive-summary-writer` | Zero 🔴 CRITICAL QC issues |
 

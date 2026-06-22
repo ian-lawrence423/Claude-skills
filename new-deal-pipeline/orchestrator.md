@@ -40,19 +40,24 @@ SOURCE_STRICTNESS:    [standard | strict; default strict]
 
 ```
 Phase -1  Load governing frameworks and quality contract
-Phase 0   n8n intake, overnight research, competitive pre-fetch, dispatch readiness
-Phase 1   Shared deal brief, source bibliography, evidence register, belief register
-Phase 2   Gold-standard market research report
-Phase 3   Gold-standard competitive assessment
-Phase 4   Strategic diligence bridge: NTB, driver tree, boundability
-Phase 5   IC memo, consuming Phase 2-4 as authoritative inputs
-Phase 6   Cross-output QA and deal-pack summary
+Pre-data-room Phase 0   n8n intake, overnight research, competitive pre-fetch, dispatch readiness
+Pre-data-room Phase 1   Shared deal brief, source bibliography, evidence register, belief register
+Pre-data-room Phase 2   Gold-standard market research report
+Pre-data-room Phase 3   Gold-standard competitive assessment
+Pre-data-room Phase 4A  Outside-in NTB registry, outside-in driver tree, data-room request list
+Data-room gate          Access log, data-room index, source inventory
+Post-data-room Phase 4B Data-room validation, confirmed NTB registry, validated driver tree
+Post-data-room Phase 4C Deal workbook, GTM metrics, KPI tree, boundability
+Post-data-room Phase 5  IC memo, consuming validated Phase 2-4 inputs
+Post-data-room Phase 6  Cross-output QA and deal-pack summary
 ```
 
 The phases are sequenced deliberately. There is one supported deal research mode:
 `gold_standard_end_to_end`. n8n workflows are upstream components of that mode,
-not alternatives to it. Market research and competitive assessment must finish
-before the IC memo. A prior artifact may be resumed only under
+not alternatives to it. Market research and competitive assessment are
+pre-data-room outputs. Workbook, GTM, KPI tree, boundability, and the final IC
+memo are post-data-room outputs unless explicitly marked provisional or blocked.
+A prior artifact may be resumed only under
 `RESUME_EXCEPTION=resume_verified_outputs` after the tracker logs the artifact,
 source bibliography, evidence register, number register, and QA status.
 
@@ -278,33 +283,121 @@ HALT if moat verdict lacks mechanism, metric, or replicability horizon.
 
 ---
 
-## Phase 4 - Strategic Diligence Bridge
+## Phase 4A - Pre-Data-Room Diligence Workstreams
+
+Pre-data-room diligence is outside-in. Its purpose is to define what must be
+true, what the public evidence says, and what the data room must prove or
+disprove. Do not build final workbook, GTM, KPI, boundability, or IC outputs
+from outside-in evidence unless they are explicitly marked provisional.
 
 Run in sequence:
 
 1. `{SKILLS_PATH}/ntb-diligence/SKILL.md` when `NTB_MODE=full`
 2. `{SKILLS_PATH}/driver-tree/SKILL.md`
-3. `{SKILLS_PATH}/boundability/SKILL.md`
+3. `{SKILLS_PATH}/diligence-ddr/SKILL.md` or the data-room request-list path when company-specific evidence is missing
 
 Write:
 - `{WORK_DIR}/diligence/ntb-registry.md`
 - `{WORK_DIR}/diligence/driver-tree.md`
-- `{WORK_DIR}/diligence/boundability.md`
+- `{WORK_DIR}/diligence/data-room-request-list.md`
 
 Required standards:
 - 4-7 Need-to-Believe statements.
-- Every NTB maps to evidence, source, decision impact, and kill trigger.
+- Every NTB maps to evidence, source, decision impact, kill trigger, and exact data-room request.
 - Driver tree decomposes the thesis into causal drivers with T1-T4 evidence tiers.
-- Boundability consumes the driver tree and failure modes; it must not rebuild them.
-- Market and competitive strategic-analysis modules must map to at least one NTB,
-  model assumption, failure mode, or open diligence item. If a module maps to none,
-  it is context and should not be carried into the IC memo as evidence.
+- Driver tree must mark outside-in or provisional nodes where company-specific data is required.
+- The data-room request list must map every unresolved NTB, driver, GTM metric, model assumption, and kill trigger to a concrete data ask.
 
-HALT if a load-bearing T4 driver is required for the base thesis.
+HALT if a load-bearing T4 driver is required for the base thesis and the required data-room evidence is not gettable.
+
+---
+
+## Data-Room Gate
+
+Do not start post-data-room work until data-room access is granted or partially
+granted and the source inventory is indexed.
+
+Write:
+- `{WORK_DIR}/shared/data-room-access-log.md`
+- `{WORK_DIR}/shared/data-room-index.md`
+- updated `{WORK_DIR}/shared/materials-index.md`
+
+Gate:
+- PASS only if every data-room file has owner/date/type/source tag, mapped request, source tier, and intended use.
+- PASS_WITH_GAPS only if missing folders or permissions are logged with owner, expected date, and decision impact.
+- HALT if thesis-critical source files are unavailable and the deal cannot be evaluated without them.
+
+---
+
+## Phase 4B - Post-Data-Room Validation
+
+Use the data-room index to validate or revise pre-data-room work before building
+the workbook, GTM diagnostic, KPI tree, boundability, or IC memo.
+
+Write:
+- `{WORK_DIR}/diligence/data-room-validation.md`
+- updated `{WORK_DIR}/diligence/ntb-registry.md`
+- updated `{WORK_DIR}/diligence/driver-tree.md`
+- updated shared registers
+
+Required standards:
+- Every pre-data-room thesis-critical claim is confirmed, weakened, contradicted, or left as GAP.
+- Every confirmed NTB and driver tree node cites company-specific evidence when available.
+- Any contradiction between outside-in and data-room evidence updates the belief register and open issues.
+
+HALT if data-room evidence contradicts a load-bearing thesis claim and the memo still depends on that claim.
+
+---
+
+## Phase 4C - Post-Data-Room Detailed Diligence Workstreams
+
+Run each detailed skill as its own visible workstream and update
+`shared/process-tracker.md` after each one. Do not proceed to the IC memo while
+any required post-data-room workstream is hidden inside a generic "diligence
+bridge" note.
+
+Run in sequence:
+
+1. `{SKILLS_PATH}/financial-model-builder/SKILL.md` when a source model or sufficient financial statements are available
+2. `{SKILLS_PATH}/deal-workbook-builder/SKILL.md` when a source model, financial statements, KPI exports, or deal assumptions are available
+3. `{SKILLS_PATH}/gtm-metrics-analyzer/SKILL.md` when SaaS, sales-led, ARR/MRR, pipeline, retention, S&M, or CRM data is available
+4. `{SKILLS_PATH}/kpi-tree-builder/SKILL.md` when `KPI_MODE=full`
+5. `{SKILLS_PATH}/boundability/SKILL.md`
+
+Write:
+- `{WORK_DIR}/diligence/deal-workbook.xlsx`
+- `{WORK_DIR}/diligence/workbook-quality-check.md`
+- `{WORK_DIR}/diligence/gtm-metrics-diagnostic.xlsx`
+- `{WORK_DIR}/diligence/gtm-metrics-summary.md`
+- `{WORK_DIR}/diligence/kpi-tree.md`
+- `{WORK_DIR}/diligence/boundability.md`
+
+Required standards:
+- Deal workbook must be formula-linked to the source model or documented inputs; no hardcoded model-chain cells, formula errors, or broken links may remain.
+- GTM metrics diagnostic must separate uploaded inputs from derived calculations and cover ARR funnel, retention, pipeline health, sales efficiency, productivity, and missing fields when those data types are available.
+- KPI tree must convert thesis-critical drivers into measurable operating inputs with definition, formula, source, owner, cadence, threshold, and action.
+- Boundability consumes the NTB registry, driver tree, deal workbook, GTM diagnostic, KPI tree, and failure modes; it must not rebuild them.
+- Market and competitive strategic-analysis modules must map to at least one NTB,
+  driver-tree node, workbook assumption, GTM metric, KPI node, failure mode, or open
+  diligence item. If a module maps to none, it is context and should not be carried
+  into the IC memo as evidence.
+
+HALT if any of the following is true:
+- `KPI_MODE=full` and `diligence/kpi-tree.md` is missing.
+- A source model or financial data is available but the workbook is not built.
+- SaaS / sales-led GTM source data is available but the GTM diagnostic is not run.
+- The workbook has unresolved formula errors, broken source links, or hardcoded model-chain cells.
+- The GTM diagnostic has unresolved formula errors or uses unsupported sales narratives as calculated metrics.
+- Boundability attempts to override a driver-tree HALT instead of reframing the thesis.
 
 ---
 
 ## Phase 5 - IC Memo
+
+Phase 5 is post-data-room by default. Do not draft the final IC memo until
+`shared/data-room-index.md` and `diligence/data-room-validation.md` exist, or
+until missing access is explicitly documented as a blocker in
+`shared/open-issues.md` and the memo is labeled `PROVISIONAL`.
 
 Run `ic-memo-pipeline/orchestrator.md` with:
 
@@ -324,10 +417,18 @@ KPI_MODE:       {KPI_MODE}
 Additional instructions:
 - Treat the market research report and competitive assessment as upstream
   evidence, not optional background.
+- Treat data-room validation as the source of truth for company-specific
+  claims. If outside-in evidence and data-room evidence conflict, the conflict
+  must appear in the memo risk, recommendation, and open-issues sections.
+- Treat the NTB registry, driver tree, deal workbook, GTM diagnostic, KPI tree, and boundability
+  output as required Phase 4 inputs. If any is missing, either repair the
+  workstream or document the explicit data blocker in `shared/open-issues.md`.
 - Do not re-research Phase 2 or Phase 3 unless source staleness or gaps require it.
 - The IC memo executive summary must use `executive-summary-writer` six-section spine.
 - All claims reused from market research or competitive assessment must retain their
   evidence tags and source references.
+- Every thesis-critical memo claim should map to at least one NTB, driver-tree
+  node, workbook assumption, GTM metric, KPI-tree node, or boundability issue object.
 - Do not convert open questions into softened risks. Carry unresolved evidence
   gaps visibly into the executive summary, risk section, and recommendation.
 
@@ -353,6 +454,12 @@ Create `{WORK_DIR}/deal-pack-summary.md`:
 |---|---|---|
 | Market research | market-research/final-output.docx | PASS / PASS_WITH_GAPS / HALT |
 | Competitive assessment | competitive-assessment/final-output.docx | PASS / PASS_WITH_GAPS / HALT |
+| NTB registry | diligence/ntb-registry.md | PASS / PASS_WITH_GAPS / HALT |
+| Driver tree | diligence/driver-tree.md | PASS / PASS_WITH_GAPS / HALT |
+| Deal workbook | diligence/deal-workbook.xlsx | PASS / PASS_WITH_GAPS / HALT / DEFERRED_WITH_BLOCKER |
+| GTM metrics diagnostic | diligence/gtm-metrics-diagnostic.xlsx | PASS / PASS_WITH_GAPS / HALT / DEFERRED_WITH_BLOCKER |
+| KPI tree | diligence/kpi-tree.md | PASS / PASS_WITH_GAPS / HALT / DEFERRED_WITH_BLOCKER |
+| Boundability | diligence/boundability.md | PASS / PASS_WITH_GAPS / HALT |
 | IC memo | ic-memo/final-output.docx | PASS / PASS_WITH_GAPS / HALT |
 
 ## Cross-Output Consistency
@@ -369,6 +476,7 @@ Cross-output gate:
 - Same competitor set or explicit reason for differences.
 - Same source and value for repeated market size, growth, valuation, retention, and margin figures.
 - Same moat verdict or explicit explanation for changed confidence.
+- Same driver, workbook, GTM metric, KPI, and boundability treatment for each load-bearing thesis claim.
 - Same open questions carried into the IC memo.
 - `shared/process-tracker.md` shows every phase as PASS, PASS_WITH_GAPS,
   SKIPPED with reason, or HALT with blocker.

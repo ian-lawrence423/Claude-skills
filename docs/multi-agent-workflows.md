@@ -20,7 +20,7 @@ The repo should not be cleaned by deleting anything that looks unused. First cla
 
 | User Need | First Skill | Workflow | Output |
 |---|---|---|---|
-| "Run deal intelligence on this company" | `deal-master` | `new-deal-pipeline/orchestrator.md` | Full gold-standard chain: n8n prefetch, market research, competitive assessment, diligence bridge, IC memo, QA |
+| "Run deal intelligence on this company" | `deal-master` | `new-deal-pipeline/orchestrator.md` | Full gold-standard chain split by information state: pre-data-room outside-in work, data-room gate, post-data-room validation, workbook/GTM/KPI/boundability, IC memo, QA |
 | "Write an IC memo" | `deal-master` | `ic-memo-pipeline/orchestrator.md` only if upstream research is verified/current | 10-section IC memo, Pattern DOCX, QA |
 | "Research this market" for a deal | `deal-master` | `new-deal-pipeline/orchestrator.md` | Full deal research path, not standalone/light research |
 | "Research this market" outside a deal | `market-research` | `market-research-pipeline/orchestrator.md` only as non-deal/legacy route | Standalone market research report |
@@ -62,7 +62,7 @@ Is this deal-related?
 
 | Pipeline | Status | Role | Keep / Archive Decision |
 |---|---|---|---|
-| `new-deal-pipeline/` | Primary | Full deal-pack workflow. Creates one evidence spine for n8n prefetch, market research, competitive assessment, diligence bridge, and IC memo. | Keep as the only deal research route |
+| `new-deal-pipeline/` | Primary | Full deal-pack workflow. Creates one evidence spine, splits pre-data-room outside-in work from post-data-room validation, and gates workbook/GTM/KPI/boundability/IC memo on data-room evidence. | Keep as the only deal research route |
 | `ic-memo-pipeline/` | Specialized | IC memo workflow when the memo is the main output and upstream research is already scoped. | Keep, but document as memo-only |
 | `market-research-pipeline/` | Legacy / repair | Standalone market research report workflow. | Keep for non-deal research or failed-component repair; do not present as a deal research mode |
 | Standalone research phase slice | Removed | Superseded by `plugins/deal-intelligence/` and root canonical skills. | Use `deal-intelligence` grouped plugin |

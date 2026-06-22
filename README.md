@@ -196,7 +196,7 @@ Pipelines are multi-agent workflows composed of skills. They live in their own f
 
 | Pipeline | Folder | What It Produces | Mode Flags |
 |----------|--------|-----------------|-----------|
-| `new-deal-pipeline` | `new-deal-pipeline/` | Full new-deal pack: n8n intake/prefetch/dispatch -> shared evidence spine -> gold-standard market research -> competitive assessment -> strategic diligence bridge -> IC memo -> cross-output QA | `RESEARCH_MODE=gold_standard_end_to_end`; `RESUME_EXCEPTION`: none/resume_verified_outputs/repair_failed_phase; `SOURCE_STRICTNESS`: standard/strict |
+| `new-deal-pipeline` | `new-deal-pipeline/` | Full new-deal pack: pre-data-room n8n intake/prefetch/dispatch -> shared evidence spine -> market research -> competitive assessment -> outside-in NTB / driver tree / data-room request list -> data-room gate -> post-data-room validation -> workbook/model bridge -> GTM metrics -> KPI tree -> boundability -> IC memo -> cross-output QA | `RESEARCH_MODE=gold_standard_end_to_end`; `RESUME_EXCEPTION`: none/resume_verified_outputs/repair_failed_phase; `SOURCE_STRICTNESS`: standard/strict |
 | `ic-memo-pipeline` | `ic-memo-pipeline/` | Full 10-section IC memo: intake → market research → NTB diligence → driver tree → section drafts → 5 iteration passes → Pattern DOCX → QA | `NTB_MODE`: full/skip · `KPI_MODE`: full/skip |
 | `market-research-pipeline` | `market-research-pipeline/` | Legacy standalone/repair research path. Not a deal research mode. | Use only outside deal workflows or to repair a failed full-chain component |
 

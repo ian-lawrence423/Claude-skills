@@ -248,15 +248,17 @@ Hard rules:
 Return competitive assessment status: PASS, PASS_WITH_GAPS, or HALT.
 ```
 
-### Prompt 4 - Strategic Diligence Bridge
+### Prompt 4A - Pre-Data-Room Diligence Workstreams
 
 ```text
-Continue the new-deal package with Phase 4 only: strategic diligence bridge.
+Continue the new-deal package with Phase 4A only: pre-data-room diligence workstreams.
+This is outside-in work. Do not build final workbook, GTM, KPI tree, boundability,
+or IC memo outputs until data-room access is granted and indexed.
 
 Use:
 - ntb-diligence/SKILL.md
 - driver-tree/SKILL.md
-- boundability/SKILL.md
+- diligence-ddr/SKILL.md or the data-room request-list path
 - market research output
 - competitive assessment output
 - shared evidence registers
@@ -264,7 +266,7 @@ Use:
 Produce:
 - diligence/ntb-registry.md
 - diligence/driver-tree.md
-- diligence/boundability.md
+- diligence/data-room-request-list.md
 - diligence/value-creation-bridge.md
 - diligence/leaf-node-register.md
 - diligence/thesis-quality-gates.md
@@ -275,25 +277,78 @@ Produce:
 
 Required standard:
 - Create 4 to 7 Need-to-Believe statements.
-- Every NTB must map to evidence, source, decision impact, kill trigger, and diligence owner.
+- Every NTB must map to evidence, source, decision impact, kill trigger, and a specific data-room request.
 - Driver tree must begin with a value-creation bridge whose buckets sum to 100%.
-- Driver tree must decompose the thesis into causal drivers with evidence tiers.
+- Driver tree must decompose the thesis into causal drivers with evidence tiers and mark provisional nodes.
+- Data-room request list must map each unresolved NTB, driver, GTM metric, model assumption, and kill trigger to a concrete data ask.
 - Leaf-node register must include value impact, direction, tier, rubric score, control,
   monitorability, falsification trigger, treatment, and correlated drivers.
 - Thesis-quality gates must report PASS, PASS_WITH_GAPS, or HALT.
 - Downside and upside cascades must be built around T3/T4 trigger drivers and include
   mechanical vs. behavioral legs plus lag assumptions.
-- Boundability must test where the thesis holds versus degrades by geography, segment, product, customer type, and operating condition.
 
 Hard rules:
 - Stop if a base-case thesis depends on a T4 unsupported driver.
 - Stop if driver-tree thesis-quality gates return HALT.
+- Do not mark workbook, GTM, KPI tree, boundability, or final IC memo complete before the data-room gate.
+- Carry every company-specific unresolved item into diligence/data-room-request-list.md and shared/open-issues.md.
+
+Return Phase 4A status: PASS, PASS_WITH_GAPS, or HALT.
+```
+
+### Prompt 4B - Post-Data-Room Diligence Workstreams
+
+```text
+Continue the new-deal package with Phase 4B/4C only: post-data-room validation,
+confirmed workbook/model bridge, GTM diagnostic, KPI tree, and boundability.
+
+Prerequisites:
+- shared/data-room-index.md exists.
+- shared/data-room-access-log.md shows access granted or partially granted.
+- diligence/data-room-request-list.md exists from pre-data-room work.
+
+Use:
+- financial-model-builder/SKILL.md when source model or financial statements are available
+- deal-workbook-builder/SKILL.md when source model, financial statements, KPI exports, or deal assumptions are available
+- gtm-metrics-analyzer/SKILL.md when SaaS, sales-led, ARR/MRR, retention, S&M, CRM, or pipeline data is available
+- kpi-tree-builder/SKILL.md
+- boundability/SKILL.md
+- preliminary NTB registry and driver tree
+- shared/data-room-index.md
+- shared evidence registers
+
+Produce:
+- diligence/data-room-validation.md
+- updated diligence/ntb-registry.md
+- updated diligence/driver-tree.md
+- diligence/deal-workbook.xlsx
+- diligence/workbook-quality-check.md
+- diligence/gtm-metrics-diagnostic.xlsx
+- diligence/gtm-metrics-summary.md
+- diligence/kpi-tree.md
+- diligence/boundability.md
+- updated shared/belief-register.md
+- updated shared/process-tracker.md
+- updated shared/open-issues.md
+
+Required standard:
+- Every pre-data-room thesis-critical claim must be confirmed, weakened, contradicted, or left as GAP.
+- Deal workbook must be formula-linked to the source model or documented inputs; no hardcoded model-chain cells, formula errors, or broken links may remain.
+- GTM diagnostic must separate uploaded inputs from derived calculations and cover ARR funnel, retention, pipeline health, sales efficiency, productivity, and missing fields when those data types are available.
+- KPI tree must map each thesis-critical driver to a KPI definition, formula, source, owner, cadence, threshold, and action.
+- Boundability must test where the thesis holds versus degrades by geography, segment, product, customer type, and operating condition.
+
+Hard rules:
+- Stop if data-room evidence contradicts a load-bearing thesis claim and the memo still depends on that claim.
+- Stop if source financial data is available but the workbook/model bridge is not built.
+- Stop if SaaS / sales-led GTM data is available but the GTM diagnostic is not run.
+- Stop if KPI_MODE=full and KPI tree is missing without an explicit data blocker.
 - Do not allow `boundability` to override a failed driver-tree gate with generic
   "proceed with protections" language.
 - Do not convert weak evidence into softened prose.
 - Carry unresolved diligence items into open-issues.md.
 
-Return diligence bridge status: PASS, PASS_WITH_GAPS, or HALT.
+Return Phase 4B/4C status: PASS, PASS_WITH_GAPS, or HALT.
 ```
 
 ### Prompt 5 - IC Memo
@@ -308,8 +363,13 @@ Use:
 - pattern-docx/SKILL.md
 - market-research/final-output.docx
 - competitive-assessment/final-output.docx
+- shared/data-room-index.md
+- diligence/data-room-validation.md
 - diligence/ntb-registry.md
 - diligence/driver-tree.md
+- diligence/deal-workbook.xlsx
+- diligence/gtm-metrics-diagnostic.xlsx
+- diligence/kpi-tree.md
 - diligence/boundability.md
 - shared evidence registers
 
@@ -322,15 +382,21 @@ Produce:
 
 Required memo behavior:
 - Treat market research and competitive assessment as upstream evidence, not optional background.
+- Treat data-room validation as the source of truth for company-specific claims.
 - Do not re-research Phase 2 or Phase 3 unless source staleness or gaps require it.
 - Retain evidence tags and sources for reused claims.
 - Include the strategic diligence spine: value-creation bridge, thesis-quality gate
   result, top load-bearing drivers, top T3/T4 drivers, and monitoring / re-underwrite
   triggers.
+- Tie thesis-critical claims to the NTB registry, driver tree, workbook assumption,
+  GTM metric, KPI-tree node, or boundability issue object.
+- Do not use unsupported sales narratives where the GTM diagnostic should supply ARR,
+  retention, pipeline, sales efficiency, or productivity evidence.
 - Use the executive summary spine: Company Overview, Product Offering, Market Dynamic, Business Model, Thesis, Open Questions.
 - Keep unresolved gaps visible in the executive summary, risk section, and recommendation.
 
 Hard rules:
+- Do not draft a final IC memo before data-room validation exists unless the memo is explicitly labeled PROVISIONAL.
 - Zero unaddressed KILL claims.
 - Zero conflicting recurring numbers.
 - Zero thesis-critical claims without evidence tag and source.
