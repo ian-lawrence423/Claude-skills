@@ -26,15 +26,6 @@
       }
     },
     {
-      "name": "deal-diligence",
-      "description": "Phase 3 deep diligence: NTB quality check, driver tree, boundability assessment, financial model, GTM metrics, and KPI tree. Requires data room for financial/GTM skills.",
-      "category": "deal-intelligence",
-      "source": "./deal-diligence",
-      "author": {
-        "name": "Ian Lawrence"
-      }
-    },
-    {
       "name": "deal-intelligence",
       "description": "Grouped deal-intelligence plugin with market research, diligence, IC memo, QA, and Pattern DOCX/PPTX production skills.",
       "category": "deal-intelligence",

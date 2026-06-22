@@ -68,7 +68,7 @@ Is this deal-related?
 | `ic-memo-pipeline/` | Specialized | IC memo workflow when the memo is the main output and upstream research is already scoped. | Keep, but document as memo-only |
 | `market-research-pipeline/` | Specialized | Standalone market research report workflow. | Keep, but do not use for IC memo production unless feeding a memo |
 | Standalone research phase slice | Removed | Superseded by `plugins/deal-intelligence/` and root canonical skills. | Use `deal-intelligence` grouped plugin |
-| `deal-diligence/` | Archive candidate | Standalone plugin slice for diligence. Overlaps with `plugins/deal-intelligence/`, but still exists for modular installs. | Keep only if you intentionally use modular diligence installs |
+| Standalone diligence phase slice | Removed | Superseded by `plugins/deal-intelligence/` and root canonical skills. | Use `deal-intelligence` grouped plugin |
 | Standalone output phase slice | Removed | Superseded by `plugins/deal-intelligence/` and root canonical skills. | Use `deal-intelligence` grouped plugin |
 
 ## Delete / Archive Recommendations
@@ -79,22 +79,17 @@ were redirected to `plugins/deal-intelligence/`. Current cleanup state:
 | Candidate | Why It Looks Stale | Recommended Action |
 |---|---|---|
 | Standalone research phase slice | Superseded by packaged `deal-intelligence` bundle and unused by Ian | Removed |
-| `deal-diligence/` | Standalone diligence slice overlaps with packaged `deal-intelligence` bundle | Keep for now unless Ian confirms it is unused |
+| Standalone diligence phase slice | Superseded by packaged `deal-intelligence` bundle and unused by Ian | Removed |
 | Standalone output phase slice | Superseded by packaged `deal-intelligence` bundle and unused by Ian | Removed |
 | `analytical-operating-system.plugin` | Generated package artifact, not source | Move to `dist/` or regenerate on demand |
 | `plugins/deal-intelligence.plugin` | Generated package artifact, not source | Move to `dist/` or regenerate on demand |
 | `market-research-pipeline/remaining-agents.md` | Explicitly retained as historical source material in `market-research-pipeline/CLAUDE.md`; agents should not dispatch from it | Keep or move to `archive/notes/` only after updating `CLAUDE.md` |
 
-## Mismatch To Resolve
+## Resolved Source-Of-Truth Mismatch
 
-`deal-workbook-builder` exists in `plugins/deal-intelligence/skills/` but not as a root canonical skill. Root `driver-tree` and `boundability` already reference it, and the docs generator includes it, so this is an active source-of-truth mismatch rather than a dead skill.
-
-Choose one of two actions:
-
-| Option | When To Choose It | Action |
-|---|---|---|
-| Promote | Preferred if the current references are intentional | Copy it to root as `deal-workbook-builder/`, then document it in the root README |
-| Retire | Only if workbook building is no longer part of the system | Remove the plugin copy and update `driver-tree`, `boundability`, `docs/generate_claude_docs.py`, and package docs |
+`deal-workbook-builder` is now promoted to a root canonical skill and remains synced
+into `plugins/deal-intelligence/skills/`. Root `driver-tree`, root `boundability`, and
+the docs generator can reference it without relying on a plugin-only source.
 
 ## Quality Gates
 

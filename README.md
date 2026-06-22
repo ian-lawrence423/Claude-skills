@@ -2,11 +2,11 @@
 
 Pattern's modular skill architecture for Claude. Each skill is a folder containing a `SKILL.md` file that instructs Claude on methodology, output format, and quality standards for a specific domain. Skills are loaded on-demand — Claude reads the relevant `SKILL.md` before executing any task in its domain.
 
-**33 skills across 8 groups, one orchestration entry point, 5 functional layers, 3 multi-agent pipelines, and 8 generated reference documents.** Every formal output runs through at least two layers — usually three or four. Layers are not optional — skipping a layer produces a draft, not a deliverable.
+**35 skills across 8 groups, one orchestration entry point, 5 functional layers, 3 multi-agent pipelines, and 8 generated reference documents.** Every formal output runs through at least two layers — usually three or four. Layers are not optional — skipping a layer produces a draft, not a deliverable.
 
 > **Source of truth:** Root skill folders in this repo are the canonical authoring source. Packaged copies under grouped plugin folders must be synced from root before publishing. Update this README whenever skills are added, removed, repackaged, or promoted as workflow entry points.
 
-> **Current inventory note:** The current repo has 34 canonical root skills, 25 packaged deal-intelligence skills, 3 multi-agent pipeline folders, and 8 generated reference documents. The top summary should be treated as stale if these counts diverge.
+> **Current inventory note:** The current repo has 35 canonical root skills, 25 packaged deal-intelligence skills, 3 multi-agent pipeline folders, and 8 generated reference documents. The top summary should be treated as stale if these counts diverge.
 
 > **Reference docs:** Generated Word reference files in `docs/` are rebuilt from this repo with `docs/generate_claude_docs.py`. Do not hand-edit the DOCX files without also updating the Markdown/source generator.
 
@@ -93,7 +93,7 @@ All other skills are invoked by name when the task matches their trigger criteri
 
 ## 3. Complete Skill Index
 
-All 34 root skills organized by group. Invoke the most specific skill first; fall back to broader skills if needed.
+All 35 root skills organized by group. Invoke the most specific skill first; fall back to broader skills if needed.
 
 ### Strategy & Problem Solving
 
@@ -119,6 +119,7 @@ All 34 root skills organized by group. Invoke the most specific skill first; fal
 | Skill | Layer | What It Does | Triggers |
 |---|---|---|---|
 | `financial-model-builder` | L4 — Production | Builds canonical 3-tab operating model (Input Page, Financial Model Template, Output Tab) from source P&L/BS. 6+6 analysis (actuals + forecast). **Read first — foundational** | "build financial model", "3-tab model", "6+6 analysis", "turn this P&L into a model" |
+| `deal-workbook-builder` | L4 — Production | Builds the formula-linked PE/M&A deal workbook: driver tree, KPI tree, NTB registry, and MOIC bridge chained to a source financial model | "build the deal workbook", "rebuild the driver tree", "link the NTB registry to the model", "fix the MOIC bridge" |
 | `ic-memo` | L2 — Research | IC memo architecture: 10-section structure, three-gate structure (company quality → sector timing → investment attractiveness), kill criteria, scenario analysis, Pattern-branded DOCX output | "IC memo", "investment committee memo", "write up this deal", "deal memo" |
 | `ntb-diligence` | L2 — Research | Standalone 4-phase NTB diligence, 2 checkpoints, MOIC sum tolerance ±15%. Evaluates whether growth is driven by genuine new customers vs. base recycling | "NTB diligence", "new-to-brand analysis", "customer acquisition quality", "cohort analysis" |
 | `diligence-ddr` | L4 — Production | Generates or customizes Due Diligence Request Lists for PE buyout / M&A sell-side. Tailored by sector and business model | "DDR", "due diligence request list", "data room requests", "diligence checklist" |

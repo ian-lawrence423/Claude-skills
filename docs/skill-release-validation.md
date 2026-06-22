@@ -26,7 +26,6 @@ Validate that the skill-system cleanup work is publishable after the governance,
 - `.claude-plugin/marketplace.json`
 - `deal-master/.claude-plugin/plugin.json`
 - `analytical-operating-system/.claude-plugin/plugin.json`
-- `deal-diligence/.claude-plugin/plugin.json`
 - `plugins/deal-intelligence/.claude-plugin/plugin.json`
 - `README.md`
 - `CHEATSHEET.md`

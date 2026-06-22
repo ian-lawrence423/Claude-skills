@@ -27,12 +27,11 @@ Root skill folders remain the canonical authoring source. When root skill metada
 
 Synced package families:
 - `plugins/deal-intelligence/skills/`
-- `deal-diligence/skills/`
 - standalone packaged copies under `analytical-operating-system/skills/` and `deal-master/skills/`
 
 Current packaging note: root skills and `plugins/deal-intelligence/skills/` are the
-active source/package pair for the grouped deal workflow. Retired standalone research
-and output phase slices are no longer sync targets.
+active source/package pair for the grouped deal workflow. Retired standalone research,
+diligence, and output phase slices are no longer sync targets.
 
 ## Validation Targets
 
