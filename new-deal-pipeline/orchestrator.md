@@ -27,11 +27,10 @@ MATERIALS_PATH:       [path to source materials]
 SKILLS_PATH:          [absolute path to skills root]
 WORK_DIR:             [absolute path for this run]
 OUTPUT_FORMAT:        [docx | pptx | both; default docx]
-MARKET_MODE:          [full | skip_existing | skip]
-COMPETITIVE_MODE:     [full | skip_existing | skip]
-IC_MODE:              [full | skip_existing | skip]
-NTB_MODE:             [full | skip]
-KPI_MODE:             [full | skip]
+RESEARCH_MODE:        gold_standard_end_to_end
+RESUME_EXCEPTION:     [none | resume_verified_outputs | repair_failed_phase]
+NTB_MODE:             full
+KPI_MODE:             [full | deferred_until_data_available]
 SOURCE_STRICTNESS:    [standard | strict; default strict]
 ```
 
@@ -41,7 +40,7 @@ SOURCE_STRICTNESS:    [standard | strict; default strict]
 
 ```
 Phase -1  Load governing frameworks and quality contract
-Phase 0   Create process tracker; inventory materials and prior outputs
+Phase 0   n8n intake, overnight research, competitive pre-fetch, dispatch readiness
 Phase 1   Shared deal brief, source bibliography, evidence register, belief register
 Phase 2   Gold-standard market research report
 Phase 3   Gold-standard competitive assessment
@@ -50,9 +49,12 @@ Phase 5   IC memo, consuming Phase 2-4 as authoritative inputs
 Phase 6   Cross-output QA and deal-pack summary
 ```
 
-The phases are sequenced deliberately. Market research and competitive assessment
-must finish before the IC memo unless the user explicitly chooses `skip_existing`
-and the inventory confirms current, usable prior outputs.
+The phases are sequenced deliberately. There is one supported deal research mode:
+`gold_standard_end_to_end`. n8n workflows are upstream components of that mode,
+not alternatives to it. Market research and competitive assessment must finish
+before the IC memo. A prior artifact may be resumed only under
+`RESUME_EXCEPTION=resume_verified_outputs` after the tracker logs the artifact,
+source bibliography, evidence register, number register, and QA status.
 
 ---
 
@@ -84,11 +86,25 @@ and carried into `shared/open-issues.md`. A thesis-critical gap returns `HALT`.
 
 Scan `MATERIALS_PATH` and `WORK_DIR` recursively.
 
+Confirm the full-chain n8n state before any synthesis:
+
+| Component | Required Evidence |
+|---|---|
+| Deal intake / materials | Materials folder exists or missing materials are logged |
+| Gold Standard Queue | Columns A:M captured in `shared/queue-contract-check.md` |
+| Market Research Gold Standard Overnight | Column K `complete`, column L valid `CompetitiveIntel` JSON, column M Website populated |
+| Competitive pre-fetch / landscape mapping | Run ID or sheet column, score rationale, source map, review flag |
+| Deal Intelligence Orchestrator | Dispatch packet created, WorkDir set, row marked `in_progress`, required deliverables listed |
+
+If any component is missing, log `repair_failed_phase`; do not switch into a
+lighter research mode.
+
 First create `{WORK_DIR}/shared/process-tracker.md` by copying
 `new-deal-pipeline/process-tracker-template.md`. Populate the metadata,
-workflow modes, current phase statuses, required artifacts, and first next
-action before any analysis starts. Update the tracker at every phase start and
-phase completion.
+workflow mode, Gold Standard Queue Row Tracker, Detailed Step Tracker,
+Professional Document Readiness Tracker, current phase statuses, required
+artifacts, and first next action before any analysis starts. Update the tracker
+at every phase start and phase completion.
 
 Create:
 
@@ -115,6 +131,9 @@ Process tracker gate:
 - PASS only if `shared/process-tracker.md` exists and names every required
   workflow, skill/plugin, input, output, integrity gate, status, owner/next
   action, and artifact.
+- PASS also requires the Gold Standard Queue row to be copied into the Queue Row
+  Tracker and every professional deliverable to appear in the Document Readiness
+  Tracker with an owner/next action.
 - HALT if no tracker exists, if a phase status is ambiguous, or if the next
   action is not explicit.
 
@@ -163,9 +182,10 @@ Write `{WORK_DIR}/shared/deal-brief.md`:
 6. Execution, exit, and open risks
 
 ## Required Deliverables
-- Market research report: [run / skip_existing / skip]
-- Competitive assessment: [run / skip_existing / skip]
-- IC memo: [run / skip_existing / skip]
+- Market research report: required
+- Competitive assessment: required
+- IC memo: required
+- n8n handoff reconciliation: required when any automation output is used
 ```
 
 Initialize:
@@ -185,7 +205,10 @@ Gate 1:
 
 ## Phase 2 - Gold-Standard Market Research
 
-Run `market-research-pipeline/orchestrator.md` with:
+Run the full gold-standard research synthesis. Use the overnight market research
+pack and competitive pre-fetch as required inputs, then produce the final
+market-research DOCX. Do not call the legacy/light Phase 2 n8n market-research
+workflow as an alternative research mode. It is a repair component only.
 
 ```
 COMPANY:       {COMPANY}
@@ -193,11 +216,13 @@ QUESTION:      Is this market attractive, investable, and strategically actionab
 OUTPUT_FORMAT: docx
 SKILLS_PATH:   {SKILLS_PATH}
 WORK_DIR:      {WORK_DIR}/market-research
+RESEARCH_MODE: gold_standard_end_to_end
 ```
 
 Additional instructions:
 - Load `docs/market-research-gold-standard-guide.md`.
 - Load `market-research/references/gold-standard-report-template.md`.
+- Load `shared/overnight-output-index.md` and `market-research/overnight-reconciliation.md` if an overnight pack exists.
 - Use `shared/source-bibliography.md`, `shared/evidence-register.md`,
   `shared/number-register.md`, and `shared/open-issues.md`.
 - Append new sources and claims back into the shared registers.

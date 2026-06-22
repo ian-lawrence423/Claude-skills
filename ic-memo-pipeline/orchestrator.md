@@ -74,28 +74,31 @@ Bayesian updates, kill triggers, and decision posture. Log:
 
 ## Step 0a — Pipeline Inventory Check
 
-Before running any research phase, scan MATERIALS_PATH for files produced
-by the overnight n8n pipeline. Skip any phase whose output already exists.
+Before running any research phase, scan MATERIALS_PATH for files produced by
+the overnight n8n pipeline. This IC memo-only route should be used only when
+upstream research is already verified and current. For new deal diligence, stop
+and route to `deal-master` -> `new-deal-pipeline/orchestrator.md` with
+`RESEARCH_MODE=gold_standard_end_to_end`.
 
 ```
-N8N PIPELINE FILES → PHASE SKIP MAP
-competitive-landscape-briefing.md  → Skip Phase 2 cold research (load as context instead)
-research/l4-market-context.md      → Skip L4 (load as l4-market.md equivalent)
-research/l3-customer-insights.md   → Skip L3 (load as l3-customer.md equivalent)
-research/tam-sam-som.md            → Skip TAM calculation (load as market sizing context)
-research/competitive-moat-assessment.md → Skip moat assessment (load as moat context)
-data-room-request.md               → DDR already issued; note in intake.md
-thesis-validation/claim-scrutinizer.md → Load as prior context for Phase 5 passes
-thesis-validation/red-team.md      → Load as prior context for Phase 5 passes
-thesis-validation/pre-mortem.md    → Load as prior context for Phase 5 passes
+N8N PIPELINE FILES -> CONTEXT MAP
+competitive-landscape-briefing.md       -> Load as Phase 0 context; not final research
+research/l4-market-context.md           -> Load as market context and verify against sources
+research/l3-customer-insights.md        -> Load as customer context and verify against sources
+research/tam-sam-som.md                 -> Load as market sizing context and verify arithmetic
+research/competitive-moat-assessment.md -> Load as moat context and verify mechanism/durability
+data-room-request.md                    -> DDR already issued; note in intake.md
+thesis-validation/claim-scrutinizer.md  -> Load as prior context for Phase 5 passes
+thesis-validation/red-team.md           -> Load as prior context for Phase 5 passes
+thesis-validation/pre-mortem.md         -> Load as prior context for Phase 5 passes
 ```
 
 Log what was found:
 ```
 [PIPELINE INVENTORY]
   Found: [list of n8n files]
-  Skipping: [list of phases with reason]
-  Loading as context: [list of files]
+  Loading as verified context: [list of files]
+  Verification required: [source, arithmetic, staleness, and open GAP checks]
   Starting at: Phase [N]
 ```
 

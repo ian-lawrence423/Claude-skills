@@ -70,15 +70,15 @@ Evidence notation standard: thesis-critical claims should use `[F · H]`, `[F ·
 
 | Pipeline | When to use | Mode flags |
 |----------|-------------|-----------|
-| `new-deal-pipeline` | Full new deal pack: market research, competitive assessment, IC memo, and cross-output QA | `MARKET_MODE`, `COMPETITIVE_MODE`, `IC_MODE`: full/skip_existing/skip |
+| `new-deal-pipeline` | Full new deal pack: n8n prefetch/dispatch, market research, competitive assessment, IC memo, and cross-output QA | `RESEARCH_MODE=gold_standard_end_to_end`; `RESUME_EXCEPTION`: none/resume_verified_outputs/repair_failed_phase |
 | `ic-memo-pipeline` | Full IC memo from intake to branded DOCX | `NTB_MODE`: full/skip · `KPI_MODE`: full/skip |
-| `market-research-pipeline` | Standalone gold-standard market research report | — |
+| `market-research-pipeline` | Legacy standalone/repair research path; not a deal research mode | Use only outside deal workflows or to repair a failed full-chain component |
 
 ---
 
 ## Full market research report minimum spine
 
-Use this when the user asks for a full standalone market research report, board-ready market study, or IC-supporting market analysis.
+Use this for non-deal standalone market research, board-ready market studies, or repair research inside the full deal chain. Do not use it as a shortcut around `new-deal-pipeline` for deal diligence.
 
 | Section | Required artifact |
 |---------|-------------------|

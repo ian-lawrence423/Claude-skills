@@ -1,8 +1,9 @@
 # Market Research Gold Standard Guide
 
-Use this guide when the goal is a full, standalone market research report that can
-support an IC memo, board discussion, strategic investment decision, or CEO-level
-market entry decision.
+Use this guide when the goal is a full, non-deal standalone market research
+report, or when the full deal chain needs repair research for a failed component.
+For new deal diligence, use `deal-master` and `new-deal-pipeline` instead of
+treating this guide as a separate research mode.
 
 ## Decision Standard
 
@@ -243,15 +244,15 @@ Avoid these failure modes:
 ## Paste-Ready Prompt
 
 ```text
-Run a full standalone market research report on [market/company/category].
+Run a full non-deal standalone market research report on [market/company/category].
 
 Decision to support: [enter/invest/acquire/partner/prioritize/avoid].
 Geography: [scope].
 Time horizon: [time horizon].
 Output: DOCX. Use Pattern-branded formatting only when requested.
 
-Use market-research in Full mode. Load mckinsey-consultant first, then complete
-the research brief. Use the gold-standard report architecture: cover/KPI strip,
+Use market-research with the gold-standard architecture. Load mckinsey-consultant
+first, then complete the research brief. Use the report architecture: cover/KPI strip,
 scope, executive summary, market sizing, customer segmentation, competitive
 landscape, pricing/economics, technology trends, regulatory/risk, moat analysis,
 strategic implications, and appendix. Label claims as fact, estimate, hypothesis,

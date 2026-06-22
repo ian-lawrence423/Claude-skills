@@ -3,6 +3,12 @@
 This is a multi-agent market research pipeline. Drop this directory into your
 Claude Code workspace. Run via the command below.
 
+This is not a deal research mode. For any new deal, acquisition target, IC memo,
+or company diligence process, start with `deal-master` and use
+`new-deal-pipeline/orchestrator.md` with `RESEARCH_MODE=gold_standard_end_to_end`.
+Use this pipeline only for non-deal standalone research or to repair a failed
+component inside the full deal chain.
+
 ---
 
 ## Usage

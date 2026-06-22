@@ -24,9 +24,9 @@ This repo has three different surfaces. They are not interchangeable:
 
 If you are unsure what to run, use this order:
 
-1. Full deal package: `deal-master` -> `new-deal-pipeline/orchestrator.md`.
-2. IC memo only: `deal-master` -> `ic-memo-pipeline/orchestrator.md`.
-3. Market research only: `market-research` or `market-research-pipeline/orchestrator.md`.
+1. New deal or company research for a deal: `deal-master` -> `new-deal-pipeline/orchestrator.md` with `RESEARCH_MODE=gold_standard_end_to_end`.
+2. IC memo only: use only when upstream research is already verified and current.
+3. Non-deal market research only: `market-research`; do not use it as a shortcut for deal diligence.
 4. Single artifact or analysis task: invoke the most specific root skill directly.
 5. File output: run quality first, then `pattern-docx` or `pattern-investment-pptx`, then `doc-quality-checker`.
 
@@ -186,9 +186,9 @@ When multiple skills could apply, use this tie-breaking order:
 
 | Need | Start Here | Use This Pipeline | Do Not Use |
 |---|---|---|---|
-| Full deal package from research through IC memo | `deal-master` | `new-deal-pipeline/orchestrator.md` | Standalone phase-slice plugins unless you intentionally want modular installs; use `deal-intelligence` for the grouped package |
-| IC memo only, with research already in hand or tightly scoped | `ic-memo` or `deal-master` | `ic-memo-pipeline/orchestrator.md` | `new-deal-pipeline/` if you do not need market + competitive + IC outputs from one evidence spine |
-| Market research report only | `market-research` | `market-research-pipeline/orchestrator.md` | `ic-memo-pipeline/` unless the report is feeding an IC memo |
+| Full deal package from research through IC memo | `deal-master` | `new-deal-pipeline/orchestrator.md` | Standalone/light research workflows; all deal research uses the full gold-standard chain |
+| IC memo only, with verified current research already in hand | `deal-master` | `ic-memo-pipeline/orchestrator.md` | Any path that treats unverified n8n markdown as final research |
+| Non-deal market research report only | `market-research` | `market-research-pipeline/orchestrator.md` only as a legacy/repair reference | Using standalone market research as a shortcut for a deal pack |
 
 If two routes could work, use the broader route only when it produces an output you actually need.
 
@@ -196,9 +196,9 @@ Pipelines are multi-agent workflows composed of skills. They live in their own f
 
 | Pipeline | Folder | What It Produces | Mode Flags |
 |----------|--------|-----------------|-----------|
-| `new-deal-pipeline` | `new-deal-pipeline/` | Full new-deal pack: shared evidence spine -> gold-standard market research -> competitive assessment -> strategic diligence bridge -> IC memo -> cross-output QA | `MARKET_MODE`, `COMPETITIVE_MODE`, `IC_MODE`: full/skip_existing/skip; `SOURCE_STRICTNESS`: standard/strict |
+| `new-deal-pipeline` | `new-deal-pipeline/` | Full new-deal pack: n8n intake/prefetch/dispatch -> shared evidence spine -> gold-standard market research -> competitive assessment -> strategic diligence bridge -> IC memo -> cross-output QA | `RESEARCH_MODE=gold_standard_end_to_end`; `RESUME_EXCEPTION`: none/resume_verified_outputs/repair_failed_phase; `SOURCE_STRICTNESS`: standard/strict |
 | `ic-memo-pipeline` | `ic-memo-pipeline/` | Full 10-section IC memo: intake → market research → NTB diligence → driver tree → section drafts → 5 iteration passes → Pattern DOCX → QA | `NTB_MODE`: full/skip · `KPI_MODE`: full/skip |
-| `market-research-pipeline` | `market-research-pipeline/` | Standalone market research report: brief → L4→L3→L2 → gold-standard guide/template → iteration passes → Pattern DOCX | — |
+| `market-research-pipeline` | `market-research-pipeline/` | Legacy standalone/repair research path. Not a deal research mode. | Use only outside deal workflows or to repair a failed full-chain component |
 
 **new-deal-pipeline files:**
 

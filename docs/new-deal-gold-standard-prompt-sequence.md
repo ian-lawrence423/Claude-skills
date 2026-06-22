@@ -28,11 +28,10 @@ MATERIALS_PATH: [absolute path to source materials]
 WORK_DIR: [absolute path for output]
 SKILLS_PATH: C:\Users\IanLawrence\github\Claude-skills
 OUTPUT_FORMAT: docx
-MARKET_MODE: full
-COMPETITIVE_MODE: full
-IC_MODE: full
+RESEARCH_MODE: gold_standard_end_to_end
+RESUME_EXCEPTION: none
 NTB_MODE: full
-KPI_MODE: skip
+KPI_MODE: full
 SOURCE_STRICTNESS: strict
 ```
 
@@ -58,11 +57,10 @@ WORK_DIR: [absolute path for output]
 SKILLS_PATH: C:\Users\IanLawrence\github\Claude-skills
 OUTPUT_FORMAT: docx
 WORKFLOW_MODE: full_deal_pack
-MARKET_MODE: full
-COMPETITIVE_MODE: full
-IC_MODE: full
+RESEARCH_MODE: gold_standard_end_to_end
+RESUME_EXCEPTION: none
 NTB_MODE: full
-KPI_MODE: skip
+KPI_MODE: full
 SOURCE_STRICTNESS: strict
 
 Load in this order:
@@ -128,11 +126,10 @@ MATERIALS_PATH: [absolute path to source materials]
 WORK_DIR: [absolute path for output]
 SKILLS_PATH: C:\Users\IanLawrence\github\Claude-skills
 WORKFLOW_MODE: full_deal_pack
-MARKET_MODE: full
-COMPETITIVE_MODE: full
-IC_MODE: full
+RESEARCH_MODE: gold_standard_end_to_end
+RESUME_EXCEPTION: none
 NTB_MODE: full
-KPI_MODE: skip
+KPI_MODE: full
 SOURCE_STRICTNESS: strict
 
 Load:
@@ -166,7 +163,9 @@ Gate:
 Continue the new-deal package with Phase 2 only: gold-standard market research.
 
 Use:
-- market-research-pipeline/orchestrator.md
+- the completed Market Research Gold Standard Overnight output if available
+- the Competitive Pre-Fetch / competitive landscape output if available
+- market-research-pipeline/orchestrator.md only as a repair component, not as a separate research mode
 - docs/market-research-gold-standard-guide.md
 - market-research/references/gold-standard-report-template.md
 - shared/source-bibliography.md

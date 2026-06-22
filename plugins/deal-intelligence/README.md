@@ -19,12 +19,12 @@ This plugin is the packaged deal-intelligence bundle. It is not the canonical au
 
 | Situation | Start Here | Then Run |
 |---|---|---|
-| Full new deal package | `deal-master` | `new-deal-pipeline/orchestrator.md` |
-| IC memo only | `deal-master` or `ic-memo` | `ic-memo-pipeline/orchestrator.md` |
-| Market research only | `market-research` | `market-research-pipeline/orchestrator.md` |
+| Full new deal package | `deal-master` | `new-deal-pipeline/orchestrator.md` with `RESEARCH_MODE=gold_standard_end_to_end` |
+| IC memo only | `deal-master` | `ic-memo-pipeline/orchestrator.md` only when upstream research is verified/current |
+| Non-deal market research only | `market-research` | `market-research-pipeline/orchestrator.md` only outside deal workflows or as repair |
 | Narrow analysis task | Most specific skill | Only add broader methodology if needed |
 
-Default deal sequence: `deal-master` -> `mckinsey-consultant` -> `analytical-operating-system` -> create `shared/process-tracker.md` -> research/diligence skills -> `ic-memo` -> `writing-style` -> `claim-scrutinizer` / `red-team` / `pre-mortem` -> `pattern-docx` or `pattern-investment-pptx` -> `doc-quality-checker`.
+Default deal sequence: `deal-master` -> `mckinsey-consultant` -> `analytical-operating-system` -> create `shared/process-tracker.md` -> n8n intake / overnight research / competitive pre-fetch / deal-intelligence dispatch reconciliation -> research/diligence skills -> `ic-memo` -> `writing-style` -> `claim-scrutinizer` / `red-team` / `pre-mortem` -> `pattern-docx` or `pattern-investment-pptx` -> `doc-quality-checker`.
 
 ## Skills (25)
 

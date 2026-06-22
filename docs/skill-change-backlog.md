@@ -17,7 +17,7 @@ Branch: `codex/pattern-production-spec-split` after Work Package 4 first slice w
 | Item | Why It Matters | Proposed Change | Files |
 |---|---|---|---|
 | Add dependency contract section to system-critical skills | Agents need load order and handoff outputs | Add standard dependency block | `mckinsey-consultant`, `market-research`, `ic-memo`, `ntb-diligence`, `claim-scrutinizer`, `writing-style`, `pattern-docx` |
-| Add quick / standard / full modes | Avoid over-processing simple tasks | Define mode gates and skip rules | `market-research`, `ic-memo`, `ntb-diligence`, `driver-tree`, `claim-scrutinizer` |
+| Remove ambiguous research modes from deal work | Prevent thin deal outputs and mode confusion | Keep one deal research path: `RESEARCH_MODE=gold_standard_end_to_end`; use resume/repair exceptions only when verified outputs exist | `deal-master`, `new-deal-pipeline`, `market-research`, `ic-memo` |
 | Clarify auto-run rules | Prevent quality skills from running on interim scratch work | Make auto-run conditions explicit and bounded | `writing-style`, `doc-quality-checker`, `README.md` |
 | Create workflow tests | Validate load order and handoffs | Add scenario prompts and expected skill chain | `docs/` or `tests/` |
 
@@ -58,7 +58,7 @@ Status: implemented and merged in Work Package 1.
 
 Scope:
 - Add dependency blocks to the top 10 central skills
-- Add quick / standard / full mode gates
+- Remove tiered deal-research gates; document resume/repair exceptions instead
 - Add handoff output schemas
 
 Exit criteria:

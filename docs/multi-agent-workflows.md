@@ -4,7 +4,7 @@ This document explains how the Claude Skills repo fits together operationally. I
 
 ## Executive Answer
 
-Use `deal-master` first for deal work. It should route into `new-deal-pipeline/orchestrator.md` for a full deal pack, `ic-memo-pipeline/orchestrator.md` for an IC memo-only process, or `market-research-pipeline/orchestrator.md` for standalone market research.
+Use `deal-master` first for all deal work. For a new deal, it routes into `new-deal-pipeline/orchestrator.md` with one research mode: `gold_standard_end_to_end`. The n8n workflows are components of that route, not separate research options.
 
 The repo should not be cleaned by deleting anything that looks unused. First classify each folder as one of five types:
 
@@ -20,9 +20,10 @@ The repo should not be cleaned by deleting anything that looks unused. First cla
 
 | User Need | First Skill | Workflow | Output |
 |---|---|---|---|
-| "Run deal intelligence on this company" | `deal-master` | `new-deal-pipeline/orchestrator.md` | Market research, competitive assessment, IC memo, QA |
-| "Write an IC memo" | `deal-master` or `ic-memo` | `ic-memo-pipeline/orchestrator.md` | 10-section IC memo, Pattern DOCX, QA |
-| "Research this market" | `market-research` | `market-research-pipeline/orchestrator.md` | Standalone market research report |
+| "Run deal intelligence on this company" | `deal-master` | `new-deal-pipeline/orchestrator.md` | Full gold-standard chain: n8n prefetch, market research, competitive assessment, diligence bridge, IC memo, QA |
+| "Write an IC memo" | `deal-master` | `ic-memo-pipeline/orchestrator.md` only if upstream research is verified/current | 10-section IC memo, Pattern DOCX, QA |
+| "Research this market" for a deal | `deal-master` | `new-deal-pipeline/orchestrator.md` | Full deal research path, not standalone/light research |
+| "Research this market" outside a deal | `market-research` | `market-research-pipeline/orchestrator.md` only as non-deal/legacy route | Standalone market research report |
 | "Build a model/workbook" | `financial-model-builder`, then narrow finance skill | No pipeline unless part of deal pack | Excel model or workbook |
 | "Make the final Word/PPT artifact" | `writing-style`, then output skill | No pipeline unless upstream analysis is incomplete | Pattern DOCX/PPTX plus QA |
 
@@ -51,22 +52,19 @@ Rule: a pipeline is an operator workflow, not a source skill.
 ```text
 Is this deal-related?
   No -> invoke the most specific root skill.
-  Yes -> Is the required output a full deal pack?
-    Yes -> deal-master -> create shared/process-tracker.md -> new-deal-pipeline/orchestrator.md
-    No -> Is the required output only an IC memo?
-      Yes -> deal-master or ic-memo -> ic-memo-pipeline/orchestrator.md
-      No -> Is the required output only market research?
-        Yes -> market-research -> market-research-pipeline/orchestrator.md
-        No -> invoke the narrow skill directly.
+  Yes -> deal-master -> create shared/process-tracker.md -> new-deal-pipeline/orchestrator.md
+         with RESEARCH_MODE=gold_standard_end_to_end.
+         Only use ic-memo-pipeline when verified/current upstream research already exists.
+         Do not use standalone market-research-pipeline as a deal shortcut.
 ```
 
 ## Workflow Map
 
 | Pipeline | Status | Role | Keep / Archive Decision |
 |---|---|---|---|
-| `new-deal-pipeline/` | Primary | Full deal-pack workflow. Creates one evidence spine for market research, competitive assessment, and IC memo. | Keep as primary route |
+| `new-deal-pipeline/` | Primary | Full deal-pack workflow. Creates one evidence spine for n8n prefetch, market research, competitive assessment, diligence bridge, and IC memo. | Keep as the only deal research route |
 | `ic-memo-pipeline/` | Specialized | IC memo workflow when the memo is the main output and upstream research is already scoped. | Keep, but document as memo-only |
-| `market-research-pipeline/` | Specialized | Standalone market research report workflow. | Keep, but do not use for IC memo production unless feeding a memo |
+| `market-research-pipeline/` | Legacy / repair | Standalone market research report workflow. | Keep for non-deal research or failed-component repair; do not present as a deal research mode |
 | Standalone research phase slice | Removed | Superseded by `plugins/deal-intelligence/` and root canonical skills. | Use `deal-intelligence` grouped plugin |
 | Standalone diligence phase slice | Removed | Superseded by `plugins/deal-intelligence/` and root canonical skills. | Use `deal-intelligence` grouped plugin |
 | Standalone output phase slice | Removed | Superseded by `plugins/deal-intelligence/` and root canonical skills. | Use `deal-intelligence` grouped plugin |

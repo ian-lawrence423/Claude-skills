@@ -374,7 +374,7 @@ MARKET_PACK_MODULES = [
 ]
 
 PIVOTAL_GUIDES = [
-    ["Market Research Gold Standard", "docs/Market_Research_Gold_Standard_Guide.docx", "Full standalone market research report."],
+    ["Market Research Gold Standard", "docs/Market_Research_Gold_Standard_Guide.docx", "Non-deal standalone or full-chain repair market research report."],
     ["IC Memo Gold Standard", "docs/IC_Memo_Gold_Standard_Guide.docx", "Full IC memo with gates, NTBs, returns bridge, risks, and open items."],
     ["Competitive Assessment Gold Standard", "docs/Competitive_Assessment_Gold_Standard_Guide.docx", "Competitive arena, competitor map, moat proof, durability, and displacement paths."],
     ["Executive Summary Gold Standard", "docs/Executive_Summary_Gold_Standard_Guide.docx", "Two-page six-section summary for market research, IC memos, diligence, and strategy."],
@@ -466,7 +466,7 @@ def build_readme_doc() -> None:
             ["deal-master", "Start/resume full deal intelligence workflow.", "Routed phase plan and evidence register."],
             ["new-deal-pipeline", "Full new deal pack requiring market research, competitive assessment, and IC memo.", "Three DOCX outputs, shared evidence registers, cross-output QA."],
             ["ic-memo-pipeline", "Full IC memo from intake to branded DOCX.", "10-section IC memo, quality passes, DOCX QA."],
-            ["market-research-pipeline", "Standalone gold-standard market research report.", "Pattern DOCX market research report."],
+            ["market-research-pipeline", "Non-deal standalone or full-chain repair market research path; not a deal research mode.", "Pattern DOCX market research report."],
         ],
         [2600, 4200, 4000],
     )
@@ -497,7 +497,7 @@ def build_readme_doc() -> None:
             ["README.md", "Repo source of truth for deployed skills, layers, and invocation guide."],
             ["CHEATSHEET.md", "Quick-reference task map, layer sequence, workflow pairs, and brand constants."],
             ["docs/market-research-gold-standard-guide.md", "Standalone source guide for the most thorough market research report."],
-            ["docs/Market_Research_Gold_Standard_Guide.docx", "Generated Word guide for full standalone market research reports."],
+            ["docs/Market_Research_Gold_Standard_Guide.docx", "Generated Word guide for non-deal standalone or full-chain repair market research reports."],
             ["docs/ic-memo-gold-standard-guide.md", "Standalone source guide for the most thorough IC memo."],
             ["docs/competitive-assessment-gold-standard-guide.md", "Standalone source guide for competitive assessment and moat analysis."],
             ["docs/executive-summary-gold-standard-guide.md", "Standalone source guide for two-page executive summaries."],
@@ -862,7 +862,7 @@ def build_market_research_doc() -> None:
     add_callout(
         doc,
         "Prompt",
-        "Run a full standalone market research report on [market/company/category]. Decision: [enter/invest/acquire/partner/prioritize/avoid]. Geography: [scope]. Time horizon: [horizon]. Use market-research in Full mode, load mckinsey-consultant first, use the gold-standard architecture, label evidence, show market-sizing arithmetic, include artifacts in every section, then run writing-style, claim-scrutinizer, red-team, pattern-docx, and doc-quality-checker.",
+        "Run a non-deal standalone market research report on [market/company/category], or use this only as repair research inside the full deal chain. Decision: [enter/invest/acquire/partner/prioritize/avoid]. Geography: [scope]. Time horizon: [horizon]. Use the gold-standard architecture, label evidence, show market-sizing arithmetic, include artifacts in every section, then run writing-style, claim-scrutinizer, red-team, pattern-docx, and doc-quality-checker.",
         fill="F5F8FF",
     )
     save(doc, DOCS / "Market_Research_Gold_Standard_Guide.docx")

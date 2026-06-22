@@ -63,12 +63,11 @@ MATERIALS_PATH:  [path to deal folder — e.g. C:\...\Pattern Strategic M&A\{Com
 WORK_DIR:        [path for output — e.g. MATERIALS_PATH\analysis\]
 ENTRY_VAL:       [entry valuation + implied multiple, or "TBD"]
 HOLD_PERIOD:     [hold period + target return, or "TBD"]
-WORKFLOW_MODE:   [full_deal_pack | ic_memo_only | resume]
-MARKET_MODE:     [full | skip_existing | skip]
-COMPETITIVE_MODE:[full | skip_existing | skip]
-IC_MODE:         [full | skip_existing | skip]
-NTB_MODE:        [full | skip]
-KPI_MODE:        [full | skip]
+WORKFLOW_MODE:   [full_deal_pack | resume_repair]
+RESEARCH_MODE:   gold_standard_end_to_end
+RESUME_EXCEPTION:[none | resume_verified_outputs | repair_failed_phase]
+NTB_MODE:        full
+KPI_MODE:        [full | deferred_until_data_available]
 ```
 
 ---
@@ -82,12 +81,12 @@ Map files to phases using this table:
 ### N8N Pipeline Outputs (auto-generated overnight)
 | File | Phase Covered | Action |
 |------|--------------|--------|
-| `competitive-landscape-briefing.md` | Phases 0–2 summary | Load as MATERIALS; skip cold research |
+| `competitive-landscape-briefing.md` | Phase 0 evidence | Load as MATERIALS; reconcile into full research, do not treat as final |
 | `data-room-request.md` | Phase 1 DDR | DDR already issued |
-| `research/l4-market-context.md` | Phase 2 L4 market | Skip L4 |
-| `research/l3-customer-insights.md` | Phase 2 L3 customer | Skip L3 |
-| `research/tam-sam-som.md` | Phase 2 TAM/SAM/SOM | Skip TAM calculation |
-| `research/competitive-moat-assessment.md` | Phase 2 moat | Skip moat assessment |
+| `research/l4-market-context.md` | Phase 0/2 evidence | Reconcile into final market research DOCX |
+| `research/l3-customer-insights.md` | Phase 0/2 evidence | Reconcile into final market research DOCX |
+| `research/tam-sam-som.md` | Phase 0/2 evidence | Reconcile into final market research DOCX and number register |
+| `research/competitive-moat-assessment.md` | Phase 0/3 evidence | Reconcile into final competitive assessment and moat verdict |
 | `thesis-validation/claim-scrutinizer.md` | Phase 5 (pre-IC thesis) | Load as prior; re-run on memo draft |
 | `thesis-validation/red-team.md` | Phase 5 (pre-IC thesis) | Load as prior; re-run on memo draft |
 | `thesis-validation/pre-mortem.md` | Phase 5 (pre-IC thesis) | Load as prior; re-run on memo draft |
@@ -126,12 +125,12 @@ Based on the inventory, determine the current state:
 
 **State A — No pipeline files, no prior IC run**
 → Fresh start. If `WORKFLOW_MODE=full_deal_pack`, run `new-deal-pipeline`.
-→ Otherwise run IC memo pipeline from Phase 1.
-→ Skip Phase 2 only if materials folder has CIM or market research.
+→ If the user asks for deal research, keep `RESEARCH_MODE=gold_standard_end_to_end`.
+→ Do not offer a thinner research path.
 
 **State B — N8N pipeline files exist, no IC memo run started**
-→ Phases 0–2 are DONE. Start at Phase 3 (NTB Diligence + Driver Tree).
-→ Load briefing.md + all research/*.md as MATERIALS for intake.
+→ Phase 0 evidence exists. Start or resume `new-deal-pipeline`; do not mark Phases 2-3 done.
+→ Load briefing.md + all research/*.md as MATERIALS and reconcile them into the shared registers.
 → Pre-IC thesis validation files are context, not final — they ran on the
   competitive landscape thesis, not the IC memo draft.
 
@@ -210,7 +209,7 @@ Kill triggers (if any of these fail → Pass or Reprice):
 
 Current state: [A/B/C/D/E]
 Starting at: Phase [N]
-Skipping: [list of phases with reason]
+Resume / repair exceptions: [verified outputs or failed phase repairs, with reason]
 ```
 
 ---
@@ -236,8 +235,8 @@ deal pack.
 Invoke: new-deal-pipeline/orchestrator.md
 Load first: mckinsey-consultant/SKILL.md, then analytical-operating-system/SKILL.md
 Pass: COMPANY, DEAL_TYPE, THESIS, GEOGRAPHY, ENTRY_VAL, HOLD_PERIOD,
-      MATERIALS_PATH, WORK_DIR, MARKET_MODE, COMPETITIVE_MODE, IC_MODE,
-      NTB_MODE, KPI_MODE
+      MATERIALS_PATH, WORK_DIR, RESEARCH_MODE=gold_standard_end_to_end,
+      RESUME_EXCEPTION, NTB_MODE=full, KPI_MODE
 Outputs:
   1. market-research/final-output.docx
   2. competitive-assessment/final-output.docx
@@ -249,17 +248,18 @@ Gate: cross-output QA passes; no unsupported thesis-critical claims; no conflict
 ```
 
 The new-deal pipeline is stricter than the IC memo pipeline. It must produce
-separate market and competitive deliverables before the IC memo unless the user
-explicitly skips them or current prior outputs already exist.
+separate market and competitive deliverables before the IC memo. Existing n8n
+outputs accelerate evidence collection, but they do not replace final market
+research, competitive assessment, diligence bridge, or memo QA.
 
-### Phase 2 — Market & Competitive Research (skip if n8n files exist)
-If n8n research files found → SKIP with note: "Phases 0-2 covered by
-overnight pipeline. Loading as context."
+### Phase 2 — Market & Competitive Research (one comprehensive mode)
+If n8n research files are found, reconcile them into the full evidence spine and
+final deliverables. Do not skip research phases because markdown exists.
 
 If not found:
 ```
-L4 → L3 → L2 sequentially, then moat-assessment
-Invoke: ic-memo-pipeline/l4-market.md, l3-customer.md, l2-competitive.md, moat-assessment.md
+Run the missing full-chain component and log `RESUME_EXCEPTION=repair_failed_phase`.
+Then continue the full gold-standard sequence.
 Gate 2: TAM/SAM with both methodologies | ≥2 customer segments with JTBD | ≥3 competitor profiles
 ```
 
@@ -333,9 +333,11 @@ Remaining: [phases still to run]
 
 ## Key Rules
 
-**Never re-run what the pipeline already did.**
-If n8n research files exist, load them. Do not re-conduct L4/L3/L2/Moat
-research from scratch — this wastes time and produces inconsistent results.
+**Never treat n8n output as deal completion.**
+If n8n research files exist, load them, reconcile them, and cite them. Do not
+replace the final market research DOCX, competitive assessment DOCX, NTB
+registry, driver tree, boundability, IC memo, or memo-level QA with raw
+automation markdown.
 
 **Pre-IC thesis-validation ≠ IC memo quality passes.**
 The overnight pipeline ran claim-scrutinizer, red-team, and pre-mortem on
