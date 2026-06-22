@@ -10,6 +10,11 @@ archetypes, SWOT with named sources, priority diligence agenda, and verbatim exp
 quotes organized by theme. It is the highest-quality primary research Pattern has
 on this market — treat it as ground truth unless contradicted by more recent evidence.
 
+**Subject-neutrality rule:** Pattern is the source of this template, not the default
+subject of every report. When the evaluated company, asset, operator, or investor is
+not Pattern, translate "Pattern internal" into "internal/client analytic" and write
+recommendations for the named subject.
+
 Loading this file activates deep dive mode automatically.
 
 ---

@@ -10,11 +10,14 @@ Read:
 - `{WORK_DIR}/open-issues.md`
 - `{WORK_DIR}/source-bibliography.md`
 - `{WORK_DIR}/data-gaps.md`
+- `{WORK_DIR}/comprehensive-market-pack-plan.md` if present
 - `{WORK_DIR}/strategic-analysis-plan.md` if present
 
 ## Document Structure
 
-Build a Pattern-branded Word document in this order:
+Build a professional Word document in this order. Use Pattern-branded formatting
+when Pattern formatting is requested by the run; keep the analysis itself objective
+and specific to the evaluated company, market, asset, operator, or investor.
 
 1. Cover
 2. Executive Summary
@@ -27,10 +30,13 @@ Build a Pattern-branded Word document in this order:
 9. Regulatory Environment and External Risk
 10. Competitive Moat Analysis
 11. Strategic Implications and Key Takeaways
-12. Strategic-analysis modules marked `Yes`, in the order listed in
+12. Comprehensive market-pack modules marked `Yes`, in the order listed in
+    `comprehensive-market-pack-plan.md`, if any were produced and not already
+    covered by the base sections
+13. Strategic-analysis modules marked `Yes`, in the order listed in
     `strategic-analysis-plan.md`, if any were produced
-13. Open Items, if any
-14. Appendix: sources, methodology, arithmetic checks, and data gaps
+14. Open Items, if any
+15. Appendix: sources, methodology, arithmetic checks, and data gaps
 
 ## Output Rules
 
@@ -40,6 +46,9 @@ Build a Pattern-branded Word document in this order:
 - Include all produced strategic-analysis module sections; do not collapse them into
   Strategic Implications unless the strategic-analysis-plan explicitly says the module
   is summary-only.
+- Include all produced comprehensive market-pack module sections; do not collapse
+  thesis stress-test, GTM, financial, risk, or market entry work into the executive
+  summary.
 - If `open-issues.md` is non-empty, include a clearly labeled Open Items section
   before the appendix.
 - Do not use unsupported promotional language.

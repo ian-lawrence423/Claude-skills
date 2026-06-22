@@ -9,6 +9,11 @@ country, competitive landscape with known data points, consumer behavior from
 proprietary surveys, logistics economics, take-rate architecture, moat assessment,
 and open questions from prior research iterations.
 
+**Subject-neutrality rule:** Pattern is the source of this template, not the default
+subject of every report. When the evaluated company, asset, operator, or investor is
+not Pattern, translate "Pattern analysis" into "internal/client analytic" and write
+recommendations for the named subject.
+
 Loading this file activates deep dive mode automatically.
 
 ---
@@ -56,7 +61,7 @@ flywheel as currently constructed.
 ## 2. Market Sizing — Known Figures as of March 2026
 
 Verify with web search before citing. All figures from J.P. Morgan, Momentum Works,
-and Google-Temasek-Bain unless labeled [Pattern Analysis].
+and Google-Temasek-Bain unless labeled [internal/client analytic].
 
 ### Southeast Asia — Country-Level GMV
 

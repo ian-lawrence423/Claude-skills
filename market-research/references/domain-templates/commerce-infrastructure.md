@@ -7,6 +7,11 @@ infrastructure market: the seven-stage value chain framing, data sensitivity tie
 vendor universe with known data points, analytical guardrails developed across prior
 research iterations, and the deep dive document structure calibrated to this market.
 
+**Subject-neutrality rule:** Pattern is the source of this template, not the default
+subject of every report. When the evaluated company, asset, operator, or investor is
+not Pattern, translate legacy Pattern-labeled estimates into "internal/client analytic" and write
+recommendations for the named subject.
+
 Loading this file activates deep dive mode automatically. Do not run standard mode
 for commerce infrastructure research without explicit confirmation from Ian.
 
@@ -32,7 +37,7 @@ Stage 7 — Retention & Loyalty           (adjacent — note if vendors span S6/
 **Scope declaration rule:** Every research report must declare which stages are in
 scope in the first paragraph of the market sizing section. Mixed-stage analysis must
 use separate market sizing frames per stage — never aggregate into a single blended
-number without labeling it explicitly as a Pattern internal composite.
+number without labeling it explicitly as an internal/client analytic composite.
 
 **Stage boundary enforcement:**
 - Stage 4 ends at order confirmation. Post-confirmation workflows are Stage 5 or 6.
@@ -46,7 +51,7 @@ number without labeling it explicitly as a Pattern internal composite.
 
 ## 2. Data Sensitivity Tiering Framework
 
-Pattern's proprietary analytical lens for commerce infrastructure diligence.
+Prior analytical lens for commerce infrastructure diligence.
 Apply to any vendor assessment, DDR scoping, or risk analysis in this market.
 
 | Bucket | Stage | Data Sensitivity | Typical PII & Data Captured | Diligence Implication |
@@ -81,7 +86,7 @@ any market sizing claim.
 |-------|---------------|------------|
 | Official/Primary | Company filings, regulator publications, NRF, Shopify annual data, Baymard | Market structure, product capability, regulatory scope, operational benchmarks |
 | Vendor/Commissioned | Vendor marketing, PR, commissioned TEI studies, self-reported metrics | Product positioning and directional customer value — not independent market sizing |
-| Pattern Analytic | Internal constructions, scenario cases, bridge estimates | Label separately; never sum with consensus market figures without disclosure |
+| Internal/client analytic | Internal constructions, scenario cases, bridge estimates | Label separately; never sum with consensus market figures without disclosure |
 
 ### CAGR arithmetic check — mandatory before publishing any growth rate
 
@@ -103,15 +108,15 @@ Three common definition failures in this market:
    returns = $280B. The capture rate framing changes materially — state which base.
 2. **Software-pure vs. total market:** OMS total market includes legacy on-premise;
    AI-native SaaS sub-segments grow 3× faster. Always separate the two views.
-3. **Reference market vs. Pattern analytic slice:** Externally sized markets and
-   Pattern-defined analytic constructions must be labeled separately and never summed
+3. **Reference market vs. internal/client analytic slice:** Externally sized markets and
+   internally defined analytic constructions must be labeled separately and never summed
    without disclosure.
 
 ### Agentic upside — treat separately
 
 Agentic commerce TAM (AI agent-initiated orders, autonomous resolution) is not yet
-independently sized by any analyst firm. Pattern internal estimate only. Label as
-[Pattern Analytic] and show separately from base case market sizing — never include
+independently sized by any analyst firm. Internal/client estimate only. Label as
+[Internal/client analytic] and show separately from base case market sizing — never include
 in base case without explicit disclosure.
 
 ---
@@ -126,7 +131,7 @@ figure more than 6 months old. Label every figure with source and confidence lev
 | Frame | 2025E | 2028E | CAGR | Source | Confidence |
 |-------|-------|-------|------|--------|------------|
 | Payment orchestration reference market | $2.65B | ~$4.4B | 18.3% | Mordor Intelligence | M |
-| Software-pure analytic view (orchestration + checkout optimization SaaS) | ~$3.0B | ~$5.4B | ~22% | Pattern composite | L |
+| Software-pure analytic view (orchestration + checkout optimization SaaS) | ~$3.0B | ~$5.4B | ~22% | Internal/client composite | L |
 | BNPL integration layer | Adjacency | Adjacency | N/A | Excluded from base | — |
 | Checkout-layer fraud | Adjacency | Adjacency | N/A | Shown separately | — |
 
@@ -135,7 +140,7 @@ figure more than 6 months old. Label every figure with source and confidence lev
 | Frame | 2025E | 2028E | CAGR | Source | Confidence |
 |-------|-------|-------|------|--------|------------|
 | OMS reference market (total, incl. legacy) | $6.8B | ~$8.8B | 8% | Virtue Market Research 2025 | M |
-| AI-native composite (AI routing + demand forecasting + WISMO AI) | ~$4.8B | ~$9.2B | ~24% | Pattern composite (weighted sub-segment) | L |
+| AI-native composite (AI routing + demand forecasting + WISMO AI) | ~$4.8B | ~$9.2B | ~24% | Internal/client composite (weighted sub-segment) | L |
 
 *Note: 24% CAGR reflects AI-native sub-segments only (AI routing ~26%, demand forecasting
 ~26%, WISMO AI ~33%) weighted by estimated sub-segment size. Do not apply 24% to the
@@ -145,9 +150,9 @@ full OMS reference market.*
 
 | Frame | 2025E | 2028E | CAGR | Source | Confidence |
 |-------|-------|-------|------|--------|------------|
-| Base case (tracking + returns mgmt + fraud + agentic resolution) | ~$5.2B | ~$9.0B | ~20% | Pattern composite | L |
-| Aggressive case | ~$5.2B | ~$11.5B | ~30% | Pattern internal | L |
-| Agentic upside (separate) | ~$1.5B+ | N/A | N/A | Pattern internal only | L |
+| Base case (tracking + returns mgmt + fraud + agentic resolution) | ~$5.2B | ~$9.0B | ~20% | Internal/client composite | L |
+| Aggressive case | ~$5.2B | ~$11.5B | ~30% | Internal/client analytic | L |
+| Agentic upside (separate) | ~$1.5B+ | N/A | N/A | Internal/client analytic only | L |
 
 ### Sub-segment growth rates (AI-native vs. legacy)
 
@@ -497,7 +502,7 @@ Address proactively in any investment memo or market research report for this sp
 
 | Decision Area | Harder Question | What Passes IC Scrutiny |
 |--------------|----------------|------------------------|
-| Market sizing | Is the market definition consistent from start to finish? | Stage-specific reference markets + separately labeled Pattern analytic slices; never blended without disclosure |
+| Market sizing | Is the market definition consistent from start to finish? | Stage-specific reference markets + separately labeled internal/client analytic slices; never blended without disclosure |
 | Protocol risk | Can the vendor expose commerce actions through reliable callable interfaces today? | Evidence of usable APIs or protocol support — not roadmap announcements or press releases |
 | Monetization | Has the vendor actually migrated contracts to new pricing, or only proposed it? | Proof of realized net ARR expansion after pricing migration; management claim alone is insufficient |
 | Competitive moat | Does the advantage survive substitute workflows from adjacent stages? | Measured ML lift, deep ERP embeds, or financial liability/physical assets that resist substitution |

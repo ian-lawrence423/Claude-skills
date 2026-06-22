@@ -10,6 +10,7 @@ Read:
 - `{WORK_DIR}/themes.md`
 - `{WORK_DIR}/open-issues.md`
 - `{WORK_DIR}/source-bibliography.md`
+- `{WORK_DIR}/comprehensive-market-pack-plan.md` if present
 
 ## Slide Structure
 
@@ -24,7 +25,9 @@ Read:
 9. Regulatory Environment and External Risk
 10. Competitive Moat Analysis
 11. Strategic Implications and Key Takeaways
-12. Appendix: sources, methodology, and open items
+12. Comprehensive market-pack modules marked `Yes`, if any were produced and not
+    already covered by the base sections
+13. Appendix: sources, methodology, and open items
 
 ## Output Rules
 
@@ -32,6 +35,8 @@ Read:
 - Every chart or table must identify source, period, and scope.
 - Use evidence tags for uncertain or hypothesis-driven claims.
 - Do not use unsupported superlatives or promotional language.
+- Keep recommendations specific to the evaluated company, market, asset, operator,
+  or investor. Do not default to Pattern unless Pattern is explicitly the subject.
 - If open issues are material, surface them before the appendix.
 
 Write final deck to `{WORK_DIR}/final-output.pptx`.

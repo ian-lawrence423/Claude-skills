@@ -1,4 +1,4 @@
-# Pattern Market Research Gold Standard Guide
+# Market Research Gold Standard Guide
 
 Use this guide when the goal is a full, standalone market research report that can
 support an IC memo, board discussion, strategic investment decision, or CEO-level
@@ -13,7 +13,7 @@ that lets a senior decision-maker answer five questions with evidence:
 2. Why does the market matter now?
 3. Who buys, who pays, and what workflow pain drives willingness to pay?
 4. Which competitors or substitutes control the profit pool today?
-5. What should Pattern, an operator, or an investor underwrite differently after reading it?
+5. What should the evaluated company, operator, or investor underwrite differently after reading it?
 
 ## Minimum Deliverable Contract
 
@@ -23,7 +23,7 @@ A full report must include all of the following:
 |---|---|
 | Decision purpose | State the decision the report supports before analysis begins |
 | Scope control | Define in-scope, out-of-scope, adjacent, and excluded markets |
-| Evidence discipline | Label claims as fact, estimate, hypothesis, vendor claim, or Pattern analytic |
+| Evidence discipline | Label claims as fact, estimate, hypothesis, vendor claim, management claim, or internal/client analytic |
 | Market sizing | Reconcile multiple market frames and show arithmetic |
 | Buyer analysis | Segment by buying behavior, budget owner, JTBD, and switching friction |
 | Competition | Include direct competitors, substitutes, and platform-native alternatives |
@@ -52,11 +52,39 @@ Use this structure for the most thorough standalone report:
 Do not organize the report as raw research notes. Use the research pyramid to
 investigate. Use the report architecture to communicate.
 
+## Full Market Pack Module Spine
+
+Use the Commerce Market Research Pack source files as the benchmark for depth and
+module coverage. The source pack contains 10 markdown modules (`01`, `02`, `03`,
+`04`, `05`, `07`, `09`, `10`, `11`, `12`); do not preserve the skipped numbering as
+a requirement. Preserve the analytical jobs.
+
+| Module | Job to be done | Required artifacts |
+|---|---|---|
+| TAM and sizing | Bound the market, reconcile top-down and bottom-up frames, and show growth math | Top-down layers, sub-market deep dives, bottom-up buyer/spend build, TAM/SAM/SOM table, CAGR checks, assumptions |
+| Competitive landscape | Explain who controls each layer, where substitutes matter, and where white space remains | Stack/control map, competitor profiles, threat matrix, white-space map, special protocol/platform analysis when relevant |
+| Thesis stress-test | Attack the working thesis before it hardens into a recommendation | Validation evidence, numbered holes, bottleneck ranking, alternative thesis, scorecard, revised thesis |
+| Trends and timing | Separate durable forces from hype and identify adoption sequence | Macro/micro trends, disruption stack, bottleneck cascade, investment signals, adoption timeline |
+| SWOT and Porter's | Translate internal/external position into industry attractiveness and strategic constraints | SWOT with cross-analysis, Five Forces ratings, force-by-force implications |
+| GTM strategy | Define the first target customer, positioning, channels, partnerships, and launch path | ICP, positioning by competitor, phasing, channel/partnership strategy, land-and-expand motion, revenue model |
+| Financial and unit economics | Quantify how value converts into revenue, margin, payback, and capital need | Unit economics, 3-year projection, sensitivity analysis, build/buy/partner economics, investment requirement |
+| Risk and scenarios | Make downside explicit and action-oriented | Risk register, heatmap, scenarios, mitigations, priority risk actions |
+| Market entry | Decide how to enter and what must be true to win | Market attractiveness score, entry mode comparison, localization, roadmap, investment plan, success metrics |
+| Executive synthesis | Compress the pack into a CEO-ready decision memo | Current-state assessment, strategic options, recommendation, 90-day actions, resource needs, decision framework, final scorecard |
+
+Objectivity rule: write each module for the company, market, asset, or investor in
+scope. Do not default to Pattern as the beneficiary, buyer, or operator unless
+Pattern is explicitly the subject. Use "the evaluated company should...", "the
+acquirer should...", "the operator should...", or the named company/client instead
+of defaulting to a Pattern-facing recommendation.
+
 ## Strategic Analysis Variant
 
 Use this variant when the deliverable is closer to a pricing, product-economics,
 business-model, regulatory, or strategic-design analysis than a broad market map.
 The reference standard is `Pattern_PAYG_Token_Pricing_Analysis_5.docx`.
+Use it as an analytical structure benchmark, not as a reason to make the output
+Pattern-specific.
 
 Add a `strategic-analysis-plan.md` before drafting. It must select the modules that
 change the decision and explain omissions. Required modules by trigger:
@@ -142,7 +170,7 @@ Market sizing fails when scope and math drift. Apply these checks:
 - Separate reference markets, analytic slices, and upside scenarios.
 - Do not sum overlapping markets unless overlap is removed.
 - Tie every CAGR to start value, end value, and number of years.
-- Label Pattern-built estimates separately from third-party market figures.
+- Label internal/client-built estimates separately from third-party market figures.
 - Treat vendor or commissioned studies as directional unless independently triangulated.
 
 Core formula:
@@ -161,7 +189,7 @@ Use these labels throughout the report and in the appendix:
 | Estimate | Reasoned calculation from credible inputs | Use with assumptions visible |
 | Hypothesis | Plausible but not yet proven interpretation | State confirming evidence needed |
 | Vendor claim | Vendor, PR, or commissioned customer claim | Directional only |
-| Pattern analytic | Internal model, bridge, or scenario | Keep separate from consensus |
+| Internal/client analytic | Internal model, bridge, scenario, or author-built estimate | Keep separate from consensus and point to the underlying artifact or assumptions |
 
 ### 7. Write The Executive Summary Last
 
@@ -184,7 +212,7 @@ Before producing the final DOCX, run:
 1. `writing-style` for prose quality, claim tagging, and data-gap language.
 2. `claim-scrutinizer` for claim integrity, source strength, and derivative math.
 3. `red-team` for the strongest opposing case.
-4. `pattern-docx` for the final Pattern-branded Word output.
+4. `pattern-docx` for the final Pattern-branded Word output when requested.
 5. `doc-quality-checker` after the file exists.
 
 ## Section Quality Gates
@@ -220,18 +248,20 @@ Run a full standalone market research report on [market/company/category].
 Decision to support: [enter/invest/acquire/partner/prioritize/avoid].
 Geography: [scope].
 Time horizon: [time horizon].
-Output: Pattern-branded DOCX.
+Output: DOCX. Use Pattern-branded formatting only when requested.
 
 Use market-research in Full mode. Load mckinsey-consultant first, then complete
 the research brief. Use the gold-standard report architecture: cover/KPI strip,
 scope, executive summary, market sizing, customer segmentation, competitive
 landscape, pricing/economics, technology trends, regulatory/risk, moat analysis,
 strategic implications, and appendix. Label claims as fact, estimate, hypothesis,
-vendor claim, or Pattern analytic. Show market-sizing arithmetic and include
+vendor claim, management claim, or internal/client analytic. Show market-sizing arithmetic and include
 decision-grade artifacts in every major section. If the question involves pricing,
 usage-based monetization, product economics, regulation, launch design, moat durability,
 or strategic underwriting, create a strategic-analysis-plan and include the relevant
-PAYG-style modules. Run writing-style,
+PAYG-style modules. Keep recommendations objective and specific to the evaluated
+company, market, asset, or investor; do not reference Pattern unless Pattern is the
+actual subject or source artifact. Run writing-style,
 claim-scrutinizer, red-team, pattern-docx, and doc-quality-checker before final
 delivery.
 ```

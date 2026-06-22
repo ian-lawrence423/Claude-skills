@@ -360,6 +360,19 @@ MARKET_ARCH = [
     ["Appendix", "Methodology, source labels, arithmetic corrections, open questions."],
 ]
 
+MARKET_PACK_MODULES = [
+    ["TAM and sizing", "Top-down layers, bottom-up buyer/spend build, TAM/SAM/SOM, CAGR checks."],
+    ["Competitive landscape", "Stack/control map, competitor profiles, threat matrix, white-space map."],
+    ["Thesis stress-test", "Validation, numbered holes, bottleneck ranking, alternative thesis, scorecard."],
+    ["Trends and timing", "Macro/micro trends, disruption stack, bottleneck cascade, adoption timeline."],
+    ["SWOT and Porter's", "SWOT cross-analysis, Five Forces ratings, integrated implication."],
+    ["GTM strategy", "ICP, positioning, launch phasing, channels, partnerships, revenue model."],
+    ["Financial and unit economics", "Unit economics, three-year model, sensitivity, build/buy/partner, payback."],
+    ["Risk and scenarios", "Risk register, heatmap, scenarios, risk-weighted actions."],
+    ["Market entry", "Market attractiveness score, entry mode comparison, roadmap, investment plan."],
+    ["Executive synthesis", "CEO brief, strategic options, recommendation, 90-day actions, final scorecard."],
+]
+
 PIVOTAL_GUIDES = [
     ["Market Research Gold Standard", "docs/Market_Research_Gold_Standard_Guide.docx", "Full standalone market research report."],
     ["IC Memo Gold Standard", "docs/IC_Memo_Gold_Standard_Guide.docx", "Full IC memo with gates, NTBs, returns bridge, risks, and open items."],
@@ -754,7 +767,7 @@ def build_finance_doc() -> None:
 def build_market_research_doc() -> None:
     doc = setup_doc(
         "Market Research Gold Standard Guide",
-        f"How to create the most thorough Pattern market research document | {DATE_LABEL}",
+        f"How to create the most thorough objective market research document | {DATE_LABEL}",
     )
     add_callout(
         doc,
@@ -767,13 +780,19 @@ def build_market_research_doc() -> None:
         [
             "State the decision before research begins.",
             "Use a MECE hypothesis tree to identify what must be true.",
-            "Separate facts, estimates, hypotheses, vendor claims, and Pattern analytics.",
+            "Separate facts, estimates, hypotheses, vendor claims, management claims, and internal/client analytics.",
             "Build artifacts in every major section; prose-only sections are incomplete.",
             "End with actions, underwriting implications, and open questions.",
         ],
     )
     add_h1(doc, "Canonical Report Architecture")
     add_table(doc, ["Section", "Minimum standard"], MARKET_ARCH, [3300, 7500])
+    add_h1(doc, "Full Market Pack Module Spine")
+    add_para(
+        doc,
+        "For the most comprehensive market pack, preserve the analytical jobs from the Commerce Market Research Pack source modules while keeping the output objective and specific to the evaluated company, market, asset, operator, or investor.",
+    )
+    add_table(doc, ["Module", "Minimum standard"], MARKET_PACK_MODULES, [3300, 7500])
     add_h1(doc, "Workflow")
     add_table(
         doc,
@@ -795,7 +814,7 @@ def build_market_research_doc() -> None:
             "Separate reference markets, analytic slices, and upside scenarios.",
             "Do not sum overlapping markets unless overlap is removed.",
             "Tie every CAGR to start value, end value, and number of years.",
-            "Label Pattern-built estimates separately from third-party market figures.",
+            "Label internal/client-built estimates separately from third-party market figures.",
             "Treat vendor or commissioned studies as directional unless independently triangulated.",
         ],
     )
@@ -809,7 +828,7 @@ def build_market_research_doc() -> None:
             ["Estimate", "Reasoned calculation from credible inputs.", "Show assumptions."],
             ["Hypothesis", "Plausible but unproven interpretation.", "State confirming evidence needed."],
             ["Vendor claim", "Vendor, PR, or commissioned customer claim.", "Directional only."],
-            ["Pattern analytic", "Internal model, bridge, or scenario.", "Keep separate from consensus."],
+            ["Internal/client analytic", "Internal model, bridge, scenario, or author-built estimate.", "Keep separate from consensus and show assumptions."],
         ],
         [1700, 5200, 3900],
     )

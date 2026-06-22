@@ -12,7 +12,7 @@
 ### The Decision
 [What specific decision will this research support? Be precise.
 e.g., "Evaluate X as an acquisition target at a $Y valuation"
-e.g., "Determine whether Pattern should enter the Z market"
+e.g., "Determine whether [company/operator/investor] should enter the Z market"
 e.g., "Assess whether A is a viable strategic partner or competitive threat"]
 
 This is not the same as the research question. The decision is what gets made.

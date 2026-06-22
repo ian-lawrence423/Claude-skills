@@ -6,7 +6,8 @@ asks for a lighter output or a different structure.
 Source standards:
 - `Commerce_Market_Research_v9.docx` from the Pattern research artifact library.
   Treat this document as the benchmark for broad market-research depth, structure,
-  artifact density, and Pattern DOCX presentation.
+  artifact density, and professional DOCX presentation. Use the structure, not the
+  Pattern-specific point of view.
 - `Pattern_PAYG_Token_Pricing_Analysis_5.docx` from the Pattern research artifact
   library. Treat this document as the benchmark for strategic business-model,
   pricing, product-economics, regulatory, risk, and underwriting analysis.
@@ -23,7 +24,7 @@ a CEO, investor, or strategy lead understand:
 5. How vendors monetize and whether the economics are attractive
 6. Which technology, regulatory, and market forces change the category
 7. Which companies have structural vs. transient advantages
-8. What the strategic implications are for Pattern, an operator, or an investor
+8. What the strategic implications are for the evaluated company, operator, or investor
 
 ## Canonical Report Architecture
 
@@ -45,10 +46,40 @@ Use this top-level structure for Full-mode DOCX reports:
 Do not organize the report as a raw L4/L3/L2/L1 pyramid. Use the pyramid to
 research. Use the architecture above to communicate.
 
+## Full Market Pack Module Spine
+
+The Commerce Market Research Pack source set is the depth benchmark for full
+market research. It contains 10 source markdown modules (`01`, `02`, `03`, `04`,
+`05`, `07`, `09`, `10`, `11`, `12`). The skipped numbers are not a workflow
+requirement; the module jobs below are.
+
+| Module | Required questions | Required artifacts |
+|---|---|---|
+| 01 - TAM and market sizing | How large is the market, what is in/out of scope, and which sizing frame is decision-useful? | Top-down layers, sub-market deep dives, bottom-up buyer/spend build, TAM/SAM/SOM summary, CAGR table, analyst/source comparison, assumptions |
+| 02 - Competitive landscape | Who controls each layer, which substitutes matter, and where is defensible white space? | Stack/control map, competitor-by-competitor analysis, threat matrix, white-space map, platform/protocol special analysis |
+| 03 - Thesis stress-test | What would make the working thesis wrong? | Evidence-supported validation, numbered holes, bottleneck ranking, alternative thesis, thesis scorecard, revised thesis |
+| 04 - Trends and timing | Which trends are real, which are hype, and what unlocks adoption? | Macro trends, micro trends, technology disruption stack, bottleneck cascade, investment signals, adoption timeline |
+| 05 - SWOT and Porter's | What are the internal/external constraints and industry attractiveness? | SWOT with cross-analysis, Five Forces ratings, force-by-force implications, integrated recommendation |
+| 07 - GTM strategy | Which ICP, positioning, channel, partnership, and launch sequence should be prioritized? | ICP table, competitor-specific positioning, launch phasing, channel strategy, partnership priorities, land-and-expand motion, pricing/revenue model |
+| 09 - Financial model and unit economics | What are the economics, investment need, payback, and build/buy/partner trade-offs? | Unit economics, 3-year projection, sensitivity table, build/buy/partner economics, capital requirement, payback |
+| 10 - Risk and scenarios | What can go wrong, how severe is it, and what mitigations are practical? | Risk register, heatmap, scenario plan, top risk-weighted actions |
+| 11 - Market entry | Should the subject enter, how, where, and in what sequence? | Market attractiveness score, entry mode comparison, localization requirements, 12-month roadmap, investment plan, success metrics |
+| 12 - Executive synthesis | What is the final answer and what decisions follow? | CEO brief, current-state assessment, strategic options, recommended strategy, 90-day actions, resource needs, decision framework, final scorecard |
+
+Use the full spine when the user asks for the most comprehensive report, board/CEO
+market pack, market entry decision, new strategic category assessment, or full
+deal/IC market work. For narrower questions, select the relevant modules and state
+which ones were intentionally omitted.
+
+Subject-neutrality rule: do not make Pattern the default beneficiary of the
+analysis. Write implications for the named company, asset, operator, investor, or
+market in scope. Mention Pattern only when Pattern is explicitly the subject,
+client, data source, formatting standard, or source artifact.
+
 ## Strategic Analysis Variant
 
 Use this variant when the question is not just "what does the market look like?"
-but whether Pattern, an operator, an investor, or a product team should launch,
+but whether the evaluated company, operator, investor, or product team should launch,
 price, underwrite, or redesign a strategic model. Common triggers:
 
 - Pricing, usage-based pricing, credit packs, consumption models, monetization,
@@ -67,7 +98,7 @@ select the modules that change the decision and state why omitted modules do not
 | Module | Use when | Required artifact | Quality gate |
 |---|---|---|---|
 | Benchmark comparables | The decision depends on market norms, pricing models, contract terms, or vendor behavior | Benchmark summary table with source, model type, price/term, implication | Every benchmark row has a source type and an implication; no vendor claim is treated as proof |
-| Rule / accounting / policy analysis | Rev-rec, legal, regulatory, compliance, or marketplace rules shape design | Rule interpretation table and recommended defensible structure | Distinguish rule text, interpretation, and Pattern recommendation |
+| Rule / accounting / policy analysis | Rev-rec, legal, regulatory, compliance, or marketplace rules shape design | Rule interpretation table and recommended defensible structure | Distinguish rule text, interpretation, and the recommendation for the subject |
 | Design implications | The output should guide a product, pricing, GTM, or finance design choice | Numbered implication list with evidence basis and owner | Each implication is action-oriented and traceable to a prior finding |
 | Pre-mortem | The strategy could fail through market, competitive, model, customer, technology, or execution pathways | Failure mode registry across MECE categories plus compound failure paths | Failure modes state mechanism, boundability, and data that would sharpen the assessment |
 | Boundability assessment | The team must know what is known, gettable, or structurally unknowable | Boundability table: issue, boundability state, what we know, what would sharpen it | Do not assign false precision to unboundable items |
@@ -118,7 +149,7 @@ Market sizing is where poor research most often fails. Apply these rules:
 1. Separate reference markets, analytic slices, and upside scenarios.
 2. Do not sum overlapping markets unless the overlap is explicitly removed.
 3. Every CAGR must tie mathematically to its start year, end year, and endpoint.
-4. If a figure is a Pattern internal construction, label it as such.
+4. If a figure is an internal/client construction, label it as such and show the assumptions.
 5. If a vendor or commissioned report supplies the figure, label the source type.
 6. Use ranges when sources diverge and explain why the divergence exists.
 7. Keep agentic, AI, or other emerging upside separate from the base market unless
@@ -140,7 +171,7 @@ Every substantive claim must be labelable by source type:
 | Official / primary | Filings, regulator publications, official company disclosures, government or association data | Strongest evidence; cite directly |
 | Independent research | Analyst reports, industry benchmarks, reputable third-party research | Use for market structure and benchmarks; check methodology |
 | Vendor / commissioned | Vendor marketing, PR, commissioned TEI studies, self-reported customer value | Directional only; do not treat as independent proof |
-| Pattern analytic | Internal calculations, scenario models, bridges, estimates | Label separately; do not mix with consensus figures |
+| Internal/client analytic | Internal calculations, scenario models, bridges, estimates | Label separately; do not mix with consensus figures; point to the model or assumptions |
 | Hypothesis | Plausible but unproven interpretation | State what evidence would confirm or reject it |
 
 Source labels belong in the appendix and should be referenced inline where they
@@ -256,7 +287,7 @@ The report is not ready until all gates pass:
 - [ ] Market sizing separates reference markets, analytic cuts, and upside scenarios
 - [ ] Every CAGR and market total ties arithmetically
 - [ ] Vendor and commissioned claims are labeled separately from independent evidence
-- [ ] Pattern estimates are labeled and not blended into consensus figures
+- [ ] Internal/client estimates are labeled and not blended into consensus figures
 - [ ] Competitive analysis includes substitutes and platform-native threats
 - [ ] Moat analysis classifies durability and replicability horizon
 - [ ] Regulatory claims include scope and a "do not over-claim" guardrail

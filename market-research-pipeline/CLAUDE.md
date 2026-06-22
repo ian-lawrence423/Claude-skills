@@ -46,6 +46,11 @@ Runs a six-phase market research pipeline:
 | P6 — Output | Pattern-branded DOCX or PPTX |
 
 Full-mode reports must follow `market-research/references/gold-standard-report-template.md`.
+For the most comprehensive market pack, use the Commerce Pack module spine:
+TAM, competitive landscape, thesis stress-test, trends/timing, SWOT/Porter's,
+GTM, financial/unit economics, risk/scenarios, market entry, and executive synthesis.
+Keep the content objective and relevant to the evaluated company, market, asset,
+operator, or investor; do not make Pattern the default recommendation target.
 `doc-quality-checker` runs after the branded output is produced.
 
 Expected runtime: 25–45 minutes depending on market complexity and number of competitors.

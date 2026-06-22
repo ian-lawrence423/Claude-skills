@@ -210,6 +210,31 @@ Create `{WORK_DIR}/artifact-plan.md` mapping each gold-standard section to the
 decision-grade artifact it will contain. Do not advance to output if any major
 section is prose-only.
 
+Create `{WORK_DIR}/comprehensive-market-pack-plan.md` before any draft agent runs.
+Use the Commerce Market Research Pack module spine as the default for Full-mode
+standalone reports. The source pack used 10 markdown modules (`01`, `02`, `03`,
+`04`, `05`, `07`, `09`, `10`, `11`, `12`); preserve the analytical jobs, not the
+skipped numbering.
+
+| Pack module | Include? | Draft target | Required artifact |
+|---|---|---|---|
+| 01 TAM and market sizing | Yes / No | context-and-market-sizing.md or 01-tam.md | Top-down layers, bottom-up build, TAM/SAM/SOM, CAGR checks |
+| 02 Competitive landscape | Yes / No | competitive-landscape.md or 02-competitive.md | Stack/control map, competitor profiles, threat matrix, white-space map |
+| 03 Thesis stress-test | Yes / No | 03-thesis-stresstest.md | Validation, numbered holes, bottleneck ranking, alternative thesis, scorecard |
+| 04 Trends and timing | Yes / No | technology-trends.md or 04-trends.md | Macro/micro trends, disruption stack, bottleneck cascade, adoption timeline |
+| 05 SWOT and Porter's | Yes / No | 05-swot-porter.md | SWOT cross-analysis, Five Forces ratings, integrated implication |
+| 07 GTM strategy | Yes / No | 07-gtm.md | ICP, positioning, launch phasing, channels, partnerships, revenue model |
+| 09 Financial and unit economics | Yes / No | pricing-economics.md or 09-financial.md | Unit economics, 3-year model, sensitivity, build/buy/partner, payback |
+| 10 Risk and scenarios | Yes / No | 10-risk.md | Risk register, heatmap, scenarios, risk-weighted actions |
+| 11 Market entry | Yes / No | 11-market-entry.md | Market attractiveness score, entry mode comparison, roadmap, investment plan |
+| 12 Executive synthesis | Yes / No | exec-summary.md | CEO brief, strategic options, recommendation, 90-day actions, final scorecard |
+
+For a full market pack, every module should be `Yes` unless the decision makes a
+module irrelevant and the omission reason is written. For narrower reports, select
+only decision-relevant modules. Keep all recommendations objective and specific to
+the evaluated company, market, asset, operator, or investor. Do not default to
+Pattern unless Pattern is the subject.
+
 Create `{WORK_DIR}/strategic-analysis-plan.md` before any draft agent runs. Use it
 to decide whether the Strategic Analysis Variant from the gold-standard template is
 required. It is required when QUESTION or the evidence base depends on pricing,
@@ -248,6 +273,8 @@ source/scope table, and arithmetic checks.
 ### 4b — Gold-standard analytical sections + Competitor profiles (parallel)
 Read `{WORK_DIR}/themes.md` to determine theme count N.
 Read `{WORK_DIR}/research/l2-competitive.md` to extract named competitors.
+Read `{WORK_DIR}/comprehensive-market-pack-plan.md` to determine which full-pack
+module drafts are required.
 Read `{WORK_DIR}/strategic-analysis-plan.md` to determine which strategic modules
 become additional `draft-section.md` assignments.
 
@@ -258,6 +285,11 @@ Dispatch in parallel:
 - For each strategic module marked `Yes`, invoke `draft-section.md` with
   SECTION_NAME equal to the module name and SECTION_ARTIFACT from
   `strategic-analysis-plan.md`.
+  Writes: `{WORK_DIR}/draft/[module-slug].md`
+- For each comprehensive-market-pack module marked `Yes` and not already covered by
+  context-and-market-sizing or another base section, invoke `draft-section.md` with
+  SECTION_NAME equal to the pack module and SECTION_ARTIFACT from
+  `comprehensive-market-pack-plan.md`.
   Writes: `{WORK_DIR}/draft/[module-slug].md`
 - For each named competitor: invoke `draft-competitor.md` with COMPETITOR=[name]
   Writes: `{WORK_DIR}/draft/competitor-[name].md`
@@ -316,6 +348,7 @@ Non-blocking: `WOUND` attacks where risk is acknowledged in text.
 **Gate 3 — check before Phase 6:**
 - [ ] Zero open KILL-rated claims or attacks
 - [ ] All thesis-critical DATA GAPs either resolved or explicitly flagged in exec summary
+- [ ] comprehensive-market-pack-plan modules marked `Yes` have corresponding draft sections
 - [ ] Strategic-analysis-plan modules marked `Yes` have corresponding draft sections
 - [ ] open-issues.md written (even if empty)
 

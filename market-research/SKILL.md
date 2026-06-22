@@ -571,7 +571,7 @@ Confirmed evidence [F] — lead with hardest evidence; named sources; include co
   • ...
 
 Conditional evidence [E] — reasoned estimates with stated assumptions:
-  • [Finding] [E — Pattern derivation from X and Y, assumption: Z]
+  • [Finding] [E — internal/client derivation from X and Y, assumption: Z]
   • ...
 
 Hypothesis [H] — directionally plausible but not yet tested:
@@ -610,9 +610,14 @@ Read: {SKILL_DIR}/references/gold-standard-report-template.md
 
 The gold-standard template is mandatory for full market research reports unless Ian
 explicitly asks for a lighter output or a different structure. It is the consistency
-standard for thoughtful Pattern research: fixed report architecture, required
-analytical artifacts, market-sizing arithmetic checks, evidence labels, and final QA
-gates.
+standard for thoughtful research: fixed report architecture, required analytical
+artifacts, market-sizing arithmetic checks, evidence labels, and final QA gates.
+
+**Subject-neutrality rule:** keep the analysis objective and relevant to the
+company, market, asset, operator, or investor being evaluated. Do not make Pattern
+the default beneficiary, buyer, operator, or recommendation target unless Pattern is
+explicitly the subject. Mention Pattern only as a formatting standard, source
+artifact, source of a real internal model, or named client/subject.
 
 **Strategic-analysis variant:** When the research question is about pricing,
 business model design, product economics, rev-rec/accounting treatment, regulatory
@@ -641,10 +646,34 @@ and unit-economics sections.
 8.  Technology Trends       — quantified signals, disruption map, timing
 9.  Regulatory / Risk       — documented scope, implications, do-not-overclaim guardrails
 10. Competitive Moat        — moat types, replicability horizon, scorecard, verdicts
-11. Strategic Implications  — key findings and what Pattern/operator/IC should underwrite
+11. Strategic Implications  — key findings and what the subject/operator/investor/IC should underwrite
 12. Appendix                — source labels, methodology, arithmetic corrections,
                                detailed sizing model, CRAAP scores
 ```
+
+### Full market pack module spine
+
+When Ian asks for the most comprehensive market research, a board/CEO market pack,
+a market entry assessment, or a full deal/IC market workstream, use the Commerce
+Market Research Pack module spine as the default depth standard. The source pack
+contains 10 markdown modules (`01`, `02`, `03`, `04`, `05`, `07`, `09`, `10`,
+`11`, `12`); the skipped numbers are not a requirement.
+
+| Module | Required output |
+|---|---|
+| TAM and sizing | Top-down layers, sub-market deep dives, bottom-up buyer/spend build, TAM/SAM/SOM summary, CAGR checks, analyst/source comparison, assumptions |
+| Competitive landscape | Stack/control map, competitor profiles, threat matrix, white-space map, platform/protocol special analysis |
+| Thesis stress-test | Evidence validation, numbered holes, bottleneck ranking, alternative thesis, scorecard, revised thesis |
+| Trends and timing | Macro/micro trends, technology disruption stack, bottleneck cascade, investment signals, adoption timeline |
+| SWOT and Porter's | SWOT with cross-analysis, Five Forces ratings, force-by-force implications |
+| GTM strategy | ICP, positioning by competitor, launch phasing, channel strategy, partnership priorities, land-and-expand motion, pricing/revenue model |
+| Financial model and unit economics | Unit economics, 3-year projection, sensitivity analysis, build/buy/partner economics, capital requirement, payback |
+| Risk and scenarios | Risk register, heatmap, scenario planning, top risk-weighted actions |
+| Market entry | Market attractiveness score, entry mode comparison, localization, roadmap, investment requirements, success metrics |
+| Executive synthesis | CEO brief, current-state assessment, strategic options, recommendation, 90-day actions, resource needs, decision framework, final scorecard |
+
+For narrower reports, select only the modules that change the decision and state
+why omitted modules are not necessary.
 
 ### Strategic-analysis module selection
 
@@ -666,6 +695,10 @@ plan answers: which decision-grade modules are required, which are omitted, and 
 | JTBD / WTP | Adoption, budget, or price ceiling is uncertain | Buyer segment table with JTBD, pain, alternative cost, and WTP signal |
 | Technology disruption map | Open-source, platform, AI, or infrastructure shifts can change economics | Trend/disruption table with quantified signal, trajectory, impact, and response |
 | Unit economics model | Margin, contribution, payback, or scale economics drives the recommendation | Scenario table with volume cases, cost lines, assumptions, and breakeven logic |
+| GTM / channel strategy | ICP, positioning, channel, partnership, launch sequence, or monetization path changes the recommendation | ICP and launch-phasing table with channel/partner priorities and success metrics |
+| Market entry roadmap | The decision is whether, where, or how to enter a market | Market attractiveness score, entry mode comparison, localization requirements, roadmap, investment plan |
+| Risk register / scenario plan | Downside cases, kill criteria, or board-level risk posture matter | Risk register, heatmap, scenarios, mitigations, and top risk-weighted actions |
+| Thesis stress-test | A working thesis exists and must be challenged before synthesis | Validation evidence, numbered holes, bottleneck ranking, alternative thesis, and final scorecard |
 
 Do not force every module into every report. Missing a decision-relevant module is
 a quality failure; adding an irrelevant module is filler and violates claim economy.

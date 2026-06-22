@@ -27,8 +27,9 @@ Use two headings:
 1. `Context and Scope`
 2. `Market Sizing`
 
-All claims retain inline citations from L4 research. Pattern internal constructions
-must be labeled separately from external reference markets.
+All claims retain inline citations from L4 research. Internal/client analytic
+constructions must be labeled separately from external reference markets and must
+show assumptions.
 
 If a strategic-analysis-plan exists, read it before drafting. Any module that depends
 on market boundary, buyer population, regulatory scope, data sensitivity, or unit
