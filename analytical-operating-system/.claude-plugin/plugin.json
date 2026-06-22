@@ -1,8 +1,8 @@
 {
   "name": "analytical-operating-system",
   "version": "1.0.0",
-  "description": "Evidence-control layer for deal work: F/E/H claim tagging, belief registers, Bayesian updates, kill triggers, and PROCEED / REPRICE / PASS / RESOLVE FIRST posture.",
-  "category": "deal-intelligence",
+  "description": "Evidence-control layer for any analysis or recommendation: F/E/H claim tagging, belief registers, Bayesian updates, kill triggers, and PROCEED / ADJUST / PASS / RESOLVE FIRST posture. Pairs with mckinsey-consultant.",
+
   "author": {
     "name": "Ian Lawrence"
   },

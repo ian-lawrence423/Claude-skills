@@ -1,25 +1,27 @@
 ---
 name: analytical-operating-system
 description: >-
-  Track deal evidence states, belief registers, Bayesian updates, kill triggers, and
-  decision posture for IC memo, diligence, and investment thesis workflows.
+  Track evidence states, belief registers, Bayesian updates, kill triggers, and
+  decision posture for any analysis, recommendation, or strategic decision.
 intent: >-
-  Enforces investment evidence discipline: F/E/H claim tagging, belief-register
-  initialization, Bayesian updates, kill triggers, and PROCEED / REPRICE / PASS / RESOLVE
-  FIRST decision posture. Use with deal-master, IC memo, diligence, and investment thesis
-  workflows after mckinsey-consultant has framed the problem.
+  Enforces evidence discipline across any analytical workstream: F/E/H claim tagging,
+  belief-register initialization, Bayesian updates, kill triggers, and PROCEED / ADJUST /
+  PASS / RESOLVE FIRST decision posture. Use with mckinsey-consultant after it has framed
+  the problem — this skill owns the operating discipline that keeps beliefs auditable as
+  evidence changes.
 type: workflow
 ---
 
 # Analytical Operating System - Evidence Discipline
 
-This skill is the evidence-control layer for investment and deal work. It is not the primary
-analytical method. `mckinsey-consultant` owns problem definition, MECE issue trees, strategy
-dimensions, Pyramid Principle, analytical modules, and the Six Screening Questions. This skill
-owns the operating discipline that keeps investment beliefs auditable as evidence changes.
+This skill is the evidence-control layer for any analysis or recommendation. It is not the
+primary analytical method. `mckinsey-consultant` owns problem definition, MECE issue trees,
+hypothesis framing, Pyramid Principle communication, and analytical modules. This skill owns
+the operating discipline that keeps beliefs traceable, auditable, and updated as evidence
+changes.
 
-Read this file after loading `mckinsey-consultant` for deal, diligence, IC memo, or investment
-thesis work.
+Read this file after loading `mckinsey-consultant` for any workstream where conclusions must
+hold up under scrutiny or evolve as new information arrives.
 
 ---
 
@@ -27,9 +29,9 @@ thesis work.
 
 | Skill | Owns | Does Not Own |
 |---|---|---|
-| `mckinsey-consultant` | Problem framing, issue trees, strategy dimensions, analytical modules, investment gates | Persistent belief registers or phase-to-phase evidence logs |
+| `mckinsey-consultant` | Problem framing, issue trees, hypothesis, analytical modules, decision criteria | Persistent belief registers or phase-to-phase evidence logs |
 | `analytical-operating-system` | Evidence-state tagging, belief registers, Bayesian updates, kill triggers, decision posture | New research collection, source validation, or MECE framework design |
-| `market-research` | Source strategy, evidence gathering, CRAAP validation, triangulation | Final investment posture or belief-register ownership |
+| `market-research` | Source strategy, evidence gathering, CRAAP validation, triangulation | Final posture or belief-register ownership |
 | `writing-style` | Final prose self-review and claim-language hygiene | Analytical method or operating workflow |
 
 **Rule:** If the question is "how should we structure the problem?", use `mckinsey-consultant`.
@@ -41,16 +43,16 @@ use this skill on top of `mckinsey-consultant`.
 ## When to Use
 
 Use this skill for:
-- Deal-master, IC memo pipeline, diligence, investment thesis, and investment update workflows
-- Any active deal where new evidence may confirm, weaken, or kill a load-bearing assertion
-- Any recommendation that needs a PROCEED / REPRICE / PASS / RESOLVE FIRST posture
-- Any workstream where a belief register or thesis-change log must survive across phases
+- Any recommendation where beliefs must survive contact with new evidence
+- Any multi-phase workstream where thesis drift is a risk
+- Any analysis where load-bearing assertions need explicit confidence levels
+- Any decision that requires a clear posture: PROCEED, ADJUST, PASS, or RESOLVE FIRST
 
 Do not use this skill for:
 - Quick factual answers, definitions, or generic strategy frameworks
 - Research tasks where the job is only to collect and validate sources
 - Final prose cleanup where `writing-style` already owns the pass
-- Standalone issue-tree work with no tracked investment thesis
+- Standalone issue-tree work with no tracked thesis or governing belief
 
 ---
 
@@ -64,8 +66,8 @@ Before applying this skill, collect the minimum operating context:
 | Current governing thesis | Yes | Establishes the belief being tested |
 | Materials or evidence list | Yes | Anchors [F] and [E] claims to sources |
 | Prior belief register | If available | Prevents silent thesis drift |
-| Open diligence questions | If available | Separates unresolved issues from conclusions |
-| Return or decision impact | If available | Prioritizes load-bearing assertions |
+| Open questions or gaps | If available | Separates unresolved issues from conclusions |
+| Stakes or decision impact | If available | Prioritizes load-bearing assertions |
 
 If the decision or thesis is unclear, return `RESOLVE FIRST` and name the one question that must
 be answered before continuing.
@@ -101,7 +103,7 @@ Load `mckinsey-consultant` first. Capture:
 - Issue tree branches
 - Day-1 hypothesis
 - 20/80 drivers
-- Investment gates or strategy dimensions in scope
+- Key decision criteria or analytical dimensions in scope
 
 This skill does not rebuild that structure. It converts the structure into an auditable evidence
 operating system.
@@ -112,10 +114,10 @@ Extract only assertions that can change the decision:
 - Thesis pillars
 - Need-to-believe statements
 - Key risks
-- Return drivers
-- Diligence gaps
+- Value or impact drivers
+- Open questions or gaps
 
-Exclude background context, generic market commentary, and claims with no decision implication.
+Exclude background context, generic commentary, and claims with no decision implication.
 
 ### Step 3 - Build the Belief Register
 
@@ -123,7 +125,7 @@ Use this format:
 
 | ID | Assertion | Evidence State | Source / Basis | Prior | Latest Evidence | Posterior | Direction | Decision Impact |
 |---|---|---|---|---:|---|---:|---|---|
-| B1 | [load-bearing assertion] | [F/E/H] | [source or method] | [% or High/Med/Low] | [new evidence] | [% or High/Med/Low] | CONFIRMED / WEAKENED / KILLED / INSUFFICIENT | [PROCEED / REPRICE / PASS / RESOLVE FIRST impact] |
+| B1 | [load-bearing assertion] | [F/E/H] | [source or method] | [% or High/Med/Low] | [new evidence] | [% or High/Med/Low] | CONFIRMED / WEAKENED / KILLED / INSUFFICIENT | [PROCEED / ADJUST / PASS / RESOLVE FIRST impact] |
 
 Use numeric confidence only when there is a reasoned basis. Otherwise use High / Medium / Low
 and state what evidence would move the rating.
@@ -155,9 +157,9 @@ Every workstream ends with one posture:
 | Posture | Use When | Required Output |
 |---|---|---|
 | PROCEED | Thesis holds and remaining gaps are bounded | Next action and owner |
-| REPRICE | Thesis holds only with valuation, terms, or risk transfer adjustment | Required concession and reason |
+| ADJUST | Thesis holds only with modified scope, terms, or conditions | Required change and reason |
 | PASS | Thesis fails or unbounded risk remains | One-sentence failure reason |
-| RESOLVE FIRST | A specific unanswered question blocks the decision | Question, data source, owner, deadline |
+| RESOLVE FIRST | A specific unanswered question blocks the decision | Question, source, owner, deadline |
 
 Do not present options without a posture.
 
@@ -178,14 +180,15 @@ Never silently revise a prior position.
 ## Example
 
 Example prompt:
-> "Update the belief register after this customer call transcript and tell me whether the posture changed."
+> "Update the belief register after this new customer interview and tell me whether the posture changed."
 
 Expected use:
-- Extract only material assertions that can change the investment decision.
+- Extract only material assertions that can change the decision.
 - Update evidence states, priors, posteriors, and direction of change.
-- End with PROCEED, REPRICE, PASS, or RESOLVE FIRST plus the evidence that would change it.
+- End with PROCEED, ADJUST, PASS, or RESOLVE FIRST plus the evidence that would change it.
 
 ---
+
 ## Output Templates
 
 ### Evidence-Control Block
@@ -194,7 +197,7 @@ Expected use:
 Evidence-control summary
 Decision: [decision]
 Governing thesis: [one sentence]
-Current posture: PROCEED / REPRICE / PASS / RESOLVE FIRST
+Current posture: PROCEED / ADJUST / PASS / RESOLVE FIRST
 Most important assertion: [ID + assertion]
 Highest-risk gap: [specific question]
 Next evidence required: [source + owner + deadline]
@@ -208,7 +211,7 @@ the register.
 ### Decision Posture
 
 ```text
-Posture: [PROCEED / REPRICE / PASS / RESOLVE FIRST]
+Posture: [PROCEED / ADJUST / PASS / RESOLVE FIRST]
 Reason: [one sentence]
 Assumes: [top 2-3 conditions]
 Would change if: [single most likely reversal condition]
@@ -220,8 +223,8 @@ Next action: [owner, timeline, evidence expected]
 ## Anti-Patterns
 
 Never:
-- Use this skill to duplicate `mckinsey-consultant` issue trees or strategy dimensions
-- Treat a hypothesis as a fact because it appears in a polished memo
+- Use this skill to duplicate `mckinsey-consultant` issue trees or analytical dimensions
+- Treat a hypothesis as a fact because it appears in a polished document
 - Maintain a long register of non-material claims
 - Update the conclusion without updating the assertions that support it
 - Give a PROCEED posture while leaving an unbounded kill-risk unresolved
