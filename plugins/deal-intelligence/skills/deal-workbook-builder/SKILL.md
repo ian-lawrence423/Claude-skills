@@ -24,6 +24,15 @@ edit you run the quality check and fix all layout defects reported.
 
 Read this entire file before starting any build or edit.
 
+## Data-Room Stage Rule
+
+The deal workbook is a post-data-room output by default. It requires the source financial model, company financials, KPI exports, or clearly mapped data-room files.
+
+- **Pre-data-room:** only create a framework scaffold or missing-input map. Do not mark formula-linked tabs PASS without source model evidence.
+- **Post-data-room:** build or update the workbook after `shared/data-room-index.md` and `diligence/data-room-validation.md` exist, and link workbook assumptions to the validated NTB registry, driver tree, GTM diagnostic, and KPI tree.
+
+If required source data is unavailable, log the blocker in `shared/open-issues.md` and keep the workbook `BLOCKED` or `DEFERRED_WITH_BLOCKER`.
+
 ---
 
 ## Architecture

@@ -33,6 +33,15 @@ This skill is built primarily for B2B SaaS companies with some sales-led motion.
 
 ---
 
+## Data-Room Stage Rule
+
+The GTM diagnostic is post-data-room by default when it supports a deal process. It requires company GTM evidence such as CRM exports, ARR waterfall, pipeline, retention cohorts, bookings, sales headcount, quota, S&M spend, or management reporting.
+
+- **Pre-data-room:** use the skill only to define the required GTM data request and missing-input register.
+- **Post-data-room:** calculate metrics only from indexed and mapped company files or clearly labeled management-provided tables.
+
+If company GTM data is unavailable, produce `diligence/gtm-missing-inputs.md` or keep `diligence/gtm-metrics-diagnostic.xlsx` blocked; do not fill gaps with benchmark assumptions unless explicitly labeled.
+
 ## Skill architecture
 
 ```

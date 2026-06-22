@@ -30,6 +30,15 @@ deliverable for a deal team.
 
 Read this entire file before beginning.
 
+## Data-Room Stage Rule
+
+This skill runs in two information states:
+
+- **Pre-data-room:** produce the outside-in NTB registry, evidence-state map, kill triggers, and exact data-room requests. Do not clear a thesis-critical GAP with public evidence alone.
+- **Post-data-room:** update the NTB registry only after `shared/data-room-index.md` and `diligence/data-room-validation.md` exist. Every thesis-critical NTB must be confirmed, weakened, contradicted, or left as GAP against company-specific evidence.
+
+When this skill is part of `deal-master` / `new-deal-pipeline`, write or update `diligence/data-room-request-list.md` before the data-room gate and treat `diligence/data-room-validation.md` as the post-data-room authority.
+
 ---
 
 ## Skill Architecture — Where This Fits

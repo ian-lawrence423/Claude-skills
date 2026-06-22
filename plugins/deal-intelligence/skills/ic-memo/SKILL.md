@@ -40,6 +40,14 @@ Quality floor:
 - For full deal-pack work, `new-deal-pipeline/quality-contract.md` overrides this
   file where standards conflict.
 
+## Data-Room Stage Rule
+
+The final IC memo is post-data-room by default. It should consume `diligence/data-room-validation.md`, the confirmed NTB registry, validated driver tree, deal workbook, GTM diagnostic, KPI tree, and boundability output.
+
+Before data-room validation exists, any memo draft must be labeled **PROVISIONAL** and must keep company-specific claims as GAP, MGMT, or provisional. Do not turn pre-data-room outside-in evidence into final company-specific conclusions.
+
+If outside-in evidence and data-room evidence conflict, data-room validation becomes the source of truth and the conflict must appear in the memo's risks, open issues, or recommendation logic.
+
 ---
 
 ## Skill Architecture

@@ -23,6 +23,15 @@ The purpose of this skill is to turn a budget, forecast, or target metric into a
 4. define what should be tracked over time,
 5. convert underwriting assumptions into an operating cadence.
 
+## Data-Room Stage Rule
+
+The KPI tree is post-data-room by default when it supports deal underwriting. It should translate validated drivers, model assumptions, and GTM/workbook outputs into trackable operating metrics.
+
+- **Pre-data-room:** draft only a provisional KPI architecture and data request map from the outside-in driver tree.
+- **Post-data-room:** finalize KPI definitions, formulas, source systems, owners, cadences, thresholds, and actions only after `shared/data-room-index.md` and `diligence/data-room-validation.md` exist.
+
+If data-room materials do not include source systems or metric definitions, keep the KPI tree `PASS_WITH_GAPS` or `BLOCKED`; do not invent owners, cadences, or definitions.
+
 ## Core principle
 
 Always decompose:

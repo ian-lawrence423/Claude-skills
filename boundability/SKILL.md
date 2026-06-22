@@ -32,6 +32,15 @@ decision.
 
 Read this entire file before beginning.
 
+## Data-Room Stage Rule
+
+Boundability is a post-data-room underwriting output by default. It converts validated load-bearing drivers and diligence findings into underwriting treatment.
+
+- **Pre-data-room:** document preliminary issue objects, required evidence, and data-room asks, but do not classify the final underwriting treatment as boundable/partially boundable/unboundable from outside-in evidence alone.
+- **Post-data-room:** run final boundability only after `shared/data-room-index.md`, `diligence/data-room-validation.md`, the updated driver tree, and the updated NTB registry exist.
+
+If data-room evidence contradicts a load-bearing thesis claim, boundability must preserve the contradiction and cannot override a driver-tree HALT.
+
 ---
 
 ## Architecture

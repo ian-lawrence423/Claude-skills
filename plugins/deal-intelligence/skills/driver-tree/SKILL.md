@@ -36,6 +36,15 @@ input.
 
 Read this entire file before beginning.
 
+## Data-Room Stage Rule
+
+This skill runs in two information states:
+
+- **Pre-data-room:** build the outside-in driver tree and label nodes provisional where company evidence is required. Public evidence can tier a driver, but it cannot make a data-room-dependent driver final.
+- **Post-data-room:** retier and validate load-bearing drivers after `shared/data-room-index.md` and `diligence/data-room-validation.md` exist. Any contradiction between outside-in and data-room evidence updates the driver tree, belief register, and open issues.
+
+Do not hand off a driver tree as final to workbook, KPI tree, boundability, or IC memo unless post-data-room validation has run or the output is explicitly labeled provisional.
+
 ---
 
 ## Architecture
