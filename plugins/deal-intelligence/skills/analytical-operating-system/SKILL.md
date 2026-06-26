@@ -1,14 +1,14 @@
 ---
 name: analytical-operating-system
 description: >-
-  Track evidence states, belief registers, Bayesian updates, kill triggers, and
-  decision posture for any analysis, recommendation, or strategic decision.
+  Track evidence states, belief registers, Bayesian updates, and decision posture
+  for any analysis, recommendation, or strategic decision. Grounded in cited, traceable facts.
 intent: >-
   Enforces evidence discipline across any analytical workstream: F/E/H claim tagging,
-  belief-register initialization, Bayesian updates, kill triggers, and PROCEED / ADJUST /
-  PASS / RESOLVE FIRST decision posture. Use with mckinsey-consultant after it has framed
-  the problem — this skill owns the operating discipline that keeps beliefs auditable as
-  evidence changes.
+  belief-register initialization, Bayesian updates, and PROCEED / ADJUST / PASS / RESOLVE FIRST
+  decision posture. Every conclusion must be traceable to a named source or stated method.
+  Use with mckinsey-consultant after it has framed the problem — this skill owns the operating
+  discipline that keeps beliefs auditable and fact-grounded as evidence changes.
 type: workflow
 ---
 
@@ -30,7 +30,7 @@ hold up under scrutiny or evolve as new information arrives.
 | Skill | Owns | Does Not Own |
 |---|---|---|
 | `mckinsey-consultant` | Problem framing, issue trees, hypothesis, analytical modules, decision criteria | Persistent belief registers or phase-to-phase evidence logs |
-| `analytical-operating-system` | Evidence-state tagging, belief registers, Bayesian updates, kill triggers, decision posture | New research collection, source validation, or MECE framework design |
+| `analytical-operating-system` | Evidence-state tagging, belief registers, Bayesian updates, decision posture | New research collection, source validation, or MECE framework design |
 | `market-research` | Source strategy, evidence gathering, CRAAP validation, triangulation | Final posture or belief-register ownership |
 | `writing-style` | Final prose self-review and claim-language hygiene | Analytical method or operating workflow |
 
@@ -85,12 +85,13 @@ Every material assertion receives one state:
 | `[H]` | Hypothesis | Plausible but unproven; falsifiable and tied to a validation path |
 
 Downgrade rules:
-- `[F]` without a traceable source becomes `[E]` or `[H]`
-- `[E]` without method and assumptions becomes `[H]`
-- `[H]` without a validation path becomes an open question, not a thesis pillar
+- `[F]` without a named, traceable source must be downgraded to `[E]` or `[H]` immediately
+- `[E]` without an explicit method and stated assumptions must be downgraded to `[H]`
+- `[H]` without a concrete validation path is an open question and cannot anchor a conclusion
+- Polished prose or confident-sounding language does not upgrade evidence state; only sourced data does
 
-No thesis-critical assertion can rest on unsupported `[H]` evidence without being named as a
-decision risk.
+No thesis-critical assertion can rest on unsupported `[H]` evidence without being explicitly
+named as a decision risk with a path to resolution.
 
 ---
 
@@ -144,11 +145,10 @@ Decision implication: [what changes, if anything]
 ```
 
 Escalate immediately when:
-- A load-bearing assertion moves more than 20 percentage points
-- A load-bearing assertion falls below 40% confidence
-- New evidence contradicts a claimed `[F]`
-- A kill trigger is hit
-- The governing thesis changes
+- A load-bearing assertion moves more than 20 percentage points based on new cited evidence
+- A load-bearing assertion falls below 40% confidence and no additional evidence is in reach
+- New evidence from a named source contradicts a claimed `[F]`
+- The weight of evidence shifts the governing thesis materially
 
 ### Step 5 - Set Decision Posture
 
@@ -227,7 +227,7 @@ Never:
 - Treat a hypothesis as a fact because it appears in a polished document
 - Maintain a long register of non-material claims
 - Update the conclusion without updating the assertions that support it
-- Give a PROCEED posture while leaving an unbounded kill-risk unresolved
+- Give a PROCEED posture while leaving a material unresolved evidence gap unnamed
 - Use numeric confidence when the evidence only supports directional confidence
 
 ---
