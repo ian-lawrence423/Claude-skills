@@ -146,12 +146,73 @@ Fundamental pillar of McKinsey thinking developed in the 1960s-70s.
 
 ## Pyramid Principle
 
-Developed by Barbara Minto at McKinsey in the 1960s. Structures thinking from details to main conclusions.
+Developed by Barbara Minto at McKinsey in the 1960s. Governs three things: how to open a
+response, how points relate vertically, and how points relate horizontally.
 
-### Core Concept
+### Opening a response: SCQA
 
-**Bottom-up thinking:** Start with detailed facts, build to supporting insights, culminate in main conclusions
-**Top-down communication:** Present main conclusion first, then supporting arguments, then detailed evidence
+Every pyramid starts from a shared starting point, not the answer in isolation:
+
+- **Situation** — what is true and uncontested
+- **Complication** — what changed, or what's at stake
+- **Question** — the question the complication raises in the reader's mind (often implicit)
+- **Answer** — the governing thought — stated before any supporting argument
+
+Example (Minto's own case, from the training deck this section is drawn from):
+> Situation: Regional Bell Operating Company (RBOC) revenue growth has been slowing for five
+> years, driven mainly by long-distance access fees.
+> Complication: The FCC may auction spectrum that lets long-distance carriers bypass RBOCs
+> entirely.
+> Question: How should the RBOCs respond to protect growth?
+> Answer: RBOCs should invest in the PCS (personal communication service) market to protect
+> growth and avoid further share loss.
+
+### Vertical relationships: the Question/Answer test
+
+Every point below a line exists to answer a question the line above raises — usually "why?" or
+"how?". The answers to "why" questions are reasons; the answers to "how" questions are steps.
+A line only belongs in the pyramid if it is **necessary and sufficient** to prove the point
+above it — not merely related to it.
+
+### Horizontal relationships: inductive vs. deductive grouping
+
+Points at the same level must be logically grouped one of two ways:
+
+- **Inductive** — parallel ideas that share a common category and jointly imply the conclusion
+  above (e.g., three independent reasons market share will grow). Classic MECE grouping.
+- **Deductive** — a chained argument where each step follows logically from the one before
+  (A is true → therefore B → therefore C). The argument is only as strong as its weakest link;
+  attack the chain by attacking one link, not the whole.
+
+**Grouping checks (horizontal):**
+- No misfits — an item at a different level of abstraction, or one that doesn't point to the
+  same conclusion as its siblings, doesn't belong
+- No overlaps (confused logic) and no gaps (incomplete thinking)
+- Order is validated — chronological, structural, or by degree of importance, not arbitrary
+- Re-group if a branch exceeds roughly 6 inductive items or 4 chained deductive steps — short-
+  term memory holds about seven items at once (a convenient number is three); past that, split
+  and regroup rather than listing more
+
+### Building the pyramid: top-down vs. bottom-up
+
+- **Top-down** (hypothesis already visible): state the answer, ask what question it answers,
+  draft the 2-3 key lines that answer that question, then check each key line the same way —
+  repeat downward until every line is backed by hard evidence
+- **Bottom-up** (hypothesis not yet visible): list the points you're already confident of, find
+  what they have in common (the inductive grouping), and let the conclusion emerge from that
+  commonality — the conclusion becomes the line above
+
+Always separate the thinking (building the pyramid) from the writing (drafting it top-down) —
+do not draft prose until the structure is complete.
+
+### Writing conventions that follow from the structure
+
+- Section/slide titles are insight statements, not labels — state the conclusion, not the topic
+  (❌ "Revenue" / ✅ "Revenue growth accelerating — 34% YoY on enterprise expansion")
+- Titles run roughly 7±2 words; cut "to be" verbs where possible
+- Sibling titles are phrased in parallel — they are one horizontal grouping and should read as one
+- Order moves general → specific, easy-to-grasp → hard-to-understand
+- Limit each section to 3 or fewer key messages
 
 ### Structure
 
@@ -181,12 +242,65 @@ Developed by Barbara Minto at McKinsey in the 1960s. Structures thinking from de
 3. Provide insight-level details
 4. Reference fact-level data in appendix
 
-### MECE Integration
+Each level of this pyramid should be MECE: the main conclusion has 3-5 mutually exclusive
+supporting arguments, and each supporting argument has collectively exhaustive evidence beneath
+it — no overlap between branches, complete coverage within branches. (This is the same MECE
+test as the Horizontal relationships check above, applied specifically to the research
+pipeline.)
 
-Each level of pyramid should be MECE:
-- Main conclusion has 3-5 mutually exclusive supporting arguments
-- Each supporting argument has collectively exhaustive evidence
-- No overlap between branches, complete coverage within branches
+---
+
+## Hypothesis Chain (A.T. Kearney Hypothesis-Based Problem Solving)
+
+Minto's Pyramid Principle governs the *shape* of the argument. This framework, drawn from
+A.T. Kearney's internal consulting training, governs how you *fill in* that shape — the chain
+of vocabulary that turns a vague topic into a provable or disprovable line in the pyramid.
+
+### The four-step framework
+
+1. **Identify and structure the client's issues and questions** — build the issue tree
+2. **Formulate hypotheses** — a testable initial answer for the overarching question and for
+   each major branch
+3. **Collect and analyze data** — gathered specifically to test those hypotheses, not for its
+   own sake
+4. **Develop findings, conclusions, and recommendations** — the chain that turns data into action
+
+### Definitions
+
+- **Hypothesis** — a testable initial answer to an issue or question, derived directly from it.
+  Must be falsifiable; establishes a focus for data collection; is a "best educated guess," not
+  a commitment
+- **Argument** — a statement supporting a hypothesis. Each argument must be individually
+  necessary to support the hypothesis; the full set of arguments must be collectively sufficient
+  to prove it (this is the operational version of Minto's vertical Question/Answer test above)
+- **Finding** — a summary statement derived from data, generally answering a yes/no question.
+  Findings should fully test the hypothesis, fully support the conclusion that follows, and be
+  reliable, accurate, and convincing on their own
+- **Conclusion** — a diagnostic statement based on data and findings that is in line with (or
+  revises) the hypothesis. Conclusions unite the findings, diagnose the issue, and suggest
+  possible recommendations. A conclusion may come from the hypothesis holding up, or directly
+  from findings that overturn it — review and revise hypotheses based on findings, don't treat
+  them as precious
+- **Recommendation** — the action the client (or decision-maker) should take, addressing the
+  overarching issue
+
+### Worked example (source: A.T. Kearney training deck)
+
+> **Findings:** Typical contracts in the industry are long-term (>8 years). Target companies
+> won't require additional investment to serve existing contracts — equipment and facilities
+> are already owned. Revenues are not cyclical and are expected to grow steadily.
+>
+> **Conclusion:** The business is financially attractive and provides stability to the client's
+> revenue base.
+>
+> **Recommendation:** The client should enter the waste management business.
+
+### The link back to the Pyramid
+
+This hypothesis chain is how you fill in Minto's vertical structure. Each Finding/Conclusion
+pair is one "line" in the vertical Question/Answer test — the chain above is what makes that
+line *necessary and sufficient* rather than merely plausible. A recommendation without this
+chain behind it is an opinion; a recommendation with it is a pyramid.
 
 ---
 

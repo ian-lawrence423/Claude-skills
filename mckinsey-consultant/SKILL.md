@@ -127,6 +127,11 @@ questions but must never be skipped entirely — compress, don't omit.
 - Break the problem into mutually exclusive, collectively exhaustive sub-questions
 - Maximum 3–4 branches at each level; maximum 3 levels deep
 - Each branch must be independently answerable with evidence
+- **Horizontally consistent**: siblings at each level sit at the same altitude of detail/
+  importance — don't mix a market-sizing question with an implementation-timeline question at
+  the same level
+- **Vertically logical**: each child branch answers a question the parent branch raises; if it
+  doesn't, it belongs elsewhere in the tree or not in it
 - Label the tree type: **diagnostic** (why is X happening?), **solution** (how do we achieve Y?), or **evaluative** (should we do Z?)
 
 **Issue tree format:**
@@ -148,12 +153,26 @@ Core question
 - [ ] Together, all branches fully cover the problem — no material gaps
 - [ ] Each branch is resolvable with available or gatherable evidence
 - [ ] The logical structure holds: if all branches are true, the governing thesis follows
+- [ ] Each grouping is typed as **inductive** (parallel items sharing a category, jointly
+      implying the point above) or **deductive** (a chain where each step follows from the one
+      before)
+- [ ] No branch has more than ~6 inductive items or ~4 chained deductive steps — past that,
+      split and regroup rather than listing more
 
-### Step 3: State the Day-1 Hypothesis
-- Form a hypothesis immediately — do not wait for analysis to be complete
-- Format: *"We believe [conclusion] because [primary reason], which means [implication]"*
-- This is a working hypothesis, not a commitment — it will be refined
-- Label it explicitly as **hypothesis (untested)**
+### Step 3: State Hypotheses
+- A hypothesis is a testable initial answer derived directly from the question it answers —
+  not a final answer, and it must be falsifiable
+- State the overarching Day-1 hypothesis for the whole problem immediately — do not wait for
+  analysis to be complete. Format: *"We believe [conclusion] because [primary reason], which
+  means [implication]"* — label it explicitly as **hypothesis (untested)**
+- Give each major branch of the issue tree its own branch-level hypothesis — the initial answer
+  to that branch's question — so each branch has something concrete to test, not just a topic
+  to research
+- If a hypothesis isn't yet visible for the overarching question or a branch, build bottom-up
+  instead: list the points you're already confident of, find what they share in common, and let
+  the conclusion emerge from that commonality
+- Hypotheses are working beliefs, not commitments — revise or reject them as findings come in
+  (see Step 5)
 
 ### Step 4: Identify the 20/80 Drivers
 - Of all branches in the issue tree, identify the 2–3 that drive 80% of the answer
@@ -174,6 +193,14 @@ For each prioritized branch, apply the relevant analytical lens:
 | Capability / internal | Capability gap analysis, build/buy/partner framework |
 | Decision / trade-off | Decision matrix, weighted criteria, scenario tree |
 
+Every hypothesis is supported by **arguments** — each argument must be individually necessary
+to support the hypothesis, and the full set of arguments must be collectively sufficient to
+prove it. An argument that's merely "related" but not necessary doesn't belong.
+
+**Findings** are the yes/no-style statements derived from data that test a hypothesis — they
+should fully test the hypothesis, fully support whatever conclusion follows, and be accurate
+enough to be convincing on their own.
+
 **Claim labeling is mandatory on every finding:**
 - **fact** — sourced, verifiable, cited
 - **estimate** — reasoned from available data with stated assumptions
@@ -184,11 +211,18 @@ persistent claim tracking to `analytical-operating-system` and new evidence gath
 `market-research` (see Ownership & Routing above).
 
 ### Step 6: Synthesize to a Recommendation
-- State the recommendation in one sentence first — never bury it
-- Structure the supporting argument as a **Pyramid**:
-  - Top: Governing thought (the answer)
-  - Middle: 3 key lines of reasoning (each independently sufficient)
-  - Base: Evidence per line of reasoning
+- For each branch, draw a **conclusion**: a diagnostic statement that unites that branch's
+  findings, checks them against the branch hypothesis, and revises or confirms it. A conclusion
+  can come from the hypothesis holding up, or directly from findings that overturn it.
+- State the overarching recommendation in one sentence first — never bury it
+- Structure the supporting argument as a **Pyramid** (Minto): Top = governing thought (the
+  answer); Middle = 3 key lines of reasoning, one per binding conclusion; Base = evidence
+- **Vertical test:** every point below a line must answer a why/how question the line above
+  raises; the supporting points are individually necessary and collectively sufficient to
+  prove it
+- **Horizontal test:** the lines supporting one point are typed as **inductive** (parallel
+  reasons sharing a category) or **deductive** (a chain, breakable at its weakest link) — check
+  for no misfits, no overlaps, no gaps, and correct order
 - For each recommendation include:
   - What this assumes (top 2–3 conditions that must hold)
   - What would change it (the single most likely reversal condition)
@@ -284,13 +318,16 @@ Flag explicitly when data for a dimension is unavailable.
 **So What?** [One sentence]
 ```
 
-### Format B: Situation-Complication-Resolution (SCR) Narrative
-*Use for: executive briefings, board memos, investment theses, any document with a narrative arc*
+### Format B: Situation-Complication-Question-Answer (SCQA) Narrative
+*Use for: opening any written response with a narrative arc — executive briefings, board memos,
+investment theses, or a longer in-chat answer. Default opening whenever the reader doesn't
+already share your context.*
 
 ```
 **Situation:** [What is true and uncontested — shared starting point]
 **Complication:** [What has changed or is at stake — the tension]
-**Resolution:** [The answer — stated before supporting argument]
+**Question:** [The question the complication raises — name it if not obvious]
+**Answer:** [The resolution — stated before supporting argument]
 
 [Pyramid support structure]
 [Evidence per pillar — labeled fact/estimate/hypothesis]
@@ -326,6 +363,13 @@ Storyline structure for any document or deck:
 Each slide or section title must be an **insight statement**, not a label:
 - ❌ Label: "Revenue"
 - ✅ Insight: "Revenue growth accelerating — 34% YoY driven by enterprise expansion"
+
+Writing rules of thumb (any section/slide title, not just decks):
+- Titles are insight statements, not labels — state the conclusion, not the topic
+- Keep titles to roughly 7±2 words; cut "to be" verbs where possible
+- Make sibling titles parallel in phrasing — they are one horizontal grouping
+- Order general → specific, easy-to-grasp → hard-to-understand
+- Limit each section to 3 or fewer key messages
 
 ---
 
@@ -465,6 +509,13 @@ Every output must pass all of the following before delivery:
 - [ ] Day-1 hypothesis stated, labeled as hypothesis
 - [ ] 20/80 drivers identified and deprioritized branches explicitly noted
 - [ ] Every claim labeled: fact / estimate / hypothesis
+- [ ] Each issue-tree branch has its own testable hypothesis, revised or rejected as findings
+      come in — not treated as a fixed commitment
+- [ ] Every argument under a hypothesis is individually necessary; the full set is collectively
+      sufficient to prove it
+- [ ] Findings test the hypothesis explicitly (confirm / weaken / reject) before a conclusion is
+      drawn
+- [ ] Horizontal groupings typed inductive or deductive, with no misfits, overlaps, or gaps
 
 **Content standards**
 - [ ] No generic observations — name names, state numbers
