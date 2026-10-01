@@ -1,10 +1,16 @@
 // Stop hook.
 // If mckinsey-consultant was invoked since the user's last message, do a blunt,
-// deterministic pattern check for the skill's Quality Standards markers in the
-// response text produced since then. This is NOT semantic verification — Stop
+// deterministic pattern check for a subset of the skill's Quality Standards markers
+// in the response text produced since then. This is NOT semantic verification — Stop
 // hooks only support "command" type (no LLM judgment here) — it only catches the
 // common failure mode of dropping a required element outright (no "So What?",
 // no claim labels, no hypothesis).
+//
+// One source of truth: each check below only applies if its source snippet is still
+// found verbatim in SKILL.md's Quality Standards section. If a requirement is
+// removed or reworded there, this hook drops that check instead of silently
+// blocking on stale wording it no longer matches — the same drift this hook's
+// sibling (mckinsey-post-skill.js) was fixed to avoid.
 //
 // Fail-open by design: any parse error, missing file, or unexpected shape exits 0
 // (no opinion) rather than blocking. A one-shot guard (temp sentinel file) ensures
@@ -15,6 +21,28 @@ const os = require('os');
 const path = require('path');
 
 function exit0() { process.exit(0); }
+
+// Only the checklist items that are reliably detectable by keyword/pattern presence
+// make the cut here — most of the Quality Standards checklist requires semantic
+// judgment a Stop hook can't make. Each entry's `snippet` must match verbatim
+// against SKILL.md's Quality Standards section for the check to apply.
+const CHECKS = [
+  {
+    snippet: 'Day-1 hypothesis stated, labeled as hypothesis',
+    label: 'Day-1 hypothesis (labeled "hypothesis")',
+    test: (text) => /hypothesis/i.test(text),
+  },
+  {
+    snippet: 'Every claim labeled: fact / estimate / hypothesis',
+    label: 'claim labels (fact / estimate / hypothesis)',
+    test: (text) => /fact\s*\/\s*estimate\s*\/\s*hypothesis|\b(fact|estimate|hypothesis)\b.*\b(fact|estimate|hypothesis)\b/is.test(text),
+  },
+  {
+    snippet: 'Every substantive response ends with So What?',
+    label: 'closing "So What?"',
+    test: (text) => /so what/i.test(text.slice(-600)),
+  },
+];
 
 let data = '';
 process.stdin.on('data', (c) => { data += c; });
@@ -65,12 +93,18 @@ process.stdin.on('end', () => {
     .join('\n\n');
   if (!responseText) return exit0();
 
+  const skillPath = path.join(__dirname, '..', '..', 'mckinsey-consultant', 'SKILL.md');
+  let skillContent = '';
+  try { skillContent = fs.readFileSync(skillPath, 'utf8'); } catch (e) { /* checked per-item below */ }
+
   const missing = [];
-  if (!/hypothesis/i.test(responseText)) missing.push('Day-1 hypothesis (labeled "hypothesis")');
-  if (!/fact\s*\/\s*estimate\s*\/\s*hypothesis|\b(fact|estimate|hypothesis)\b.*\b(fact|estimate|hypothesis)\b/is.test(responseText)) {
-    missing.push('claim labels (fact / estimate / hypothesis)');
+  for (const check of CHECKS) {
+    // If SKILL.md couldn't be read, or the snippet isn't there anymore, the
+    // requirement has changed and there's nothing current to check — skip it
+    // rather than block on wording that's no longer accurate.
+    if (!skillContent || !skillContent.includes(check.snippet)) continue;
+    if (!check.test(responseText)) missing.push(check.label);
   }
-  if (!/so what/i.test(responseText.slice(-600))) missing.push('closing "So What?"');
 
   if (missing.length === 0) return exit0();
 
