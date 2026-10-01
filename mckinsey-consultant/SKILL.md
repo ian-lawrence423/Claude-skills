@@ -1,31 +1,35 @@
 ---
 name: mckinsey-consultant
 description: >-
-  Structure strategy and investment problems with MECE issue trees, hypotheses, MBB
-  problem solving, Pyramid Principle, and analytical lenses.
+  Structure any complex problem with MECE issue trees, hypothesis-driven reasoning, MBB
+  problem solving, the Pyramid Principle, and analytical lenses.
 intent: >-
-  McKinsey-level structured consulting methodology for strategy, analysis, and
-  problem-solving. This is the analytical OS — load it for any strategy work, investment
-  evaluation, structured diagnosis, framework design, or McKinsey-style document. It owns
-  all analytical methodology: 7-step MBB problem solving, MECE issue trees, 7 strategy
-  dimensions, Pyramid Principle, Six Screening Questions for investments, and all
-  analytical modules (Porter's, SWOT, market sizing, positioning maps, value chain). It
-  does NOT govern evidence gathering or source validation — that is market-research's job.
-  For any task that requires original data collection (market sizing, competitive
-  intelligence, customer research), invoke market-research on top of this skill. For
-  financial modeling, use financial-model-builder. For PPTX/docx output, use
-  pattern-investment-pptx or pattern-docx. In deal workflows, pair this skill with
-  analytical-operating-system for persistent belief registers, Bayesian updates, kill
-  triggers, and decision posture tracking.
+  McKinsey-level structured thinking for any non-trivial problem. This is the analytical
+  OS — load it whenever a question benefits from disciplined reasoning rather than an ad
+  hoc answer: strategy work, structured diagnosis, framework design, decision-making, or
+  a McKinsey-style document. It owns the general method: 7-step MBB problem solving, MECE
+  issue trees, 7 strategy dimensions, Pyramid Principle, and all analytical modules
+  (Porter's, SWOT, market sizing, positioning maps, value chain). Investment evaluation is
+  one application of this method, not its purpose — when a task specifically requires
+  screening or stress-testing an investment, pair this skill with the Six Screening
+  Questions (see Investment Lens below). It does NOT govern evidence gathering or source
+  validation — that is market-research's job. For any task that requires original data
+  collection (market sizing, competitive intelligence, customer research), invoke
+  market-research on top of this skill. For financial modeling, use
+  financial-model-builder. For PPTX/docx output, use pattern-investment-pptx or
+  pattern-docx. In deal workflows, pair this skill with analytical-operating-system for
+  persistent belief registers, Bayesian updates, kill triggers, and decision posture
+  tracking.
 type: workflow
 ---
 
 # McKinsey Consultant Skill — Analytical OS
 
-This skill is the analytical engine for all strategy and investment work. It governs how you
-think, structure arguments, apply analytical lenses, and synthesize to a recommendation. It does
-not govern how you gather evidence — that is market-research's job, which runs on top of this
-skill when original data collection is required.
+This skill is the analytical engine for structured thinking — a way of reasoning through any
+complex problem, not a strategy or investment specific tool. It governs how you think, structure
+arguments, apply analytical lenses, and synthesize to a recommendation. It does not govern how
+you gather evidence — that is market-research's job, which runs on top of this skill when
+original data collection is required.
 
 Read this entire file before beginning any analysis.
 
@@ -88,15 +92,24 @@ Do not use this skill alone when:
 ## Example And Anti-Pattern
 
 Example prompt:
-> "Structure the investment case for Company X using this existing CIM and management deck."
+> "Our enterprise churn rate jumped this quarter — help me figure out why and what to do about it."
 
 Expected use:
 - Define the decision, Day-1 hypothesis, MECE issue tree, binding driver, and recommendation logic.
 - Use known evidence only; invoke `market-research` if new source collection is required.
 - Hand off to `analytical-operating-system` when belief registers or decision posture are required.
 
+A second valid example, same method:
+> "Structure the investment case for Company X using this existing CIM and management deck."
+
+The method does not change between the two — only the analytical lenses applied (see Seven
+Strategy Dimensions and Investment Lens below) and, if the output is an IC memo, the document
+architecture (owned by `ic-memo`).
+
 Anti-pattern:
 - Do not use this skill to gather new sources, maintain evidence registers, build financial models, or generate branded files.
+- Do not force every problem through an investment-screening frame — the Six Screening Questions
+  are a lens for investment decisions specifically, not the default structure for all analysis.
 
 ---
 ## Core Methodology: MBB 7-Step Problem Solving
@@ -405,50 +418,34 @@ Output format:
 
 ---
 
-## Investment Evaluation Mode
+## Investment Lens (Optional)
 
-When the task involves **screening, evaluating, stress-testing, or building an IC memo for
-an investment opportunity**, switch from the generic 7-step method to the Six Screening
-Questions as the governing analytical structure.
+The 7-step method and Seven Strategy Dimensions above are sufficient for most problems,
+investment included. Reach for this lens only when the task specifically requires
+**screening, evaluating, stress-testing, or building an IC memo for an investment
+opportunity** — triggered by phrases like "screen this deal," "IC memo," "investment
+thesis," "ROIC analysis," "walk-away conditions," or "need-to-believe." Do not route a
+general strategy or business question through this lens by default.
+
+When it does apply, swap the Six Screening Questions in for the generic 7-step method as
+the governing structure — they are gates, not a checklist (a weak answer to an earlier
+gate is not compensated by a strong answer to a later one):
+
+Company quality → Sector timing → Investment attractiveness → Exit realization →
+Owner fit → Adversarial diligence
 
 ```
 Load: {SKILL_DIR}/references/investment-evaluation-framework.md
 ```
 
-**How to apply the Six Questions:**
-- The questions are gates, not a checklist — answer them in sequence. A weak answer to an
-  earlier gate is not compensated by a strong answer to a later one.
-- Sequence: Company quality → Sector timing → Investment attractiveness → Exit realization →
-  Owner fit → Adversarial diligence
-- Label every claim: **fact** (sourced) / **estimate** (reasoned) / **hypothesis** (untested)
-- Surface red flags explicitly — do not soften or bury them
-- End every IC-facing output with: walk-away conditions stated, single most important assumption
-  named and labeled as assumption, and an honest post-mortem scenario
+Label every claim fact / estimate / hypothesis, surface red flags rather than softening
+them, and end every IC-facing output with walk-away conditions, the single most important
+assumption (labeled as such), and an honest post-mortem scenario.
 
----
-
-### IC Memo Document Architecture
-
-Section order, where the NTB registry sits, gate scorecards, the returns disaggregation
-table, and the information gaps table are document-architecture decisions owned by the
-`ic-memo` skill — invoke it for document structure. This skill supplies the analytical
-gates those sections are built from (the Six Screening Questions above); do not
-re-derive IC memo formatting here. For the NTB registry itself, `ntb-diligence` is the
-authoritative source — invoke it before the memo if the thesis has 4+ load-bearing
-assumptions.
-
----
-
-**Trigger phrases that activate Investment Evaluation Mode:**
-- "screen this deal / opportunity"
-- "evaluate this investment / acquisition / target"
-- "IC memo" / "investment committee"
-- "investment thesis" / "stress-test the thesis"
-- "why is this a good company"
-- "ROIC analysis" / "return on invested capital"
-- "deal screening" / "diligence scoping"
-- "walk-away conditions"
-- "need-to-believe" / "NTB"
+Document architecture — section order, NTB registry placement, gate scorecards, returns
+disaggregation, information gaps — is owned by `ic-memo`; invoke it for document
+structure rather than re-deriving IC memo formatting here. `ntb-diligence` is the
+authoritative source for the NTB registry itself.
 
 ---
 
