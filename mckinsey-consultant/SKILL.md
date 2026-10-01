@@ -31,42 +31,24 @@ Read this entire file before beginning any analysis.
 
 ---
 
-## Skill Architecture — Where This Fits
+## Ownership & Routing
 
 ```
-mckinsey-consultant   ← YOU ARE HERE — analytical methodology, always active for strategy work
+mckinsey-consultant   ← analytical method: problem definition, MECE trees, 7 dimensions,
+                         Pyramid Principle, analytical modules, investment screening questions
       │
-      ├── market-research        ← invoke when evidence gathering is required
-      │        └── pattern-investment-pptx / pattern-docx  ← invoke for file output
-      │
-      ├── financial-model-builder ← invoke for financial modeling tasks
-      │
-      └── claim-scrutinizer      ← invoke when stress-testing a completed document
+      ├── market-research             ← new evidence gathering, source validation, triangulation
+      ├── analytical-operating-system ← belief registers, Bayesian updates, kill triggers, decision posture
+      ├── financial-model-builder     ← operating models and return cases
+      └── pattern-docx / pattern-investment-pptx / ic-memo ← file and document output
 ```
 
-**Ownership boundary:** This skill owns analytical method: problem definition, MECE issue
-trees, strategy dimensions, Pyramid Principle, analytical modules, and investment screening
-questions. `analytical-operating-system` owns the deal evidence-control layer: evidence-state
-tags, belief registers, Bayesian update logs, kill triggers, and PROCEED / REPRICE / PASS /
-RESOLVE FIRST posture. Do not duplicate those operating artifacts here.
-
-**When to invoke market-research on top of this skill:**
-- Task requires gathering new external data (market sizing, competitive landscape, customer research)
-- Task involves a structured research project with a brief and deliverable
-- Task requires source tier assignment, CRAAP validation, or triangulation of findings
-
-**When this skill alone is sufficient:**
-- Strategy memo, investment thesis, or board deck where evidence already exists
-- Structuring an argument, building an issue tree, or designing a framework
-- Synthesizing known information into a recommendation
-- Any analytical task where the data is in hand and the job is to think clearly about it
-- Any task that does not require a persistent belief register, claim ledger, or thesis update log
-
-**When to invoke analytical-operating-system on top of this skill:**
-- Deal-master, IC memo pipeline, diligence, or investment thesis workflows where assertions must be tracked over time
-- Any active deal update where new evidence may confirm, weaken, or kill a load-bearing assertion
-- Any recommendation that needs an explicit PROCEED / REPRICE / PASS / RESOLVE FIRST decision posture
-- Any situation where prior beliefs, evidence state, and posterior confidence need to be auditable
+This skill alone is sufficient whenever evidence is already in hand and the job is to
+structure and reason — a memo, thesis, or deck built from known facts. Invoke
+`market-research` when new external evidence must be gathered or validated. Invoke
+`analytical-operating-system` when assertions must be tracked over time — deal-master,
+IC memo, or diligence workflows where evidence state and decision posture need to be
+auditable. Do not duplicate either skill's artifacts here.
 
 ---
 
@@ -184,14 +166,9 @@ For each prioritized branch, apply the relevant analytical lens:
 - **estimate** — reasoned from available data with stated assumptions
 - **hypothesis** — untested, requires validation
 
-For investment workflows, persistent claim tracking belongs in `analytical-operating-system`.
-Use this skill to decide which claims matter and how they fit the issue tree. Use
-`analytical-operating-system` to maintain the belief register, update log, kill triggers,
-and decision posture across deal phases.
-
-**When evidence gathering is required at this step:** invoke market-research to execute
-the relevant pyramid level(s). Market-research governs source selection, validation, and
-triangulation. This skill governs what questions those sources need to answer.
+Use this skill to decide which claims matter and how they fit the issue tree; route
+persistent claim tracking to `analytical-operating-system` and new evidence gathering to
+`market-research` (see Ownership & Routing above).
 
 ### Step 6: Synthesize to a Recommendation
 - State the recommendation in one sentence first — never bury it
@@ -450,102 +427,15 @@ Load: {SKILL_DIR}/references/investment-evaluation-framework.md
 
 ---
 
-### Required IC Memo Structure — Five Mandatory Analytical Components
+### IC Memo Document Architecture
 
-Every IC memo must include these five components in this order. Each is a gate — a memo
-missing any of these is not IC-ready regardless of its prose quality.
-
-#### 1. Gate Scoring Tables (Gate 1, Gate 2, Gate 3)
-
-**Gate 1 — Why is this a good company?**
-Score the company against all 12 canonical Gate 1 criteria from the investment-evaluation-framework.
-Present as a table: Criterion | Verdict (PASS / CONDITIONAL / WATCH) | One-line evidence assessment.
-Do not assert "the company is strong" — score each criterion explicitly.
-
-**Gate 2 — Why is this a good sector today?**
-Score the sector against all 12 canonical Gate 2 criteria. Present as a full 12-row scorecard
-table with criterion number, criterion name, verdict (PASS / CONDITIONAL / WATCH), and
-a 1–2 sentence assessment with evidence tags. The gate table summary cell points to this
-scorecard; it does not repeat it.
-
-CRITICAL: Gate 2 is a sector-only analysis. The following do NOT belong in Gate 2:
-- Stock price drawdown or valuation discount → Gate 3
-- Company-specific competitive position → Gate 1
-- Adverse selection thesis or why the opportunity exists at this price → Gate 6
-
-Test: could you make the same Gate 2 argument for a private company with no market price?
-If not, the argument belongs in Gate 3.
-
-**Gate 3 — Why is this a good investment?**
-Score against all 9 canonical Gate 3 factors. Valuation entry point, drawdown, sentiment
-mismatch, and adverse selection thesis belong HERE — not in Gate 2.
-
-#### 2. Need-to-Believe (NTB) Registry
-
-Position: immediately after the executive summary verdict paragraph, before the gate table.
-
-The NTB registry is the bridge between the investment thesis (what we believe) and the
-returns disaggregation table (what each belief is worth). Every IC memo requires it.
-
-**The NTB registry is owned by the `ntb-diligence` skill.** This skill produces the registry
-structure, evidence state classification, boundability narratives, and information gaps
-table. If `ntb-diligence` has already run on this deal (typically as pre-IC diligence), the
-registry it produced feeds directly into this IC memo's Section 1 without rework.
-
-If `ntb-diligence` has not yet run, trigger it now before continuing with the IC memo:
-
-```
-Load: /mnt/skills/user/ntb-diligence/SKILL.md
-```
-
-The NTB registry produced by `ntb-diligence` becomes Section 1 of this memo. The
-Information Gaps table produced there becomes part of Section 7 (Risk Analysis).
-
-**Summary of NTB registry format (full spec in ntb-diligence):**
-5 columns — Need-to-Believe | Key Findings & Workstreams | Evidence State | CY[exit year]E
-EBITDA & MOIC Impact | Boundability. Minimum 4 NTBs, each governing a >5% MOIC driver.
-GAP items in red bold. Diligence column intentionally excluded (lives in information gaps
-table). Returns footnote required.
-
-#### 3. Investment Thesis — Five-Point NTB-Structured Architecture
-
-The investment thesis section must be restructured around the NTBs — not written as independent
-analytical observations. Every NTB becomes a numbered thesis point.
-
-**Format for each thesis point:**
-```
-[Number in navy bold] [NTB statement — one sentence] [NTB # — Evidence State / Boundability]
-
-[Para 1: What the data shows — lead with confirmed facts, then conditional evidence]
-[Para 2: What the uncertainty is — name the specific gap, quantify its impact]
-[DATA GAP callout if applicable: exact data request in orange left-border paragraph]
-[Para 3: Why it matters to the consolidated thesis — link to returns impact]
-[Supporting table or data note if material evidence requires it]
-```
-
-This architecture makes the thesis immediately auditable: an IC member who disagrees with
-the recommendation can identify exactly which NTB they dispute and why.
-
-**What the five-point structure replaces:**
-- Independent h2 sections for each product/segment without a governing NTB frame
-- Flywheel narratives that don't connect to return quantification
-- Risk sections disconnected from the return model
-
-#### 4. Returns Disaggregation Table (section 3.3 of investment-evaluation-framework)
-
-Every IC memo requires the structured returns disaggregation table with 7 columns:
-Driver | Base Case Assumption | Upside Scenario + Mechanism | Downside Scenario + Mechanism |
-CY[exit year]E EBITDA Impact Up/Down | MOIC Impact Up/Down | Resolving Diligence Item
-
-The NTB table is the upstream document that populates the "Resolving Diligence Item" column.
-Every NTB must map to at least one row in this table.
-
-#### 5. Information Gaps Table
-
-Ranked by priority (CRITICAL / HIGH / MEDIUM). Every GAP item in the NTB table must appear
-here as a named priority with: specific data request, risk addressed, action and owner.
-The NTB table references these by priority number — the information gaps table is the
-single authoritative source for diligence prioritization.
+Section order, where the NTB registry sits, gate scorecards, the returns disaggregation
+table, and the information gaps table are document-architecture decisions owned by the
+`ic-memo` skill — invoke it for document structure. This skill supplies the analytical
+gates those sections are built from (the Six Screening Questions above); do not
+re-derive IC memo formatting here. For the NTB registry itself, `ntb-diligence` is the
+authoritative source — invoke it before the memo if the thesis has 4+ load-bearing
+assumptions.
 
 ---
 
@@ -560,9 +450,15 @@ single authoritative source for diligence prioritization.
 - "walk-away conditions"
 - "need-to-believe" / "NTB"
 
-
+---
 
 ## Quality Standards
+
+This checklist is the source of truth for two hooks configured in `.claude/settings.json`:
+a PostToolUse hook re-injects it as a reminder right after this skill loads, and a Stop
+hook does a blunt keyword check (hypothesis label, claim labels, closing "So What?") before
+the turn ends. The hooks catch outright omissions mechanically; they do not verify the
+other items below — that judgment still has to come from you.
 
 Every output must pass all of the following before delivery:
 
