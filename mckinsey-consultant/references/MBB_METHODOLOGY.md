@@ -12,106 +12,6 @@ All MBB firms use practically identical **hypothesis-driven problem-solving** th
 
 ---
 
-## Seven-Step Problem-Solving Process
-
-McKinsey, BCG, and Bain all use this identical 7-step framework that structures secondary research within systematic analysis:
-
-### Step 1: Define the Problem
-
-**Objective:** Precise specification of the key question
-
-**Tools:**
-- Problem Statement Worksheet
-- SMART criteria (Specific, Measurable, Achievable, Relevant, Time-bound)
-- Success criteria definition
-
-**Key questions:**
-- What is the precise business question we need to answer?
-- What decisions will be based on research results?
-- What level of precision and confidence do we need?
-- What are time and budget constraints?
-
-**Output:** Clear problem definition that aligns stakeholders before data collection begins
-
-### Step 2: Structure the Problem
-
-**Objective:** Break down complex problems into manageable components
-
-**Tools:**
-- MECE principle (Mutually Exclusive, Collectively Exhaustive)
-- Logic trees and issue trees
-- Hypothesis trees
-
-**Application:** Create structured representation of possible answers to guide subsequent research
-
-**MECE ensures:**
-- All problem components are covered (Collectively Exhaustive)
-- No duplication of effort (Mutually Exclusive)
-
-### Step 3: Prioritize
-
-**Objective:** Focus effort on high-impact areas
-
-**Tools:**
-- Two-by-two matrix: Impact vs. Ease of Implementation
-- 80/20 rule application
-- Hypothesis prioritization
-
-**McKinsey approach:** Focus on 20% of analysis that delivers 80% of solution value
-
-**Rationale:** Consulting firms charge $200,000/week – efficiency is paramount
-
-### Step 4: Work Plan
-
-**Objective:** Detailed planning before execution
-
-**Define:**
-- Specific tasks and analyses required
-- Data source identification
-- Timeline and milestones
-- Responsibility assignments
-- Resource requirements
-
-**Research brief:** Comprehensive document aligning stakeholders on desired outcomes
-
-### Step 5: Execute Analyses
-
-**Objective:** Systematic hypothesis testing using secondary sources
-
-**Approach:**
-- Quantitative focus – solid numbers for every claim
-- Multi-source triangulation
-- Continuous validation
-- CRAAP test for source quality
-
-**Data hierarchy:** Tier 1 sources (government, peer-reviewed) prioritized over Tier 2-3
-
-### Step 6: Synthesize Findings
-
-**Objective:** Continuous insight generation, not end-loaded analysis
-
-**Tools:**
-- Pyramid Principle structuring
-- "Day 1 drafts" – immediate synthesis
-- Continuous hypothesis refinement
-
-**Critical practice:** Never accumulate synthesis until project end. Create initial insights immediately, refine continuously as new data emerges.
-
-### Step 7: Develop Recommendations
-
-**Objective:** Actionable plan with clear accountability
-
-**Components:**
-- Specific action items
-- Clear ownership assignments
-- Measurable success criteria
-- Implementation timeline
-- Risk mitigation strategies
-
-**Standard:** Recommendations must be specific, actionable, and prioritized
-
----
-
 ## MECE Principle (Mutually Exclusive, Collectively Exhaustive)
 
 Fundamental pillar of McKinsey thinking developed in the 1960s-70s.
@@ -156,7 +56,9 @@ Every pyramid starts from a shared starting point, not the answer in isolation:
 - **Situation** — what is true and uncontested
 - **Complication** — what changed, or what's at stake
 - **Question** — the question the complication raises in the reader's mind (often implicit)
-- **Answer** — the governing thought — stated before any supporting argument
+- **Answer** — the governing thought, stated before any supporting argument. Minto's own deck
+  labels this element "Resolution" and ties it explicitly to the hypothesis — the SCQA answer
+  *is* the Day-1 hypothesis, not a separate claim
 
 Example (Minto's own case, from the training deck this section is drawn from):
 > Situation: Regional Bell Operating Company (RBOC) revenue growth has been slowing for five
@@ -301,60 +203,6 @@ This hypothesis chain is how you fill in Minto's vertical structure. Each Findin
 pair is one "line" in the vertical Question/Answer test — the chain above is what makes that
 line *necessary and sufficient* rather than merely plausible. A recommendation without this
 chain behind it is an opinion; a recommendation with it is a pyramid.
-
----
-
-## Issue Trees and Logic Trees
-
-### Issue Trees
-
-**Purpose:** Disaggregate complex problem into specific questions
-
-**Structure:**
-```
-Main Question
-├── Sub-question 1
-│   ├── Component A
-│   └── Component B
-├── Sub-question 2
-│   ├── Component C
-│   └── Component D
-└── Sub-question 3
-    ├── Component E
-    └── Component F
-```
-
-**MECE application:** Each level must be mutually exclusive and collectively exhaustive
-
-**Example for market entry:**
-```
-Should we enter this market?
-├── Is the market attractive?
-│   ├── What is market size and growth?
-│   └── What is competitive intensity?
-├── Can we compete effectively?
-│   ├── Do we have required capabilities?
-│   └── Can we achieve cost advantage?
-└── Is financial return adequate?
-    ├── What is investment required?
-    └── What is expected ROI timeline?
-```
-
-### Hypothesis Trees
-
-**Purpose:** Structure possible answers to guide research
-
-**Difference from issue trees:** Hypothesis trees propose potential answers, issue trees ask questions
-
-**Example:**
-```
-Hypothesis: Market is attractive for entry
-├── Market size >$1B and growing >10% CAGR
-├── Fragmented competition with no dominant player
-└── Strong customer need for innovation
-```
-
-**Research execution:** Test each hypothesis branch systematically with secondary data
 
 ---
 

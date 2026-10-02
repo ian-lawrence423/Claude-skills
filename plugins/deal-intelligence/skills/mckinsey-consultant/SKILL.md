@@ -149,6 +149,7 @@ Core question
 ```
 
 **MECE check before proceeding:**
+- [ ] Concise — the tree is no bigger than it needs to be; cut branches that don't change the answer
 - [ ] No branch overlaps with another — each is independently addressable
 - [ ] Together, all branches fully cover the problem — no material gaps
 - [ ] Each branch is resolvable with available or gatherable evidence
@@ -222,7 +223,8 @@ persistent claim tracking to `analytical-operating-system` and new evidence gath
   prove it
 - **Horizontal test:** the lines supporting one point are typed as **inductive** (parallel
   reasons sharing a category) or **deductive** (a chain, breakable at its weakest link) — check
-  for no misfits, no overlaps, no gaps, and correct order
+  for no misfits, no overlaps, no gaps, and correct order. Same cap as the issue tree: regroup
+  past ~6 inductive lines or ~4 chained deductive steps
 - For each recommendation include:
   - What this assumes (top 2–3 conditions that must hold)
   - What would change it (the single most likely reversal condition)
@@ -327,7 +329,7 @@ already share your context.*
 **Situation:** [What is true and uncontested — shared starting point]
 **Complication:** [What has changed or is at stake — the tension]
 **Question:** [The question the complication raises — name it if not obvious]
-**Answer:** [The resolution — stated before supporting argument]
+**Answer:** [The resolution — this is the Day-1 hypothesis, stated before supporting argument]
 
 [Pyramid support structure]
 [Evidence per pillar — labeled fact/estimate/hypothesis]
@@ -468,7 +470,7 @@ these files are not duplicated there.
 Read: {SKILL_DIR}/references/investment-evaluation-framework.md
 ```
 
-**Extended MBB methodology (7-step deep-dive, MECE, Pyramid Principle, 80/20):**
+**Extended methodology deep-dive (MECE, Pyramid Principle, Hypothesis Chain, 80/20):**
 ```
 Read: {SKILL_DIR}/references/MBB_METHODOLOGY.md
 ```
