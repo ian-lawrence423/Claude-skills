@@ -33,13 +33,13 @@ const CHECKS = [
     test: (text) => /hypothesis/i.test(text),
   },
   {
-    snippet: 'Every claim labeled: fact / estimate / hypothesis',
-    label: 'claim labels (fact / estimate / hypothesis)',
+    snippet: 'Every claim tagged inline: [fact] / [estimate] / [hypothesis]',
+    label: 'claim tags ([fact] / [estimate] / [hypothesis])',
     // Require at least two DISTINCT terms from the set, not two occurrences of the
     // same one — "hypothesis...hypothesis" used to pass this on its own, which
     // isn't a claim label at all, just the word hypothesis mentioned twice.
     test: (text) => {
-      if (/fact\s*\/\s*estimate\s*\/\s*hypothesis/i.test(text)) return true;
+      if (/\[?fact\]?\s*\/\s*\[?estimate\]?\s*\/\s*\[?hypothesis\]?/i.test(text)) return true;
       const terms = ['fact', 'estimate', 'hypothesis'];
       const found = terms.filter((t) => new RegExp(`\\b${t}\\b`, 'i').test(text));
       return found.length >= 2;

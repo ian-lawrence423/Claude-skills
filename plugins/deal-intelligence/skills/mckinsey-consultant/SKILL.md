@@ -202,7 +202,8 @@ prove it. An argument that's merely "related" but not necessary doesn't belong.
 should fully test the hypothesis, fully support whatever conclusion follows, and be accurate
 enough to be convincing on their own.
 
-**Claim labeling is mandatory on every finding:**
+**Claim labeling is mandatory on every finding — tag each one inline, immediately after
+stating it, with `[fact]`, `[estimate]`, or `[hypothesis]`:**
 - **fact** — sourced, verifiable, cited
 - **estimate** — reasoned from available data with stated assumptions
 - **hypothesis** — untested, requires validation
@@ -234,6 +235,8 @@ persistent claim tracking to `analytical-operating-system` and new evidence gath
 - Each action: **Owner · Timeline · Expected impact · Leading indicator it's working**
 - Sequence actions: quick wins (0–30 days) → structural moves (30–90 days) → long-term bets (90+ days)
 - End with **So What?** — one sentence on the key takeaway or most urgent decision
+- Before delivering, re-read the Quality Standards checklist below and confirm every item
+  yourself — this is a required step, not a suggestion; do not assume a hook will catch a miss
 
 ---
 
@@ -425,11 +428,14 @@ authoritative source for the NTB registry itself.
 
 ## Quality Standards
 
-This checklist is the source of truth for two hooks configured in `.claude/settings.json`:
-a PostToolUse hook re-injects it as a reminder right after this skill loads, and a Stop
-hook does a blunt keyword check (hypothesis label, claim labels, closing "So What?") before
-the turn ends. The hooks catch outright omissions mechanically; they do not verify the
-other items below — that judgment still has to come from you.
+Self-apply this checklist before every response — it is the primary check, required by Step 7
+above, not a passive reference. Two hooks configured in `.claude/settings.json` (a PostToolUse
+reminder right after this skill loads, and a Stop-time keyword check for hypothesis labels,
+claim tags, and a closing "So What?") reinforce this in environments where they're active, but
+hook support cannot be assumed — treat them as a bonus tripwire if present, never as the
+mechanism this checklist actually depends on. Even where hooks are active, they only catch
+outright omissions mechanically; they do not verify the other items below — that judgment is
+yours either way.
 
 Every output must pass all of the following before delivery:
 
@@ -438,7 +444,7 @@ Every output must pass all of the following before delivery:
 - [ ] Issue tree is MECE — checked for overlaps and gaps
 - [ ] Day-1 hypothesis stated, labeled as hypothesis
 - [ ] 20/80 drivers identified and deprioritized branches explicitly noted
-- [ ] Every claim labeled: fact / estimate / hypothesis
+- [ ] Every claim tagged inline: [fact] / [estimate] / [hypothesis]
 - [ ] Each issue-tree branch has its own testable hypothesis, revised or rejected as findings
       come in — not treated as a fixed commitment
 - [ ] Every argument under a hypothesis is individually necessary; the full set is collectively
