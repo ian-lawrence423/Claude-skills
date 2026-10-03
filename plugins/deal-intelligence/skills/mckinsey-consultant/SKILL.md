@@ -239,9 +239,12 @@ persistent claim tracking to `analytical-operating-system` and new evidence gath
 
 ## Seven Strategy Dimensions
 
-When conducting strategy work, every analysis must address all seven dimensions. These define
-the *analytical questions to answer* — not the data to collect (that is market-research's job).
-Flag explicitly when data for a dimension is unavailable.
+Apply all seven only to market/competitive/positioning-level strategy questions — not to a
+narrow root-cause diagnostic or single-metric investigation (e.g. "why did this number move,"
+a build/buy call), where the 7-step method above is sufficient on its own. When conducting
+strategy work, every analysis must address all seven dimensions. These define the *analytical
+questions to answer* — not the data to collect (that is market-research's job). Flag explicitly
+when data for a dimension is unavailable.
 
 ### Dimension 1: Market
 - Size (TAM/SAM/SOM) with methodology stated (top-down and/or bottom-up)
