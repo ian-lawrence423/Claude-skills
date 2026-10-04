@@ -33,6 +33,15 @@
       "author": {
         "name": "Ian Lawrence"
       }
+    },
+    {
+      "name": "mckinsey-consultant",
+      "description": "Structure any complex problem with MECE issue trees, hypothesis-driven reasoning, MBB problem solving, the Pyramid Principle, and analytical lenses. General-purpose analytical method, independent of any deal workflow.",
+      "category": "analysis",
+      "source": "./mckinsey-consultant",
+      "author": {
+        "name": "Ian Lawrence"
+      }
     }
   ]
 }

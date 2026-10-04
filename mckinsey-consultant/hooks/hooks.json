@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/hooks/mckinsey-post-skill.js",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/mckinsey-post-skill.js\"",
             "timeout": 10
           }
         ]
@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/hooks/mckinsey-stop-check.js",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/mckinsey-stop-check.js\"",
             "timeout": 10
           }
         ]

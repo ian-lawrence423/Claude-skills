@@ -1,0 +1,11 @@
+{
+  "name": "mckinsey-consultant",
+  "version": "1.0.0",
+  "description": "Structure any complex problem with MECE issue trees, hypothesis-driven reasoning, MBB problem solving, the Pyramid Principle, and analytical lenses.",
+  "author": {
+    "name": "Ian Lawrence"
+  },
+  "hooks": [
+    "./hooks/hooks.json"
+  ]
+}

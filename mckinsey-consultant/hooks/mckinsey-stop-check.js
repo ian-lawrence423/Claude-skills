@@ -101,7 +101,10 @@ process.stdin.on('end', () => {
     .join('\n\n');
   if (!responseText) return exit0();
 
-  const skillPath = path.join(__dirname, '..', '..', 'mckinsey-consultant', 'SKILL.md');
+  // CLAUDE_PLUGIN_ROOT is this plugin's own install root (set by Claude Code);
+  // fall back to a relative hop only if it's ever missing (e.g. manual testing).
+  const pluginRoot = process.env.CLAUDE_PLUGIN_ROOT || path.join(__dirname, '..');
+  const skillPath = path.join(pluginRoot, 'SKILL.md');
   let skillContent = '';
   try { skillContent = fs.readFileSync(skillPath, 'utf8'); } catch (e) { /* checked per-item below */ }
 

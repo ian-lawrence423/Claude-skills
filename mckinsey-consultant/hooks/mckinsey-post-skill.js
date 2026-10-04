@@ -20,7 +20,10 @@ process.stdin.on('end', () => {
   const skill = input && input.tool_input && input.tool_input.skill;
   if (skill !== 'mckinsey-consultant') process.exit(0);
 
-  const skillPath = path.join(__dirname, '..', '..', 'mckinsey-consultant', 'SKILL.md');
+  // CLAUDE_PLUGIN_ROOT is this plugin's own install root (set by Claude Code);
+  // fall back to a relative hop only if it's ever missing (e.g. manual testing).
+  const pluginRoot = process.env.CLAUDE_PLUGIN_ROOT || path.join(__dirname, '..');
+  const skillPath = path.join(pluginRoot, 'SKILL.md');
 
   let reminder;
   try {
