@@ -42,6 +42,16 @@
       "author": {
         "name": "Ian Lawrence"
       }
+    },
+    {
+      "name": "superpowers",
+      "description": "Vendored copy of obra/superpowers (MIT) — brainstorming, planning, TDD, systematic debugging, subagent-driven development, and code-review workflows. Kept in-repo so Codex (via AGENTS.md) and other non-Claude harnesses can read these skills directly.",
+      "category": "workflow",
+      "source": "./superpowers",
+      "author": {
+        "name": "Jesse Vincent",
+        "url": "https://github.com/obra/superpowers"
+      }
     }
   ]
 }

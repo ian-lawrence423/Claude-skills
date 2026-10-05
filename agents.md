@@ -431,3 +431,16 @@ If yes, save the output to:
 **File format:** Default to `.docx` (Word) for all analysis outputs — use `pattern-docx` skill (Pattern-branded). Use `.md` for quick notes/briefs. Use `.pptx` via `pattern-investment-pptx` only when a deck/presentation format is explicitly requested. Do NOT default to `.html` for analysis.
 
 **Rule:** Never save without asking first. Never create a folder with a generic or ambiguous name.
+
+---
+
+## Cross-Harness Skill Loading (Codex & Other Non-Claude Agents)
+
+This file loads automatically in Codex CLI and other AGENTS.md-aware harnesses, the same way `CLAUDE.md` loads in Claude Code. Codex has no native `Skill` tool, so it cannot invoke a skill the way Claude Code does — but it can still **read** any `SKILL.md` directly.
+
+**Rule for Codex (and any harness without a Skill tool):** when this file or the Skill Directory above tells you to "invoke" or "use" a skill, and you have no Skill-invocation tool available, read that skill's `SKILL.md` directly with your file-read tool before proceeding, then follow it as if it had been loaded. Lacking a dedicated tool is never a reason to skip the skill — reading the file is the correct substitute, not a shortcut around the rule.
+
+- Skill content lives at `<skill-name>/SKILL.md` relative to repo root (e.g. [mckinsey-consultant/SKILL.md](mckinsey-consultant/SKILL.md), [pattern-docx/SKILL.md](pattern-docx/SKILL.md)).
+- Superpowers' process skills (brainstorming, systematic-debugging, writing-plans, subagent-driven-development, etc.) are vendored at `superpowers/skills/<skill-name>/SKILL.md`. Apply the same Skill Priority rule Claude Code uses: process skills (`brainstorming`, `systematic-debugging`) come before implementation skills — see [superpowers/skills/using-superpowers/SKILL.md](superpowers/skills/using-superpowers/SKILL.md).
+- Some skills reference Claude-Code-specific tools (`Skill`, `Agent`, `TodoWrite`). Translate to your own equivalents: your subagent/task-dispatch tool for `Agent`, your own todo/task-list mechanism for `TodoWrite`, a direct file read for `Skill`. If no equivalent exists, do the work inline and say so rather than inventing a tool call.
+- [superpowers/skills/using-superpowers/references/codex-tools.md](superpowers/skills/using-superpowers/references/codex-tools.md) has Codex-specific tool-mapping guidance (subagent config, model routing, worktree detection) — read it once per session when running as Codex.
