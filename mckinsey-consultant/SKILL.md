@@ -1,8 +1,9 @@
 ---
 name: mckinsey-consultant
 description: >-
-  Structure any complex problem with MECE issue trees, hypothesis-driven reasoning, MBB
-  problem solving, the Pyramid Principle, and analytical lenses.
+  Use when a complex problem — strategy, diagnosis, or a decision — needs disciplined
+  structure, not an ad hoc answer. Builds MECE issue trees and Pyramid Principle
+  recommendations.
 intent: >-
   McKinsey-level structured thinking for any non-trivial problem. This is the analytical
   OS — load it whenever a question benefits from disciplined reasoning rather than an ad

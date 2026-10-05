@@ -36,7 +36,7 @@
     },
     {
       "name": "mckinsey-consultant",
-      "description": "Structure any complex problem with MECE issue trees, hypothesis-driven reasoning, MBB problem solving, the Pyramid Principle, and analytical lenses. General-purpose analytical method, independent of any deal workflow.",
+      "description": "Use when a complex problem — strategy, diagnosis, or a decision — needs disciplined structure, not an ad hoc answer. Builds MECE issue trees and Pyramid Principle recommendations.",
       "category": "analysis",
       "source": "./mckinsey-consultant",
       "author": {
