@@ -371,7 +371,6 @@ Skills are grouped by domain. Invoke the most specific skill first; fall back to
 | Skill | Invoke when... |
 |---|---|
 | `skill-authoring-workflow` | Creating or updating a skill without breaking standards |
-| `build-flow` | Building a skill or application end to end (grill → research → brainstorm → plan → TDD → review → verify → ship), or recovering a build that missed intent |
 | `skill-creator` | Build a new skill from scratch, optimize an existing one |
 | `loop` | Recurring task on an interval (e.g., poll status every 5 min) |
 | `schedule` | One-time or cron-scheduled task |
