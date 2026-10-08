@@ -56,6 +56,9 @@ structure and reason — a memo, thesis, or deck built from known facts. Invoke
 IC memo, or diligence workflows where evidence state and decision posture need to be
 auditable. Do not duplicate either skill's artifacts here.
 
+For any question about whether a moat or advantage is durable, defensible, or eroding, name
+`competitive-moat-assessment` as the handoff in your answer before improvising a moat framework here.
+
 ---
 
 ## Dependency Contract
@@ -373,6 +376,9 @@ authoritative source for the NTB registry itself.
 - **Forcing every question through the investment-screening lens.** The Six Screening Questions
   are for investment decisions specifically, not the default structure for all analysis — see
   Investment Lens.
+- **Inventing durations in prose.** The no-fabricated-timeline rule covers every sentence, not just
+  the action table: "this week," "today," "within a month" in a closing summary or So What are
+  the same failure as a made-up date in Step 7. Use a horizon category or say nothing about timing.
 
 ---
 
