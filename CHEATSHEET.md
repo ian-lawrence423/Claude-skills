@@ -39,6 +39,7 @@
 | Pattern investment deck | `pattern-investment-pptx` |
 | QA a Pattern document | `doc-quality-checker` (auto-runs) |
 | Create or update a skill | `skill-authoring-workflow` |
+| Build a skill or app end to end, or recover a build that missed intent | `build-flow` |
 
 ---
 
