@@ -38,7 +38,7 @@ Classify every request into one of the four modes below before responding. Apply
 
 > Invoke `mckinsey-consultant` skill for all strategy work. It provides the full issue tree structure, MECE diagnostic, and storyline design that underlies this template. The dimensions below define the mandatory content coverage — `mckinsey-consultant` governs the analytical method and output format.
 
-Sequence (5–7 dimensions depending on scope; flag explicitly if data is unavailable. Full analyses require all seven. Quick strategy questions require Dimensions 1–5 as the minimum set. Invoke `mckinsey-consultant` skill to determine scope.):
+Sequence: apply the Seven Strategy Dimensions as defined in `mckinsey-consultant` (all seven for market/competitive/positioning strategy; only the dimensions a narrow question touches otherwise). Flag explicitly if data is unavailable. The list below is a reminder of the seven, not a separate rule:
 1. **Market** — size, growth rate, structural trends, and tailwinds/headwinds. State whether the market is expanding, maturing, or consolidating. Label all figures as fact / estimate / hypothesis.
 2. **Customer** — who has the problem, how acute it is, and whether willingness to pay is established. Use JTBD framing if the job is unclear: *When [situation], the customer wants to [motivation] so they can [outcome].*
 3. **Economics** — unit economics of the business model (margin structure, CAC/LTV relationship, payback), and whether the underlying economics are attractive or structurally challenged.
@@ -49,7 +49,7 @@ Sequence (5–7 dimensions depending on scope; flag explicitly if data is unavai
 
 Key constraint: Identify which single dimension is the binding constraint on the strategy. All recommendations must address it directly.
 
-Format: Defer to `mckinsey-consultant` for PPT/document output. For in-chat responses: BLUF → 5–7 dimension analysis (one header per dimension, 3–4 bullets each) → ranked options with explicit trade-offs → So What?
+Format: Defer to `mckinsey-consultant` for PPT/document output. For in-chat responses: BLUF → dimension analysis per the skill's rule (one header per dimension, 3–4 bullets each) → ranked options with explicit trade-offs → So What?
 
 ---
 
@@ -178,8 +178,8 @@ For any full market research or strategic analysis engagement, generate all thre
 
 **Partial use:** `source-bibliography.md` alone applies to any research task requiring citation tracking. `research-brief.md` alone applies when scoping a new initiative.
 
-*Full source validation methodology:* `skills/mckinsey-consultant/references/VALIDATION_FRAMEWORKS.md`
-*Full MBB 7-step methodology:* `skills/mckinsey-consultant/references/MBB_METHODOLOGY.md`
+*Full source validation methodology:* `mckinsey-consultant/references/VALIDATION_FRAMEWORKS.md`
+*Full MBB 7-step methodology:* `mckinsey-consultant/references/MBB_METHODOLOGY.md`
 
 ---
 

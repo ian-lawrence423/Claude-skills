@@ -423,8 +423,8 @@ Every output must pass all of the following before delivery:
 
 ## References
 
-All reference files live in this skill's /references folder. Market-research points here —
-these files are not duplicated there.
+Reference files live in this skill's /references folder. `VALIDATION_FRAMEWORKS.md` is shared:
+`market-research` and `claim-scrutinizer` read it from here, so do not move it.
 
 **Investment evaluation (load for any investment or IC memo task):**
 ```
@@ -448,24 +448,11 @@ durability, substrate disintermediation — optional lenses, not the core method
 Read: {SKILL_DIR}/references/analytical-modules.md
 ```
 
-**Source validation — full CRAAP scoring rubric, triangulation matrix, confidence labeling:**
+**Evidence gathering and source validation belong to `market-research`.** Read these only
+when this skill is asked to validate a source or run the research suite directly:
 ```
-Read: {SKILL_DIR}/references/VALIDATION_FRAMEWORKS.md
+Read: {SKILL_DIR}/references/VALIDATION_FRAMEWORKS.md   # CRAAP rubric, triangulation, confidence labels (also read by market-research and claim-scrutinizer)
+Read: {SKILL_DIR}/references/prompts.md                 # 12-prompt research suite
+Read: {SKILL_DIR}/references/FREE_SOURCES_GUIDE.md      # Tier 1-3 source directory (market-research holds a newer copy)
 ```
-
-**12-prompt research suite (market sizing, competitive landscape, personas, trends, SWOT,
-pricing, GTM, journey mapping, financial modeling, risk, market entry, executive synthesis):**
-```
-Read: {SKILL_DIR}/references/prompts.md
-```
-
-**Source bibliography template (working tracker for documenting and scoring sources):**
-```
-Read: {SKILL_DIR}/references/source-bibliography.md
-```
-
-**Free data sources directory (Tier 1–3 sources by category — government agencies, academic
-databases, SEC filings, industry associations, trade publications):**
-```
-Read: {SKILL_DIR}/references/FREE_SOURCES_GUIDE.md
-```
+For a source bibliography tracker, use `market-research/references/source-bibliography.md`.
